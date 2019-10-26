@@ -4,14 +4,14 @@ public class User extends Person{
     int age;
     String email; 
     String phoneNumber;
-    ArrayList<Booking> bookings;
+//    ArrayList<Booking> bookings;
 
     //basic methods
     public User(int age, String email, String phoneNumber){
         this.age = age;
         this.email = email;
         this.phoneNumber = phoneNumber;
-        bookings = new ArrayList<Booking>();
+//        bookings = new ArrayList<Booking>();
     }
     void setAge(int age){
         this.age = age;
@@ -33,7 +33,7 @@ public class User extends Person{
     }
     
     public String toString() {
-        return name + "\nage\t:" + age + "\nemail\t:" + email + "\nphone\t:" + phoneNumber + "\n";
+        return name + "\nage\t:" + String.valueOf(age) + "\nemail\t:" + email + "\nphone\t:" + phoneNumber + "\n";
     }
     // end of basic methods
     
