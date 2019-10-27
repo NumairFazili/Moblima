@@ -5,7 +5,7 @@ public abstract class Person {
     // basic methods
     public Person(){
         ID = generateID();
-        name = "Person"+ID;
+        name = "Person"+Long.toString(ID);
     }
     long getId(){
         return ID;
@@ -23,8 +23,6 @@ public abstract class Person {
 
     long generateID(){
         // to generate distinct user id using based on their time of starting the application
-        // if the user booked a movie, save the user object (for booking history)
-        // else, delete the user object
         long result = 0;
         String datetime = java.time.LocalDateTime.now().toString();
         int temp;
@@ -38,5 +36,5 @@ public abstract class Person {
         return result;
     }
 
-    void save(){}   //only implemented in User and Staff
+    void save(){}
 }
