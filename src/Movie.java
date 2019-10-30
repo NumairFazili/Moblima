@@ -10,7 +10,7 @@ public class Movie extends MovieShow{
     private double rating;
     private ArrayList<String> reviews;
     private int base_price;
-    private static int number_of_reviews;
+    private int number_of_reviews;
 
     //constructor
     public Movie(String name, int status, String synopsis, String director, String cast, int base_price){
