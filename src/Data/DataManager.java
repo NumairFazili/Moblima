@@ -163,7 +163,7 @@ public class DataManager {
 //        for(Cinema cinema:test2)
 //            System.out.println(cinema.getCinemaID());
 
-        AddShowTimes(new Cinema(2,2,1004,"10/10/2019 18:30",Arrays.asList(0,0,0,0)));
+        AddShowTimes(new Cinema(2,2,1004,"11/10/2019 17:30",Arrays.asList(1,1,0,0)));
 
 
     }
