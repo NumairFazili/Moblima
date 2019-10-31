@@ -1,0 +1,4 @@
+Booking_ID/TID,Cineplex_ID,Cinema_ID,Movie_ID,ShowTime,Cinema Class,Movie Type,Customer Name,Mobile Number,Email,Customer Type,Seat Number,Booking_Time,Price
+13217,1,1,1001,7/10/2019 16:30,Platinum,3D,Test User,123456789,xyz@gmail.com,regular,31,6/10/2019 16:30,14
+14718,2,2,1004,11/10/2019 17:30,Gold,2D,Test User2,123456789,xyz@gmail.com,senior citizen,41,10/10/2019 17:30,10
+15179,1,2,1002,7/10/2019 16:30,Silver,2D,Test User 3,123456789,xyz@gmail.com,student,12,6/10/2019 16:30,11
