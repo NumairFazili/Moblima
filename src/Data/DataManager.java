@@ -20,7 +20,7 @@ public class DataManager {
 
     }
 
-    private static ArrayList<Movie> loadMovies(String search){
+    private static ArrayList<Movie> LoadMovies(String search){
         BufferedReader reader = null;
         ArrayList<Movie> movieArrayList=new ArrayList<>();
         try {
@@ -34,7 +34,6 @@ public class DataManager {
             reader.readLine();
             while ((line = reader.readLine()) != null) {
                 String[] tokens = line.split(",");
-
                 if(tokens[1].toLowerCase().contains(search.toLowerCase())){
                     List<String> items =  Arrays.asList(tokens[5].split("\\."));
                     Movie movie=new Movie(Integer.parseInt(tokens[0]),tokens[1],tokens[2],Double.parseDouble(tokens[3]),tokens[4],items,tokens[6],tokens[7]);
@@ -100,10 +99,10 @@ public class DataManager {
                 String[] tokens = line.split(",");
 
                 if(tokens[0].contains(String.valueOf(cinplexID))){
-                    List<String> str =  Arrays.asList(tokens[4].split("\\."));
+                    List<String> str =  Arrays.asList(tokens[5].split("\\."));
                     List<Integer> items=new ArrayList<>();
                     for(String s : str)items.add(Integer.valueOf(s));
-                    Cinema cinema=new Cinema(Integer.parseInt(tokens[0]),Integer.parseInt(tokens[1]),Integer.parseInt(tokens[2]),tokens[3],items);
+                    Cinema cinema=new Cinema(Integer.parseInt(tokens[0]),Integer.parseInt(tokens[1]),Integer.parseInt(tokens[2]),tokens[3],tokens[4],items);
                     cinemaArrayList.add(cinema);
                 }
             }
@@ -132,6 +131,8 @@ public class DataManager {
             writer.append(String.valueOf(cinema.getMovieID()));
             writer.append(",");
             writer.append(String.valueOf(cinema.getTime()));
+            writer.append(",");
+            writer.append(String.valueOf(cinema.getStatus()));
             writer.append(",");
             writer.append(Joiner.on('.').join(cinema.getSeats()));
             writer.append("\n");
@@ -236,14 +237,14 @@ public class DataManager {
 
     public static void main(String[] args){
 
-//        Movie movie=new Movie(1004,"Joker","English",9.8,"3:15",Arrays.asList("a,b","c"),"sampleText","sampleText");
+//        Movie movie=new Movie(1004,"Joker","English",9.8,"3:15",Arrays.asList("a","b","c"),"sampleText","sampleText");
 //
 //        SaveMovies(movie);
 
-//        ArrayList<Movie>test=loadMovies("h");
-//
-//        for(Movie movie:test)
-//            System.out.println(movie.getName());
+        ArrayList<Movie> test=LoadMovies("BATMAN1");
+
+        for(Movie movie:test)
+            System.out.println(movie.getName());
 
 //
 //        List<String> str=Arrays.asList("a","b","c");
@@ -254,7 +255,7 @@ public class DataManager {
 //        for(Cinema cinema:test2)
 //            System.out.println(cinema.getCinemaID());
 
-//        AddShowTimes(new Cinema(2,2,1004,"11/10/2019 17:30",Arrays.asList(1,1,0,0)));
+//        AddShowTimes(new Cinema(2,2,1004,"11/10/2019 17:30","Coming Soon",Arrays.asList(1,1,0,0)));
 
 
 //        ArrayList<Booking> test3=LoadBookings();
