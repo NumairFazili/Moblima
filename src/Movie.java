@@ -44,11 +44,11 @@ public class Movie extends MovieShow{
     public String getSynopsis() { return synopsis; }
     public String getDirector() { return director; }
     public String getCast() { return cast; }
-    public double getRating() {
+    public Double getRating() {
         if (number_of_reviews == 0)
-            return -1;
+            return -1.0;
         else
-            return rating/number_of_reviews;
+            return rating/number_of_reviews*1.0;
     }
     public ArrayList getReviews() { return reviews; }
     public int getBaseprice() { return base_price; }

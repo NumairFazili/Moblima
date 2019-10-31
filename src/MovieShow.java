@@ -47,12 +47,12 @@ class SortByTime implements Comparator<MovieShow>{
 class SortByName implements  Comparator<MovieShow>{
     @Override
     public int compare(MovieShow o1, MovieShow o2){
-        return o1.movie.name.compareTo(o2.movie.name);
+        return o1.movie.getName().compareTo(o2.movie.getName());
     }
 }
 class SortByRating implements  Comparator<MovieShow>{
     @Override
     public int compare(MovieShow o1, MovieShow o2){
-        return o1.movie.rating.compareTo(o2.movie.rating);
+        return o1.movie.getRating().compareTo(o2.movie.getRating());
     }
 }

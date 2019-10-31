@@ -1,6 +1,6 @@
 import java.time.LocalDateTime;
 import java.time.Period;
-import java.time.Duration
+import java.time.Duration;
 public class TimeRange {
     LocalDateTime start_time;
     LocalDateTime end_time;

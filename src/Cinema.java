@@ -15,5 +15,6 @@ public class Cinema {
     }
     public void printMovies(){
         System.out.println();
+
     }
 }
