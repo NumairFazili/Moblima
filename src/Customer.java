@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 import java.util.Collections;
 
-public class Customer extends Person{
+public class Customer { //extends Person
     int age;
     String email; 
     String phoneNumber;
@@ -33,9 +33,9 @@ public class Customer extends Person{
         return phoneNumber;
     }
     
-    public String toString() {
-        return name + "\nage\t:" + String.valueOf(age) + "\nemail\t:" + email + "\nphone\t:" + phoneNumber + "\n";
-    }
+//    public String toString() {
+//        return name + "\nage\t:" + String.valueOf(age) + "\nemail\t:" + email + "\nphone\t:" + phoneNumber + "\n";
+//    }
     // end of basic methods
     
     /* MAY CONTAIN ERROR -- CAN'T TEST

@@ -1,16 +1,12 @@
-package Data;
+package Controller;
 
-import Entity.Booking;
-import Entity.Cinema;
-import Entity.Movie;
+import Entity.*;
 import com.google.common.base.Joiner;
 
 import java.io.*;
-import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class DataManager {
     
@@ -20,11 +16,16 @@ public class DataManager {
 
     }
 
+    private static String getLocation(String str) {
+        return "src/Data/" + str + ".csv";
+    }
+
+
     private static ArrayList<Movie> LoadMovies(String search){
         BufferedReader reader = null;
         ArrayList<Movie> movieArrayList=new ArrayList<>();
         try {
-            reader=new BufferedReader(new FileReader("src/Data/"+"Movie"+".csv"));
+            reader=new BufferedReader(new FileReader(getLocation("Movie")));
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
@@ -51,7 +52,7 @@ public class DataManager {
     private static void SaveMovies(Movie movie){
         FileWriter writer = null;
         try {
-            writer = new FileWriter("src/Data/"+"Movie"+".csv",true);
+            writer = new FileWriter(getLocation("Movie"),true);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -87,7 +88,7 @@ public class DataManager {
         BufferedReader reader = null;
         ArrayList<Cinema> cinemaArrayList=new ArrayList<>();
         try {
-            reader=new BufferedReader(new FileReader("src/Data/"+"Cinema"+".csv"));
+            reader=new BufferedReader(new FileReader(getLocation("Cinema")));
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
@@ -118,7 +119,7 @@ public class DataManager {
     public static void  AddShowTimes(Cinema cinema){
         FileWriter writer = null;
         try {
-            writer = new FileWriter("src/Data/"+"Cinema"+".csv",true);
+            writer = new FileWriter(getLocation("Cinema"),true);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -148,7 +149,7 @@ public class DataManager {
         BufferedReader reader = null;
         ArrayList<Booking> bookingArrayList=new ArrayList<>();
         try {
-            reader=new BufferedReader(new FileReader("src/Data/"+"Booking"+".csv"));
+            reader=new BufferedReader(new FileReader(getLocation("Booking")));
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
@@ -193,7 +194,7 @@ public class DataManager {
     public static void AddBooking(Booking booking){
         FileWriter writer = null;
         try {
-            writer = new FileWriter("src/Data/"+"Booking"+".csv",true);
+            writer = new FileWriter(getLocation("Booking"),true);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -235,16 +236,98 @@ public class DataManager {
     }
 
 
+    public static ArrayList<User> LoadUser(){
+
+        BufferedReader reader = null;
+        ArrayList<User> userArrayList=new ArrayList<>();
+        try {
+            reader=new BufferedReader(new FileReader(getLocation("User")));
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        String line = "";
+        try {
+            reader.readLine();
+            while ((line = reader.readLine()) != null) {
+                String[] tokens = line.split(",");
+                    User user=new User(tokens[0],Long.parseLong(tokens[1]),tokens[2]);
+                    userArrayList.add(user);
+
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+
+        }
+        return userArrayList;
+
+
+    }
+
+    public static void addUser(User user){
+
+        FileWriter writer = null;
+        try {
+            writer = new FileWriter(getLocation("User"),true);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            writer.append(user.getName());
+            writer.append(",");
+            writer.append(String.valueOf(user.getMobileNumber()));
+            writer.append(",");
+            writer.append(user.getEmail());
+            writer.append("\n");
+            writer.flush();
+            writer.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    public static ArrayList<Cineplex> LoadCineplex(){
+
+        BufferedReader reader = null;
+        ArrayList<Cineplex> cineplexArrayList =new ArrayList<>();
+        try {
+            reader=new BufferedReader(new FileReader(getLocation("Cineplex")));
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        String line = "";
+        try {
+            reader.readLine();
+            while ((line = reader.readLine()) != null) {
+                String[] tokens = line.split(",");
+                Cineplex cineplex =new Cineplex(Integer.parseInt(tokens[0]),tokens[1],tokens[2],Integer.parseInt(tokens[3]));
+                cineplexArrayList.add(cineplex);
+
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+
+        }
+        return cineplexArrayList;
+
+    }
+
+
     public static void main(String[] args){
 
 //        Movie movie=new Movie(1004,"Joker","English",9.8,"3:15",Arrays.asList("a","b","c"),"sampleText","sampleText");
 //
 //        SaveMovies(movie);
 
-        ArrayList<Movie> test=LoadMovies("BATMAN1");
-
-        for(Movie movie:test)
-            System.out.println(movie.getName());
+//        ArrayList<Movie> test=LoadMovies("BATMAN");
+//
+//        for(Movie movie:test)
+//            System.out.println(movie.getName());
 
 //
 //        List<String> str=Arrays.asList("a","b","c");
@@ -265,6 +348,24 @@ public class DataManager {
 
 //        Booking booking=new Booking(15179,1,2,1002,"7/10/2019 16:30","Silver","2D","Test User 3",123456789,"xyz@gmail.com","student",12,"6/10/2019 16:30",11);
 //        AddBooking(booking);
+
+
+
+//        addUser(new User("test3",123456789,"test3@gmail.com"));
+//
+//        ArrayList<User> test=LoadUser();
+////
+//        for(User user:test)
+//            System.out.println(user.getMobileNumber());
+
+//
+//        ArrayList<Cineplex> test=LoadCineplex();
+////
+//        for(Cineplex cineplex:test)
+//            System.out.println(cineplex.getName());
+
+
+
 
 
     }
