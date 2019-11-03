@@ -10,35 +10,35 @@ public class User extends Person{
 //    ArrayList<Booking> bookings;
 
     //basic methods
-    public User(int age, String name, String email, String mobileNumber){
+    public User(String name, int age, String mobileNumber,String email){
         this.age = age;
         this.name = name;
         this.email = email;
         this.mobileNumber = mobileNumber;
 //        bookings = new ArrayList<Booking>();
     }
-    void setAge(int age){
+    public void setAge(int age){
         this.age = age;
     }
-    void setName(String name) {
+    public void setName(String name) {
         this.name = name;
     }
-    void setEmail(String email){
+    public void setEmail(String email){
         this.email = email;
     }
-    void setmobileNumber(String mobileNumber){
+    public void setmobileNumber(String mobileNumber){
         this.mobileNumber = mobileNumber;
     }
-    int getAge(){
+    public int getAge(){
         return age;
     }
-    String getName() {
+    public String getName() {
         return name;
     }
-    String getEmail(){
+    public String getEmail(){
         return email;
     }
-    String getmobileNumber(){
+    public String getmobileNumber(){
         return mobileNumber;
     }
     

@@ -4,10 +4,11 @@ import Entity.*;
 import com.google.common.base.Joiner;
 
 import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
 public class DataManager {
     
 
@@ -144,6 +145,108 @@ public class DataManager {
         }
     }
 
+    public static Boolean UpdateShowTime(Cinema cinema){
+
+
+        File inputFile = new File("src/Data/Cinema.csv");
+        File tempFile = new File("src/Data/myTempFile.csv");
+
+        BufferedReader reader = null;
+        BufferedWriter writer=null;
+            try {
+            reader = new BufferedReader(new FileReader(inputFile));
+            writer = new BufferedWriter(new FileWriter(tempFile));
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
+        try {
+            writer.append("Cineplex_ID");
+            writer.append(",");
+            writer.append("Cinema_ID");
+            writer.append(",");
+            writer.append("Movie ID");
+            writer.append(",");
+            writer.append("ShowTime");
+            writer.append(",");
+            writer.append("Seats");
+            writer.append("\n");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        Boolean Found=false;
+        String line;
+            try {
+            reader.readLine();
+            while ((line = reader.readLine()) != null) {
+                String[] tokens = line.split(",");
+
+                if((tokens[0].equals(String.valueOf(cinema.getCinplexID())))&&(tokens[1].equals(String.valueOf(cinema.getCinemaID())))&&(tokens[2].equals(String.valueOf(cinema.getMovieID())))&&(tokens[3].contains(String.valueOf(cinema.getTime())))){
+                    Found=true;
+                }
+                    else{
+                        writer.append(tokens[0]);
+                        writer.append(",");
+                        writer.append(tokens[1]);
+                        writer.append(",");
+                        writer.append(tokens[2]);
+                        writer.append(",");
+                        writer.append(tokens[3]);
+                        writer.append(",");
+                        writer.append(tokens[4]);
+                        writer.append(",");
+                        writer.append(tokens[5]);
+                        writer.append("\n");
+                    }
+
+                if(Found){
+                    writer.append(String.valueOf(cinema.getCinplexID()));
+                    writer.append(",");
+                    writer.append(String.valueOf(cinema.getCinemaID()));
+                    writer.append(",");
+                    writer.append(String.valueOf(cinema.getMovieID()));
+                    writer.append(",");
+                    writer.append(String.valueOf(cinema.getTime()));
+                    writer.append(",");
+                    writer.append(String.valueOf(cinema.getStatus()));
+                    writer.append(",");
+                    writer.append(Joiner.on('.').join(cinema.getSeats()));
+                    writer.append("\n");
+
+                }
+
+            }
+
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+            try {
+    //
+            writer.close();
+            reader.close();
+
+                if(Found){
+                    Files.delete(Paths.get("src/Data/Cinema.csv"));
+                }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+            Boolean success=tempFile.renameTo(new File("src/Data/Cinema.csv"));
+            return  success;
+
+
+    }
+
+
+
+
+
+
 
     public static ArrayList<Booking> LoadBookings(){
         BufferedReader reader = null;
@@ -251,7 +354,7 @@ public class DataManager {
             reader.readLine();
             while ((line = reader.readLine()) != null) {
                 String[] tokens = line.split(",");
-                    User user=new User(tokens[0],Long.parseLong(tokens[1]),tokens[2]);
+                    User user=new User(tokens[0],Integer.parseInt(tokens[1]),tokens[2],tokens[3]);
                     userArrayList.add(user);
 
             }
@@ -277,7 +380,7 @@ public class DataManager {
         try {
             writer.append(user.getName());
             writer.append(",");
-            writer.append(String.valueOf(user.getMobileNumber()));
+            writer.append(user.getmobileNumber());
             writer.append(",");
             writer.append(user.getEmail());
             writer.append("\n");
@@ -363,6 +466,10 @@ public class DataManager {
 ////
 //        for(Cineplex cineplex:test)
 //            System.out.println(cineplex.getName());
+
+
+//        System.out.println((UpdateShowTime(new Cinema(2,2,1004,"11/10/2019 17:30" ,"Show Ended",Arrays.asList(1,1,0,0)))));
+        //2,2,1004,11/10/2019 17:30,Show Ended,1.1.0.0
 
 
 
