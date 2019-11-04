@@ -2,34 +2,53 @@ package Entity;
 
 import java.util.ArrayList;
 
+import Controller.DataManager;
+
 public class User extends Person{
     int age;
-    String name;
     String email; 
     String mobileNumber;
 //    ArrayList<Booking> bookings;
 
     //basic methods
-    public User(String name, int age, String mobileNumber,String email){
+
+    //for creating guest user -- only have ID and name like Person201911040200, set attributes afterwards
+    public User(){}
+
+    //for DataManager to re-create existing user
+    public User(String name, int age, String email, String mobileNumber){
         this.age = age;
-        this.name = name;
+        setName_User(name);
         this.email = email;
         this.mobileNumber = mobileNumber;
 //        bookings = new ArrayList<Booking>();
     }
-    public void setAge(int age){
+
+    //setters - used when make booking
+    void setName_User(String name){
+        this.setName(name);     //using base class function
+    }
+    void setAge(int age){
         this.age = age;
     }
-    public void setName(String name) {
-        this.name = name;
-    }
-    public void setEmail(String email){
+    void setEmail(String email){
         this.email = email;
     }
-    public void setmobileNumber(String mobileNumber){
+    void setmobileNumber(String mobileNumber){
         this.mobileNumber = mobileNumber;
     }
+    //
+    public void setAttributes(String name, int age, String email, String mobileNumber){
+        setName(name);
+        setAge(age);
+        setEmail(email);
+        setmobileNumber(mobileNumber);
+    }
+    //getters
     public int getAge(){
+        if(age == 0){
+            return -1;
+        }
         return age;
     }
     public String getName() {
@@ -43,7 +62,7 @@ public class User extends Person{
     }
     
     public String toString() {
-        return "email\t:" + email + "\nage\t:" + String.valueOf(age) + "\nmobile\t:" + mobileNumber + "\n";
+        return name + "\nemail\t:" + email + "\nage\t:" + String.valueOf(age) + "\nmobile\t:" + mobileNumber + "\n";
     }
     // end of basic methods
 
@@ -74,9 +93,23 @@ public class User extends Person{
     void doReview(Movie m, String content, int rating){
         m.addReview(content, rating);
     }
-
-    void save(){
-        //Database.save(ID, age, email, mobileNumber, bookings);
-    }
     */
+
+    public void save(){
+        DataManager.addUser(this);
+    }
+    
+    //to verify the attributes
+    public static void main(String args[]){
+        User guest = new User();
+        User existing = new User("John", 19, "john0002@gmail.com", "12345654");
+        
+        System.out.println("Guest user: \n" + guest.ID);
+        System.out.println(guest.name);
+
+        System.out.println("Existing user: \n" + existing.age);
+        System.out.println(existing.name);
+        System.out.println(existing.email);
+        System.out.println(existing.mobileNumber);
+    }
 }

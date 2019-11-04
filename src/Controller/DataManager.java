@@ -380,6 +380,8 @@ public class DataManager {
         try {
             writer.append(user.getName());
             writer.append(",");
+            writer.append(String.valueOf(user.getAge()));
+            writer.append(",");
             writer.append(user.getmobileNumber());
             writer.append(",");
             writer.append(user.getEmail());
@@ -470,10 +472,6 @@ public class DataManager {
 
 //        System.out.println((UpdateShowTime(new Cinema(2,2,1004,"11/10/2019 17:30" ,"Show Ended",Arrays.asList(1,1,0,0)))));
         //2,2,1004,11/10/2019 17:30,Show Ended,1.1.0.0
-
-
-
-
 
     }
 
