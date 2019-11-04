@@ -5,16 +5,23 @@ public class Staff extends Person{
     
     //basic methods
     public Staff(String name, String password){
-        this.name = name;
+        this.setName(name);         //using base class method
         this.password = password;
-        this.ID = generateID();
+        //ID should be generated automatically
     }
-    void setPassword(String password){
+    public void setPassword(String password){
         this.password = password;
     }
     //end of basic methods
 
     //login implemented in main
+    //mechanism_1: Get staff object of the name inputted --> s.verifyPassword(password inputted)
+    //mechanism_2: Directly get the staff object of the name and password, not exist then login failed
+    public boolean verifyPassword(String password){
+        if (password == this.password)
+            return true;
+        return false;
+    }
 
     //MOVIE 
     /*
@@ -39,7 +46,6 @@ public class Staff extends Person{
 
     //SHOWTIME
 
-
     //USER
     /*
     void viewUserBookingHistory(User u){
@@ -47,7 +53,14 @@ public class Staff extends Person{
     }
     */
 
-    //CALENDER
+    //CALENDER?
     
+    //to verify the attributes
+    public static void main(String args[]){
+        Staff s = new Staff("Cindy", "passwordhere");
+        System.out.println(s.ID);
+        System.out.println(s.name);
+        System.out.println(s.password);
+    }
 
 }
