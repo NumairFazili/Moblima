@@ -85,7 +85,7 @@ public class DataManager {
     }
 
 
-    public static List<Cinema> LoadShowTimes(int cinplexID){
+    public static List<Cinema> LoadShowTimes(int cineplexID){
         BufferedReader reader = null;
         ArrayList<Cinema> cinemaArrayList=new ArrayList<>();
         try {
@@ -100,7 +100,7 @@ public class DataManager {
             while ((line = reader.readLine()) != null) {
                 String[] tokens = line.split(",");
 
-                if(tokens[0].contains(String.valueOf(cinplexID))){
+                if(tokens[0].contains(String.valueOf(cineplexID))){
                     List<String> str =  Arrays.asList(tokens[5].split("\\."));
                     List<Integer> items=new ArrayList<>();
                     for(String s : str)items.add(Integer.valueOf(s));
@@ -148,8 +148,8 @@ public class DataManager {
     public static Boolean UpdateShowTime(Cinema cinema){
 
 
-        File inputFile = new File("src/Data/Cinema.csv");
-        File tempFile = new File("src/Data/myTempFile.csv");
+        File inputFile = new File(getLocation("Cinema"));
+        File tempFile = new File(getLocation("Temp"));
 
         BufferedReader reader = null;
         BufferedWriter writer=null;
@@ -174,6 +174,9 @@ public class DataManager {
             writer.append(",");
             writer.append("Seats");
             writer.append("\n");
+
+
+
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -215,6 +218,7 @@ public class DataManager {
                     writer.append(",");
                     writer.append(Joiner.on('.').join(cinema.getSeats()));
                     writer.append("\n");
+                    Found=false;
 
                 }
 
@@ -229,14 +233,14 @@ public class DataManager {
             writer.close();
             reader.close();
 
-                if(Found){
-                    Files.delete(Paths.get("src/Data/Cinema.csv"));
-                }
+
+            Files.delete(Paths.get(getLocation("Cinema")));
+
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-            Boolean success=tempFile.renameTo(new File("src/Data/Cinema.csv"));
+            Boolean success=tempFile.renameTo(new File(getLocation("Cinema")));
             return  success;
 
 
@@ -470,8 +474,8 @@ public class DataManager {
 //            System.out.println(cineplex.getName());
 
 
-//        System.out.println((UpdateShowTime(new Cinema(2,2,1004,"11/10/2019 17:30" ,"Show Ended",Arrays.asList(1,1,0,0)))));
-        //2,2,1004,11/10/2019 17:30,Show Ended,1.1.0.0
+//        System.out.println((UpdateShowTime(new Cinema(2,2,1004,"11/10/2019 17:30" ,"Coming Soon",Arrays.asList(0,0,0,0)))));
+//        2,2,1004,11/10/2019 17:30,Show Ended,1.1.0.0
 
     }
 
