@@ -66,5 +66,8 @@ public class Cinema {
     public void setSeats(List<Integer> seats) {
         this.seats = seats;
     }
+    public void addSeats(Integer a){
+        this.seats.add(a);
+    }
 
 }

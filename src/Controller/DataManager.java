@@ -50,6 +50,8 @@ public class DataManager {
         return movieArrayList;
     }
 
+
+
     private static void SaveMovies(Movie movie){
         FileWriter writer = null;
         try {

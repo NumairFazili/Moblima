@@ -1,6 +1,9 @@
 package Entity;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 public class Movie {
@@ -10,7 +13,6 @@ public class Movie {
     double rating;
     String name,Language,runTime,Description,Director;
     List<String> cast;
-
     public Movie(int id,String name,String Language,double rating,String runTime,List<String> cast,String Description,String Director) {
         this.id = id;
         this.rating = rating;
@@ -89,4 +91,6 @@ public class Movie {
     public void setCast(List<String> cast) {
         this.cast = cast;
     }
+
+
 }
