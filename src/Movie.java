@@ -24,7 +24,7 @@ public class Movie extends MovieShow{
         this.rating = 0;
         number_of_reviews = 0;
     }
-
+    //testing
     //Setters
     public void setName(String name){
         this.name = name;
