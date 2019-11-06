@@ -8,7 +8,7 @@ public class Boundary {
             System.out.println(" "+String.valueOf(count++) + " : " + str[i]);
         System.out.println(-1 + " : " + "Exit");
     }
-
+    public static void DisplaySeatings()
 //    public static void main(String[] args) {
 //
 //

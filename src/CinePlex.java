@@ -1,17 +1,37 @@
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Collection;
 
 public class CinePlex {
-    Cinema[] cinemas;
+    ArrayList<Cinema> cinemas;
     String name;
     String location;
-    String default_getMovie_arg = "Name";
+    int id;
+    public CinePlex(String name, String location, int id, ArrayList<Cinema> cinemas){
+        this.name = name;
+        this.location = location;
+        this.id = id;
+        this.cinemas = cinemas;
+    }
+    public ArrayList<Cinema> getCinemas(){return this.cinemas};
 
-    public ArrayList<MovieShow> getUpcomingMovies(){
-        ArrayList<MovieShow> movieShows = new ArrayList<MovieShow>();
-        for(int i = 0;i<cinemas.length;i++){
-            movieShows.addAll(cinemas[i].get_ComingMovies());
-        }
-        return movieShows;
+    public String getName(){return this.name};
+
+    public String getLocation(){return this.location};
+    public int getId(){return this.id};
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setLocation(String location){
+        this.location = location;
+    }
+
+    public void AddCinema(Cinema c){
+        this.cinemas.add(c);
+    }
+    public void AddCinema(ArrayList<Cinema> c){
+        this.cinemas.addAll(c);
     }
 }

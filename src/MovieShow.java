@@ -1,4 +1,6 @@
 
+import Controller.DataManager;
+
 import java.time.LocalDateTime;
 import java.util.Comparator;
 import java.util.HashMap;
@@ -9,7 +11,11 @@ public class MovieShow {
     double discounts;
     TimeRange showtime;
     Movie movie;
-
+    public MovieShow(int movie_id, int[] seating, int Cinema_id, double discounts, LocalDateTime start, LocalDateTime end, Movie m){
+        this.movie_id = movie_id;
+        this.seating = seating;
+        this.cinema = DataManager.
+    }
 
 
     public void bookSeating(int seat){
@@ -35,24 +41,4 @@ public class MovieShow {
         }
     }
 
-}
-class SortByTime implements Comparator<MovieShow>{
-
-
-    @Override
-    public int compare(MovieShow o1, MovieShow o2) {
-        return o1.showtime.start_time.compareTo(o2.showtime.end_time);
-    }
-}
-class SortByName implements  Comparator<MovieShow>{
-    @Override
-    public int compare(MovieShow o1, MovieShow o2){
-        return o1.movie.getName().compareTo(o2.movie.getName());
-    }
-}
-class SortByRating implements  Comparator<MovieShow>{
-    @Override
-    public int compare(MovieShow o1, MovieShow o2){
-        return o1.movie.getRating().compareTo(o2.movie.getRating());
-    }
 }

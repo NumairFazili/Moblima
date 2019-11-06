@@ -10,8 +10,6 @@ package Controller;
 
 import Entity.Movie;
 
-import org.jetbrains.annotations.NotNull;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -49,14 +47,14 @@ public class SortingManager{
 
 class SortByName implements Comparator<Movie> {
     @Override
-    public int compare(@org.jetbrains.annotations.NotNull Movie o1, @NotNull Movie o2){
+    public int compare(Movie o1, Movie o2){
         return o1.getName().compareTo(o2.getName());
     }
 
 }
 class SortByRating implements Comparator<Movie>{
     @Override
-    public int compare(@NotNull Movie o1, @NotNull Movie o2){
+    public int compare( Movie o1, Movie o2){
 
         if(o1.getRating()<o2.getRating()){
             return 1;
