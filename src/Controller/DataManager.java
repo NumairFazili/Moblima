@@ -8,7 +8,10 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.InputMismatchException;
 import java.util.List;
+
+import java.util.Scanner;
 public class DataManager {
     
 
@@ -430,7 +433,129 @@ public class DataManager {
 
 
     public static void main(String[] args){
+        //####################################Brandan####################################
+        Scanner input = new Scanner(System.in);
+        String username, password;
+        int choice = 0;
+        int adminauth;
+        System.out.println("MOBLIMA Movie Booking System START:");
+        while (choice != -2){
+            while (choice != 1 && choice != 2 && choice != -1){
+                try{
+                    Scanner in = new Scanner(System.in);
+                    System.out.println("Please enter 1 for Admin, 2 for Movie-Goer and -1 to exit:");
+                    choice = in.nextInt();
+                    if (choice == -1){
+                        System.exit(0);
+                    }
+                    if (choice != 1 && choice != 2 && choice != -1){
+                        System.out.println("Error! Please enter either 1, 2 or -1:");
+                    }
+                }
+                catch(InputMismatchException e){
+                    System.out.println("That is not an integer, please try again." );
+                }
+            }
+    
+             //Admin choice
+            if (choice == 1){
+                adminauth = 0;
+                while (adminauth == 0){
+                    System.out.println("ADMIN USER:");
+                    System.out.println("Please enter login details, Input -2 to go back:");
+                    System.out.println("Enter Username:");
+                    username = input.next();
+                    if (username.equals("-2")){ //If input is -2 go back to previous menu
+                        System.out.println("going to break");
+                        choice = 0;
+                        break;
+                    }
+                    System.out.println("Enter Password:");
+                    password = input.next();
+                    System.out.println(username);
 
+                }//If admin username and password is authenticated
+                if (adminauth == 1){
+                    choice = 0;
+                    while (choice <= 0 || choice >= 8){
+                        try{
+                            Scanner in = new Scanner(System.in);
+                            System.out.println("1. Create movie listing");
+                            System.out.println("2. Update movie listing");
+                            System.out.println("3. Remove movie listing");
+                            System.out.println("4. Create cinema showtimes and the movies to be shown");
+                            System.out.println("5. Update cinema showtimes and the movies to be shown");
+                            System.out.println("6. Remove cinema showtimes and the movies to be shown");
+                            System.out.println("7. Configure system settings");
+                            choice = in.nextInt();
+                            if (choice <= 0 || choice >= 8){
+                                System.out.println("Error! Please enter either 1, 2, 3, 4, 5, 6 or 7:");
+                            }
+                        }
+                        catch(InputMismatchException e){
+                            System.out.println("That is not an integer, please try again." );
+                        }
+                    }
+                    //1. Create movie listing
+                    if (choice == 1){
+        
+                    }
+                    //2. Update movie listing
+                    else if (choice == 2){
+        
+                    }
+                    //3. Remove movie listing
+                    else if (choice == 3){
+        
+                    }                                        
+                    //4. Create cinema showtimes and the movies to be shown
+                    else if (choice == 4){
+                            
+                    }
+                    //5. Update cinema showtimes and the movies to be shown
+                    else if (choice == 5){
+                            
+                    }
+                    //6. Remove cinema showtimes and the movies to be shown
+                    else if (choice == 6){
+                            
+                    }                                        
+                    //7. Configure system settings
+                    else if (choice == 7){
+                            
+                    }
+                }
+
+            }
+            
+    
+            //Movie-Goer choice
+            else { 
+                System.out.println("MOVIE-GOER USER");
+                choice = 0;
+                while (choice <= 0 || choice >= 7){
+                    try{
+                        Scanner in = new Scanner(System.in);
+                        System.out.println("1. Search/List movie");
+                        System.out.println("2. View movie details – including reviews and ratings");
+                        System.out.println("3. Check seat availability and selection of seat/s.");
+                        System.out.println("4. Book and purchase ticket");
+                        System.out.println("5. View booking history");
+                        System.out.println("6. List the Top 5 ranking by ticket sales OR by overall reviewers’ ratings");
+                        choice = in.nextInt();
+                        if (choice <= 0 || choice >= 7){
+                            System.out.println("Error! Please enter either 1, 2, 3, 4, 5 or 6:");
+                        }
+                    }
+                    catch(InputMismatchException e){
+                        System.out.println("That is not an integer, please try again." );
+                    }
+                }
+            }
+        }
+    }
+}
+        //####################################Brandan####################################
 //        Movie movie=new Movie(1004,"Joker","English",9.8,"3:15",Arrays.asList("a","b","c"),"sampleText","sampleText");
 //
 //        SaveMovies(movie);
@@ -479,7 +604,4 @@ public class DataManager {
 //        System.out.println((UpdateShowTime(new Cinema(2,2,1004,"11/10/2019 17:30" ,"Coming Soon",Arrays.asList(0,0,0,0)))));
 //        2,2,1004,11/10/2019 17:30,Show Ended,1.1.0.0
 
-    }
 
-
-}
