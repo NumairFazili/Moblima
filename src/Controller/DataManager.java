@@ -212,7 +212,6 @@ public class DataManager {
             reader.readLine();
             while ((line = reader.readLine()) != null) {
                 String[] tokens = line.split(",");
-
                 if (tokens[2].contains(String.valueOf(movieID))) {
                     List<String> str = Arrays.asList(tokens[6].split("\\."));
                     List<Integer> items = new ArrayList<>();
@@ -643,6 +642,7 @@ public class DataManager {
 //        Movie movie=new Movie(1005,"Mission Impossible 2","English",9.1,"2:15",Arrays.asList("a","b","c"),"sampleText","sampleText");
 //        System.out.println((manageMovie(movie,false)));
 
+//        System.out.println((LoadShowTimes(1003)));
 
     }
 }
