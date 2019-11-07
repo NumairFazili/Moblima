@@ -5,17 +5,18 @@ import java.util.List;
 public class Cinema {
 
     int cinplexID,cinemaID,movieID;
-    String time,status;
+    String time,status,cinemaClass;
     List<Integer> seats;
 
 
 
-    public Cinema(int cinplexID, int cinemaID, int movieID, String time, String status, List<Integer> seats) {
+    public Cinema(int cinplexID, int cinemaID, int movieID, String time, String status, String cinemaClass, List<Integer> seats) {
         this.cinplexID = cinplexID;
         this.cinemaID = cinemaID;
         this.movieID = movieID;
         this.time = time;
         this.status=status;
+        this.cinemaClass=cinemaClass;
         this.seats = seats;
     }
 
@@ -58,6 +59,14 @@ public class Cinema {
     public void setStatus(String status) {
         this.status = status;
     }
+    public String getCinemaClass() {
+        return cinemaClass;
+    }
+
+    public void setCinemaClass(String cinemaClass) {
+        this.cinemaClass = cinemaClass;
+    }
+
 
     public List<Integer> getSeats() {
         return seats;
