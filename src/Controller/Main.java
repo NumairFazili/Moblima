@@ -60,8 +60,12 @@ public class Main {
                     //Check with database to if username and password is correct
                     if (username.equals("username")){
                         if (password.equals("123")){
+                            System.out.println("Admin account sucessfully logged in!");
                             adminauth = 1;
                         }
+                    }
+                    if (adminauth == 0){
+                        System.out.println("The username or password you typed is incorrect. Please try again.");
                     }
                 }
 
@@ -108,7 +112,7 @@ public class Main {
                             input.nextLine(); //Catch newline from .nextDouble()
                             System.out.println("Enter runtime:");
                             runtime = input.nextLine();
-                            System.out.println("Enter number of cast members");
+                            System.out.println("Enter cast members");
                             cast = Arrays.asList(input.nextLine().split(","));
                             System.out.println("Enter description:");
                             description = input.nextLine();
@@ -118,24 +122,107 @@ public class Main {
                             mymovie = new Movie(movieid, moviename, language, rating, runtime, cast, description, director);
                             DataManager.SaveMovies(mymovie);
                         }
+
                         //2. Update movie listing
                         else if (choice == 2){
                             //List all movies
                             Boundary.DisplayMovies(DataManager.LoadMovies(""));
                             //Select movie to update by movieID
-                            System.out.println("Enter ID of the movie to see the details: " );
+                            System.out.println("Enter ID of the movie to be updated: " );
                             inputsearchint = input.nextInt();
+                            input.nextLine();//Catch newline from input.nextInt()
                             mymovie = SearchManager.find_Movie_byID(DataManager.LoadMovies(""), inputsearchint);
-                            mymovie.setName("Name changed");
+
+                            //Choose which attribute of the movie to be edited
+                            System.out.println("Choose attribute of movie to be edited: " );
+                            choice = -1;
+                            while (choice != 0){
+                                choice = -1;
+                                while (choice <= -1 || choice >= 8){
+                                    try{
+                                        Scanner in = new Scanner(System.in);
+                                        System.out.println("1. movie name:");
+                                        System.out.println("2. language:");
+                                        System.out.println("3. rating:");
+                                        System.out.println("4. runtime:");
+                                        System.out.println("5. Cast members");
+                                        System.out.println("6. description:");
+                                        System.out.println("7. director:");
+                                        System.out.println("0. Done:");
+                                        choice = in.nextInt();
+                                        if (choice <= -1 || choice >= 8){
+                                            System.out.println("Error! Please enter either 0, 1, 2, 3, 4, 5, 6 or 7:");
+                                        }
+                                    }
+                                    catch(InputMismatchException e){
+                                        System.out.println("That is not an integer, please try again." );
+                                    }
+                                }
+                                //0. Done, save new movie object to database
+                                if (choice == 0){
+                                    choice = -1;
+                                    break;
+                                }
+                                //1. Prompt input for movie name and edit movie object
+                                else if (choice == 1){
+                                    System.out.println("Enter new movie name:");
+                                    mymovie.setName(input.nextLine());
+                                }
+                                //2. Prompt input for language and edit movie object
+                                else if (choice == 2){
+                                    System.out.println("Enter new language:");
+                                    mymovie.setLanguage(input.nextLine());
+                                }
+                                //3. Prompt input for rating and edit movie object
+                                else if (choice == 3){
+                                    System.out.println("Enter new rating:");
+                                    mymovie.setRating(input.nextDouble());
+                                    input.nextLine();//Catch newline from input.nextDouble()
+                                }
+                                //4. Prompt input for runtime and edit movie object
+                                else if (choice == 4){
+                                    System.out.println("Enter new runtime:");
+                                    mymovie.setRunTime(input.nextLine());
+                                }
+                                //5. Prompt input for Cast member and edit movie object
+                                else if (choice == 5){
+                                    System.out.println("Enter new cast members:");
+                                    mymovie.setCast(Arrays.asList(input.nextLine().split(",")));
+                                }
+                                //6. Prompt input for description and edit movie object
+                                else if (choice == 6){
+                                    System.out.println("Enter new description:");
+                                    mymovie.setDescription(input.nextLine());
+                                }
+                                //7. Prompt input for director and edit movie object
+                                else if (choice == 7){
+                                    System.out.println("Enter new director:");
+                                    mymovie.setDirector(input.nextLine());
+                                }
+
+                            }
+                            //Save edited movie object to database
                             if (DataManager.manageMovie(mymovie,false) == Boolean.TRUE){
                                 System.out.println("Movie listing successfully updated!");
                             }
                             else{
-                                System.out.println("Error movie listing failed to update!");
+                                System.out.println("Error movie listing failed to be updated!");
                             }
                         }
                         //3. Remove movie listing
                         else if (choice == 3){
+                            //List all movies
+                            Boundary.DisplayMovies(DataManager.LoadMovies(""));
+                            //Select movie to remove by movieID
+                            System.out.println("Enter ID of the movie to remove: " );
+                            inputsearchint = input.nextInt();
+                            mymovie = SearchManager.find_Movie_byID(DataManager.LoadMovies(""), inputsearchint);
+                            if (DataManager.manageMovie(mymovie,true) == Boolean.TRUE){
+                                System.out.println("Movie listing successfully removed!");
+                            }
+                            else{
+                                System.out.println("Error movie listing failed to be removed!");
+                            }
 
                         }
                         //4. Create cinema showtimes and the movies to be shown

@@ -114,6 +114,10 @@ public class DataManager {
                     writer.append(tokens[4]);
                     writer.append(",");
                     writer.append(tokens[5]);
+                    writer.append(",");
+                    writer.append(tokens[6]);
+                    writer.append(",");
+                    writer.append(tokens[7]);
                     writer.append("\n");
                 }
 
