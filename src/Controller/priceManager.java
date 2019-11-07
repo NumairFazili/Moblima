@@ -4,14 +4,12 @@ import Entity.Settings;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
 public class priceManager {
 
 
-    private static double basePrice;
     private int age;
     private String cinemaClass;
 
