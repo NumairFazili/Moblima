@@ -88,7 +88,7 @@ public class DataManager {
     }
 
 
-    public static List<Cinema> LoadShowTimes(int cineplexID) {
+    public static List<Cinema> LoadShowTimes(int movieID) {
         BufferedReader reader = null;
         ArrayList<Cinema> cinemaArrayList = new ArrayList<>();
         try {
@@ -103,11 +103,11 @@ public class DataManager {
             while ((line = reader.readLine()) != null) {
                 String[] tokens = line.split(",");
 
-                if (tokens[0].contains(String.valueOf(cineplexID))) {
-                    List<String> str = Arrays.asList(tokens[5].split("\\."));
+                if (tokens[2].contains(String.valueOf(movieID))) {
+                    List<String> str = Arrays.asList(tokens[6].split("\\."));
                     List<Integer> items = new ArrayList<>();
                     for (String s : str) items.add(Integer.valueOf(s));
-                    Cinema cinema = new Cinema(Integer.parseInt(tokens[0]), Integer.parseInt(tokens[1]), Integer.parseInt(tokens[2]), tokens[3], tokens[4], items);
+                    Cinema cinema = new Cinema(Integer.parseInt(tokens[0]), Integer.parseInt(tokens[1]), Integer.parseInt(tokens[2]), tokens[3], tokens[4],tokens[5],items);
                     cinemaArrayList.add(cinema);
                 }
             }

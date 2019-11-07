@@ -1,5 +1,6 @@
 package View;
 
+import Entity.Cinema;
 import Entity.Movie;
 
 import java.util.ArrayList;
@@ -30,6 +31,14 @@ public class Boundary {
         System.out.println("Language: "+movie.getLanguage());
         System.out.println("Cast: "+movie.getCast());
         System.out.println("Description: "+movie.getDescription());
+    }
+
+    public static void DisplayCinemas(List<Cinema> cinemas){
+        int count=0;
+        System.out.println("index"+"  "+"CinePlex ID" + "  " + "Cinema ID" + "  " + "Time" + "  " + "Status" +"  "+"Class");
+        for(Cinema cinema:cinemas){
+            System.out.println(count++ +"  "+cinema.getCinplexID() + "  " + cinema.getCinemaID() + "  " + cinema.getTime() + "  " +cinema.getStatus() + "  " +cinema.getCinemaClass());
+        }
     }
 
     public static void DisplaySeating(List<Integer> seating) {
