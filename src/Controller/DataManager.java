@@ -24,7 +24,7 @@ public class DataManager {
     }
 
 
-    private static ArrayList<Movie> LoadMovies(String search) {
+    public static ArrayList<Movie> LoadMovies(String search) {
         BufferedReader reader = null;
         ArrayList<Movie> movieArrayList = new ArrayList<>();
         try {
@@ -53,7 +53,7 @@ public class DataManager {
     }
 
 
-    private static void SaveMovies(Movie movie) {
+    public static void SaveMovies(Movie movie) {
         FileWriter writer = null;
         try {
             writer = new FileWriter(getLocation("Movie"), true);
