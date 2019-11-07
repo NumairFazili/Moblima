@@ -8,6 +8,3 @@ Cineplex_ID,Cinema_ID,Movie ID,ShowTime,Status,class,Seats
 2,1,1001,7/10/2019 16:30,Now Showing,Platinum,1.0.0.1
 2,1,1002,7/10/2019 18:30,Now Showing,Platinum,1.0.0.1
 2,1,1003,8/10/2019 16:30,Now Showing,Platinum,1.0.0.1
-2,2,1004,11/10/2019 17:30,Coming Soon,Gold,0.0.0.0
-
-
