@@ -5,3 +5,4 @@ Movie ID,Movie Name,Language,Rating,RunTime,Cast,Description,Director
 1004,Joker,English,9.8,3:15,a.b.c,sampleText,sampleText
 1005,Mission Impossible,English,8.1,2:15,a.b.c,sampleText,sampleText
 1007,Avengers 2,English,9.3,3:10,a.b.c.d,sampletext,michael bay
+1006,The Incredibles,English,6.7,2:45,a.b.cd.e,sampletext,Brad Bird

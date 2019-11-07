@@ -2,6 +2,7 @@ package Controller;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import Entity.*;
 import View.Boundary;
@@ -15,7 +16,7 @@ public class Main {
         int movieid;
         double rating;
         String moviename, language, runtime, description, director;
-        ArrayList<String> cast = new ArrayList<>();
+        List<String> cast;
 
         String username, password, inputsearch, mobilenumber, email;
         int choice = -1;
@@ -108,12 +109,7 @@ public class Main {
                             System.out.println("Enter runtime:");
                             runtime = input.nextLine();
                             System.out.println("Enter number of cast members");
-                            inputsearchint = input.nextInt();
-                            input.nextLine(); //Catch newline from .nextInt()
-                            for (i=0; i<inputsearchint; i++){
-                                System.out.printf("Enter cast: %d",i+1);
-                                cast.add(input.nextLine());
-                            }
+                            cast = Arrays.asList(input.nextLine().split(","));
                             System.out.println("Enter description:");
                             description = input.nextLine();
                             System.out.println("Enter director:");
@@ -130,6 +126,13 @@ public class Main {
                             System.out.println("Enter ID of the movie to see the details: " );
                             inputsearchint = input.nextInt();
                             mymovie = SearchManager.find_Movie_byID(DataManager.LoadMovies(""), inputsearchint);
+                            mymovie.setName("Name changed");
+                            if (DataManager.manageMovie(mymovie,false) == Boolean.TRUE){
+                                System.out.println("Movie listing successfully updated!");
+                            }
+                            else{
+                                System.out.println("Error movie listing failed to update!");
+                            }
                         }
                         //3. Remove movie listing
                         else if (choice == 3){
