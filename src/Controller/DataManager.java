@@ -15,8 +15,7 @@ import java.util.Scanner;
 public class DataManager {
 
 
-
-    public DataManager(){
+    public DataManager() {
 
     }
 
@@ -25,11 +24,11 @@ public class DataManager {
     }
 
 
-    private static ArrayList<Movie> LoadMovies(String search){
+    private static ArrayList<Movie> LoadMovies(String search) {
         BufferedReader reader = null;
-        ArrayList<Movie> movieArrayList=new ArrayList<>();
+        ArrayList<Movie> movieArrayList = new ArrayList<>();
         try {
-            reader=new BufferedReader(new FileReader(getLocation("Movie")));
+            reader = new BufferedReader(new FileReader(getLocation("Movie")));
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
@@ -39,9 +38,9 @@ public class DataManager {
             reader.readLine();
             while ((line = reader.readLine()) != null) {
                 String[] tokens = line.split(",");
-                if(tokens[1].toLowerCase().contains(search.toLowerCase())){
-                    List<String> items =  Arrays.asList(tokens[5].split("\\."));
-                    Movie movie=new Movie(Integer.parseInt(tokens[0]),tokens[1],tokens[2],Double.parseDouble(tokens[3]),tokens[4],items,tokens[6],tokens[7]);
+                if (tokens[1].toLowerCase().contains(search.toLowerCase())) {
+                    List<String> items = Arrays.asList(tokens[5].split("\\."));
+                    Movie movie = new Movie(Integer.parseInt(tokens[0]), tokens[1], tokens[2], Double.parseDouble(tokens[3]), tokens[4], items, tokens[6], tokens[7]);
                     movieArrayList.add(movie);
                 }
             }
@@ -54,11 +53,10 @@ public class DataManager {
     }
 
 
-
-    private static void SaveMovies(Movie movie){
+    private static void SaveMovies(Movie movie) {
         FileWriter writer = null;
         try {
-            writer = new FileWriter(getLocation("Movie"),true);
+            writer = new FileWriter(getLocation("Movie"), true);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -74,7 +72,7 @@ public class DataManager {
             writer.append(",");
             writer.append(movie.getRunTime());
             writer.append(",");
-            writer.append(String.join(".",movie.getCast()));
+            writer.append(String.join(".", movie.getCast()));
             writer.append(",");
             writer.append(movie.getDescription());
             writer.append(",");
@@ -90,11 +88,11 @@ public class DataManager {
     }
 
 
-    public static List<Cinema> LoadShowTimes(int cineplexID){
+    public static List<Cinema> LoadShowTimes(int cineplexID) {
         BufferedReader reader = null;
-        ArrayList<Cinema> cinemaArrayList=new ArrayList<>();
+        ArrayList<Cinema> cinemaArrayList = new ArrayList<>();
         try {
-            reader=new BufferedReader(new FileReader(getLocation("Cinema")));
+            reader = new BufferedReader(new FileReader(getLocation("Cinema")));
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
@@ -105,11 +103,11 @@ public class DataManager {
             while ((line = reader.readLine()) != null) {
                 String[] tokens = line.split(",");
 
-                if(tokens[0].contains(String.valueOf(cineplexID))){
-                    List<String> str =  Arrays.asList(tokens[5].split("\\."));
-                    List<Integer> items=new ArrayList<>();
-                    for(String s : str)items.add(Integer.valueOf(s));
-                    Cinema cinema=new Cinema(Integer.parseInt(tokens[0]),Integer.parseInt(tokens[1]),Integer.parseInt(tokens[2]),tokens[3],tokens[4],items);
+                if (tokens[0].contains(String.valueOf(cineplexID))) {
+                    List<String> str = Arrays.asList(tokens[5].split("\\."));
+                    List<Integer> items = new ArrayList<>();
+                    for (String s : str) items.add(Integer.valueOf(s));
+                    Cinema cinema = new Cinema(Integer.parseInt(tokens[0]), Integer.parseInt(tokens[1]), Integer.parseInt(tokens[2]), tokens[3], tokens[4], items);
                     cinemaArrayList.add(cinema);
                 }
             }
@@ -122,10 +120,10 @@ public class DataManager {
     }
 
 
-    public static void  AddShowTimes(Cinema cinema){
+    public static void AddShowTimes(Cinema cinema) {
         FileWriter writer = null;
         try {
-            writer = new FileWriter(getLocation("Cinema"),true);
+            writer = new FileWriter(getLocation("Cinema"), true);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -150,15 +148,15 @@ public class DataManager {
         }
     }
 
-    public static Boolean UpdateShowTime(Cinema cinema){
+    public static Boolean UpdateShowTime(Cinema cinema) {
 
 
         File inputFile = new File(getLocation("Cinema"));
         File tempFile = new File(getLocation("Temp"));
 
         BufferedReader reader = null;
-        BufferedWriter writer=null;
-            try {
+        BufferedWriter writer = null;
+        try {
             reader = new BufferedReader(new FileReader(inputFile));
             writer = new BufferedWriter(new FileWriter(tempFile));
         } catch (FileNotFoundException e) {
@@ -183,36 +181,34 @@ public class DataManager {
             writer.append("\n");
 
 
-
         } catch (IOException e) {
             e.printStackTrace();
         }
-        Boolean Found=false;
+        Boolean Found = false;
         String line;
-            try {
+        try {
             reader.readLine();
             while ((line = reader.readLine()) != null) {
                 String[] tokens = line.split(",");
 
-                if((tokens[0].equals(String.valueOf(cinema.getCinplexID())))&&(tokens[1].equals(String.valueOf(cinema.getCinemaID())))&&(tokens[2].equals(String.valueOf(cinema.getMovieID())))&&(tokens[3].contains(String.valueOf(cinema.getTime())))){
-                    Found=true;
+                if ((tokens[0].equals(String.valueOf(cinema.getCinplexID()))) && (tokens[1].equals(String.valueOf(cinema.getCinemaID()))) && (tokens[2].equals(String.valueOf(cinema.getMovieID()))) && (tokens[3].contains(String.valueOf(cinema.getTime())))) {
+                    Found = true;
+                } else {
+                    writer.append(tokens[0]);
+                    writer.append(",");
+                    writer.append(tokens[1]);
+                    writer.append(",");
+                    writer.append(tokens[2]);
+                    writer.append(",");
+                    writer.append(tokens[3]);
+                    writer.append(",");
+                    writer.append(tokens[4]);
+                    writer.append(",");
+                    writer.append(tokens[5]);
+                    writer.append("\n");
                 }
-                    else{
-                        writer.append(tokens[0]);
-                        writer.append(",");
-                        writer.append(tokens[1]);
-                        writer.append(",");
-                        writer.append(tokens[2]);
-                        writer.append(",");
-                        writer.append(tokens[3]);
-                        writer.append(",");
-                        writer.append(tokens[4]);
-                        writer.append(",");
-                        writer.append(tokens[5]);
-                        writer.append("\n");
-                    }
 
-                if(Found){
+                if (Found) {
                     writer.append(String.valueOf(cinema.getCinplexID()));
                     writer.append(",");
                     writer.append(String.valueOf(cinema.getCinemaID()));
@@ -225,7 +221,7 @@ public class DataManager {
                     writer.append(",");
                     writer.append(Joiner.on('.').join(cinema.getSeats()));
                     writer.append("\n");
-                    Found=false;
+                    Found = false;
 
                 }
 
@@ -235,8 +231,8 @@ public class DataManager {
         } catch (IOException e) {
             e.printStackTrace();
         }
-            try {
-    //
+        try {
+            //
             writer.close();
             reader.close();
 
@@ -247,23 +243,18 @@ public class DataManager {
             e.printStackTrace();
         }
 
-            Boolean success=tempFile.renameTo(new File(getLocation("Cinema")));
-            return  success;
+        Boolean success = tempFile.renameTo(new File(getLocation("Cinema")));
+        return success;
 
 
     }
 
 
-
-
-
-
-
-    public static ArrayList<Booking> LoadBookings(){
+    public static ArrayList<Booking> LoadBookings() {
         BufferedReader reader = null;
-        ArrayList<Booking> bookingArrayList=new ArrayList<>();
+        ArrayList<Booking> bookingArrayList = new ArrayList<>();
         try {
-            reader=new BufferedReader(new FileReader(getLocation("Booking")));
+            reader = new BufferedReader(new FileReader(getLocation("Booking")));
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
@@ -275,24 +266,23 @@ public class DataManager {
                 String[] tokens = line.split(",");
 
 
-                long bookingID=Long.parseLong(tokens[0]);
-                int cinplexID= Integer.parseInt(tokens[1]);
-                int cinemaID=Integer.parseInt(tokens[2]);
-                int movieID=Integer.parseInt(tokens[3]);
-                String showTime=tokens[4];
-                String cinemaClass=tokens[5];
-                String movieType=tokens[6];
-                String customerName=tokens[7];
-                long mobileNumber=Long.parseLong(tokens[8]);
-                String email=tokens[9];
-                String customerType=tokens[10];
-                int seatNO=Integer.parseInt(tokens[11]);
-                String bookingTime=tokens[12];
-                int price=Integer.parseInt(tokens[13]);
+                long bookingID = Long.parseLong(tokens[0]);
+                int cinplexID = Integer.parseInt(tokens[1]);
+                int cinemaID = Integer.parseInt(tokens[2]);
+                int movieID = Integer.parseInt(tokens[3]);
+                String showTime = tokens[4];
+                String cinemaClass = tokens[5];
+                String movieType = tokens[6];
+                String customerName = tokens[7];
+                long mobileNumber = Long.parseLong(tokens[8]);
+                String email = tokens[9];
+                String customerType = tokens[10];
+                int seatNO = Integer.parseInt(tokens[11]);
+                String bookingTime = tokens[12];
+                int price = Integer.parseInt(tokens[13]);
 
 
-
-                Booking booking=new Booking(bookingID,cinplexID,cinemaID,movieID,showTime,cinemaClass,movieType,customerName,mobileNumber,email,customerType,seatNO,bookingTime,price);
+                Booking booking = new Booking(bookingID, cinplexID, cinemaID, movieID, showTime, cinemaClass, movieType, customerName, mobileNumber, email, customerType, seatNO, bookingTime, price);
                 bookingArrayList.add(booking);
 
             }
@@ -305,10 +295,10 @@ public class DataManager {
     }
 
 
-    public static void AddBooking(Booking booking){
+    public static void AddBooking(Booking booking) {
         FileWriter writer = null;
         try {
-            writer = new FileWriter(getLocation("Booking"),true);
+            writer = new FileWriter(getLocation("Booking"), true);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -350,12 +340,12 @@ public class DataManager {
     }
 
 
-    public static ArrayList<User> LoadUser(){
+    public static ArrayList<User> LoadUser() {
 
         BufferedReader reader = null;
-        ArrayList<User> userArrayList=new ArrayList<>();
+        ArrayList<User> userArrayList = new ArrayList<>();
         try {
-            reader=new BufferedReader(new FileReader(getLocation("User")));
+            reader = new BufferedReader(new FileReader(getLocation("User")));
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
@@ -365,8 +355,8 @@ public class DataManager {
             reader.readLine();
             while ((line = reader.readLine()) != null) {
                 String[] tokens = line.split(",");
-                    User user=new User(tokens[0],Integer.parseInt(tokens[1]),tokens[2],tokens[3]);
-                    userArrayList.add(user);
+                User user = new User(tokens[0], Integer.parseInt(tokens[1]), tokens[2], tokens[3]);
+                userArrayList.add(user);
 
             }
 
@@ -379,11 +369,11 @@ public class DataManager {
 
     }
 
-    public static void addUser(User user){
+    public static void addUser(User user) {
 
         FileWriter writer = null;
         try {
-            writer = new FileWriter(getLocation("User"),true);
+            writer = new FileWriter(getLocation("User"), true);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -405,12 +395,12 @@ public class DataManager {
 
     }
 
-    public static ArrayList<Cineplex> LoadCineplex(){
+    public static ArrayList<Cineplex> LoadCineplex() {
 
         BufferedReader reader = null;
-        ArrayList<Cineplex> cineplexArrayList =new ArrayList<>();
+        ArrayList<Cineplex> cineplexArrayList = new ArrayList<>();
         try {
-            reader=new BufferedReader(new FileReader(getLocation("Cineplex")));
+            reader = new BufferedReader(new FileReader(getLocation("Cineplex")));
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
@@ -420,7 +410,7 @@ public class DataManager {
             reader.readLine();
             while ((line = reader.readLine()) != null) {
                 String[] tokens = line.split(",");
-                Cineplex cineplex =new Cineplex(Integer.parseInt(tokens[0]),tokens[1],tokens[2],Integer.parseInt(tokens[3]));
+                Cineplex cineplex = new Cineplex(Integer.parseInt(tokens[0]), tokens[1], tokens[2], Integer.parseInt(tokens[3]));
                 cineplexArrayList.add(cineplex);
 
             }
@@ -434,127 +424,111 @@ public class DataManager {
     }
 
 
-    public static void main(String[] args){
-        //####################################Brandan####################################
-        Scanner input = new Scanner(System.in);
-        String username, password;
-        int choice = 0;
-        int adminauth;
-        System.out.println("MOBLIMA Movie Booking System START:");
-        while (choice != -2){
-            while (choice != 1 && choice != 2 && choice != -1){
-                try{
-                    Scanner in = new Scanner(System.in);
-                    System.out.println("Please enter 1 for Admin, 2 for Movie-Goer and -1 to exit:");
-                    choice = in.nextInt();
-                    if (choice == -1){
-                        System.exit(0);
-                    }
-                    if (choice != 1 && choice != 2 && choice != -1){
-                        System.out.println("Error! Please enter either 1, 2 or -1:");
-                    }
-                }
-                catch(InputMismatchException e){
-                    System.out.println("That is not an integer, please try again." );
-                }
-            }
-    
-             //Admin choice
-            if (choice == 1){
-                adminauth = 0;
-                while (adminauth == 0){
-                    System.out.println("ADMIN USER:");
-                    System.out.println("Please enter login details, Input -2 to go back:");
-                    System.out.println("Enter Username:");
-                    username = input.next();
-                    if (username.equals("-2")){ //If input is -2 go back to previous menu
-                        System.out.println("going to break");
-                        choice = 0;
-                        break;
-                    }
-                    System.out.println("Enter Password:");
-                    password = input.next();
-                    System.out.println(username);
+    public static Settings LoadSettings(){
 
-                }//If admin username and password is authenticated
-                if (adminauth == 1){
-                    choice = 0;
-                    while (choice <= 0 || choice >= 8){
-                        try{
-                            Scanner in = new Scanner(System.in);
-                            System.out.println("1. Create movie listing");
-                            System.out.println("2. Update movie listing");
-                            System.out.println("3. Remove movie listing");
-                            System.out.println("4. Create cinema showtimes and the movies to be shown");
-                            System.out.println("5. Update cinema showtimes and the movies to be shown");
-                            System.out.println("6. Remove cinema showtimes and the movies to be shown");
-                            System.out.println("7. Configure system settings");
-                            choice = in.nextInt();
-                            if (choice <= 0 || choice >= 8){
-                                System.out.println("Error! Please enter either 1, 2, 3, 4, 5, 6 or 7:");
-                            }
-                        }
-                        catch(InputMismatchException e){
-                            System.out.println("That is not an integer, please try again." );
-                        }
-                    }
-                    //1. Create movie listing
-                    if (choice == 1){
-        
-                    }
-                    //2. Update movie listing
-                    else if (choice == 2){
-        
-                    }
-                    //3. Remove movie listing
-                    else if (choice == 3){
-        
-                    }                                        
-                    //4. Create cinema showtimes and the movies to be shown
-                    else if (choice == 4){
-                            
-                    }
-                    //5. Update cinema showtimes and the movies to be shown
-                    else if (choice == 5){
-                            
-                    }
-                    //6. Remove cinema showtimes and the movies to be shown
-                    else if (choice == 6){
-                            
-                    }                                        
-                    //7. Configure system settings
-                    else if (choice == 7){
-                            
-                    }
-                }
-
-            }
-            
-    
-            //Movie-Goer choice
-            else { 
-                System.out.println("MOVIE-GOER USER");
-                choice = 0;
-                while (choice <= 0 || choice >= 7){
-                    try{
-                        Scanner in = new Scanner(System.in);
-                        System.out.println("1. Search/List movie");
-                        System.out.println("2. View movie details – including reviews and ratings");
-                        System.out.println("3. Check seat availability and selection of seat/s.");
-                        System.out.println("4. Book and purchase ticket");
-                        System.out.println("5. View booking history");
-                        System.out.println("6. List the Top 5 ranking by ticket sales OR by overall reviewers’ ratings");
-                        choice = in.nextInt();
-                        if (choice <= 0 || choice >= 7){
-                            System.out.println("Error! Please enter either 1, 2, 3, 4, 5 or 6:");
-                        }
-                    }
-                    catch(InputMismatchException e){
-                        System.out.println("That is not an integer, please try again." );
-                    }
-                }
-            }
+        BufferedReader reader = null;
+        try {
+            reader = new BufferedReader(new FileReader(getLocation("settings")));
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
         }
+
+        String line = "";
+        try {
+            reader.readLine();
+            while ((line = reader.readLine()) != null) {
+                String[] tokens = line.split(",");
+
+                List<String> dates = Arrays.asList(tokens[7].split("\\."));
+                Settings settings = new Settings(Double.parseDouble(tokens[0]),Double.parseDouble(tokens[1]),Double.parseDouble(tokens[2]),Double.parseDouble(tokens[3]),Double.parseDouble(tokens[4]),Double.parseDouble(tokens[5]),Double.parseDouble(tokens[6]),dates);
+                return settings;
+
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+
+        }
+        return null;
+    }
+
+    public static Boolean manageSettings(Settings settings){
+
+        File tempFile = new File(getLocation("Temp"));
+
+        BufferedWriter writer = null;
+        try {
+            writer = new BufferedWriter(new FileWriter(tempFile));
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
+        try {
+            writer.append("BasePrice");
+            writer.append(",");
+            writer.append("ChildPrice");
+            writer.append(",");
+            writer.append("SeniorPrice");
+            writer.append(",");
+            writer.append("HolidayPrice");
+            writer.append(",");
+            writer.append("silverPrice");
+            writer.append(",");
+            writer.append("GoldPrice");
+            writer.append(",");
+            writer.append("platinumPrice");
+            writer.append(",");
+            writer.append("Holiday");
+            writer.append("\n");
+
+
+            writer.append(String.valueOf(settings.getBasePrice()));
+            writer.append(",");
+            writer.append(String.valueOf(settings.getChildPrice()));
+            writer.append(",");
+            writer.append(String.valueOf(settings.getSeniorPrice()));
+            writer.append(",");
+            writer.append(String.valueOf(settings.getHolidayPrice()));
+            writer.append(",");
+            writer.append(String.valueOf(settings.getSilverPrice()));
+            writer.append(",");
+            writer.append(String.valueOf(settings.getGoldPrice()));
+            writer.append(",");
+            writer.append(String.valueOf(settings.getPlatinumPrice()));
+            writer.append(",");
+            writer.append(Joiner.on('.').join(settings.getHolidays()));
+            writer.append("\n");
+
+
+
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
+        try {
+            //
+            writer.close();
+
+
+            Files.delete(Paths.get(getLocation("settings")));
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        Boolean success = tempFile.renameTo(new File(getLocation("settings")));
+        return success;
+
+    }
+
+
+    public static void main(String[] args) {
+
+
     }
 }
         //####################################Brandan####################################
