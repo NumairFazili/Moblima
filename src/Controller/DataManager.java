@@ -1,6 +1,7 @@
 package Controller;
 
 import Entity.*;
+import View.Boundary;
 import com.google.common.base.Joiner;
 
 import java.io.*;
@@ -635,7 +636,6 @@ public class DataManager {
 
 
     public static void main(String[] args) {
-
 //
 //        Movie movie=new Movie(1005,"Mission Impossible","English",8.1,"2:15",Arrays.asList("a","b","c"),"sampleText","sampleText");
 //        manageMovie(movie,true);
