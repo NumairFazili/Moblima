@@ -45,11 +45,12 @@ public class DataManager {
                     movieArrayList.add(movie);
                 }
             }
-
+            reader.close();
         } catch (IOException e) {
             e.printStackTrace();
 
         }
+
         return movieArrayList;
     }
 
@@ -220,6 +221,7 @@ public class DataManager {
                     cinemaArrayList.add(cinema);
                 }
             }
+            reader.close();
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -395,6 +397,7 @@ public class DataManager {
                 bookingArrayList.add(booking);
 
             }
+            reader.close();
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -468,6 +471,7 @@ public class DataManager {
                 userArrayList.add(user);
 
             }
+            reader.close();
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -523,7 +527,7 @@ public class DataManager {
                 cineplexArrayList.add(cineplex);
 
             }
-
+            reader.close();
         } catch (IOException e) {
             e.printStackTrace();
 
@@ -553,7 +557,7 @@ public class DataManager {
                 return settings;
 
             }
-
+            reader.close();
         } catch (IOException e) {
             e.printStackTrace();
 
@@ -623,7 +627,6 @@ public class DataManager {
             //
             writer.close();
 
-
             Files.delete(Paths.get(getLocation("settings")));
 
         } catch (IOException e) {
@@ -637,8 +640,9 @@ public class DataManager {
 
     public static void main(String[] args) {
 //
-//        Movie movie=new Movie(1005,"Mission Impossible","English",8.1,"2:15",Arrays.asList("a","b","c"),"sampleText","sampleText");
-//        manageMovie(movie,true);
+//        Movie movie=new Movie(1005,"Mission Impossible 2","English",9.1,"2:15",Arrays.asList("a","b","c"),"sampleText","sampleText");
+//        System.out.println((manageMovie(movie,false)));
+
 
     }
 }
