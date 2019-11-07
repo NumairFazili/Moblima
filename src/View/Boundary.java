@@ -1,16 +1,26 @@
 package View;
 
+import Entity.Movie;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 public class Boundary {
 
-    public static void Display(String[] str) {
+    public static void DisplayOptions(String[] str) {
         int count = 0;
         for (int i = 0; i < str.length; i++)
             System.out.println(" " + String.valueOf(count++) + " : " + str[i]);
         System.out.println(-1 + " : " + "Exit");
+    }
+
+
+    public static void DisplayMovies(List<Movie> movieList){
+        System.out.println("ID" + "  " + "Title" + "  " + "Rating" + "  " + "Language");
+        for(Movie movie:movieList){
+            System.out.println(movie.getId() + "  " + movie.getName() + "  " + movie.getRating() + "  " +movie.getLanguage());
+        }
     }
 
     public static void DisplaySeating(List<Integer> seating) {
@@ -35,8 +45,6 @@ public class Boundary {
              }
              System.out.println();
          }
-
-
     }
 }
 
