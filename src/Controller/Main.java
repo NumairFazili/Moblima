@@ -21,6 +21,7 @@ public class Main {
         String username, password, inputsearch, mobilenumber, email;
         int choice = -1;
         int adminauth, age, inputsearchint, i;
+        Cinema mycinema;
         ArrayList<Movie> mymovielist = new ArrayList<>();
         Movie mymovie;
         User myuser;
@@ -141,14 +142,14 @@ public class Main {
                                 while (choice <= -1 || choice >= 8){
                                     try{
                                         Scanner in = new Scanner(System.in);
-                                        System.out.println("1. movie name:");
-                                        System.out.println("2. language:");
-                                        System.out.println("3. rating:");
-                                        System.out.println("4. runtime:");
-                                        System.out.println("5. Cast members");
-                                        System.out.println("6. description:");
-                                        System.out.println("7. director:");
-                                        System.out.println("0. Done:");
+                                        System.out.println("1. movie name");
+                                        System.out.println("2. language");
+                                        System.out.println("3. rating");
+                                        System.out.println("4. runtime");
+                                        System.out.println("5. Cast member");
+                                        System.out.println("6. description");
+                                        System.out.println("7. director");
+                                        System.out.println("0. Done");
                                         choice = in.nextInt();
                                         if (choice <= -1 || choice >= 8){
                                             System.out.println("Error! Please enter either 0, 1, 2, 3, 4, 5, 6 or 7:");
@@ -325,7 +326,6 @@ public class Main {
                     }
                     //1. Search/List movie
                     else if (choice == 1 || choice == 5){
-//                        ArrayList<Movie> mymovielist = new ArrayList<>();
                         //Search and display movies
                         if (choice == 1){
                             System.out.println("Enter name of movie to search: " );
@@ -360,6 +360,10 @@ public class Main {
                             Boundary.DisplayCinemas(DataManager.LoadShowTimes(mymovie.getId()));
                         }
                         //3. Check seat availability and selection of seat/s.
+                        System.out.println("Choose index of the showtime to view seat availability: ");
+                        inputsearchint = input.nextInt();
+                        input.nextLine(); //Catch newline from .nextInt()
+                        Boundary.DisplaySeating(((DataManager.LoadShowTimes(mymovie.getId()).get(inputsearchint)).getSeats()));
 
                         //4. Book and purchase ticket
                     }
