@@ -13,7 +13,7 @@ import java.util.List;
 
 import java.util.Scanner;
 public class DataManager {
-    
+
 
 
     public DataManager(){
@@ -176,6 +176,8 @@ public class DataManager {
             writer.append("Movie ID");
             writer.append(",");
             writer.append("ShowTime");
+            writer.append(",");
+            writer.append("Status");
             writer.append(",");
             writer.append("Seats");
             writer.append("\n");

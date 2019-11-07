@@ -43,10 +43,15 @@ public class BookingManager {
         //movieType need to be added into Movie
 
         long bookingID = genBookingID();
-        String customer_temp = "regular";
+        String customer_temp;
         if(user.getAge()>=65){
-            customer_temp = "citizen";
+            customer_temp = "senior";
         }
+        else if(user.getAge()<15)
+            customer_temp = "child";
+
+        else
+            customer_temp="adult";
         //missing customer type logic for student
 
         LocalDateTime dateTime = LocalDateTime.now();
