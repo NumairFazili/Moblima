@@ -25,9 +25,11 @@ public class PersonManager{
         ArrayList<Movie> m_list = DataManager.LoadMovies("");
         return m_list;
     }
+
     public ArrayList<Movie> getMovieByName(String s){
         return DataManager.LoadMovies(s);
     }
+
     public Movie selectMovieByID(ArrayList<Movie> m_list, int id){
         for (int i = 0; i < m_list.size(); i++){
             if (m_list.get(i).getId() == id){
@@ -36,6 +38,17 @@ public class PersonManager{
         }
         return null;
     }
+
+    public Movie selectMovieByID(int id){
+        ArrayList<Movie> m_list = DataManager.LoadMovies("");
+        for (int i = 0; i < m_list.size(); i++){
+            if (m_list.get(i).getId() == id){
+                return m_list.get(i);
+            }
+        }
+        return null;
+    }
+
     public ArrayList<Movie> getTopByRatings(){
         return SearchManager.get_topN_byRating(getAllMovies());
     }

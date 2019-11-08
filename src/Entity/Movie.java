@@ -3,7 +3,6 @@ package Entity;
 
 
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
 
 public class Movie {
@@ -13,10 +12,10 @@ public class Movie {
     String name,Language,runTime,Description,Director;
     double avgRating;
     List<Double> ratings;
-    List<String> comments;
+    List<String> reviews;
     List<String> cast;
     int minAge;
-    public Movie(int id,String name,String Language,List<Double>ratings,String runTime,List<String> cast,String Description,String Director, List<String> comments, int minAge) {
+    public Movie(int id,String name,String Language,List<Double>ratings,String runTime,List<String> cast,String Description,String Director, List<String> reviews, int minAge) {
         this.id = id;
         this.ratings = ratings;
         this.name = name;
@@ -25,7 +24,7 @@ public class Movie {
         this.Description = Description;
         this.Director = Director;
         this.cast = cast;
-        this.comments = comments;
+        this.reviews = reviews;
         this.minAge = minAge;
     }
 
@@ -45,6 +44,10 @@ public class Movie {
         this.ratings = ratings;
     }
 
+    public void addRating(Double rating){
+        this.ratings.add(rating);
+    }
+    
     public double getAvgRating(){
         if(ratings != null){
             avgRating = 0;
@@ -110,20 +113,20 @@ public class Movie {
         this.cast = cast;
     }
 
-    public List<String> getComments(){
-        if(comments != null){
-            return comments;
+    public List<String> getReviews(){
+        if(reviews != null){
+            return reviews;
         }else{
             return new ArrayList<String>();
         }
     }
 
-    public void addComment(String comment){
-        this.comments.add(comment);
+    public void addReview(String review){
+        this.reviews.add(review);
     }
 
-    public void setComments(List<String> comments){
-        this.comments = comments;
+    public void setReviews(List<String> reviews){
+        this.reviews = reviews;
     }
 
     public int getMinAge(){

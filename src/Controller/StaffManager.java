@@ -36,8 +36,8 @@ public class StaffManager extends PersonManager{
     }
 
     //MOVIE 
-    public void createNewMovie(int id,String name,String Language,List<Double> rating,String runTime,List<String> cast,String Description,String Director, List<String> comments){
-        Movie m = new Movie(id, name, Language, rating, runTime, cast, Description, Director, comments);
+    public void createNewMovie(int id,String name,String Language,List<Double> rating,String runTime,List<String> cast,String Description,String Director, List<String> comments, int minAge){
+        Movie m = new Movie(id, name, Language, rating, runTime, cast, Description, Director, comments, minAge);
         DataManager.SaveMovies(m);
     }
     public void updateMovieName(Movie m, String s){
@@ -54,6 +54,9 @@ public class StaffManager extends PersonManager{
     }
     public void updateMovieCast(Movie m, List<String> cast){
         m.setCast(cast);
+    }
+    public void updateMovieMinAge(Movie m, int age){
+        m.setMinAge(age);
     }
     public void saveMovieChanges(Movie m){
         DataManager.manageMovie(m, false);

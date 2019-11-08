@@ -31,9 +31,14 @@ public class UserManager extends PersonManager{
 
 
     public void createBooking(Cinema cinema, String showTime, String cinemaClass, String movieType, int seatNO, int price){
-        Booking b = BookingManager.createBooking(user, cinema, showTime, cinemaClass, movieType, seatNO, price);
-        user.addBooking(b);
-        user.save();
+        Movie m = super.selectMovieByID(cinema.getMovieID());
+        if(user.getAge() >= m.getMinAge()){
+            Booking b = BookingManager.createBooking(user, cinema, showTime, cinemaClass, movieType, seatNO, price);
+            user.addBooking(b);
+            user.save();    
+        }else{
+            System.out.println("Minimum age requirement not reached.");
+        }
     }
 
     public List<Booking> getBookings(){
@@ -54,9 +59,10 @@ public class UserManager extends PersonManager{
         return bookings;
     }
 
-    // public void reviewMovie(Movie m, double rating, String comment){
-    //     m.addReview(user, rating, comment);
-    // }
+    public void reviewMovie(Movie m, double rating, String review){
+        m.addRating(rating);
+        m.addReview(review);
+    }
 
     public static void main(String args[]){
         UserManager um = new UserManager("James", 18, "jammy@gmail.com", "13572468");
