@@ -9,7 +9,7 @@ import View.Boundary;
 
 //return StaffManager/UserManager
 
-public class AuthenticationManager{
+public class AuthManager{
 
     public static StaffManager getStaff(String username, String password){
 
