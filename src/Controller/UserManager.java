@@ -24,7 +24,7 @@ public class UserManager extends PersonManager{
 
     //for new user
     public UserManager(String name, int age, String email, String mobileNumber){
-        User u = new User(name, age, mobileNumber, email);
+        User u = new User(name, age, mobileNumber, email, null);
         u.save();
         user = u;
     }
