@@ -50,12 +50,14 @@ public class Movie {
     
     public double getAvgRating(){
         if(ratings != null){
-            avgRating = 0;
-            for(int i = 0; i < ratings.size(); i++){
-                avgRating += ratings.get(i);
+            if(ratings.size()> 1){
+                avgRating = 0;
+                for(int i = 0; i < ratings.size(); i++){
+                    avgRating += ratings.get(i);
+                }
+                avgRating /= ratings.size();
+                return avgRating;    
             }
-            avgRating /= ratings.size();
-            return avgRating;
         }
         return 0;
     }
