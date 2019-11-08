@@ -38,7 +38,7 @@ public class BookingManager {
         DataManager.AddBooking(booking);
 
     }
-    private static Booking createBooking(User user, Cinema cinema, String showTime, String cinemaClass, String movieType, int seatNO, int price){
+    public static Booking createBooking(User user, Cinema cinema, String showTime, String cinemaClass, String movieType, int seatNO, int price){
         //Cinema class need to be added into Cinema
         //movieType need to be added into Movie
 

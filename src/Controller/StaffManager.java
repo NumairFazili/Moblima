@@ -7,103 +7,88 @@ import Entity.*;
 
 /*
 List of Methods
-(1)Staff
-    verifyPassword
-(2)Movie
-    showMovies,
+(1)Movie
     createMovie,
     updateMovie[Name, RunTime, Description, Director, Cast],
+    saveMovieChanges, 
     deleteMovie
-(3)ShowTime(Cinema)
-    showShowTimes,
+(2)ShowTime(Cinema)
     createShowTime,
     update[CinemaID, MovieID, Time, Status],
+    saveShowTimeChanges,
     deleteShowTime
-(4)Settings
+(3)Settings
     showSettings
     update[BasePrice, ChildPrice, SeniorPrice, HolidayPrice, SilverPrice, GoldPrice, PlatinumPrice, Holiday]
-    saveSettings
+    saveSettingsChanges
 */
 
 
-public class StaffManager {
+public class StaffManager extends PersonManager{
 
     Staff staff;
 
-    public boolean verifyPassword(String username, String password){
-
-        ArrayList<Staff> staffList = DataManager.loadStaff();
-
-        for(int i = 0; i < staffList.size(); i++){
-            if(staffList.get(i).getName() == username){
-                if(staffList.get(i).checkPassword(password)){
-                    staff = staffList.get(i);
-                    return true;
-                }
-                return false;
-            }
+    public StaffManager(Staff s){
+        staff = s;
+        if(s == null){
+            throw new IllegalArgumentException("Staff cannot be null!");
         }
-        return false;
     }
 
     //MOVIE 
-    public ArrayList<Movie> showMovies(){
-        ArrayList<Movie> m_list = DataManager.loadMovie();
-        return m_list;
-    }
-    public void createMovie(int id,String name,String Language,double rating,String runTime,List<String> cast,String Description,String Director){
-        staff.createNewMovie(id, name, Language, rating, runTime, cast, Description, Director);
+    public void createNewMovie(int id,String name,String Language,double rating,String runTime,List<String> cast,String Description,String Director){
+        Movie m = new Movie(id, name, Language, rating, runTime, cast, Description, Director);
+        DataManager.SaveMovies(m);
     }
     public void updateMovieName(Movie m, String s){
-        staff.updateMovieName(m, s);
+        m.setName(s);
     }
     public void updateMovieRunTime(Movie m, String s){
-        staff.updateMovieRunTime(m, s);
+        m.setRunTime(s);
     }
     public void updateMovieDescription(Movie m, String s){
-        staff.updateMovieDescription(m, s);
+        m.setDescription(s);
     }
     public void updateMovieDirector(Movie m, String s){
-        staff.updateMovieDirector(m, s);
+        m.setDirector(s);
     }
     public void updateMovieCast(Movie m, List<String> cast){
-        staff.updateMovieCast(m, cast);
+        m.setCast(cast);
+    }
+    public void saveMovieChanges(Movie m){
+        DataManager.manageMovie(m, false);
     }
     public void deleteMovie(Movie m){
-        staff.deleteMovie(m);
+        DataManager.manageMovie(m, true);
     }
 
 
-    //Cinema
-    public void createShowTime(int cinplexID, int cinemaID, int movieID, String time, String status, List<Integer> seats){
-        staff.createShowTime(cinplexID, cinemaID, movieID, time, status, seats);
-    }
-    public List<Cinema> showShowTimes(int cineplexID){
-        List<Cinema> c_list = DataManager.LoadShowTimes(cineplexID);
-        return c_list;
+
+    //ShowTime
+    public void createShowTime(int cinplexID, int cinemaID, int movieID, String time, String status, String cinemaClass, List<Integer> seats){
+        Cinema c = new Cinema(cinplexID, cinemaID, movieID, time, status, cinemaClass, seats);
+        DataManager.AddShowTimes(c);
     }
     public void updateCinemaID(Cinema c, int i){
-        staff.updateCinemaID(c, i);
+        c.setCinemaID(i);
     }
     public void updateMovieID(Cinema c, int i){
-        staff.updateMovieID(c, i);
+        c.setMovieID(i);
     }
     public void updateTime(Cinema c, String s){
-        staff.updateTime(c, s);
+        c.setTime(s);
     }
     public void updateStatus(Cinema c, String s){
-        staff.updateStatus(c, s);
+        c.setStatus(s);
+    }
+    public void saveShowTimeChanges(Cinema c){
+        DataManager.UpdateShowTime(c);
     }
     public void deleteShowTime(Cinema c){
-        staff.deleteShowTime(c);
+        c.setStatus("ended");
     }
 
-    //USER
-    /*
-    void viewUserBookingHistory(User u){
-        u.viewBookingHistory();
-    }
-    */
+
 
     //Settings
     public Settings showSettings(){
@@ -111,28 +96,31 @@ public class StaffManager {
         return s;
     }
     public void updateBasePrice(Settings s, double base){
-        staff.updateBasePrice(s, base);
+        s.setBasePrice(base);
     }
     public void updateChildPrice(Settings s, double child){
-        staff.updateChildPrice(s, child);
+        s.setChildPrice(child);
     }
     public void updateSeniorPrice(Settings s, double senior){
-        staff.updateSeniorPrice(s, senior);
+        s.setSeniorPrice(senior);
     }
     public void updateHolidayPrice(Settings s, double holiday){
-        staff.updateHolidayPrice(s, holiday);
+        s.setHolidayPrice(holiday);
     }
     public void updateSilverPrice(Settings s, double silver){
-        staff.updateSilverPrice(s, silver);
+        s.setSilverPrice(silver);
     }
     public void updateGoldPrice(Settings s, double gold){
-        staff.updateGoldPrice(s, gold);
+        s.setGoldPrice(gold);
     }
     public void updatePlatinumPrice(Settings s, double platinum){
-        staff.updatePlatinumPrice(s, platinum);
+        s.setPlatinumPrice(platinum);
     }
     public void updateHoliday(Settings s, ArrayList<String> holiday){
-        staff.updateHoliday(s, holiday);
+        s.setHolidays(holiday);
+    }
+    public void saveSettingsChanges(Settings s){
+        DataManager.manageSettings(s);
     }
 
     public static void main(String args[]){
