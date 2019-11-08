@@ -79,7 +79,7 @@ public class SearchManager {
     private static ArrayList<Booking> getBookingHistory(String userName, String mobileNumber, ArrayList<Booking> bookings){
         ArrayList<Booking> to_return = new ArrayList<Booking>();
         for(int i = 0;i<bookings.size();i++){
-            String temp_str = Long.toString(bookings.get(i).getMobileNumber());
+            String temp_str = bookings.get(i).getMobileNumber();
 
             if(bookings.get(i).getCustomerName()==userName && temp_str.equalsIgnoreCase(mobileNumber)){
                 to_return.add(bookings.get(i));

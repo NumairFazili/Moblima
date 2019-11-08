@@ -7,10 +7,10 @@ public class Cinema {
     int cinplexID,cinemaID,movieID;
     String time,status,cinemaClass;
     List<Integer> seats;
+    String movieType;
 
 
-
-    public Cinema(int cinplexID, int cinemaID, int movieID, String time, String status, String cinemaClass, List<Integer> seats) {
+    public Cinema(int cinplexID, int cinemaID, int movieID, String time, String status, String cinemaClass, List<Integer> seats, String movieType) {
         this.cinplexID = cinplexID;
         this.cinemaID = cinemaID;
         this.movieID = movieID;
@@ -18,6 +18,7 @@ public class Cinema {
         this.status=status;
         this.cinemaClass=cinemaClass;
         this.seats = seats;
+        this.movieType = movieType;        
     }
 
     public int getCinplexID() {
@@ -77,6 +78,14 @@ public class Cinema {
     }
     public void addSeats(Integer a){
         this.seats.add(a);
+    }
+
+    public String getMovieType(){
+        return movieType;
+    }
+
+    public void setMovieType(String movieType){
+        this.movieType = movieType;
     }
 
 }

@@ -2,11 +2,12 @@ package Entity;
 
 public class Booking {
 
-    private long bookingID,mobileNumber;
+    private String mobileNumber;
+    private String bookingID;
     private int cinplexID,cinemaID,movieID,seatNO,Price;
     private String showTime,bookingTime,customerName,customerType,cinemaClass,movieType,email;
 
-    public Booking(long bookingID,int cinplexID,int cinemaID,int movieID,String showTime,String cinemaClass,String movieType,String customerName,long mobileNumber,String email,String customerType,int seatNO,String bookingTime,int price) {
+    public Booking(String bookingID,int cinplexID,int cinemaID,int movieID,String showTime,String cinemaClass,String movieType,String customerName,String mobileNumber,String email,String customerType,int seatNO,String bookingTime,int price) {
         this.bookingID = bookingID;
         this.mobileNumber = mobileNumber;
         this.cinplexID = cinplexID;
@@ -23,19 +24,19 @@ public class Booking {
         this.email = email;
     }
 
-    public long getBookingID() {
+    public String getBookingID() {
         return bookingID;
     }
 
-    public void setBookingID(long bookingID) {
+    public void setBookingID(String bookingID) {
         this.bookingID = bookingID;
     }
 
-    public long getMobileNumber() {
+    public String getMobileNumber() {
         return mobileNumber;
     }
 
-    public void setMobileNumber(long mobileNumber) {
+    public void setMobileNumber(String mobileNumber) {
         this.mobileNumber = mobileNumber;
     }
 
