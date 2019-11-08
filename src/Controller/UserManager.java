@@ -1,6 +1,7 @@
 package Controller;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import Entity.*;
 
@@ -35,8 +36,8 @@ public class UserManager extends PersonManager{
         user.save();
     }
 
-    public ArrayList<Booking> getBookings(){
-        ArrayList<Long> b_list = user.getBookings();
+    public List<Booking> getBookings(){
+        List<Long> b_list = user.getBookings();
         ArrayList<Booking> all_b = DataManager.LoadBookings();
         ArrayList<Booking> bookings = new ArrayList<Booking>();
         for(int i = 0; i < b_list.size(); i++){

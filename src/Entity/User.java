@@ -1,6 +1,7 @@
 package Entity;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import Controller.DataManager;
 
@@ -8,7 +9,7 @@ public class User extends Person{
     int age;
     String email; 
     String mobileNumber;
-    ArrayList<Long> bookings;
+    List<Long> bookings;
 
     //basic methods
 
@@ -21,7 +22,7 @@ public class User extends Person{
     }
 
     //for re-creating existing user
-    public User(String name, int age, String email, String mobileNumber, ArrayList<Long> bookings){
+    public User(String name, int age, String email, String mobileNumber, List<Long> bookings){
         this.age = age;
         setName_User(name);
         this.email = email;
@@ -60,7 +61,7 @@ public class User extends Person{
     public String getmobileNumber(){
         return mobileNumber;
     }
-    public ArrayList<Long> getBookings(){
+    public List<Long> getBookings(){
         if(bookings == null){
             return new ArrayList<Long>();
         }
@@ -74,7 +75,7 @@ public class User extends Person{
 
 
     public void save(){
-        DataManager.addUser(this);
+        DataManager.ManageUser(this,true);
     }
     
     //to verify the attributes

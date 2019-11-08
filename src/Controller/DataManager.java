@@ -485,31 +485,89 @@ public class DataManager {
 
     }
 
-    public static void addUser(User user) {
+    public static Boolean ManageUser(User user,Boolean add) {
 
-        FileWriter writer = null;
+
+        File inputFile = new File(getLocation("User"));
+        File tempFile = new File(getLocation("Temp"));
+
+
+        BufferedReader reader = null;
+        BufferedWriter writer = null;
         try {
-            writer = new FileWriter(getLocation("User"), true);
+            reader = new BufferedReader(new FileReader(inputFile));
+            writer = new BufferedWriter(new FileWriter(tempFile));
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }
 
+
         try {
-            writer.append(user.getName());
+            writer.append("Name");
             writer.append(",");
-            writer.append(String.valueOf(user.getAge()));
+            writer.append("Age");
             writer.append(",");
-            writer.append(user.getmobileNumber());
+            writer.append("Mobile");
             writer.append(",");
-            writer.append(user.getEmail());
+            writer.append("Email");
+            writer.append(",");
+            writer.append("Bookings");
             writer.append("\n");
-            writer.flush();
-            writer.close();
+
+
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-    }
+
+        Boolean Found = false;
+        String line;
+
+        try {
+            reader.readLine();
+            while ((line = reader.readLine()) != null) {
+                String[] tokens = line.split(",");
+
+                if (tokens[0].equals(user.getName()) && tokens[2].equals(user.getmobileNumber())) {
+                    Found = true;
+                }else {
+                    writer.append(tokens[0]);
+                    writer.append(",");
+                    writer.append(tokens[1]);
+                    writer.append(",");
+                    writer.append(tokens[2]);
+                    writer.append(",");
+                    writer.append(tokens[3]);
+                    writer.append(",");
+                    writer.append(tokens[4]);
+                    writer.append("\n");
+                }
+                if(Found || add){
+                    writer.append(user.getName());
+                    writer.append(",");
+                    writer.append(String.valueOf(user.getAge()));
+                    writer.append(",");
+                    writer.append(user.getmobileNumber());
+                    writer.append(",");
+                    writer.append(user.getEmail());
+                    writer.append(",");
+                    writer.append(Joiner.on('.').join(user.getBookings()));
+                    writer.append("\n");
+                    add=false;
+                    Found=false;
+                }
+            }
+            writer.close();
+            reader.close();
+            Files.delete(Paths.get(getLocation("User")));
+            } catch (IOException e) {
+            e.printStackTrace();}
+        Boolean success = tempFile.renameTo(new File(getLocation("User")));
+        return success;
+        }
+
 
     public static ArrayList<Cineplex> LoadCineplex() {
 
@@ -643,6 +701,11 @@ public class DataManager {
 
     public static void main(String[] args) {
 //
+//        List<Long> bookings= (List<Long>) Arrays.asList(1234567890,1234888880,1234888880);
+//        User user=new User("test4",22,"123456789","test4@gmail.com",Arrays.asList(12345L,5678L,89765L));
+//        ManageUser(user,false);
+
+
 //        Movie movie=new Movie(1005,"Mission Impossible 4","English",9.1,"2:15",Arrays.asList("a","b","c"),"sampleText","sampleText");
 //        System.out.println((manageMovie(movie,false)));
 //
