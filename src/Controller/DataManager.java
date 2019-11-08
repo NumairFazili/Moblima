@@ -470,7 +470,8 @@ public class DataManager {
             reader.readLine();
             while ((line = reader.readLine()) != null) {
                 String[] tokens = line.split(",");
-                User user = new User(tokens[0], Integer.parseInt(tokens[1]), tokens[2], tokens[3]);
+                List<String> bookings = Arrays.asList(tokens[4].split("\\."));
+                User user = new User(tokens[0], Integer.parseInt(tokens[1]), tokens[2], tokens[3],bookings);
                 userArrayList.add(user);
 
             }
