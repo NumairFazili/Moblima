@@ -1,6 +1,7 @@
 package Controller;
 
 import Entity.*;
+import View.Boundary;
 import com.google.common.base.Joiner;
 
 import java.io.*;
@@ -24,7 +25,7 @@ public class DataManager {
     }
 
 
-    private static ArrayList<Movie> LoadMovies(String search) {
+    public static ArrayList<Movie> LoadMovies(String search) {
         BufferedReader reader = null;
         ArrayList<Movie> movieArrayList = new ArrayList<>();
         try {
@@ -44,16 +45,129 @@ public class DataManager {
                     movieArrayList.add(movie);
                 }
             }
-
+            reader.close();
         } catch (IOException e) {
             e.printStackTrace();
 
         }
+
         return movieArrayList;
     }
 
 
-    private static void SaveMovies(Movie movie) {
+    public static Boolean manageMovie(Movie movie,Boolean delete){
+
+        File inputFile = new File(getLocation("Movie"));
+        File tempFile = new File(getLocation("Temp"));
+
+        BufferedReader reader = null;
+        BufferedWriter writer = null;
+        try {
+            reader = new BufferedReader(new FileReader(inputFile));
+            writer = new BufferedWriter(new FileWriter(tempFile));
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            writer.append("Movie ID");
+            writer.append(",");
+            writer.append("Movie Name");
+            writer.append(",");
+            writer.append("Language");
+            writer.append(",");
+            writer.append("Rating");
+            writer.append(",");
+            writer.append("RunTime");
+            writer.append(",");
+            writer.append("Cast");
+            writer.append(",");
+            writer.append("Description");
+            writer.append(",");
+            writer.append("Director");
+            writer.append("\n");
+
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        Boolean Found = false;
+        String line;
+        try {
+            reader.readLine();
+            while ((line = reader.readLine()) != null) {
+                String[] tokens = line.split(",");
+
+                if (Integer.parseInt(tokens[0])==movie.getId()) {
+                    Found = true;
+                } else {
+                    writer.append(tokens[0]);
+                    writer.append(",");
+                    writer.append(tokens[1]);
+                    writer.append(",");
+                    writer.append(tokens[2]);
+                    writer.append(",");
+                    writer.append(tokens[3]);
+                    writer.append(",");
+                    writer.append(tokens[4]);
+                    writer.append(",");
+                    writer.append(tokens[5]);
+                    writer.append(",");
+                    writer.append(tokens[6]);
+                    writer.append(",");
+                    writer.append(tokens[7]);
+                    writer.append("\n");
+                }
+
+                if (Found && !delete) {
+                    writer.append(String.valueOf(movie.getId()));
+                    writer.append(",");
+                    writer.append(movie.getName());
+                    writer.append(",");
+                    writer.append(movie.getLanguage());
+                    writer.append(",");
+                    writer.append(String.valueOf(movie.getRating()));
+                    writer.append(",");
+                    writer.append(movie.getRunTime());
+                    writer.append(",");
+                    writer.append(String.join(".", movie.getCast()));
+                    writer.append(",");
+                    writer.append(movie.getDescription());
+                    writer.append(",");
+                    writer.append(movie.getDirector());
+                    writer.append("\n");
+                    Found = false;
+
+                }
+
+            }
+
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        try {
+            //
+            writer.close();
+            reader.close();
+
+
+            Files.delete(Paths.get(getLocation("Movie")));
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        Boolean success = tempFile.renameTo(new File(getLocation("Movie")));
+        return success;
+
+    }
+
+
+
+    public static void SaveMovies(Movie movie) {
         FileWriter writer = null;
         try {
             writer = new FileWriter(getLocation("Movie"), true);
@@ -102,7 +216,6 @@ public class DataManager {
             reader.readLine();
             while ((line = reader.readLine()) != null) {
                 String[] tokens = line.split(",");
-
                 if (tokens[2].contains(String.valueOf(movieID))) {
                     List<String> str = Arrays.asList(tokens[6].split("\\."));
                     List<Integer> items = new ArrayList<>();
@@ -111,6 +224,7 @@ public class DataManager {
                     cinemaArrayList.add(cinema);
                 }
             }
+            reader.close();
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -286,6 +400,7 @@ public class DataManager {
                 bookingArrayList.add(booking);
 
             }
+            reader.close();
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -359,6 +474,7 @@ public class DataManager {
                 userArrayList.add(user);
 
             }
+            reader.close();
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -414,7 +530,7 @@ public class DataManager {
                 cineplexArrayList.add(cineplex);
 
             }
-
+            reader.close();
         } catch (IOException e) {
             e.printStackTrace();
 
@@ -444,7 +560,7 @@ public class DataManager {
                 return settings;
 
             }
-
+            reader.close();
         } catch (IOException e) {
             e.printStackTrace();
 
@@ -514,7 +630,6 @@ public class DataManager {
             //
             writer.close();
 
-
             Files.delete(Paths.get(getLocation("settings")));
 
         } catch (IOException e) {
@@ -527,7 +642,11 @@ public class DataManager {
 
 
     public static void main(String[] args) {
+//
+//        Movie movie=new Movie(1005,"Mission Impossible 2","English",9.1,"2:15",Arrays.asList("a","b","c"),"sampleText","sampleText");
+//        System.out.println((manageMovie(movie,false)));
 
+//        System.out.println((LoadShowTimes(1003)));
 
     }
 }

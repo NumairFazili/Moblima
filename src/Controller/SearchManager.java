@@ -41,7 +41,7 @@ public class SearchManager {
         return map;
     }
 
-    private static ArrayList<Movie> get_topN_byRating(ArrayList<Movie> movies){
+    public static ArrayList<Movie> get_topN_byRating(ArrayList<Movie> movies){
         ArrayList<Movie> to_return = new ArrayList<Movie>();
 
             Collections.sort(movies,new SortByRating());
@@ -61,7 +61,7 @@ public class SearchManager {
         throw new NoSuchElementException("No such id found");
     }
 
-    private static ArrayList<Movie> get_topN_bySale(ArrayList<Movie> movies, ArrayList<Booking> bookings){
+    public static ArrayList<Movie> get_topN_bySale(ArrayList<Movie> movies, ArrayList<Booking> bookings){
         ArrayList<Movie> to_return = new ArrayList<Movie>();
         HashMap<Integer,Integer> sales_map = SearchManager.calculateSales(bookings);
         CompareMapByValue temp = new CompareMapByValue(sales_map);
