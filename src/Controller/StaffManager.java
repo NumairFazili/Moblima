@@ -36,8 +36,8 @@ public class StaffManager extends PersonManager{
     }
 
     //MOVIE 
-    public void createNewMovie(int id,String name,String Language,double rating,String runTime,List<String> cast,String Description,String Director){
-        Movie m = new Movie(id, name, Language, rating, runTime, cast, Description, Director);
+    public void createNewMovie(int id,String name,String Language,List<Double> rating,String runTime,List<String> cast,String Description,String Director, List<String> comments){
+        Movie m = new Movie(id, name, Language, rating, runTime, cast, Description, Director, comments);
         DataManager.SaveMovies(m);
     }
     public void updateMovieName(Movie m, String s){

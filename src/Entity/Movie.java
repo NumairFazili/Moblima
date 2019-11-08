@@ -10,18 +10,21 @@ public class Movie {
 
 
     int id;
-    double rating;
     String name,Language,runTime,Description,Director;
+    double avgRating;
+    List<Double> ratings;
+    List<String> comments;
     List<String> cast;
-    public Movie(int id,String name,String Language,double rating,String runTime,List<String> cast,String Description,String Director) {
+    public Movie(int id,String name,String Language,List<Double>ratings,String runTime,List<String> cast,String Description,String Director, List<String> comments) {
         this.id = id;
-        this.rating = rating;
+        this.ratings = ratings;
         this.name = name;
         this.Language=Language;
         this.runTime = runTime;
         this.Description = Description;
         this.Director = Director;
         this.cast = cast;
+        this.comments = comments;
     }
 
     public int getId() {
@@ -32,16 +35,29 @@ public class Movie {
         this.id = id;
     }
 
-    public double getRating() {
-        return rating;
+    public List<Double> getRating() {
+        return ratings;
     }
 
-    public void setRating(double rating) {
-        this.rating = rating;
+    public void setRating(List<Double> ratings) {
+        this.ratings = ratings;
     }
 
+    public double getAvgRating(){
+        if(ratings != null){
+            avgRating = 0;
+            for(int i = 0; i < ratings.size(); i++){
+                avgRating += ratings.get(i);
+            }
+            avgRating /= ratings.size();
+            return avgRating;
+        }
+        return 0;
+    }
 
-
+    public void setAvgRating(double avgRating){
+        this.avgRating = avgRating;
+    }
 
 
     public String getRunTime() {
@@ -92,5 +108,20 @@ public class Movie {
         this.cast = cast;
     }
 
+    public List<String> getComments(){
+        if(comments != null){
+            return comments;
+        }else{
+            return new ArrayList<String>();
+        }
+    }
+
+    public void addComment(String comment){
+        this.comments.add(comment);
+    }
+
+    public void setComments(List<String> comments){
+        this.comments = comments;
+    }
 
 }

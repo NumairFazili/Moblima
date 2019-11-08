@@ -17,5 +17,6 @@ public abstract class Person {
     }
     // end of basic methods
 
-    void save(){}
+    public void save(){}
+
 }

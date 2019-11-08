@@ -1,5 +1,6 @@
 package Entity;
 
+import java.util.List;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,18 +12,8 @@ public class User extends Person{
     String mobileNumber;
     List<Long> bookings;
 
-    //basic methods
-
-    //for creating new user
-    public User(String name, int age, String mobileNumber, String email){
-        this.age = age;
-        setName_User(name);
-        this.email = email;
-        this.mobileNumber = mobileNumber;
-    }
-
     //for re-creating existing user
-    public User(String name, int age, String email, String mobileNumber, List<Long> bookings){
+    public User(String name, int age, String mobileNumber, String email, List<Long> bookings){
         this.age = age;
         setName_User(name);
         this.email = email;
@@ -80,7 +71,7 @@ public class User extends Person{
     
     //to verify the attributes
     public static void main(String args[]){
-        User existing = new User("John", 19, "john0002@gmail.com", "12345654");
+        User existing = new User("John", 19, "12345654", "john0002@gmail.com", null);
 
         System.out.println("Existing user: \n" + existing.age);
         System.out.println(existing.name);
