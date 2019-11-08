@@ -43,8 +43,8 @@ public class Boundary {
 
     public static void DisplaySeating(List<Integer> seating) {
         int value;
-        int rows=3;
-        int cols=3;
+        int rows=8;
+        int cols=8;
 
         System.out.print("   ");
         for(int i=0;i<cols;i++)

@@ -643,12 +643,25 @@ public class DataManager {
 
     public static void main(String[] args) {
 //
-//        Movie movie=new Movie(1005,"Mission Impossible 2","English",9.1,"2:15",Arrays.asList("a","b","c"),"sampleText","sampleText");
+//        Movie movie=new Movie(1005,"Mission Impossible 4","English",9.1,"2:15",Arrays.asList("a","b","c"),"sampleText","sampleText");
 //        System.out.println((manageMovie(movie,false)));
+//
+//
+//        int count=0;
+//        while(count<10){
+//            for(Movie move:LoadMovies("Mission Impossible"))
+//                System.out.println(move.getName());
+//            count++;
+//        }
+////        System.out.println((LoadShowTimes(1003)));
 
-//        System.out.println((LoadShowTimes(1003)));
+//        for(Cinema cinema:LoadShowTimes(1001)){
+//            Boundary.DisplaySeating(cinema.getSeats());
+//            break;
+//        }
 
-    }
+
+}
 }
         //####################################Brandan####################################
 //        Movie movie=new Movie(1004,"Joker","English",9.8,"3:15",Arrays.asList("a","b","c"),"sampleText","sampleText");
