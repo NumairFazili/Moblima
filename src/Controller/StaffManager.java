@@ -65,11 +65,11 @@ public class StaffManager extends PersonManager{
         DataManager.manageMovie(m, true);
     }
 
-
+    
 
     //ShowTime
-    public void createShowTime(int cinplexID, int cinemaID, int movieID, String time, String status, String cinemaClass, List<Integer> seats){
-        Cinema c = new Cinema(cinplexID, cinemaID, movieID, time, status, cinemaClass, seats);
+    public void createShowTime(int cinplexID, int cinemaID, int movieID, String time, String status, String cinemaClass, List<Integer> seats, String movieType){
+        Cinema c = new Cinema(cinplexID, cinemaID, movieID, time, status, cinemaClass, seats, movieType);
         DataManager.AddShowTimes(c);
     }
     public void updateCinemaID(Cinema c, int i){
@@ -83,6 +83,9 @@ public class StaffManager extends PersonManager{
     }
     public void updateStatus(Cinema c, String s){
         c.setStatus(s);
+    }
+    public void updateMovieType(Cinema c, String s){
+        c.setMovieType(s);
     }
     public void saveShowTimeChanges(Cinema c){
         DataManager.UpdateShowTime(c);

@@ -10,10 +10,10 @@ public class User extends Person{
     int age;
     String email; 
     String mobileNumber;
-    List<Long> bookings;
+    List<String> bookings;
 
     //for re-creating existing user
-    public User(String name, int age, String mobileNumber, String email, List<Long> bookings){
+    public User(String name, int age, String mobileNumber, String email, List<String> bookings){
         this.age = age;
         setName_User(name);
         this.email = email;
@@ -52,9 +52,9 @@ public class User extends Person{
     public String getmobileNumber(){
         return mobileNumber;
     }
-    public List<Long> getBookings(){
+    public List<String> getBookings(){
         if(bookings == null){
-            return new ArrayList<Long>();
+            return new ArrayList<String>();
         }
         return bookings;
     }
