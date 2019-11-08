@@ -40,8 +40,12 @@ public class DataManager {
             while ((line = reader.readLine()) != null) {
                 String[] tokens = line.split(",");
                 if (tokens[1].toLowerCase().contains(search.toLowerCase())) {
-                    List<String> items = Arrays.asList(tokens[5].split("\\."));
-                    Movie movie = new Movie(Integer.parseInt(tokens[0]), tokens[1], tokens[2], Double.parseDouble(tokens[3]), tokens[4], items, tokens[6], tokens[7]);
+                    List<String> cast = Arrays.asList(tokens[5].split("\\."));
+                    List<String> reviews= Arrays.asList(tokens[8].split("\\."));
+                    List<String> temp= Arrays.asList(tokens[3].split("\\."));
+                    List<Double> ratings=Arrays.asList();
+                    for (String s : temp) ratings.add(Double.valueOf(s));
+                    Movie movie = new Movie(Integer.parseInt(tokens[0]), tokens[1], tokens[2],ratings, tokens[4], cast, tokens[6], tokens[7],reviews,Integer.parseInt(tokens[9]));
                     movieArrayList.add(movie);
                 }
             }
@@ -220,7 +224,7 @@ public class DataManager {
                     List<String> str = Arrays.asList(tokens[6].split("\\."));
                     List<Integer> items = new ArrayList<>();
                     for (String s : str) items.add(Integer.valueOf(s));
-                    Cinema cinema = new Cinema(Integer.parseInt(tokens[0]), Integer.parseInt(tokens[1]), Integer.parseInt(tokens[2]), tokens[3], tokens[4],tokens[5],items);
+                    Cinema cinema = new Cinema(Integer.parseInt(tokens[0]), Integer.parseInt(tokens[1]), Integer.parseInt(tokens[2]), tokens[3], tokens[4],tokens[5],items,tokens[7]);
                     cinemaArrayList.add(cinema);
                 }
             }
@@ -380,7 +384,7 @@ public class DataManager {
                 String[] tokens = line.split(",");
 
 
-                long bookingID = Long.parseLong(tokens[0]);
+                String bookingID = tokens[0];
                 int cinplexID = Integer.parseInt(tokens[1]);
                 int cinemaID = Integer.parseInt(tokens[2]);
                 int movieID = Integer.parseInt(tokens[3]);
@@ -388,7 +392,7 @@ public class DataManager {
                 String cinemaClass = tokens[5];
                 String movieType = tokens[6];
                 String customerName = tokens[7];
-                long mobileNumber = Long.parseLong(tokens[8]);
+                String mobileNumber = tokens[8];
                 String email = tokens[9];
                 String customerType = tokens[10];
                 int seatNO = Integer.parseInt(tokens[11]);
