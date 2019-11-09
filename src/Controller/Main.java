@@ -15,13 +15,17 @@ public class Main {
         Scanner input = new Scanner(System.in);
         //Variables for admin to create movie
         int movieid, minage;
-        double rating;
         String moviename, language, runtime, description, director;
         List<String> cast;
         String username, password, inputsearch, mobilenumber, email;
         int choice = -1;
         int adminauth, age, inputsearchint, i, rowofseat, colofseat;
         boolean looper;
+        //variables for admin to create showtime
+        int cineplexid, cinemaid;
+        String showtime, status, cinemaclass, movietype;
+        List<Integer> seats;
+
         Cinema mycinema;
         ArrayList<Movie> mymovielist = new ArrayList<>();
         Movie mymovie;
@@ -120,7 +124,7 @@ public class Main {
                             System.out.println("Enter Minimum age:");
                             minage = input.nextInt();
                             input.nextLine(); //Catch newline from .nextInt()
-                            //Create movie object and save movie listing to database using DataManager
+                            //Save movie listing to database using DataManager from StaffManager
                             mystaff.createNewMovie(movieid, moviename, language, null, runtime, cast, description, director, null, minage);
                         }
 
@@ -229,11 +233,116 @@ public class Main {
                         }
                         //4. Create cinema showtimes and the movies to be shown
                         else if (choice == 4){
-
+                            //Get user input for new showtime details
+                            System.out.println("Enter Cineplex_ID:");
+                            cineplexid = input.nextInt();
+                            input.nextLine(); //Catch newline from .nextInt()
+                            System.out.println("Enter Cinema_ID:");
+                            cinemaid = input.nextInt();
+                            input.nextLine(); //Catch newline from .nextInt()
+                            System.out.println("Enter Movie ID:");//might need to error check if movieid is legit
+                            movieid = input.nextInt();
+                            input.nextLine(); //Catch newline from .nextInt()
+                            System.out.println("Enter ShowTime:");
+                            showtime = input.nextLine();
+                            System.out.println("Enter Status");
+                            status = input.nextLine();
+                            System.out.println("Enter class:");
+                            cinemaclass = input.nextLine();
+                            //System.out.println("Enter Seats:"); //Staff probably does not need to enter seat details
+                            //seats = input.nextLine();
+                            System.out.println("Enter MovieType:");
+                            movietype = input.nextLine();
+                            //Create new showtime object and save movie listing to database using DataManager
+                            mystaff.createShowTime(cineplexid, cinemaid, movieid, showtime, status, cinemaclass, Arrays.asList(), movietype);
                         }
                         //5. Update cinema showtimes and the movies to be shown
                         else if (choice == 5){
+                            //List all showtimes
+                            Boundary.DisplayCinemas(mystaff.getAllShowTimes());
+                            //Select showtime to update by cine
+                            System.out.println("Enter Index of the showtime to be updated: " );
+                            inputsearchint = input.nextInt();
+                            input.nextLine();//Catch newline from input.nextInt()
+                            mycinema = mystaff.getAllShowTimes().get(inputsearchint);
 
+                            //Choose which attribute of the showtime to be edited
+                            System.out.println("Choose attribute of showtime to be edited: " );
+                            choice = -1;
+                            while (choice != 0){
+                                choice = -1;
+                                while (choice <= -1 || choice >= 8){
+                                    try{
+                                        Scanner in = new Scanner(System.in);
+                                        System.out.println("1. Cineplex_ID");
+                                        System.out.println("2. Cinema_ID");
+                                        System.out.println("3. Movie_ID");
+                                        System.out.println("4. ShowTime");
+                                        System.out.println("5. Status");
+                                        System.out.println("6. class");
+                                        System.out.println("7. MovieType");
+                                        System.out.println("0. Done");
+                                        choice = in.nextInt();
+                                        if (choice <= -1 || choice >= 8){
+                                            System.out.println("Error! Please enter either 0, 1, 2, 3, 4, 5, 6 or 7:");
+                                        }
+                                    }
+                                    catch(InputMismatchException e){
+                                        System.out.println("That is not an integer, please try again." );
+                                    }
+                                }
+                                //0. Done, save showtime to database
+                                if (choice == 0){
+                                    choice = -1;
+                                    break;
+                                }
+                                //1. Prompt input for Cineplex_ID name and edit cinema object
+                                else if (choice == 1){
+                                    System.out.println("Enter new Cineplex_ID:");
+                                    mystaff.updateCinemaID(mycinema, input.nextInt());
+                                    input.nextLine();//Catch newline from input.nextInt
+                                }
+                                //2. Prompt input for Cinema_ID and edit cinema object
+                                else if (choice == 2){
+                                    System.out.println("Enter new Cinema_ID:");
+                                    mystaff.updateCinemaID(mycinema, input.nextInt());
+                                    input.nextLine();//Catch newline from input.nextInt
+                                }
+                                //3. Prompt input for Movie_ID and edit cinema object
+                                else if (choice == 3){
+                                    System.out.println("Enter new Movie_ID:");
+                                    mystaff.updateMovieID(mycinema, input.nextInt());
+                                    input.nextLine();//Catch newline from input.nextInt
+                                }
+                                //4. Prompt input for ShowTime and edit cinema object
+                                else if (choice == 4){
+                                    System.out.println("Enter new ShowTime:");
+                                    mystaff.updateTime(mycinema, input.nextLine());
+                                }
+                                //5. Prompt input for Status and edit cinema object
+                                else if (choice == 5){
+                                    System.out.println("Enter new Status:");
+                                    mystaff.updateStatus(mycinema, input.nextLine());
+                                }
+                                //6. Prompt input for cinema class and edit cinema object
+                                else if (choice == 6){
+                                    System.out.println("Enter new class:");
+                                    mystaff.updateClass(mycinema, input.nextLine());
+                                }
+                                //7. Prompt input for MovieType and edit cinema object
+                                else if (choice == 7){
+                                    System.out.println("Enter new MovieType:");
+                                    mystaff.updateMovieType(mycinema, input.nextLine());
+                                }
+
+                            }
+                            //Save edited movie object to database
+                            if (mystaff.saveShowTimeChanges(mycinema) == Boolean.TRUE){
+                                System.out.println("Showtime successfully updated!");
+                            }
+                            else{
+                                System.out.println("Error! Showtime failed to be updated!");
+                            }
                         }
                         //6. Remove cinema showtimes and the movies to be shown
                         else if (choice == 6){
@@ -391,7 +500,7 @@ public class Main {
                             System.out.println("Choose index of the showtime to view seat availability: ");
                             inputsearchint = input.nextInt();
                             input.nextLine(); //Catch newline from .nextInt()
-                            Boundary.DisplaySeating(((DataManager.LoadShowTimes(mymovie.getId()).get(inputsearchint)).getSeats()));
+                            Boundary.DisplaySeating(((DataManager.LoadShowTimes(mymovie.getId()).get(inputsearchint))));
                             choice = -1;
                             while (choice <= -1 || choice >= 3){
                                 try{

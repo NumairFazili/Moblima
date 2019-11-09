@@ -56,12 +56,16 @@ public class PersonManager{
         return SearchManager.get_topN_bySale(getAllMovies(), DataManager.LoadBookings());
     }
 
-    public List<Cinema> getShowTimesByCineplex(int cineplexID){
+    public List<Cinema> getShowTimesByCineplex(int cineplexID){ // wrong, supposde to be movieid
         List<Cinema> c_list = DataManager.LoadShowTimes(cineplexID);
         return c_list;
     }
     public List<Cinema> getShowTimesByMovie(int movieID){
         return DataManager.LoadShowTimes(movieID);
+    }
+
+    public List<Cinema> getAllShowTimes(){
+        return DataManager.LoadShowTimes(0);
     }
 
 }

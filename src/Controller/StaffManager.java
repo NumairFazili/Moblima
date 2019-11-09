@@ -73,6 +73,9 @@ public class StaffManager extends PersonManager{
         Cinema c = new Cinema(cinplexID, cinemaID, movieID, time, status, cinemaClass, seats, movieType);
         DataManager.AddShowTimes(c);
     }
+    public void updateCineplexID(Cinema c, int i){
+        c.setCinplexID(i);
+    }
     public void updateCinemaID(Cinema c, int i){
         c.setCinemaID(i);
     }
@@ -85,11 +88,14 @@ public class StaffManager extends PersonManager{
     public void updateStatus(Cinema c, String s){
         c.setStatus(s);
     }
+    public void updateClass(Cinema c, String s){
+        c.setCinemaClass(s);
+    }
     public void updateMovieType(Cinema c, String s){
         c.setMovieType(s);
     }
-    public void saveShowTimeChanges(Cinema c){
-        DataManager.UpdateShowTime(c);
+    public boolean saveShowTimeChanges(Cinema c){
+        return DataManager.UpdateShowTime(c);
     }
     public void deleteShowTime(Cinema c){
         c.setStatus("ended");
