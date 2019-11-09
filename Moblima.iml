@@ -70,5 +70,6 @@
         <SOURCES />
       </library>
     </orderEntry>
+    <orderEntry type="library" name="guava-28.1-jre" level="project" />
   </component>
 </module>

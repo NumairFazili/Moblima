@@ -1,4 +1,5 @@
 package Controller;
+import java.security.KeyStore;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 import java.util.ArrayList;
@@ -13,18 +14,18 @@ public class Main {
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
         //Variables for admin to create movie
-        int movieid;
+        int movieid, minage;
         double rating;
         String moviename, language, runtime, description, director;
         List<String> cast;
-
         String username, password, inputsearch, mobilenumber, email;
         int choice = -1;
-        int adminauth, age, inputsearchint, i;
+        int adminauth, age, inputsearchint, i, rowofseat, colofseat;
+        boolean looper;
         Cinema mycinema;
         ArrayList<Movie> mymovielist = new ArrayList<>();
         Movie mymovie;
-        User myuser;
+        UserManager myuser = null;
         System.out.println("MOBLIMA Movie Booking System START:");
         while (choice != -2){
             while (choice != 1 && choice != 2 && choice != 0){
@@ -108,9 +109,6 @@ public class Main {
                             moviename = input.nextLine();
                             System.out.println("Enter language:");
                             language = input.nextLine();
-                            System.out.println("Enter rating:");
-                            rating = input.nextDouble();
-                            input.nextLine(); //Catch newline from .nextDouble()
                             System.out.println("Enter runtime:");
                             runtime = input.nextLine();
                             System.out.println("Enter cast members");
@@ -119,8 +117,11 @@ public class Main {
                             description = input.nextLine();
                             System.out.println("Enter director:");
                             director = input.nextLine();
+                            System.out.println("Enter Minimum age:");
+                            minage = input.nextInt();
+                            input.nextLine(); //Catch newline from .nextInt()
                             //Create movie object and save movie listing to database using DataManager
-                            mymovie = new Movie(movieid, moviename, language, rating, runtime, cast, description, director);
+                            mymovie = new Movie(movieid, moviename, language, null, runtime, cast, description, director, null, minage);
                             DataManager.SaveMovies(mymovie);
                         }
 
@@ -177,7 +178,7 @@ public class Main {
                                 //3. Prompt input for rating and edit movie object
                                 else if (choice == 3){
                                     System.out.println("Enter new rating:");
-                                    mymovie.setRating(input.nextDouble());
+                                    mymovie.setRating(Arrays.asList(input.nextDouble()));
                                     input.nextLine();//Catch newline from input.nextDouble()
                                 }
                                 //4. Prompt input for runtime and edit movie object
@@ -270,32 +271,57 @@ public class Main {
 
                 //1. Existing User
                 if (choice == 1){
-                    System.out.println("Please enter login details:");
-                    System.out.println("Enter Username:");
-                    username = input.next();
-                    System.out.println("Enter Mobile number:");
-                    mobilenumber = input.next();
-                    //Check with database if name and mobile number matches then create corresponding user object
+                    looper = Boolean.TRUE;
+                    while (looper){
+                        System.out.println("Please enter login details:");
+                        System.out.println("Enter Username:");
+                        username = input.nextLine();
+                        System.out.println("Enter Mobile number:");
+                        mobilenumber = input.nextLine();
+                        //Check with database if name and mobile number matches then create corresponding user object
+                        myuser = AuthManager.getUser(username, mobilenumber);
+                        if (myuser == null){
+                            System.out.println("Error! Incorrect login details.");
+                            System.out.println("1. Try again");
+                            System.out.println("2. Proceed as New User");
+                            System.out.println("3. Proceed as Guest User");
+                            choice = input.nextInt();
+                            input.nextLine(); // Catch newline from nextInt
+                            if (choice == 2){
+                                choice = 2;
+                                looper = Boolean.FALSE;
+                            }
+                            else if (choice == 3){
+                                choice = 3;
+                                looper = Boolean.FALSE;
+                            }
+                        }
+                        else{
+                            System.out.println("User Login Successful!");
+                            looper = Boolean.FALSE;
+                        }
+                    }
+
 
                 }
                 //2. New User
-                else if (choice == 2){
+                if (choice == 2){
                     //Get user input to create new user object
                     System.out.println("Creating New Account:");
                     System.out.println("Enter Username:");
-                    username = input.next();
-                    System.out.println("Enter Mobile number:");
-                    mobilenumber = input.next();
+                    username = input.nextLine();
                     System.out.println("Enter Age:");
                     age = input.nextInt();
+                    input.nextLine(); // Catch newline from nextInt
+                    System.out.println("Enter Mobile number:");
+                    mobilenumber = input.nextLine();
                     System.out.println("Enter Email Address:");
-                    email = input.next();
-
-                    //Save user into database
-                    //DataManager.addUser();
+                    email = input.nextLine();
+                    //Create usermanager object and Save user into database
+                    myuser = new UserManager(username, age, mobilenumber, email);
                 }
                 //3. Proceed as Guest User
-                else if (choice == 3) {
+                if (choice == 3) {
                     //do nothing for now
                 }
 
@@ -349,9 +375,9 @@ public class Main {
                         mymovie = SearchManager.find_Movie_byID(mymovielist, inputsearchint);
                         Boundary.DisplayMovie(mymovie);
                         //Select movie, then search for all showtimes.
-                        System.out.println("Enter 1 to show all showtimes for this movie or 2 to go back");
+                        System.out.println("Enter 1 to show all showtimes for this movie or -2 to go back");
                         choice = input.nextInt();
-                        if (choice == 2){
+                        if (choice == -2){
                             choice = -1;
                             continue;
                         }
@@ -360,16 +386,47 @@ public class Main {
                             Boundary.DisplayCinemas(DataManager.LoadShowTimes(mymovie.getId()));
                         }
                         //3. Check seat availability and selection of seat/s.
-                        System.out.println("Choose index of the showtime to view seat availability: ");
-                        inputsearchint = input.nextInt();
-                        input.nextLine(); //Catch newline from .nextInt()
-                        Boundary.DisplaySeating(((DataManager.LoadShowTimes(mymovie.getId()).get(inputsearchint)).getSeats()));
+                        looper = Boolean.TRUE;
+                        while (looper){
+                            System.out.println("Choose index of the showtime to view seat availability: ");
+                            inputsearchint = input.nextInt();
+                            input.nextLine(); //Catch newline from .nextInt()
+                            Boundary.DisplaySeating(((DataManager.LoadShowTimes(mymovie.getId()).get(inputsearchint)).getSeats()));
+                            choice = -1;
+                            while (choice <= -1 || choice >= 3){
+                                try{
+                                    Scanner in = new Scanner(System.in);
+                                    System.out.println("1. Select seats");
+                                    System.out.println("2. Select another showtime");
+                                    choice = in.nextInt();
+                                    if (choice <= -1 || choice >= 3){
+                                        System.out.println("Error! Please enter either 1 or 2:");
+                                    }
+                                }
+                                catch(InputMismatchException e){
+                                    System.out.println("That is not an integer, please try again." );
+                                }
+                            }
+                            //1. Select seats
+                            if (choice == 1){
+                                looper = Boolean.FALSE; //stop while loop to check showtime
+                                System.out.println("Enter row index of seat:" );
+                                rowofseat = input.nextInt();
+                                System.out.println("Enter col index of seat:" );
+                                colofseat = input.nextInt();
+                                input.nextLine();//Catch newline from input
+                                //4. Book and purchase ticket
 
-                        //4. Book and purchase ticket
+                            }
+                            //2. Select another showtime
+                            else if (choice == 2){
+                                //Continue choosing different showtime
+                            }
+                        }
                     }
                     //2. View booking history
                     else if (choice == 2){
-
+                        myuser.getBookings();
                     }
                     //3. List the Top 5 ranking by ticket sales
                     else if (choice == 3){
