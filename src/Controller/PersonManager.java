@@ -55,7 +55,7 @@ public class PersonManager{
     public ArrayList<Movie> getTopBySales(){
         return SearchManager.get_topN_bySale(getAllMovies(), DataManager.LoadBookings());
     }
-
+ 
     public List<Cinema> getAllShowTimes(){
         List<Cinema> c_list = DataManager.LoadShowTimes(-1);
         return c_list;
