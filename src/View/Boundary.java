@@ -20,26 +20,37 @@ public class Boundary {
 
 
     public static void DisplayMovies(List<Movie> movieList){
-        System.out.println("ID" + "  " + "Title" + "  " + "Rating" + "  " + "Language");
+        System.out.println("ID" + "\t" + "Title" + " \t" + "Rating(Avg)" + "\t" + "Language");
         for(Movie movie:movieList){
-            System.out.println(movie.getId() + "  " + movie.getName() + "  " + movie.getRating() + "  " +movie.getLanguage());
+            System.out.println(movie.getId() + "\t" + movie.getName() + "\t" + movie.getAvgRating() + "\t" +movie.getLanguage());
         }
     }
 
     public static void DisplayMovie(Movie movie){
-        System.out.println("ID: "+movie.getId());
-        System.out.println("Title: "+movie.getName());
-        System.out.println("Rating: "+movie.getRating());
-        System.out.println("Language: "+movie.getLanguage());
-        System.out.println("Cast: "+movie.getCast());
-        System.out.println("Description: "+movie.getDescription());
+        System.out.println("ID\t\t\t: "+movie.getId());
+        System.out.println("Title\t\t: "+movie.getName());
+        System.out.println("Rating(Avg)\t\t: "+movie.getAvgRating());
+        System.out.println("Language\t\t: "+movie.getLanguage());
+        System.out.println("Age Requirement\t: "+movie.getMinAge());
+        System.out.println("Cast\t\t: "+movie.getCast());
+        System.out.println("Description\t\t: "+movie.getDescription());
+    }
+
+    public static void DisplayMovieReviews(Movie movie){
+        int reviewNum = movie.getRating().size() < movie.getReviews().size() ? movie.getRating().size() : movie.getReviews().size();
+        List<Integer> rating_list = movie.getRating();
+        List<String> review_list = movie.getReviews();
+        for(int i = 0; i < reviewNum; i++){
+            System.out.println("Rating\t: "+rating_list.get(i));
+            System.out.println("Reviewd\t: "+review_list.get(i));
+        }
     }
 
     public static void DisplayCinemas(List<Cinema> cinemas){
         int count=0;
-        System.out.println("index"+"  "+"CinePlex ID" + "  " + "Cinema ID" + "  " + "Time" + "  " + "Status" +"  "+"Class");
+        System.out.println("index"+"\t"+"CinePlex ID" + "\t" + "Cinema ID" + "\t" + "Time" + "\t" + "Status" +"\t"+"Class"+"\t"+"Type");
         for(Cinema cinema:cinemas){
-            System.out.println(count++ +"  "+cinema.getCinplexID() + "  " + cinema.getCinemaID() + "  " + cinema.getTime() + "  " +cinema.getStatus() + "  " +cinema.getCinemaClass());
+            System.out.println(count++ +"\t"+cinema.getCinplexID() + "\t" + cinema.getCinemaID() + "\t" + cinema.getTime() + "\t" +cinema.getStatus() + "\t" +cinema.getCinemaClass() + "\t" + cinema.getMovieType());
         }
     }
 
