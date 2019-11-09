@@ -28,6 +28,16 @@ public class Movie {
         this.minAge = minAge;
     }
 
+    @Override
+    public String toString() {
+        String cast_str ="";
+        for(int i = 0;i<this.getCast().size();i++){
+            cast_str += this.getCast().get(i);
+            cast_str += "|";
+        }
+        return new String("MovieName: "+this.getName()+"| Rating"+this.getRating()+"\nCasts: "+cast_str);
+    }
+
     public int getId() {
         return id;
     }

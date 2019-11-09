@@ -47,23 +47,14 @@ public class BookingManager {
         //showtime, movieclass, price removed from parameters
 
         String bookingID = genBookingID();
-        String customer_temp;
 
-        if(user.getAge()>=65){
-            customer_temp = "senior";
-        }
-        else if(user.getAge()<15){
-            customer_temp = "child";
-        }else{
-            customer_temp="adult";
-        }
-        //missing customer type logic for student
+
 
         LocalDateTime dateTime = LocalDateTime.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM HH::mm");
         String bookingTime = dateTime.format(formatter);
-        int final_price = calc_price();
-        Booking newBooking = new Booking(bookingID, cinema.getCinplexID(), cinema.getCinemaID(), cinema.getMovieID(), cinema.getTime(), cinema.getCinemaClass(), cinema.getMovieType(), user.getName(), user.getmobileNumber(), user.getEmail(), customer_temp, seatNO, bookingTime, final_price);
+        double final_price = calc_price(user,cinema);
+        Booking newBooking = new Booking(bookingID, cinema.getCinplexID(), cinema.getCinemaID(), cinema.getMovieID(), cinema.getTime(), cinema.getCinemaClass(), cinema.getMovieType(), user.getName(), user.getmobileNumber(), user.getEmail(), user.getCustomerType(), seatNO, bookingTime, final_price);
 
         DataManager.AddBooking(newBooking);
         cinema.addSeats(seatNO);
@@ -71,8 +62,9 @@ public class BookingManager {
         return newBooking;
     }
 
-    private static int calc_price(){
-        return 1;
+    private static double calc_price(User user,Cinema cinema){
+        priceManager calc_price = new priceManager(user.getAge(),cinema.getCinemaClass());
+        return  calc_price.getPrice();
     }
     private static String genBookingID(){
         Random rand = new Random();

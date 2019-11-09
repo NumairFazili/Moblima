@@ -20,7 +20,17 @@ public class User extends Person{
         this.mobileNumber = mobileNumber;
         this.bookings = bookings;
     }
-
+    public String getCustomerType(){
+        if(this.age<15){
+            return "student";
+        }
+        else if(this.age>65){
+            return "senior citizen";
+        }
+        else{
+            return "regular";
+        }
+    }
     public void setName_User(String name){
         this.setName(name);     //using base class function
     }

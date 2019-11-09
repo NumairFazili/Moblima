@@ -20,10 +20,7 @@ import java.lang.reflect.Array;
 import java.util.*;
 
 public class SearchManager {
-//Dont use PriorityQueue anymore
-    //Delete the PriorityQueue line later
-    private static PriorityQueue<Movie> q_rating = new PriorityQueue<Movie>(new SortByRating());
-    //private static PriorityQueue<Movie> q_sale = new PriorityQueue<Movie>(new SortBySale());
+
     private static int SIZE_OF_PQ = 5;
     public SearchManager(){}
 
@@ -76,38 +73,29 @@ public class SearchManager {
         return to_return;
     }
 
-    private static ArrayList<Booking> getBookingHistory(String userName, String mobileNumber, ArrayList<Booking> bookings){
+    public static ArrayList<Booking> getBookingHistory(String userName, String mobileNumber, ArrayList<Booking> bookings){
         ArrayList<Booking> to_return = new ArrayList<Booking>();
         for(int i = 0;i<bookings.size();i++){
-            String temp_str = bookings.get(i).getMobileNumber();
+            String get_mobnum = bookings.get(i).getMobileNumber();
 
-            if(bookings.get(i).getCustomerName()==userName && temp_str.equalsIgnoreCase(mobileNumber)){
+            if(bookings.get(i).getCustomerName()==userName && get_mobnum.equalsIgnoreCase(mobileNumber)){
                 to_return.add(bookings.get(i));
             }
         }
         return to_return;
 
     }
-
-//Dont use Priority Queue anymore
-
-    private static ArrayList<Movie> get_top5_PQ (String by) throws IllegalArgumentException{
-        //Dont use this one
-        ArrayList<Movie> to_return = new ArrayList<Movie>();
-        if(by.equalsIgnoreCase(new String("rating"))){
-            for(int i = 0; i<SIZE_OF_PQ;i++){
-                to_return.add(q_rating.poll());
-            }
+    /*
+    public static void main(String args[]){
+        ArrayList<Booking> ar = DataManager.LoadBookings();
+        for(int i = 0 ;i<ar.size();i++){
+            System.out.println(ar.get(i).toString());
+            System.out.println(ar.get(i).getBookingID());
         }
-        else if(by.equalsIgnoreCase(new String("sale"))){
-
-        }
-        else{
-            throw new IllegalArgumentException("Illegal input, enter rating or sale");
-        }
-        return to_return;
+        System.out.println(getBookingHistory("Test User","123456789",ar))
     }
 
+     */
 
 }
 

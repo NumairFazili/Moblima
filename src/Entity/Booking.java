@@ -2,12 +2,11 @@ package Entity;
 
 public class Booking {
 
-    private String mobileNumber;
-    private String bookingID;
-    private int cinplexID,cinemaID,movieID,seatNO,Price;
-    private String showTime,bookingTime,customerName,customerType,cinemaClass,movieType,email;
+    private int cinplexID,cinemaID,movieID,seatNO;
+    private double Price;
+    private String bookingID, showTime,bookingTime,customerName,customerType,cinemaClass,movieType,email,mobileNumber;
 
-    public Booking(String bookingID,int cinplexID,int cinemaID,int movieID,String showTime,String cinemaClass,String movieType,String customerName,String mobileNumber,String email,String customerType,int seatNO,String bookingTime,int price) {
+    public Booking(String bookingID,int cinplexID,int cinemaID,int movieID,String showTime,String cinemaClass,String movieType,String customerName,String mobileNumber,String email,String customerType,int seatNO,String bookingTime,double price) {
         this.bookingID = bookingID;
         this.mobileNumber = mobileNumber;
         this.cinplexID = cinplexID;
@@ -22,6 +21,11 @@ public class Booking {
         this.cinemaClass = cinemaClass;
         this.movieType = movieType;
         this.email = email;
+    }
+
+    @Override
+    public String toString() {
+        return new String("ID: "+this.getBookingID()+"| MovieID: "+this.getMovieID()+"| CustermerName: "+this.getCustomerName());
     }
 
     public String getBookingID() {
@@ -72,11 +76,11 @@ public class Booking {
         this.seatNO = seatNO;
     }
 
-    public int getPrice() {
+    public double getPrice() {
         return Price;
     }
 
-    public void setPrice(int price) {
+    public void setPrice(double price) {
         Price = price;
     }
 
