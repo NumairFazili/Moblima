@@ -1,8 +1,8 @@
-Movie ID,Movie Name,Language,Rating,RunTime,Cast,Description,Director
-1001,Batman,English,9.1,3:05,a.b.c,sampleText,sampleText
-1002,Avengers,English,8.1,2:05,a.b.c,sampleText,sampleText
-1003,Shawshank,English,10,3:25,a.b.c,sampleText,sampleText
-1004,Joker,English,9.8,3:15,a.b.c,sampleText,sampleText
-1005,Mission Impossible 4,English,9.1,2:15,a.b.c,sampleText,sampleText
-1006,The Incredibles,English,7.5,2:45,a.b.cd.e,sampletext,Brad Bird
-1007,new avengers,chinese,9.2,3:10,tony stark. iron man,sampletext,professor hulk
+Movie ID,Movie Name,Language,Rating,RunTime,Cast,Description,Director,Reviews,minAge
+1001,Batman,English,9.8.8.9,3:05,a.b.c,sampleText,sampleText,review1.review2,18
+1002,Avengers,English,9.8.8.9,2:05,a.b.c,sampleText,sampleText,review1.review2,18
+1003,Shawshank,English,9.8.8.9,3:25,a.b.c,sampleText,sampleText,review1.review2,18
+1004,Joker,English,9.8.8.9,3:15,a.b.c,sampleText,sampleText,review1.review2,18
+1005,Mission Impossible 4,English,9.8.8.9,2:15,a.b.c,sampleText,sampleText,review1.review2,18
+1006,The Incredibles,English,9.8.8.9,2:45,a.b.cd.e,sampletext,Brad Bird,review1.review2,18
+1007,new avengers,chinese,9.8.8.9,3:10,tony stark. iron man,sampletext,professor hulk,review1.review2,18

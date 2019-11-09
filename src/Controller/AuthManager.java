@@ -30,7 +30,7 @@ public class AuthManager{
         ArrayList<User> u_list = DataManager.LoadUser();
 
         for (int i = 0; i < u_list.size(); i++){
-            
+
             if (u_list.get(i).getName().equals(name)){
                 if(u_list.get(i).getmobileNumber().equals(mobileNumber)){
                     return new UserManager(u_list.get(i));

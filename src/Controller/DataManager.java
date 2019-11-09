@@ -43,8 +43,8 @@ public class DataManager {
                     List<String> cast = Arrays.asList(tokens[5].split("\\."));
                     List<String> reviews= Arrays.asList(tokens[8].split("\\."));
                     List<String> temp= Arrays.asList(tokens[3].split("\\."));
-                    List<Double> ratings=Arrays.asList();
-                    for (String s : temp) ratings.add(Double.valueOf(s));
+                    List<Integer> ratings=Arrays.asList();
+                    for (String s : temp) ratings.add(Integer.valueOf(s));
                     Movie movie = new Movie(Integer.parseInt(tokens[0]), tokens[1], tokens[2],ratings, tokens[4], cast, tokens[6], tokens[7],reviews,Integer.parseInt(tokens[9]));
                     movieArrayList.add(movie);
                 }
@@ -88,9 +88,13 @@ public class DataManager {
             writer.append(",");
             writer.append("Cast");
             writer.append(",");
+            writer.append("Director");
+            writer.append(",");
             writer.append("Description");
             writer.append(",");
-            writer.append("Director");
+            writer.append("Reviews");
+            writer.append(",");
+            writer.append("minAge");
             writer.append("\n");
 
 
@@ -122,6 +126,10 @@ public class DataManager {
                     writer.append(tokens[6]);
                     writer.append(",");
                     writer.append(tokens[7]);
+                    writer.append(",");
+                    writer.append(tokens[8]);
+                    writer.append(",");
+                    writer.append(tokens[9]);
                     writer.append("\n");
                 }
 
@@ -132,7 +140,7 @@ public class DataManager {
                     writer.append(",");
                     writer.append(movie.getLanguage());
                     writer.append(",");
-                    writer.append(String.valueOf(movie.getRating()));
+                    writer.append(Joiner.on('.').join(movie.getRating()));
                     writer.append(",");
                     writer.append(movie.getRunTime());
                     writer.append(",");
@@ -141,6 +149,10 @@ public class DataManager {
                     writer.append(movie.getDescription());
                     writer.append(",");
                     writer.append(movie.getDirector());
+                    writer.append(",");
+                    writer.append(String.join(".", movie.getReviews()));
+                    writer.append(",");
+                    writer.append(String.valueOf(movie.getMinAge()));
                     writer.append("\n");
                     Found = false;
 
@@ -171,39 +183,39 @@ public class DataManager {
 
 
 
-    public static void SaveMovies(Movie movie) {
-        FileWriter writer = null;
-        try {
-            writer = new FileWriter(getLocation("Movie"), true);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        try {
-            writer.append(String.valueOf(movie.getId()));
-            writer.append(",");
-            writer.append(movie.getName());
-            writer.append(",");
-            writer.append(movie.getLanguage());
-            writer.append(",");
-            writer.append(String.valueOf(movie.getRating()));
-            writer.append(",");
-            writer.append(movie.getRunTime());
-            writer.append(",");
-            writer.append(String.join(".", movie.getCast()));
-            writer.append(",");
-            writer.append(movie.getDescription());
-            writer.append(",");
-            writer.append(movie.getDirector());
-            writer.append("\n");
-            writer.flush();
-            writer.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-
-    }
+//    public static void SaveMovies(Movie movie) {
+//        FileWriter writer = null;
+//        try {
+//            writer = new FileWriter(getLocation("Movie"), true);
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//
+//        try {
+//            writer.append(String.valueOf(movie.getId()));
+//            writer.append(",");
+//            writer.append(movie.getName());
+//            writer.append(",");
+//            writer.append(movie.getLanguage());
+//            writer.append(",");
+//            writer.append(String.valueOf(movie.getRating()));
+//            writer.append(",");
+//            writer.append(movie.getRunTime());
+//            writer.append(",");
+//            writer.append(String.join(".", movie.getCast()));
+//            writer.append(",");
+//            writer.append(movie.getDescription());
+//            writer.append(",");
+//            writer.append(movie.getDirector());
+//            writer.append("\n");
+//            writer.flush();
+//            writer.close();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//
+//
+//    }
 
 
     public static List<Cinema> LoadShowTimes(int movieID) {
@@ -295,7 +307,11 @@ public class DataManager {
             writer.append(",");
             writer.append("Status");
             writer.append(",");
+            writer.append("Class");
+            writer.append(",");
             writer.append("Seats");
+            writer.append(",");
+            writer.append("Type");
             writer.append("\n");
 
 
@@ -323,6 +339,10 @@ public class DataManager {
                     writer.append(tokens[4]);
                     writer.append(",");
                     writer.append(tokens[5]);
+                    writer.append(",");
+                    writer.append(tokens[6]);
+                    writer.append(",");
+                    writer.append(tokens[7]);
                     writer.append("\n");
                 }
 
@@ -337,7 +357,11 @@ public class DataManager {
                     writer.append(",");
                     writer.append(String.valueOf(cinema.getStatus()));
                     writer.append(",");
+                    writer.append(cinema.getCinemaClass());
+                    writer.append(",");
                     writer.append(Joiner.on('.').join(cinema.getSeats()));
+                    writer.append(",");
+                    writer.append(cinema.getMovieType());
                     writer.append("\n");
                     Found = false;
 
@@ -705,6 +729,11 @@ public class DataManager {
 
 
     public static void main(String[] args) {
+                ArrayList<Movie> test=LoadMovies("BATMAN");
+
+        for(Movie movie:test)
+            System.out.println(movie.getName());
+
 //
 //        List<Long> bookings= (List<Long>) Arrays.asList(1234567890,1234888880,1234888880);
 //        User user=new User("test4",22,"123456789","test4@gmail.com",Arrays.asList(12345L,5678L,89765L));

@@ -122,7 +122,7 @@ public class Main {
                             input.nextLine(); //Catch newline from .nextInt()
                             //Create movie object and save movie listing to database using DataManager
                             mymovie = new Movie(movieid, moviename, language, null, runtime, cast, description, director, null, minage);
-                            DataManager.SaveMovies(mymovie);
+                            DataManager.manageMovie(mymovie,false);
                         }
 
                         //2. Update movie listing
@@ -178,7 +178,7 @@ public class Main {
                                 //3. Prompt input for rating and edit movie object
                                 else if (choice == 3){
                                     System.out.println("Enter new rating:");
-                                    mymovie.setRating(Arrays.asList(input.nextDouble()));
+                                    mymovie.setRating(Arrays.asList(input.nextInt()));
                                     input.nextLine();//Catch newline from input.nextDouble()
                                 }
                                 //4. Prompt input for runtime and edit movie object

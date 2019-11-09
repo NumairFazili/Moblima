@@ -11,11 +11,11 @@ public class Movie {
     int id;
     String name,Language,runTime,Description,Director;
     double avgRating;
-    List<Double> ratings;
+    List<Integer> ratings;
     List<String> reviews;
     List<String> cast;
     int minAge;
-    public Movie(int id,String name,String Language,List<Double>ratings,String runTime,List<String> cast,String Description,String Director, List<String> reviews, int minAge) {
+    public Movie(int id,String name,String Language,List<Integer>ratings,String runTime,List<String> cast,String Description,String Director, List<String> reviews, int minAge) {
         this.id = id;
         this.ratings = ratings;
         this.name = name;
@@ -46,15 +46,15 @@ public class Movie {
         this.id = id;
     }
 
-    public List<Double> getRating() {
+    public List<Integer> getRating() {
         return ratings;
     }
 
-    public void setRating(List<Double> ratings) {
+    public void setRating(List<Integer> ratings) {
         this.ratings = ratings;
     }
 
-    public void addRating(Double rating){
+    public void addRating(Integer rating){
         this.ratings.add(rating);
     }
     
