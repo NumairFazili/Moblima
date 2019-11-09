@@ -62,8 +62,8 @@ public class StaffManager extends PersonManager{
     public boolean saveMovieChanges(Movie m){
         return DataManager.manageMovie(m, false);
     }
-    public void deleteMovie(Movie m){
-        DataManager.manageMovie(m, true);
+    public boolean deleteMovie(Movie m){
+        return DataManager.manageMovie(m, true);
     }
 
     

@@ -214,12 +214,12 @@ public class Main {
                         //3. Remove movie listing
                         else if (choice == 3){
                             //List all movies
-                            Boundary.DisplayMovies(DataManager.LoadMovies(""));
+                            Boundary.DisplayMovies(mystaff.getAllMovies());
                             //Select movie to remove by movieID
                             System.out.println("Enter ID of the movie to remove: " );
                             inputsearchint = input.nextInt();
-                            mymovie = SearchManager.find_Movie_byID(DataManager.LoadMovies(""), inputsearchint);
-                            if (DataManager.manageMovie(mymovie,true) == Boolean.TRUE){
+                            mymovie = SearchManager.find_Movie_byID(mystaff.getAllMovies(), inputsearchint);
+                            if (mystaff.deleteMovie(mymovie) == Boolean.TRUE){
                                 System.out.println("Movie listing successfully removed!");
                             }
                             else{
