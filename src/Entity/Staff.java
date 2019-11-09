@@ -19,7 +19,7 @@ public class Staff extends Person {
         return name;
     }
     public boolean checkPassword(String password){
-        if (password == this.password){
+        if (password.equals(this.password)){
             return true;
         }
         return false;

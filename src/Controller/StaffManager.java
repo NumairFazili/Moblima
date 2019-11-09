@@ -43,6 +43,7 @@ public class StaffManager extends PersonManager{
     public void updateMovieName(Movie m, String s){
         m.setName(s);
     }
+    public void updateMovieLanguage(Movie m, String s){ m.setLanguage(s); }
     public void updateMovieRunTime(Movie m, String s){
         m.setRunTime(s);
     }
@@ -58,11 +59,11 @@ public class StaffManager extends PersonManager{
     public void updateMovieMinAge(Movie m, int age){
         m.setMinAge(age);
     }
-    public void saveMovieChanges(Movie m){
-        DataManager.manageMovie(m, false);
+    public boolean saveMovieChanges(Movie m){
+        return DataManager.manageMovie(m, false);
     }
-    public void deleteMovie(Movie m){
-        DataManager.manageMovie(m, true);
+    public boolean deleteMovie(Movie m){
+        return DataManager.manageMovie(m, true);
     }
 
     
