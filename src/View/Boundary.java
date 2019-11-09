@@ -28,7 +28,7 @@ public class Boundary {
     public static void DisplayMovie(Movie movie){
         System.out.println("ID: "+movie.getId());
         System.out.println("Title: "+movie.getName());
-        System.out.println("Rating: "+movie.getRating());
+        System.out.println("Rating: "+movie.getAvgRating());
         System.out.println("Language: "+movie.getLanguage());
         System.out.println("Cast: "+movie.getCast());
         System.out.println("Description: "+movie.getDescription());
