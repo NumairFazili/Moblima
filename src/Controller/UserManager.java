@@ -59,7 +59,7 @@ public class UserManager extends PersonManager{
         return bookings;
     }
 
-    public void reviewMovie(Movie m, double rating, String review){
+    public void reviewMovie(Movie m, int rating, String review){
         m.addRating(rating);
         m.addReview(review);
     }

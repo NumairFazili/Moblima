@@ -122,7 +122,7 @@ public class Main {
                             input.nextLine(); //Catch newline from .nextInt()
                             //Create movie object and save movie listing to database using DataManager
                             mymovie = new Movie(movieid, moviename, language, null, runtime, cast, description, director, null, minage);
-                            DataManager.manageMovie(mymovie,false);
+                            DataManager.SaveMovies(mymovie);
                         }
 
                         //2. Update movie listing

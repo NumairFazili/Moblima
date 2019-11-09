@@ -2,7 +2,7 @@ package Controller;
 
 
 
-import org.junit.Test;
+
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -17,7 +17,7 @@ public class CinemaManager {
         this.cols = c;
     }
 
-@Test
+
     public List<Integer> Convert_Index_to_1D(List<Integer> seats){
         List<Integer> res = Arrays.asList(rows*cols);
         System.out.println(res.get(10));
