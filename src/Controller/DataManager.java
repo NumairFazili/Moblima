@@ -273,7 +273,11 @@ public class DataManager {
             writer.append(",");
             writer.append(String.valueOf(cinema.getStatus()));
             writer.append(",");
+            writer.append(String.valueOf(cinema.getCinemaClass()));
+            writer.append(",");
             writer.append(Joiner.on('.').join(cinema.getSeats()));
+            writer.append(",");
+            writer.append(String.valueOf(cinema.getMovieType()));
             writer.append("\n");
             writer.flush();
             writer.close();
@@ -760,6 +764,11 @@ public class DataManager {
 
 
     public static void main(String[] args) {
+
+
+
+        Cinema  cinema = new Cinema(3,1,1004,"7/10/2019 16:30","Now Showing","Platinum",Arrays.asList(),"3D");
+        AddShowTimes(cinema);
 
 //        Movie movie=new Movie(1008,"Toy Story","English",Arrays.asList(1),"3:15",Arrays.asList("a","b","c"),"sAmpleText","SampleText",Arrays.asList("review1","review2"),18);
 //        SaveMovies(movie);
