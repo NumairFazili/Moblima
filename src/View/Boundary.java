@@ -53,11 +53,11 @@ public class Boundary {
         }
     }
 
-    public static void DisplaySeating(List<Integer> seating) {
+    public static void DisplaySeating(Cinema cinema) {
         int value;
         int rows=8;
         int cols=8;
-        List<Integer> seating_temp = seating;
+        List<Integer> seating_temp = cinema.getSeats();
 
         System.out.print("   ");
         for(int i=0;i<cols;i++)
