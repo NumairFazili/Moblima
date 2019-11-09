@@ -57,23 +57,28 @@ public class Boundary {
         int value;
         int rows=8;
         int cols=8;
+        List<Integer> seating_temp = seating;
 
         System.out.print("   ");
         for(int i=0;i<cols;i++)
             System.out.print(i+"  ");
         System.out.println();
 
-         for(int i=0;i<rows;i++){
-             System.out.print(i+" ");
-             for (int j=0;j<cols;j++){
-                 value=i*cols + j;
+        for(int i=0;i<rows;i++){
+            System.out.print(i+" ");
+            for (int j=0;j<cols;j++){
+                value=i*cols + j;
 
-                 if(seating.get(value)==1)
-                     System.out.print(" X ");
-                 else
-                     System.out.print(" A ");
+                for(int k=0; k < seating_temp.size(); k++){
+                if(seating_temp.get(k)==value){
+                    System.out.print(" X ");
+                    seating_temp.remove(k);
+                }else{
+                    System.out.print(" A ");
+                }
+                }
              }
-             System.out.println();
+            System.out.println();
          }
     }
 }
