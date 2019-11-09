@@ -13,7 +13,7 @@ public class AuthManager{
 
     public static StaffManager getStaff(String username, String password){
 
-        ArrayList<Staff> staffList = DataManager.loadStaff();
+        ArrayList<Staff> staffList = DataManager.Loadstaff();
 
         for(int i = 0; i < staffList.size(); i++){
             if(staffList.get(i).getName().equals(username)){

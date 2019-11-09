@@ -2,7 +2,6 @@ package View;
 
 import Entity.Cinema;
 import Entity.Movie;
-import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.Arrays;

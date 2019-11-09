@@ -43,7 +43,7 @@ public class DataManager {
                     List<String> cast = Arrays.asList(tokens[5].split("\\."));
                     List<String> reviews= Arrays.asList(tokens[8].split("\\."));
                     List<String> temp= Arrays.asList(tokens[3].split("\\."));
-                    List<Integer> ratings=Arrays.asList();
+                    List<Integer> ratings=new ArrayList<>();
                     for (String s : temp) ratings.add(Integer.valueOf(s));
                     Movie movie = new Movie(Integer.parseInt(tokens[0]), tokens[1], tokens[2],ratings, tokens[4], cast, tokens[6], tokens[7],reviews,Integer.parseInt(tokens[9]));
                     movieArrayList.add(movie);
@@ -183,39 +183,43 @@ public class DataManager {
 
 
 
-//    public static void SaveMovies(Movie movie) {
-//        FileWriter writer = null;
-//        try {
-//            writer = new FileWriter(getLocation("Movie"), true);
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//
-//        try {
-//            writer.append(String.valueOf(movie.getId()));
-//            writer.append(",");
-//            writer.append(movie.getName());
-//            writer.append(",");
-//            writer.append(movie.getLanguage());
-//            writer.append(",");
-//            writer.append(String.valueOf(movie.getRating()));
-//            writer.append(",");
-//            writer.append(movie.getRunTime());
-//            writer.append(",");
-//            writer.append(String.join(".", movie.getCast()));
-//            writer.append(",");
-//            writer.append(movie.getDescription());
-//            writer.append(",");
-//            writer.append(movie.getDirector());
-//            writer.append("\n");
-//            writer.flush();
-//            writer.close();
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//
-//
-//    }
+    public static void SaveMovies(Movie movie) {
+        FileWriter writer = null;
+        try {
+            writer = new FileWriter(getLocation("Movie"), true);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            writer.append(String.valueOf(movie.getId()));
+            writer.append(",");
+            writer.append(movie.getName());
+            writer.append(",");
+            writer.append(movie.getLanguage());
+            writer.append(",");
+            writer.append(Joiner.on('.').join(movie.getRating()));
+            writer.append(",");
+            writer.append(movie.getRunTime());
+            writer.append(",");
+            writer.append(String.join(".", movie.getCast()));
+            writer.append(",");
+            writer.append(movie.getDescription());
+            writer.append(",");
+            writer.append(movie.getDirector());
+            writer.append(",");
+            writer.append(String.join(".", movie.getReviews()));
+            writer.append(",");
+            writer.append(String.valueOf(movie.getMinAge()));
+            writer.append("\n");
+            writer.flush();
+            writer.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
+    }
 
 
     public static List<Cinema> LoadShowTimes(int movieID) {
@@ -727,13 +731,38 @@ public class DataManager {
 
     }
 
+    public static ArrayList<Staff> Loadstaff(){
+        BufferedReader reader = null;
+        ArrayList<Staff> staffArrayList=new ArrayList<>();
+        try {
+            reader = new BufferedReader(new FileReader(getLocation("Staff")));
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        String line = "";
+        try {
+            reader.readLine();
+            while ((line = reader.readLine()) != null) {
+                String[] tokens = line.split(",");
+
+
+                Staff staff=new Staff(tokens[0],tokens[1]);
+                staffArrayList.add(staff);
+            }
+            reader.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+
+        }
+        return staffArrayList;
+    }
+
 
     public static void main(String[] args) {
-                ArrayList<Movie> test=LoadMovies("BATMAN");
 
-        for(Movie movie:test)
-            System.out.println(movie.getName());
-
+//        Movie movie=new Movie(1008,"Toy Story","English",Arrays.asList(1),"3:15",Arrays.asList("a","b","c"),"sAmpleText","SampleText",Arrays.asList("review1","review2"),18);
+//        SaveMovies(movie);
 //
 //        List<Long> bookings= (List<Long>) Arrays.asList(1234567890,1234888880,1234888880);
 //        User user=new User("test4",22,"123456789","test4@gmail.com",Arrays.asList(12345L,5678L,89765L));
