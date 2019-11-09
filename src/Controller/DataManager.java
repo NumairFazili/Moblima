@@ -223,6 +223,13 @@ public class DataManager {
 
 
     public static List<Cinema> LoadShowTimes(int movieID) {
+
+        String ID=String.valueOf(movieID);
+
+        if(movieID==-1)
+            ID="";
+
+
         BufferedReader reader = null;
         ArrayList<Cinema> cinemaArrayList = new ArrayList<>();
         try {
@@ -236,10 +243,11 @@ public class DataManager {
             reader.readLine();
             while ((line = reader.readLine()) != null) {
                 String[] tokens = line.split(",");
-                if (tokens[2].contains(String.valueOf(movieID))) {
-                    List<String> str = Arrays.asList(tokens[6].split("\\."));
+                if (tokens[2].contains(ID)) {
                     List<Integer> items = new ArrayList<>();
-                    for (String s : str) items.add(Integer.valueOf(s));
+                    if(!tokens[6].equals("")){
+                    List<String> str = Arrays.asList(tokens[6].split("\\."));
+                    for (String s : str) items.add(Integer.valueOf(s));}
                     Cinema cinema = new Cinema(Integer.parseInt(tokens[0]), Integer.parseInt(tokens[1]), Integer.parseInt(tokens[2]), tokens[3], tokens[4],tokens[5],items,tokens[7]);
                     cinemaArrayList.add(cinema);
                 }
@@ -765,10 +773,13 @@ public class DataManager {
 
     public static void main(String[] args) {
 
+//        Integer a= null;
+//
+        List<Cinema> cinemaArrayList=LoadShowTimes(-1);
 
+        for(Cinema cinema:cinemaArrayList)
+            System.out.println(cinema.getCinplexID());
 
-        Cinema  cinema = new Cinema(3,1,1004,"7/10/2019 16:30","Now Showing","Platinum",Arrays.asList(),"3D");
-        AddShowTimes(cinema);
 
 //        Movie movie=new Movie(1008,"Toy Story","English",Arrays.asList(1),"3:15",Arrays.asList("a","b","c"),"sAmpleText","SampleText",Arrays.asList("review1","review2"),18);
 //        SaveMovies(movie);
