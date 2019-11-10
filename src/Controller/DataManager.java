@@ -327,7 +327,7 @@ public class DataManager {
             writer.append(",");
             writer.append("Seats");
             writer.append(",");
-            writer.append("Type");
+            writer.append("MovieType");
             writer.append("\n");
 
 
