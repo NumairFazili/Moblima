@@ -23,8 +23,8 @@ public class Main {
         int adminauth, age, inputsearchint, i, rowofseat, colofseat;
         boolean looper;
         //variables for admin to create showtime
-        int cineplexid, cinemaid;
-        String showtime, status, cinemaclass, movietype;
+        int cineplexid, cinemaid, movierating;
+        String showtime, status, cinemaclass, movietype, moviereview;
         List<Integer> seats;
 
         //Variables for admin to edit settings
@@ -33,7 +33,7 @@ public class Main {
         Settings mysettings;
 
         Cinema mycinema;
-        ArrayList<Movie> mymovielist = new ArrayList<>();
+        ArrayList<Movie> mymovielist;
         Movie mymovie;
         UserManager myuser = null;
         StaffManager mystaff = null;
@@ -590,64 +590,87 @@ public class Main {
                         System.out.println("Enter ID of the movie to see the details: " );
                         inputsearchint = input.nextInt();
                         mymovie = SearchManager.find_Movie_byID(mymovielist, inputsearchint);
+                        System.out.println("Movie Details: " );
                         Boundary.DisplayMovie(mymovie);
+                        System.out.println("All ratings and reviews: " );
+                        Boundary.DisplayMovieReviews(mymovie);
                         //Select movie, then search for all showtimes.
-                        System.out.println("Enter 1 to show all showtimes for this movie or -2 to go back");
-                        choice = input.nextInt();
-                        if (choice == -2){
+                        choice = -1;
+                        while (choice <= -1 || choice >= 3){
+                            try{
+                                Scanner in = new Scanner(System.in);
+                                System.out.println("1. View all showtimes for this movie: ");
+                                System.out.println("2. Leave a rating and review for this movie: ");
+                                System.out.println("0. Go back");
+                                choice = in.nextInt();
+                                if (choice <= -1 || choice >= 3){
+                                    System.out.println("Error! Please enter either 0, 1, 2:");
+                                }
+                            }
+                            catch(InputMismatchException e){
+                                System.out.println("That is not an integer, please try again." );
+                            }
+                        }
+                        if (choice == 0){
                             choice = -1;
                             continue;
                         }
                         //Select the showtime by index
-                        else{
+                        else if (choice == 1){
                             Boundary.DisplayCinemas(myuser.getShowTimesByMovie(mymovie.getId()));
-                            //Boundary.DisplayCinemas(DataManager.LoadShowTimes(mymovie.getId()));
-                        }
-                        //3. Check seat availability and selection of seat/s.
-                        looper = Boolean.TRUE;
-                        while (looper){
-                            System.out.println("Choose index of the showtime to view seat availability: ");
-                            inputsearchint = input.nextInt();
-                            input.nextLine(); //Catch newline from .nextInt()
-                            Boundary.DisplaySeating(((DataManager.LoadShowTimes(mymovie.getId()).get(inputsearchint))));
-                            choice = -1;
-                            while (choice <= -1 || choice >= 3){
-                                try{
-                                    Scanner in = new Scanner(System.in);
-                                    System.out.println("1. Select seats");
-                                    System.out.println("2. Select another showtime");
-                                    System.out.println("0. Cancel selection and return to main menu");
-                                    choice = in.nextInt();
-                                    if (choice <= -1 || choice >= 3){
-                                        System.out.println("Error! Please enter either 0, 1 or 2:");
+                            //3. Check seat availability and selection of seat/s.
+                            looper = Boolean.TRUE;
+                            while (looper){
+                                System.out.println("Choose index of the showtime to view seat availability: ");
+                                inputsearchint = input.nextInt();
+                                input.nextLine(); //Catch newline from .nextInt()
+                                Boundary.DisplaySeating(((DataManager.LoadShowTimes(mymovie.getId()).get(inputsearchint))));
+                                choice = -1;
+                                while (choice <= -1 || choice >= 3){
+                                    try{
+                                        Scanner in = new Scanner(System.in);
+                                        System.out.println("1. Select seats");
+                                        System.out.println("2. Select another showtime");
+                                        System.out.println("0. Cancel selection and return to main menu");
+                                        choice = in.nextInt();
+                                        if (choice <= -1 || choice >= 3){
+                                            System.out.println("Error! Please enter either 0, 1 or 2:");
+                                        }
+                                    }
+                                    catch(InputMismatchException e){
+                                        System.out.println("That is not an integer, please try again." );
                                     }
                                 }
-                                catch(InputMismatchException e){
-                                    System.out.println("That is not an integer, please try again." );
+                                //0. Cancel selection and return to main menu
+                                if (choice == 0){
+                                    choice = -1;
+                                    break;
+                                }
+                                //1. Select seats
+                                else if (choice == 1){
+                                    looper = Boolean.FALSE; //stop while loop to check showtime
+                                    System.out.println("Enter row index of seat:" );
+                                    rowofseat = input.nextInt();
+                                    System.out.println("Enter col index of seat:" );
+                                    colofseat = input.nextInt();
+                                    input.nextLine();//Catch newline from input
+                                    //4. Book and purchase ticket
+                                    myuser.createBooking(((DataManager.LoadShowTimes(mymovie.getId()).get(inputsearchint))), rowofseat*8 + colofseat);
+
+                                }
+                                //2. Select another showtime
+                                else if (choice == 2){
+                                    Boundary.DisplayCinemas(myuser.getShowTimesByMovie(mymovie.getId()));
+                                    //Boundary.DisplayCinemas(DataManager.LoadShowTimes(mymovie.getId()));
                                 }
                             }
-                            //0. Cancel selection and return to main menu
-                            if (choice == 0){
-                                choice = -1;
-                                break;
-                            }
-                            //1. Select seats
-                            else if (choice == 1){
-                                looper = Boolean.FALSE; //stop while loop to check showtime
-                                System.out.println("Enter row index of seat:" );
-                                rowofseat = input.nextInt();
-                                System.out.println("Enter col index of seat:" );
-                                colofseat = input.nextInt();
-                                input.nextLine();//Catch newline from input
-                                //4. Book and purchase ticket
-                                myuser.createBooking(((DataManager.LoadShowTimes(mymovie.getId()).get(inputsearchint))), rowofseat*8 + colofseat);
-
-                            }
-                            //2. Select another showtime
-                            else if (choice == 2){
-                                Boundary.DisplayCinemas(myuser.getShowTimesByMovie(mymovie.getId()));
-                                //Boundary.DisplayCinemas(DataManager.LoadShowTimes(mymovie.getId()));
-                            }
+                        }
+                        else if (choice == 2){
+                            System.out.println("Enter rating for the movie:" );
+                            movierating = input.nextInt();
+                            System.out.println("Enter review for the movie:" );
+                            moviereview = input.nextLine();
+                            myuser.reviewMovie(mymovie, movierating, moviereview);
                         }
                     }
                     //2. View booking history

@@ -40,8 +40,7 @@ public class Boundary {
         List<Integer> rating_list = movie.getRating();
         List<String> review_list = movie.getReviews();
         for(int i = 0; i < reviewNum; i++){
-            System.out.println("Rating\t: "+rating_list.get(i));
-            System.out.println("Reviewd\t: "+review_list.get(i));
+            System.out.println("Rating:"+rating_list.get(i) + " | Review: "+review_list.get(i));
         }
     }
 
