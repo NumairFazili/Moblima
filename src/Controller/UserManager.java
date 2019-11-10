@@ -1,6 +1,7 @@
 package Controller;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import Entity.*;
@@ -23,8 +24,8 @@ public class UserManager extends PersonManager{
     }
 
     //for new user
-    public UserManager(String name, int age, String email, String mobileNumber){
-        User u = new User(name, age, mobileNumber, email, null);
+    public UserManager(String name, int age, String mobileNumber, String email){
+        User u = new User(name, age, mobileNumber, email, Arrays.asList());
         u.save();
         user = u;
     }
