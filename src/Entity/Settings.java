@@ -79,7 +79,7 @@ public class Settings {
         return holidays;
     }
 
-    public void setHolidays(ArrayList<String> holidays) {
+    public void setHolidays(List<String> holidays) {
         this.holidays = holidays;
     }
 }

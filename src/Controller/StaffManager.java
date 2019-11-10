@@ -126,11 +126,11 @@ public class StaffManager extends PersonManager{
     public void updatePlatinumPrice(Settings s, double platinum){
         s.setPlatinumPrice(platinum);
     }
-    public void updateHoliday(Settings s, ArrayList<String> holiday){
+    public void updateHoliday(Settings s, List<String> holiday){
         s.setHolidays(holiday);
     }
-    public void saveSettingsChanges(Settings s){
-        DataManager.manageSettings(s);
+    public boolean saveSettingsChanges(Settings s){
+        return DataManager.manageSettings(s);
     }
 
     public static void main(String args[]){

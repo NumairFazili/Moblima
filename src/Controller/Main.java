@@ -26,6 +26,12 @@ public class Main {
         int cineplexid, cinemaid;
         String showtime, status, cinemaclass, movietype;
         List<Integer> seats;
+
+        //Variables for admin to edit settings
+        double basePrice, childPrice, seniorPrice, holidayPrice, silverPrice, goldPrice, platinumPrice;
+        List<String> holidays;
+        Settings mysettings;
+
         Cinema mycinema;
         ArrayList<Movie> mymovielist = new ArrayList<>();
         Movie mymovie;
@@ -195,7 +201,7 @@ public class Main {
                                 //5. Prompt input for Cast member and edit movie object
                                 else if (choice == 5){
                                     System.out.println("Enter new cast members:");
-                                    mystaff.updateMovieCast(mymovie, Arrays.asList(input.nextLine().split(",")));
+                                    mystaff.updateMovieCast(mymovie, Arrays.asList((input.nextLine().split(","))));
                                 }
                                 //6. Prompt input for description and edit movie object
                                 else if (choice == 6){
@@ -223,7 +229,11 @@ public class Main {
                             Boundary.DisplayMovies(mystaff.getAllMovies());
                             //Select movie to remove by movieID
                             System.out.println("Enter ID of the movie to remove: " );
+                            System.out.println("Otherwise enter -2 to go back" );
                             inputsearchint = input.nextInt();
+                            if (inputsearchint == -2){
+                                continue;
+                            }
                             mymovie = SearchManager.find_Movie_byID(mystaff.getAllMovies(), inputsearchint);
                             if (mystaff.deleteMovie(mymovie) == Boolean.TRUE){
                                 System.out.println("Movie listing successfully removed!");
@@ -231,7 +241,6 @@ public class Main {
                             else{
                                 System.out.println("Error movie listing failed to be removed!");
                             }
-
                         }
                         //4. Create cinema showtimes and the movies to be shown
                         else if (choice == 4){
@@ -262,7 +271,7 @@ public class Main {
                         else if (choice == 5){
                             //List all showtimes
                             Boundary.DisplayCinemas(mystaff.getAllShowTimes());
-                            //Select showtime to update by cine
+                            //Select showtime to update by index
                             System.out.println("Enter Index of the showtime to be updated: " );
                             inputsearchint = input.nextInt();
                             input.nextLine();//Catch newline from input.nextInt()
@@ -348,11 +357,107 @@ public class Main {
                         }
                         //6. Remove cinema showtimes and the movies to be shown
                         else if (choice == 6){
-
+                            //List all showtimes
+                            Boundary.DisplayCinemas(mystaff.getAllShowTimes());
+                            //Select showtime to remove by index
+                            System.out.println("Enter the index of showtime to be removed: " );
+                            System.out.println("Otherwise enter -2 to go back" );
+                            inputsearchint = input.nextInt();
+                            if (inputsearchint == -2){
+                                continue;
+                            }
+                            mycinema = mystaff.getAllShowTimes().get(inputsearchint);
+                            mystaff.deleteShowTime(mycinema); //should remove entry line instead of setting status to "ended" and return boolean instead of void
+                            /*if (mystaff.deleteShowTime(mycinema) == Boolean.TRUE){
+                                System.out.println("Showtime successfully removed!");
+                            }
+                            else{
+                                System.out.println("Error! Showtime failed to be removed!");
+                            }*/
                         }
                         //7. Configure system settings
                         else if (choice == 7){
-
+                            //Choose which setting to configure
+                            System.out.println("Choose which setting to configure: " );
+                            mysettings = mystaff.showSettings();
+                            choice = -1;
+                            while (choice != 0){
+                                choice = -1;
+                                while (choice <= -1 || choice >= 9){
+                                    try{
+                                        Scanner in = new Scanner(System.in);
+                                        System.out.println("1. Base price");
+                                        System.out.println("2. Child price");
+                                        System.out.println("3. Senior price");
+                                        System.out.println("4. Holiday price");
+                                        System.out.println("5. Silver price");
+                                        System.out.println("6. Gold price");
+                                        System.out.println("7. Platinum price");
+                                        System.out.println("8. Holidays");
+                                        System.out.println("0. Done");
+                                        choice = in.nextInt();
+                                        if (choice <= -1 || choice >= 9){
+                                            System.out.println("Error! Please enter either 0, 1, 2, 3, 4, 5, 6, 7 or 8:");
+                                        }
+                                    }
+                                    catch(InputMismatchException e){
+                                        System.out.println("That is not an integer, please try again." );
+                                    }
+                                }
+                                //0. Done, save new settings to database
+                                if (choice == 0){
+                                    choice = -1;
+                                    break;
+                                }
+                                //1. Prompt input for new base price
+                                else if (choice == 1){
+                                    System.out.println("Enter new base price:");
+                                    mystaff.updateBasePrice(mysettings, input.nextDouble());
+                                }
+                                //2. Prompt input for child price
+                                else if (choice == 2){
+                                    System.out.println("Enter new child price:");
+                                    mystaff.updateChildPrice(mysettings, input.nextDouble());
+                                }
+                                //3. Prompt input for senior price
+                                else if (choice == 3){
+                                    System.out.println("Enter new senior price:");
+                                    mystaff.updateSeniorPrice(mysettings, input.nextDouble());
+                                }
+                                //4. Prompt input for holiday price
+                                else if (choice == 4){
+                                    System.out.println("Enter new holiday price:");
+                                    mystaff.updateHolidayPrice(mysettings, input.nextDouble());
+                                }
+                                //5. Prompt input for silver price
+                                else if (choice == 5){
+                                    System.out.println("Enter new silver price:");
+                                    mystaff.updateSilverPrice(mysettings, input.nextDouble());
+                                }
+                                //6. Prompt input for gold price
+                                else if (choice == 6){
+                                    System.out.println("Enter new gold price:");
+                                    mystaff.updateGoldPrice(mysettings, input.nextDouble());
+                                }
+                                //7. Prompt input for platinum price
+                                else if (choice == 7){
+                                    System.out.println("Enter new platinum price:");
+                                    mystaff.updatePlatinumPrice(mysettings, input.nextDouble());
+                                    input.nextLine();//Catch newline from input.nextDouble()
+                                }
+                                //8. Prompt input for holidays
+                                else if (choice == 8){
+                                    System.out.println("Enter new holidays:");
+                                    mystaff.updateHoliday(mysettings, Arrays.asList(input.nextLine().split(",")));
+                                }
+                            }
+                            //Save edited movie object to database
+                            if (mystaff.saveSettingsChanges(mysettings) == Boolean.TRUE){
+                                System.out.println("Settings successfully updated!");
+                            }
+                            else{
+                                System.out.println("Error! Settings failed to be updated!");
+                            }
                         }
                     }
                 }
