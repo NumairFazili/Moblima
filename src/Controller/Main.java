@@ -1,5 +1,4 @@
 package Controller;
-import java.security.KeyStore;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 import java.util.ArrayList;
@@ -8,7 +7,6 @@ import java.util.List;
 import Entity.*;
 import View.Boundary;
 
-import javax.xml.crypto.Data;
 
 public class Main {
     public static void main(String[] args) {
@@ -37,8 +35,12 @@ public class Main {
         Movie mymovie;
         UserManager myuser = null;
         StaffManager mystaff = null;
-        System.out.println("MOBLIMA Movie Booking System START:");
-        while (choice != -2){
+
+
+
+
+//Below Are no longer used
+        while (true){
             while (choice != 1 && choice != 2 && choice != 0){
                 try{
                     Scanner in = new Scanner(System.in);
@@ -692,5 +694,7 @@ public class Main {
                 }
             }
         }
+        //Above No longer used
+
     }
 }

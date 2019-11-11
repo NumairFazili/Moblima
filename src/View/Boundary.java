@@ -3,13 +3,54 @@ package View;
 import Entity.Cinema;
 import Entity.Movie;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 public class Boundary {
+    public static int ModuleSelection(int choice, Scanner input){
+
+        while(choice != 1 && choice !=2 && choice !=0){
+            Boundary.DisplayBegin();
+
+            try{
+                choice = input.nextInt();
+                if(choice == 0){
+                    System.exit(0);
+                }
+                else if(choice ==1 || choice ==2){
+
+                    return choice;
+                }
+                else{
+                    System.out.println("Error! Please enter either 1, 2 or 0:");
+                }
+            }
+            catch(InputMismatchException e){
+                System.out.println("That is not an integer, please try again." );
+                input.next();
+            }
 
 
+        }
+
+        return 0;
+    }
+
+    public static void Display_Staff_main(){
+        System.out.println("1. Create movie listing");
+        System.out.println("2. Update movie listing");
+        System.out.println("3. Remove movie listing");
+        System.out.println("4. Create cinema showtimes and the movies to be shown");
+        System.out.println("5. Update cinema showtimes and the movies to be shown");
+        System.out.println("6. Remove cinema showtimes and the movies to be shown");
+        System.out.println("7. Configure system settings");
+        System.out.println("0. Exit the Program");
+    }
+    public static void DisplayBegin(){
+        System.out.println("MOBLIMA Movie Booking System START:");
+        System.out.println("1. Admin user: ");
+        System.out.println("2. Movie-Goer: ");
+        System.out.println("0. to exit:");
+    }
     public static void DisplayOptions(String[] str) {
         int count = 0;
         for (int i = 0; i < str.length; i++)

@@ -2,15 +2,45 @@ package Controller;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 import Entity.*;
 import View.Boundary;
+import javafx.util.Pair;
 
 
 //return StaffManager/UserManager
 
 public class AuthManager{
 
+    public static Pair<Integer,StaffManager> login(Scanner input){
+        boolean adminauth = false;
+        StaffManager mystaff =new StaffManager(new Staff("NULL","NULL")) ;
+        while(adminauth==false){
+            System.out.println("ADMIN USER:");
+            System.out.println("Please enter login details, Input -1 to go back:");
+            System.out.println("Enter Username:");
+            String username = input.next();
+            if(username.equals("-1")){
+
+                return new Pair<Integer,StaffManager>(-1,mystaff);
+            }
+            System.out.println("Enter Password:");
+            String password = input.next();
+            mystaff = AuthManager.getStaff(username,password);
+            if(mystaff != null){
+                System.out.println("Admin account successfully logged in!");
+                adminauth = true;
+            }
+            else{
+                System.out.println("The username or password you typed is incorrect. Please try again.");
+                adminauth = false;
+            }
+        }
+
+        return new Pair<Integer, StaffManager>(0,mystaff);
+
+    }
     public static StaffManager getStaff(String username, String password){
 
         ArrayList<Staff> staffList = DataManager.Loadstaff();

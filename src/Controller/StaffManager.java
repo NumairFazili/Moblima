@@ -1,9 +1,13 @@
 package Controller;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Scanner;
 
 import Entity.*;
+import View.Boundary;
 
 /*
 List of Methods
@@ -27,7 +31,7 @@ List of Methods
 public class StaffManager extends PersonManager{
 
     Staff staff;
-
+    public StaffManager(){};
     public StaffManager(Staff s){
         staff = s;
         if(s == null){
@@ -35,10 +39,46 @@ public class StaffManager extends PersonManager{
         }
     }
 
-    //MOVIE 
+    //MOVIE
+    public void createMovieListing(Scanner input){
+
+        System.out.println("Enter movieID:");
+        int movieid = input.nextInt();
+        input.nextLine(); //Catch newline from .nextInt()
+        System.out.println("Enter movie name:");
+        String moviename = input.nextLine();
+        System.out.println("Enter language:");
+        String language = input.nextLine();
+        System.out.println("Enter runtime:");
+        String runtime = input.nextLine();
+        System.out.println("Enter cast members, split by ','");
+        List<String> cast = Arrays.asList(input.nextLine().split(","));
+        System.out.println("Enter description:");
+        String description = input.nextLine();
+        System.out.println("Enter director:");
+        String director = input.nextLine();
+        System.out.println("Enter Minimum age:");
+        int minage = input.nextInt();
+        input.nextLine();
+        this.createNewMovie(movieid, moviename, language, Arrays.asList(), runtime, cast, description, director, Arrays.asList(), minage);
+
+    }
     public void createNewMovie(int id,String name,String Language,List<Integer> rating,String runTime,List<String> cast,String Description,String Director, List<String> comments, int minAge){
+
         Movie m = new Movie(id, name, Language, rating, runTime, cast, Description, Director, comments, minAge);
         DataManager.SaveMovies(m);
+    }
+    public void UpdateMovie(Scanner input){
+
+        ArrayList<Movie> allMovies = this.getAllMovies();
+        Boundary.DisplayMovies(allMovies);
+        System.out.println("Enter ID of the movie to be updated: " );
+        int inputsearchint = input.nextInt();
+        input.nextLine();
+        Movie mymovie = SearchManager.find_Movie_byID(allMovies, inputsearchint);
+        System.out.println("Choose attribute of movie to be edited: " );
+        int choice = -1;
+
     }
     public void updateMovieName(Movie m, String s){
         m.setName(s);
