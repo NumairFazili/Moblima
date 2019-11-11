@@ -9,7 +9,6 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.InputMismatchException;
 import java.util.List;
 
 import java.util.Scanner;
@@ -228,7 +227,6 @@ public class DataManager {
 
         if(movieID==-1)
             ID="";
-
 
         BufferedReader reader = null;
         ArrayList<Cinema> cinemaArrayList = new ArrayList<>();
@@ -660,10 +658,11 @@ public class DataManager {
 
                 List<String> dates = Arrays.asList(tokens[7].split("\\."));
                 Settings settings = new Settings(Double.parseDouble(tokens[0]),Double.parseDouble(tokens[1]),Double.parseDouble(tokens[2]),Double.parseDouble(tokens[3]),Double.parseDouble(tokens[4]),Double.parseDouble(tokens[5]),Double.parseDouble(tokens[6]),dates);
+                reader.close();
                 return settings;
 
             }
-            reader.close();
+
         } catch (IOException e) {
             e.printStackTrace();
 
@@ -719,6 +718,7 @@ public class DataManager {
             writer.append(String.valueOf(settings.getPlatinumPrice()));
             writer.append(",");
             writer.append(Joiner.on('.').join(settings.getHolidays()));
+            writer.flush();
             writer.append("\n");
 
 
@@ -773,12 +773,22 @@ public class DataManager {
 
     public static void main(String[] args) {
 
-//        Integer a= null;
-//
-        List<Cinema> cinemaArrayList=LoadShowTimes(-1);
 
-        for(Cinema cinema:cinemaArrayList)
-            System.out.println(cinema.getCinplexID());
+        //StaffManager mystaff = AuthManager.getStaff("username", "123");
+//        Settings settings=DataManager.LoadSettings();//mystaff.showSettings();
+//        settings.setBasePrice(21);
+//        DataManager.manageSettings(settings);
+
+//        Settings settings = new Settings(16,-4,-3,-2,1,3,5,Arrays.asList("07/10/2019.07/11/2019"));
+//        manageSettings(settings);
+
+
+////        Integer a= null;
+////
+//        List<Cinema> cinemaArrayList=LoadShowTimes(-1);
+//
+//        for(Cinema cinema:cinemaArrayList)
+//            System.out.println(cinema.getCinplexID());
 
 
 //        Movie movie=new Movie(1008,"Toy Story","English",Arrays.asList(1),"3:15",Arrays.asList("a","b","c"),"sAmpleText","SampleText",Arrays.asList("review1","review2"),18);
