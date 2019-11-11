@@ -133,7 +133,7 @@ public class Main {
                             minage = input.nextInt();
                             input.nextLine(); //Catch newline from .nextInt()
                             //Create movie object and save movie listing to database using DataManager
-                            mystaff.createNewMovie(movieid, moviename, language, null, runtime, cast, description, director, null, minage);
+                            mystaff.createNewMovie(movieid, moviename, language, Arrays.asList(), runtime, cast, description, director, Arrays.asList(), minage);
                         }
 
                         //2. Update movie listing
