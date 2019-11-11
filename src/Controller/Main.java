@@ -415,6 +415,7 @@ public class Main {
                                 else if (choice == 1){
                                     System.out.println("Enter new base price:");
                                     mystaff.updateBasePrice(mysettings, input.nextDouble());
+                                    //settings.setBasePrice(input.nextDouble());
                                 }
                                 //2. Prompt input for child price
                                 else if (choice == 2){
@@ -454,7 +455,7 @@ public class Main {
                                 }
                             }
                             //Save edited movie object to database
-                            if (mystaff.saveSettingsChanges(mysettings) == Boolean.TRUE){
+                            if (mystaff.saveSettingsChanges(mysettings)== Boolean.TRUE){
                                 System.out.println("Settings successfully updated!");
                             }
                             else{
