@@ -15,7 +15,7 @@ package Controller;
 import Entity.Booking;
 import Entity.Cinema;
 import Entity.User;
-import org.junit.Test;
+//import org.junit.Test;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -41,11 +41,11 @@ public class BookingManager {
     // private static void makeBooking(User user, Booking booking){
     //     DataManager.AddBooking(booking);
     // }
-    @Test
+    /*@Test
     public void test1(){
         init();
         genBookingID();
-    }
+    }*/
 
     public static Booking createBooking(User user, Cinema cinema, int seatNO){
         //Cinema class need to be added into Cinema

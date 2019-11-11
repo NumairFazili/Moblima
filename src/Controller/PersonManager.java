@@ -78,7 +78,7 @@ public class PersonManager{
         }
         return return_list;
     }
-    public List<Cinema> getShowTimesByMovie(int movieID){
+    public static List<Cinema> getShowTimesByMovie(int movieID){
         List<Cinema> c_list = DataManager.LoadShowTimes(movieID);
         for(int i = 0; i < c_list.size(); i++){
             if(c_list.get(i).getStatus().equals("Ended")){

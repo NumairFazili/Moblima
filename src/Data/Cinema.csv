@@ -1,8 +1,8 @@
 Cineplex_ID,Cinema_ID,Movie ID,ShowTime,Status,Class,Seats,MovieType
 1,1,1001,7/10/2019 16:30,Now Showing,Silver,21.20.44.13.2,3D
 1,1,1001,7/10/2019 18:30,Now Showing,Silver,21.20.44.13.2,2D
-1,1,1001,8/10/2019 16:30,Now Showing,Silver,21.20.44.13.2,3D
-1,2,1002,7/10/2019 16:30,Now Showing,Gold,21.20.44.13.2,2D
+1,1,1001,8/10/2019 16:30,Now Showing,Silver,21.20.44.13.2.1,3D
+1,2,1002,7/10/2019 16:30,Now Showing,Gold,21.20.44.13.2.9.0,2D
 1,2,1002,7/10/2019 18:30,Now Showing,Gold,21.20.44.13.2,3D
 1,2,1003,8/10/2019 16:30,Now Showing,Gold,21.20.44.13.2,2D
 2,1,1001,7/10/2019 16:30,Now Showing,Platinum,21.20.44.13.2,3D

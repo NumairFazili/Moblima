@@ -66,7 +66,6 @@ public class Test_main {
                                 staff.configureSettings(input);
                                 break;
                             case 0:
-
                                 break;
                             default:
                                 System.out.println("Error! Please enter either 0, 1, 2, 3, 4, 5, 6 or 7:");
@@ -77,33 +76,45 @@ public class Test_main {
 
             }
             else {
-                int user_login_choice = AuthManager.UserLogin(input);
-                //while loop should be inside Userlogin.(Leave it for me)
-                if(user_login_choice == 1){
-                    UserManager.createUser(input);
+                UserManager user = null;
+                while (user == null){
+                    int user_login_choice = Boundary.Display_User_Choice();
+                    if(user_login_choice == 1){
+                        user = AuthManager.UserLogin(input);
+                    }
+                    else if(user_login_choice == 2){
+                        user = UserManager.createUser(input);
+                    }
+                    else if(user_login_choice == 3){
+                        user = UserManager.getGuestUser();
+                    }
                 }
                 do{
                     Boundary.Display_User_main();
                     choice = input.nextInt();
-
-                    switch (choice){
+                    switch (choice) {
                         case 1:
-                            user.createMovieListing(input);
+                            user.SearchListMovie(input, choice);
                             break;
                         case 2:
-                            user.UpdateMovie(input);
+                            user.getBookings();
+                            //Display bookings method to be added
                             break;
                         case 3:
-                            user.removeMovieListing(input);
+                            System.out.println("Listing top 5 movies by ticket sales:");
+                            Boundary.DisplayMovies(user.getTopBySales());
                             break;
                         case 4:
-                            user.createCinemaShowtime(input);
-                            break;
+                            System.out.println("Listing top 5 movies by overall reviewers’ ratings:");
+                            Boundary.DisplayMovies(user.getTopByRatings());
                         case 5:
-                            user.updateCinemaShowtime(input);
+                            user.SearchListMovie(input, choice);
                             break;
                         case 0:
                             break;
+                        default:
+                            System.out.println("Error! Please enter either 0, 1, 2, 3, 4 or 5:");
+                    }
                 }while(choice != 0);
 
 

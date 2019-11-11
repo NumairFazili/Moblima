@@ -627,7 +627,7 @@ public class Main {
                                 System.out.println("Choose index of the showtime to view seat availability: ");
                                 inputsearchint = input.nextInt();
                                 input.nextLine(); //Catch newline from .nextInt()
-                                Boundary.DisplaySeating(((DataManager.LoadShowTimes(mymovie.getId()).get(inputsearchint))));
+                                Boundary.DisplaySeating(((DataManager.LoadShowTimes(mymovie.getId()).get(inputsearchint))).getSeats());
                                 choice = -1;
                                 while (choice <= -1 || choice >= 3){
                                     try{

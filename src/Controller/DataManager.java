@@ -435,7 +435,7 @@ public class DataManager {
                 String customerType = tokens[10];
                 int seatNO = Integer.parseInt(tokens[11]);
                 String bookingTime = tokens[12];
-                int price = Integer.parseInt(tokens[13]);
+                double price = Double.parseDouble(tokens[13]);
 
 
                 Booking booking = new Booking(bookingID, cinplexID, cinemaID, movieID, showTime, cinemaClass, movieType, customerName, mobileNumber, email, customerType, seatNO, bookingTime, price);

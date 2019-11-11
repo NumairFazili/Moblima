@@ -1,6 +1,7 @@
 package Controller;
 
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
@@ -22,7 +23,6 @@ public class AuthManager{
             System.out.println("Enter Username:");
             String username = input.next();
             if(username.equals("-1")){
-
                 return new Pair<Integer,StaffManager>(-1,mystaff);
             }
             System.out.println("Enter Password:");
@@ -41,6 +41,34 @@ public class AuthManager{
         return new Pair<Integer, StaffManager>(0,mystaff);
 
     }
+
+    public static UserManager UserLogin(Scanner input){//1. Existing User
+        while (true){
+            UserManager myuser;
+            System.out.println("Please enter login details:");
+            System.out.println("Enter Username:");
+            String username = input.next();
+            System.out.println("Enter Mobile number:");
+            String mobilenumber = input.next();
+            //Check with database if name and mobile number matches then create corresponding user object
+            myuser = AuthManager.getUser(username, mobilenumber);
+            if (myuser == null){
+                System.out.println("Error! Incorrect login details.");
+                System.out.println("1. Try again");
+                System.out.println("0. Go back");
+                int choice = input.nextInt();
+                input.nextLine(); // Catch newline from nextInt
+                if (choice == 0){
+                    return null;
+                }
+            }
+            else{
+                System.out.println("User Login Successful!");
+                return myuser;
+            }
+        }
+    }
+
     public static StaffManager getStaff(String username, String password){
 
         ArrayList<Staff> staffList = DataManager.Loadstaff();

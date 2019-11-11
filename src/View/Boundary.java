@@ -2,7 +2,7 @@ package View;
 
 import Entity.Cinema;
 import Entity.Movie;
-import sun.tools.tree.IntegerExpression;
+//import sun.tools.tree.IntegerExpression;
 
 import java.util.*;
 
@@ -34,6 +34,36 @@ public class Boundary {
         }
 
         return 0;
+    }
+
+    public static int Display_User_Choice(){
+        System.out.println("MOVIE-GOER USER");
+        int choice = 0;
+        while (choice <= 0 || choice >= 4){
+            try{
+                Scanner in = new Scanner(System.in);
+                System.out.println("1. Existing User");
+                System.out.println("2. New User");
+                System.out.println("3. Proceed as Guest User");
+                choice = in.nextInt();
+                if (choice <= 0 || choice >= 4){
+                    System.out.println("Error! Please enter either 1, 2 or 3:");
+                }
+            }
+            catch(InputMismatchException e){
+                System.out.println("That is not an integer, please try again." );
+            }
+        }
+        return choice;
+    }
+
+    public static void Display_User_main(){
+        System.out.println("1. Search movie");
+        System.out.println("2. View booking history");
+        System.out.println("3. List the Top 5 ranking by ticket sales");
+        System.out.println("4. List the Top 5 ranking by overall reviewers’ ratings");
+        System.out.println("5. List all movies");
+        System.out.println("0. Exit the Program");
     }
 
     public static void Display_Staff_main(){
