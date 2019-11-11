@@ -43,7 +43,7 @@ public class DataManager {
                     List<String> reviews= Arrays.asList(tokens[8].split("\\."));
                     List<String> temp= Arrays.asList(tokens[3].split("\\."));
                     List<Integer> ratings=new ArrayList<>();
-                    for (String s : temp) ratings.add(Integer.valueOf(s));
+                    if(temp.size()>1) for (String s : temp) ratings.add(Integer.valueOf(s));
                     Movie movie = new Movie(Integer.parseInt(tokens[0]), tokens[1], tokens[2],ratings, tokens[4], cast, tokens[6], tokens[7],reviews,Integer.parseInt(tokens[9]));
                     movieArrayList.add(movie);
                 }
@@ -773,6 +773,15 @@ public class DataManager {
 
     public static void main(String[] args) {
 
+        ArrayList<Movie> test=LoadMovies("");
+
+        for(Movie movie:test)
+            System.out.println(movie.getReviews()+ "   " + movie.getRating());
+
+
+    }
+}
+
 
         //StaffManager mystaff = AuthManager.getStaff("username", "123");
 //        Settings settings=DataManager.LoadSettings();//mystaff.showSettings();
@@ -817,8 +826,7 @@ public class DataManager {
 //        }
 
 
-}
-}
+
         //####################################Brandan####################################
 //        Movie movie=new Movie(1004,"Joker","English",9.8,"3:15",Arrays.asList("a","b","c"),"sampleText","sampleText");
 //
