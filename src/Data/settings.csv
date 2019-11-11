@@ -1,2 +1,2 @@
-BasePrice,ChildPrice,SeniorPrice,HolidayPrice,SilverPrice,GoldPrice,PlatinumPrice,Holiday
-12.0,-4.0,-2.0,-2.0,0,3,5,07/10/2019.07/11/2019
+BasePrice,ChildPrice,SeniorPrice,HolidayPrice,silverPrice,GoldPrice,platinumPrice,Holiday
+14.2,-4.0,-3.0,-2.0,1.0,3.0,5.0,07/10/2019.07/11/2019

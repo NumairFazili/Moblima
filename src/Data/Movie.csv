@@ -6,5 +6,4 @@ Movie ID,Movie Name,Language,Rating,RunTime,Cast,Director,Description,Reviews,mi
 1005,Mission Impossible 4,English,9.8.8.9,2:15,a.b.c,sampleText,sampleText,review1.review2,18
 1006,The Incredibles,English,9.8.8.9,2:45,a.b.cd.e,sampletext,Brad Bird,review1.review2,18
 1007,new avengers,chinese,9.8.8.9,3:10,tony stark. iron man,sampletext,professor hulk,review1.review2,18
-1008,Toy Story,Chinese,5.8,3:00,john.doe.johnner,samplertexter,somedirector,very good.super good,18
-1010,Crawl,English,,4:15,a.b.c.d,sampletext,director2,,18
+

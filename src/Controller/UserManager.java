@@ -33,6 +33,8 @@ public class UserManager extends PersonManager{
 
     public void createBooking(Cinema cinema, int seatNO){
         Movie m = super.selectMovieByID(cinema.getMovieID());
+        BookingManager.init();
+
         if(user.getAge() >= m.getMinAge()){
             Booking b = BookingManager.createBooking(user, cinema, seatNO);
             user.addBooking(b);

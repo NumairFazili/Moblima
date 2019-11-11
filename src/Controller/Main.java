@@ -1,5 +1,4 @@
 package Controller;
-import java.security.KeyStore;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 import java.util.ArrayList;
@@ -8,7 +7,6 @@ import java.util.List;
 import Entity.*;
 import View.Boundary;
 
-import javax.xml.crypto.Data;
 
 public class Main {
     public static void main(String[] args) {
@@ -37,8 +35,12 @@ public class Main {
         Movie mymovie;
         UserManager myuser = null;
         StaffManager mystaff = null;
-        System.out.println("MOBLIMA Movie Booking System START:");
-        while (choice != -2){
+
+
+
+
+//Below Are no longer used
+        while (true){
             while (choice != 1 && choice != 2 && choice != 0){
                 try{
                     Scanner in = new Scanner(System.in);
@@ -413,6 +415,7 @@ public class Main {
                                 else if (choice == 1){
                                     System.out.println("Enter new base price:");
                                     mystaff.updateBasePrice(mysettings, input.nextDouble());
+                                    //settings.setBasePrice(input.nextDouble());
                                 }
                                 //2. Prompt input for child price
                                 else if (choice == 2){
@@ -452,7 +455,7 @@ public class Main {
                                 }
                             }
                             //Save edited movie object to database
-                            if (mystaff.saveSettingsChanges(mysettings) == Boolean.TRUE){
+                            if (mystaff.saveSettingsChanges(mysettings)== Boolean.TRUE){
                                 System.out.println("Settings successfully updated!");
                             }
                             else{
@@ -648,15 +651,15 @@ public class Main {
                                 }
                                 //1. Select seats
                                 else if (choice == 1){
-                                    looper = Boolean.FALSE; //stop while loop to check showtime
+                                    looper = Boolean.FALSE; //stop while loop
                                     System.out.println("Enter row index of seat:" );
                                     rowofseat = input.nextInt();
                                     System.out.println("Enter col index of seat:" );
                                     colofseat = input.nextInt();
                                     input.nextLine();//Catch newline from input
                                     //4. Book and purchase ticket
-                                    myuser.createBooking(((DataManager.LoadShowTimes(mymovie.getId()).get(inputsearchint))), rowofseat*8 + colofseat);
-
+                                    mycinema = ((DataManager.LoadShowTimes(mymovie.getId()).get(inputsearchint)));
+                                    myuser.createBooking(mycinema, rowofseat*8 + colofseat);
                                 }
                                 //2. Select another showtime
                                 else if (choice == 2){
@@ -692,5 +695,7 @@ public class Main {
                 }
             }
         }
+        //Above No longer used
+
     }
 }
