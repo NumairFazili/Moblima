@@ -77,6 +77,36 @@ public class Test_main {
 
             }
             else {
+                int user_login_choice = AuthManager.UserLogin(input);
+                //while loop should be inside Userlogin.(Leave it for me)
+                if(user_login_choice == 1){
+                    UserManager.createUser(input);
+                }
+                do{
+                    Boundary.Display_User_main();
+                    choice = input.nextInt();
+
+                    switch (choice){
+                        case 1:
+                            user.createMovieListing(input);
+                            break;
+                        case 2:
+                            user.UpdateMovie(input);
+                            break;
+                        case 3:
+                            user.removeMovieListing(input);
+                            break;
+                        case 4:
+                            user.createCinemaShowtime(input);
+                            break;
+                        case 5:
+                            user.updateCinemaShowtime(input);
+                            break;
+                        case 0:
+                            break;
+                }while(choice != 0);
+
+
                 System.out.println("User module");
             }
             System.out.println("Module Finished. ");
