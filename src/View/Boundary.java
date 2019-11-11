@@ -2,6 +2,7 @@ package View;
 
 import Entity.Cinema;
 import Entity.Movie;
+import sun.tools.tree.IntegerExpression;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -52,11 +53,12 @@ public class Boundary {
         }
     }
 
-    public static void DisplaySeating(Cinema cinema) {
+    public static void DisplaySeating(List<Integer> i_list) {
         int value;
-        int rows=8;
-        int cols=8;
-        List<Integer> seating_temp = cinema.getSeats();
+        int rows=10;
+        int cols=10;
+//        List<Integer> seating_temp = cinema.getSeats();
+        List<Integer> seating_temp = i_list;
 
         System.out.print("   ");
         for(int i=0;i<cols;i++)
@@ -68,17 +70,31 @@ public class Boundary {
             for (int j=0;j<cols;j++){
                 value=i*cols + j;
 
-                for(int k=0; k < seating_temp.size(); k++){
-                if(seating_temp.get(k)==value){
+                int k;
+                for(k=0; k < seating_temp.size(); k++){
+                    if(seating_temp.get(k)==value){
+                        break;
+                    }
+                }
+
+                if(k == seating_temp.size()){
+                    System.out.print(" A ");
+                }else{
                     System.out.print(" X ");
                     seating_temp.remove(k);
-                }else{
-                    System.out.print(" A ");
                 }
-                }
-             }
+            }
             System.out.println();
-         }
+        }
     }
+
+    public static void main(String args[]){
+        List<Integer> i_list = new ArrayList<Integer>();
+        i_list.add(14);
+        i_list.add(3);
+        i_list.add(17);
+        DisplaySeating(i_list);
+    }    
+
 }
 
