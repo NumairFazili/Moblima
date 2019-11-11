@@ -55,6 +55,7 @@ public class Test_main {
                                 staff.UpdateMovie(input);
                                 break;
                             case 3:
+                                staff.removeMovieListing(input);
                                 break;
                             case 4:
                                 break;

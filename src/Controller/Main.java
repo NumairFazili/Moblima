@@ -650,15 +650,15 @@ public class Main {
                                 }
                                 //1. Select seats
                                 else if (choice == 1){
-                                    looper = Boolean.FALSE; //stop while loop to check showtime
+                                    looper = Boolean.FALSE; //stop while loop
                                     System.out.println("Enter row index of seat:" );
                                     rowofseat = input.nextInt();
                                     System.out.println("Enter col index of seat:" );
                                     colofseat = input.nextInt();
                                     input.nextLine();//Catch newline from input
                                     //4. Book and purchase ticket
-                                    myuser.createBooking(((DataManager.LoadShowTimes(mymovie.getId()).get(inputsearchint))), rowofseat*8 + colofseat);
-
+                                    mycinema = ((DataManager.LoadShowTimes(mymovie.getId()).get(inputsearchint)));
+                                    myuser.createBooking(mycinema, rowofseat*8 + colofseat);
                                 }
                                 //2. Select another showtime
                                 else if (choice == 2){

@@ -63,6 +63,27 @@ public class StaffManager extends PersonManager{
         this.createNewMovie(movieid, moviename, language, Arrays.asList(), runtime, cast, description, director, Arrays.asList(), minage);
 
     }
+
+    public void removeMovieListing(Scanner input){
+        //List all movies
+        Boundary.DisplayMovies(this.getAllMovies());
+        //Select movie to remove by movieID
+        System.out.println("Enter ID of the movie to remove: " );
+        System.out.println("Otherwise enter -2 to go back" );
+        int inputsearchint = input.nextInt();
+        if (inputsearchint == -2){
+            //Do nothing
+        }
+        else{
+
+            if (this.deleteMovie(SearchManager.find_Movie_byID(this.getAllMovies(), inputsearchint)) == Boolean.TRUE){
+                System.out.println("Movie listing successfully removed!");
+            }
+            else{
+                System.out.println("Error movie listing failed to be removed!");
+            }
+        }
+    }
     public void createNewMovie(int id,String name,String Language,List<Integer> rating,String runTime,List<String> cast,String Description,String Director, List<String> comments, int minAge){
 
         Movie m = new Movie(id, name, Language, rating, runTime, cast, Description, Director, comments, minAge);
