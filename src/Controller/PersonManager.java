@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import Entity.*;
+import Controller.*;
+import View.Boundary;
 
 //put some common functions here
 /*
@@ -58,10 +60,16 @@ public class PersonManager{
  
     public List<Cinema> getAllShowTimes(){
         List<Cinema> c_list = DataManager.LoadShowTimes(-1);
+        for(int i = 0; i < c_list.size(); i++){
+            if(c_list.get(i).getStatus().equals("Ended")){
+                c_list.remove(i);
+                i--;
+            }
+        }
         return c_list;
     }
     public List<Cinema> getShowTimesByCineplex(int cineplexID){
-        List<Cinema> c_list = DataManager.LoadShowTimes(-1);
+        List<Cinema> c_list = getAllShowTimes();
         List<Cinema> return_list = new ArrayList<Cinema>();
         for(Cinema c: c_list){
             if(c.getCinplexID() == cineplexID){
@@ -71,7 +79,24 @@ public class PersonManager{
         return return_list;
     }
     public List<Cinema> getShowTimesByMovie(int movieID){
-        return DataManager.LoadShowTimes(movieID);
+        List<Cinema> c_list = DataManager.LoadShowTimes(movieID);
+        for(int i = 0; i < c_list.size(); i++){
+            if(c_list.get(i).getStatus().equals("Ended")){
+                c_list.remove(i);
+                i--;
+            }
+        }
+        return c_list;
     }
 
+
+    public static void main(String args[]){
+        StaffManager s = AuthManager.getStaff("username", "123");
+        if(s != null){
+            List<Cinema> c_list = s.getAllShowTimes();
+            Boundary.DisplayCinemas(c_list);
+        }else{
+            System.out.println("Not authorized");
+        }
+    }
 }
