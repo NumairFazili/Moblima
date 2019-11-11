@@ -58,12 +58,16 @@ public class Test_main {
                                 staff.removeMovieListing(input);
                                 break;
                             case 4:
+                                staff.createCinemaShowtime(input);
                                 break;
                             case 5:
+                                staff.updateCinemaShowtime(input);
                                 break;
                             case 6:
+                                staff.removeCinemaShowtime(input);
                                 break;
                             case 7:
+                                staff.configureSettings(input);
                                 break;
                             case 0:
 
