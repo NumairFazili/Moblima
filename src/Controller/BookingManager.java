@@ -15,19 +15,21 @@ package Controller;
 import Entity.Booking;
 import Entity.Cinema;
 import Entity.User;
+import org.junit.Test;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Random;
 import java.util.Set;
 
 public class BookingManager {
  
     // Initialize booking Manager class by BookingManager(DataManager.LoadBookings());
-    private static Set<String> bookingIDset;
+    private static HashSet<String> bookingIDset = new HashSet<String>() ;
 
-    public BookingManager(){
+    public static void init(){
         ArrayList<Booking> bookings = DataManager.LoadBookings();
         for(int i = 0;i<bookings.size();i++){
             if(bookingIDset.contains(bookings.get(i).getBookingID())==false){
@@ -39,7 +41,12 @@ public class BookingManager {
     // private static void makeBooking(User user, Booking booking){
     //     DataManager.AddBooking(booking);
     // }
- 
+    @Test
+    public void test1(){
+        init();
+        genBookingID();
+    }
+
     public static Booking createBooking(User user, Cinema cinema, int seatNO){
         //Cinema class need to be added into Cinema
         //movieType need to be added into Movie

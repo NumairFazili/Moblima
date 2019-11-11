@@ -20,15 +20,11 @@ public class Test_main {
 
         String username, password, inputsearch, mobilenumber, email;
         int choice = -1;
-        int age, inputsearchint, i, rowofseat, colofseat;
-        boolean looper;
         //variables for admin to create showtime
-        int cineplexid, cinemaid, movierating;
         String showtime, status, cinemaclass, movietype, moviereview;
         List<Integer> seats;
 
         //Variables for admin to edit settings
-        double basePrice, childPrice, seniorPrice, holidayPrice, silverPrice, goldPrice, platinumPrice;
         List<String> holidays;
         Settings mysettings;
 
