@@ -4,6 +4,7 @@ import Entity.Cinema;
 import Entity.Movie;
 import Entity.Settings;
 import View.Boundary;
+import View.UserBoundary;
 import javafx.beans.binding.ObjectExpression;
 import javafx.util.Pair;
 
@@ -83,10 +84,10 @@ public class Test_main {
                         user = AuthManager.UserLogin(input);
                     }
                     else if(user_login_choice == 2){
-                        user = UserManager.createUser(input);
+                        user = UserBoundary.createUser(input);
                     }
                     else if(user_login_choice == 3){
-                        user = UserManager.getGuestUser();
+                        user = AuthManager.getGuestUser();
                     }
                 }
                 do{

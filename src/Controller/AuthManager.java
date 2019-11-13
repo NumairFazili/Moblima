@@ -100,6 +100,11 @@ public class AuthManager{
         return null;
     }
 
+    public static UserManager getGuestUser(){
+        UserManager u = getUser("guestaccount", "10101010");
+        return u;
+    }
+
     public static void main(String args[]){
         UserManager u = AuthManager.getUser("test1", "1234567890");
         if(u != null){
