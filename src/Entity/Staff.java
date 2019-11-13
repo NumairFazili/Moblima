@@ -56,7 +56,7 @@ public class Staff extends Person {
 
     public void removeMovieListing(Scanner input){
         //List all movies
-        Boundary.DisplayMovies(this.getAllMovies());
+        Boundary.DisplayMovie(this.getAllMovies());
         //Select movie to remove by movieID
         System.out.println("Enter ID of the movie to remove: " );
         System.out.println("Otherwise enter -2 to go back" );
@@ -301,7 +301,7 @@ public class Staff extends Person {
     public void UpdateMovie(Scanner input){
 
         ArrayList<Movie> allMovies = this.getAllMovies();
-        Boundary.DisplayMovies(allMovies);
+        Boundary.DisplayMovie(allMovies);
         System.out.println("Enter ID of the movie to be updated: " );
         int inputsearchint = input.nextInt();
         input.nextLine();
@@ -358,7 +358,7 @@ public class Staff extends Person {
         c.setMovieType(s);
     }
     public boolean saveShowTimeChanges(Cinema c){
-        return DataManager.UpdateShowTime(c);
+        return DataManager.UpdateShowTime(c,false);
     }
     public void deleteShowTime(Cinema c){
         c.setStatus("ended");

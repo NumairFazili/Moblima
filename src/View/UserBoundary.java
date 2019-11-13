@@ -10,7 +10,7 @@ import Controller.*;
 
 public class UserBoundary{
 
-    public static void SearchListMovie(Scanner input, int choice, UserManager u){
+    public static void SearchListMovie(Scanner input, int choice, User u){
         ArrayList<Movie> mymovielist = null;
         //List all movies
         if (choice == 5){
@@ -113,7 +113,7 @@ public class UserBoundary{
         }
     }
 
-    public static UserManager createUser(Scanner input){
+    public static User createUser(Scanner input){
         //2. New User
         //Get user input to create new user object
         System.out.println("Creating New Account:");
@@ -127,7 +127,7 @@ public class UserBoundary{
         System.out.println("Enter Email Address:");
         String email = input.nextLine();
         //Create usermanager object and Save user into database
-        UserManager myuser = new UserManager(username, age, mobilenumber, email);
+        User myuser = new User(username, age, mobilenumber, email);
         return myuser;
     }
 

@@ -2,6 +2,7 @@ package Controller;
 
 import Entity.*;
 import View.Boundary;
+import View.UserBoundary;
 import javafx.beans.binding.ObjectExpression;
 import javafx.util.Pair;
 
@@ -21,7 +22,7 @@ public class Test_main {
                 if(login_status==-1){continue;}
                 else{
                     do{
-                        Boundary.Display_Staff_main();
+                        Boundary.DisplayOptions("staffMenu");
                         choice = input.nextInt();
                         switch (choice){
                             case 1:
@@ -57,9 +58,14 @@ public class Test_main {
             }
 
             else {
+
                 User user = null;
-                while (user == null){
-                    int user_login_choice = Boundary.Display_User_Choice();
+
+                Boundary.DisplayOptions("userMenu");
+                int user_login_choice = input.nextInt();
+                while (user == null ){
+
+
                     if(user_login_choice == 1){
                         user = AuthManager.UserLogin(input);
                     }
@@ -69,12 +75,17 @@ public class Test_main {
                     else if(user_login_choice == 3){
                         user = UserManager.getGuestUser();
                     }
+                    else{
+                        System.out.println("Enter Valid Input");
+                        user_login_choice = input.nextInt();
+                    }
                 }
                 do{
-                    Boundary.Display_User_main();
+                    Boundary.DisplayOptions("userMovieMenu");
                     choice = input.nextInt();
                     switch (choice) {
                         case 1:
+                        case 5:
                             user.SearchListMovie(input, choice);
                             break;
                         case 2:
@@ -83,13 +94,11 @@ public class Test_main {
                             break;
                         case 3:
                             System.out.println("Listing top 5 movies by ticket sales:");
-                            Boundary.DisplayMovies(user.getTopBySales());
+                            Boundary.DisplayMovie(user.getTopBySales());
                             break;
                         case 4:
                             System.out.println("Listing top 5 movies by overall reviewers’ ratings:");
-                            Boundary.DisplayMovies(user.getTopByRatings());
-                        case 5:
-                            user.SearchListMovie(input, choice);
+                            Boundary.DisplayMovie(user.getTopByRatings());
                             break;
                         case 0:
                             break;

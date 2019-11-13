@@ -65,7 +65,7 @@ public class BookingManager {
 
         DataManager.AddBooking(newBooking);
         cinema.addSeats(seatNO);
-        DataManager.UpdateShowTime(cinema);
+        DataManager.UpdateShowTime(cinema,false);
         return newBooking;
     }
 
