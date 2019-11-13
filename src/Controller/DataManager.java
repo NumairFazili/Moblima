@@ -292,7 +292,7 @@ public class DataManager {
         }
     }
 
-    public static Boolean UpdateShowTime(Cinema cinema) {
+    public static Boolean UpdateShowTime(Cinema cinema, Boolean delete) {
 
 
         File inputFile = new File(getLocation("Cinema"));
@@ -360,7 +360,7 @@ public class DataManager {
                     writer.append("\n");
                 }
 
-                if (Found) {
+                if (Found && !delete) {
                     writer.append(String.valueOf(cinema.getCinplexID()));
                     writer.append(",");
                     writer.append(String.valueOf(cinema.getCinemaID()));
