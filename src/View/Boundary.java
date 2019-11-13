@@ -10,7 +10,7 @@ public class Boundary {
 
 
     private static final String[] staffOptions={"Create movie listing","Update movie listing","Create cinema showtimes and the movies to be shown","Update cinema showtimes and the movies to be shown","Configure system settings"};
-    private static final String[] startoptions={"MOBLIMA Movie Booking System START", "Admin user","Movie-Goer"};
+    private static final String[] startOptions ={"MOBLIMA Movie Booking System START", "Admin user","Movie-Goer"};
     private static final String[] userMovieOptions={"Search movie", "View booking history","List the Top 5 ranking by ticket sales","List the Top 5 ranking by overall reviewers’ ratings","List all movies"};
     private static final String[] userOptions={"Existing User","New User","Guest User"};
 
@@ -53,7 +53,7 @@ public class Boundary {
                 str=staffOptions;
                 break;
             case "startMenu":
-                str=startoptions;
+                str= startOptions;
                 break;
 
             case "userMovieMenu":
