@@ -3,83 +3,58 @@ package Controller;
 import java.util.*;
 
 import Entity.*;
-import View.Boundary;
-import View.UserBoundary;
-
-import javax.xml.crypto.Data;
 
 /*
     createBookings
     getBookings
 */
 
-public class UserManager extends PersonManager{
+public class UserManager {
 
     User user;
 
-    //for existing user
-    public UserManager(User u){
-        user = u;
-        if(user == null){
-            throw new IllegalArgumentException("UserManager must have a user");
-        }
-    }
 
-    //for new user
-    public UserManager(String name, int age, String mobileNumber, String email){
-        User u = new User(name, age, mobileNumber, email, Arrays.asList());
-        u.save();
-        user = u;
-    }
+    public static User getUser(String name, String mobileNumber){
+        ArrayList<User> u_list = DataManager.LoadUser();
 
+        for (int i = 0; i < u_list.size(); i++){
 
-    public void createBooking(Cinema cinema, int seatNO){
-        Movie m = super.selectMovieByID(cinema.getMovieID());
-        BookingManager.init();
-
-        try{
-            if(user.getAge() >= m.getMinAge()){
-                Booking b = BookingManager.createBooking(user, cinema, seatNO);
-                user.addBooking(b);
-                user.save();    
-            }else{
-                System.out.println("Minimum age requirement not reached.");
-            }    
-        }catch (Exception e){
-            System.out.println(e.getMessage());
-        }
-    }
-
-    public List<Booking> getBookings(){
-        List<String> bID_list = user.getBookings();     //no need null check 
-        ArrayList<Booking> all_b = DataManager.LoadBookings();
-        ArrayList<Booking> bookings = new ArrayList<Booking>();
-        for(String bID: bID_list){
-            for(Booking b: all_b){
-                if (b.getBookingID().equals(bID)){
-                    bookings.add(b);
-                    break;
+            if (u_list.get(i).getName().equals(name)){
+                if(u_list.get(i).getmobileNumber().equals(mobileNumber)){
+                    return u_list.get(i);
+                }else{
+                    return null;
                 }
             }
         }
-        if(bookings.size() != bID_list.size()){
-            System.out.println("some bookings not found");
-        }
-        return bookings;
+        return null;
     }
 
-    public void reviewMovie(Movie m, int rating, String review){
-        m.addRating(rating);
-        m.addReview(review);    
+    public static User createUser(Scanner input){
+        //2. New User
+        //Get user input to create new user object
+        System.out.println("Creating New Account:");
+        System.out.println("Enter Username:");
+        String username = input.next();
+        System.out.println("Enter Age:");
+        int age = input.nextInt();
+        input.nextLine(); // Catch newline from nextInt
+        System.out.println("Enter Mobile number:");
+        String mobilenumber = input.nextLine();
+        System.out.println("Enter Email Address:");
+        String email = input.next();
+        //Create usermanager object and Save user into database
+        User myuser = new User(username, age, mobilenumber, email);
+        myuser.save();
+        return myuser;
+
     }
 
-    public static void main(String args[]){
-        UserManager um = new UserManager("James", 18, "jammy@gmail.com", "13572468");
-        System.out.println(um.user.getBookings());
+    public static User getGuestUser(){
+        User myuser = UserManager.getUser("guestaccount", "10101010");
+        return myuser;
     }
 
-    public void SearchListMovie(Scanner input, int choice){
-        UserBoundary.SearchListMovie(input, choice, this);
-    }
+
     
 }

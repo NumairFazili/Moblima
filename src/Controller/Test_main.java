@@ -1,10 +1,7 @@
 package Controller;
 
-import Entity.Cinema;
-import Entity.Movie;
-import Entity.Settings;
+import Entity.*;
 import View.Boundary;
-import View.UserBoundary;
 import javafx.beans.binding.ObjectExpression;
 import javafx.util.Pair;
 
@@ -14,35 +11,17 @@ import java.util.Scanner;
 
 public class Test_main {
     public static void main(String[] args) {
-        //Variables for admin to create movie
-        int movieid, minage;
-        double rating;
-
-
-        String username, password, inputsearch, mobilenumber, email;
         int choice = -1;
-        //variables for admin to create showtime
-        String showtime, status, cinemaclass, movietype, moviereview;
-        List<Integer> seats;
-
-        //Variables for admin to edit settings
-        List<String> holidays;
-        Settings mysettings;
-
-        Cinema mycinema;
-        ArrayList<Movie> mymovielist;
-        Movie mymovie;
-        UserManager myuser = null;
         Scanner input = new Scanner(System.in);
         while(true){
             if (Boundary.ModuleSelection(choice, input ) == 1) {
-                Pair<Integer, StaffManager> temp = (AuthManager.login(input));
+                Pair<Integer, Staff> temp = (AuthManager.Stafflogin(input));
                 int login_status = temp.getKey();
-                StaffManager staff = temp.getValue();
+                Staff staff = temp.getValue();
                 if(login_status==-1){continue;}
                 else{
                     do{
-                        Boundary.DisplayOptions("staffMenu");
+                        Boundary.Display_Staff_main();
                         choice = input.nextInt();
                         switch (choice){
                             case 1:
@@ -76,28 +55,23 @@ public class Test_main {
                 }
 
             }
-            else {
-                UserManager user = null;
-                Boundary.DisplayOptions("userMenu");
-                int user_login_choice = input.nextInt();
-                while (user == null ){
 
+            else {
+                User user = null;
+                while (user == null){
+                    int user_login_choice = Boundary.Display_User_Choice();
                     if(user_login_choice == 1){
                         user = AuthManager.UserLogin(input);
                     }
                     else if(user_login_choice == 2){
-                        user = UserBoundary.createUser(input);
+                        user = UserManager.createUser(input);
                     }
                     else if(user_login_choice == 3){
-                        user = AuthManager.getGuestUser();
-                    }
-                    else{
-                        System.out.println("Enter Valid Input");
-                        user_login_choice = input.nextInt();
+                        user = UserManager.getGuestUser();
                     }
                 }
                 do{
-                    Boundary.DisplayOptions("userMovieMenu");
+                    Boundary.Display_User_main();
                     choice = input.nextInt();
                     switch (choice) {
                         case 1:
@@ -109,11 +83,11 @@ public class Test_main {
                             break;
                         case 3:
                             System.out.println("Listing top 5 movies by ticket sales:");
-                            Boundary.DisplayMovie(user.getTopBySales());
+                            Boundary.DisplayMovies(user.getTopBySales());
                             break;
                         case 4:
                             System.out.println("Listing top 5 movies by overall reviewers’ ratings:");
-                            Boundary.DisplayMovie(user.getTopByRatings());
+                            Boundary.DisplayMovies(user.getTopByRatings());
                         case 5:
                             user.SearchListMovie(input, choice);
                             break;
@@ -127,6 +101,8 @@ public class Test_main {
 
                 System.out.println("User module");
             }
+
+
             System.out.println("Module Finished. ");
             break;
         }

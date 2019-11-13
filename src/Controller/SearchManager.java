@@ -14,7 +14,10 @@ package Controller;
 
 import Entity.Booking;
 import Entity.Movie;
+import Entity.Person;
+import Entity.User;
 import javafx.css.Size;
+import org.junit.Test;
 
 import java.lang.reflect.Array;
 import java.util.*;
@@ -37,12 +40,18 @@ public class SearchManager {
         }
         return map;
     }
+@Test
+public void test_1(){
+        User u = new User();
+        ArrayList<Movie> m =get_topN_byRating(u.getAllMovies());
+    System.out.println(Arrays.asList(m));
 
+}
     public static ArrayList<Movie> get_topN_byRating(ArrayList<Movie> movies){
         ArrayList<Movie> to_return = new ArrayList<Movie>();
 
             Collections.sort(movies,new SortByRating());
-            for(int i = 0;i<SIZE_OF_PQ;i++){
+            for(int i = 0;i<Math.min(SIZE_OF_PQ,movies.size());i++){
                 to_return.add(movies.get(i));
             }
 
@@ -57,16 +66,45 @@ public class SearchManager {
         }
         throw new NoSuchElementException("No such id found");
     }
+    @Test
+    public void test(){
+        User p = new User();
+        System.out.println(Arrays.asList(p.getAllMovies().get(1).getId()));
+        get_topN_bySale(p.getAllMovies(), DataManager.LoadBookings());
+    }
+    public static HashMap<Integer, Integer> sortByValue(HashMap<Integer, Integer> hm)
+    {
+        // Create a list from elements of HashMap
+        List<Map.Entry<Integer, Integer> > list =
+                new LinkedList<Map.Entry<Integer, Integer> >(hm.entrySet());
 
+        // Sort the list
+        Collections.sort(list, new Comparator<Map.Entry<Integer, Integer> >() {
+            public int compare(Map.Entry<Integer, Integer> o1,
+                               Map.Entry<Integer, Integer> o2)
+            {
+                return (o1.getValue()).compareTo(o2.getValue());
+            }
+        });
+
+        // put data from sorted list to hashmap
+        HashMap<Integer, Integer> temp = new LinkedHashMap<Integer, Integer>();
+        for (Map.Entry<Integer, Integer> aa : list) {
+            temp.put(aa.getKey(), aa.getValue());
+        }
+        return temp;
+    }
     public static ArrayList<Movie> get_topN_bySale(ArrayList<Movie> movies, ArrayList<Booking> bookings){
         ArrayList<Movie> to_return = new ArrayList<Movie>();
         HashMap<Integer,Integer> sales_map = SearchManager.calculateSales(bookings);
-        CompareMapByValue temp = new CompareMapByValue(sales_map);
-        TreeMap<Integer,Integer> sorted_map = new TreeMap<Integer, Integer>(temp);
-        sorted_map.putAll(sales_map);
+        System.out.println(Arrays.asList(sales_map));
+        Map<Integer, Integer> sorted_map = sortByValue(sales_map);
+        System.out.println(Arrays.asList(sorted_map));
+
         for(Map.Entry<Integer,Integer> entry: sorted_map.entrySet()){
+
             to_return.add(find_Movie_byID(movies,entry.getKey()));
-            if(to_return.size()>=5){
+            if(to_return.size()>=SIZE_OF_PQ){
                 break;
             }
         }
@@ -97,21 +135,4 @@ public class SearchManager {
 
      */
 
-}
-
-
-class CompareMapByValue implements Comparator<Integer>{
-    Map<Integer,Integer> base;
-    public CompareMapByValue(Map<Integer,Integer> base){
-        this.base = base;
-    }
-    @Override
-    public int compare(Integer a, Integer b){
-        if(base.get(a)>= base.get(b)){
-            return -1;
-        }
-        else{
-            return 1;
-        }
-    }
 }

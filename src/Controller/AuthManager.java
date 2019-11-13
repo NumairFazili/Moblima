@@ -1,5 +1,6 @@
 package Controller;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.List;
@@ -14,20 +15,20 @@ import javafx.util.Pair;
 
 public class AuthManager{
 
-    public static Pair<Integer,StaffManager> login(Scanner input){
+    public static Pair<Integer,Staff> Stafflogin(Scanner input){
         boolean adminauth = false;
-        StaffManager mystaff =new StaffManager(new Staff("NULL","NULL")) ;
+        Staff mystaff =new Staff("NULL","NULL") ;
         while(adminauth==false){
             System.out.println("ADMIN USER:");
             System.out.println("Please enter login details, Input -1 to go back:");
             System.out.println("Enter Username:");
             String username = input.next();
             if(username.equals("-1")){
-                return new Pair<Integer,StaffManager>(-1,mystaff);
+                return new Pair<Integer,Staff>(-1,mystaff);
             }
             System.out.println("Enter Password:");
             String password = input.next();
-            mystaff = AuthManager.getStaff(username,password);
+            mystaff = StaffManager.getStaff(username,password);
             if(mystaff != null){
                 System.out.println("Admin account successfully logged in!");
                 adminauth = true;
@@ -38,21 +39,24 @@ public class AuthManager{
             }
         }
 
-        return new Pair<Integer, StaffManager>(0,mystaff);
+        return new Pair<>(0, mystaff);
 
     }
 
-    public static UserManager UserLogin(Scanner input){//1. Existing User
-        while (true){
-            UserManager myuser;
-            System.out.println("Please enter login details:");
-            System.out.println("Enter Username:");
-            String username = input.next();
-            System.out.println("Enter Mobile number:");
-            String mobilenumber = input.next();
-            //Check with database if name and mobile number matches then create corresponding user object
-            myuser = AuthManager.getUser(username, mobilenumber);
-            if (myuser == null){
+    public static User UserLogin(Scanner input){//1. Existing User
+        System.out.println("Please enter login details:");
+        System.out.println("Enter Username:");
+        String username = input.next();
+        System.out.println("Enter Mobile number:");
+        String mobilenumber = input.next();
+        //Check with database if name and mobile number matches then create corresponding user object
+
+        try{User myuser = UserManager.getUser(username, mobilenumber);
+            System.out.println("User Login Successful!");
+            return myuser;}
+        catch ( Exception e){System.out.println("Error! Incorrect login details."); return null;}
+/*
+        if (flag  == false)
                 System.out.println("Error! Incorrect login details.");
                 System.out.println("1. Try again");
                 System.out.println("0. Go back");
@@ -66,55 +70,15 @@ public class AuthManager{
                 System.out.println("User Login Successful!");
                 return myuser;
             }
-        }
+
+ */
+
     }
 
-    public static StaffManager getStaff(String username, String password){
 
-        ArrayList<Staff> staffList = DataManager.Loadstaff();
 
-        for(Staff s: staffList){
-            if(s.getName().equals(username)){
-                if(s.checkPassword(password)){
-                    return new StaffManager(s);
-                }
-                return null;
-            }
-        }
-        return null;
-    }
 
-    public static UserManager getUser(String name, String mobileNumber){
-        ArrayList<User> u_list = DataManager.LoadUser();
 
-        for (User u: u_list){
 
-            if (u.getName().equals(name)){
-                if(u.getmobileNumber().equals(mobileNumber)){
-                    return new UserManager(u);
-                }else{
-                    return null;
-                }
-            }
-        }
-        return null;
-    }
-
-    public static UserManager getGuestUser(){
-        UserManager u = getUser("guestaccount", "10101010");
-        return u;
-    }
-
-    public static void main(String args[]){
-        UserManager u = AuthManager.getUser("test1", "1234567890");
-        if(u != null){
-            List<Booking> m_list = u.getBookings();
-            for (int i = 0; i < m_list.size(); i++){
-                System.out.println(m_list.get(i).getBookingID());
-            }
-        }else{
-            System.out.println("Error in authenticating existing user!");
-        }
-    }
 
 }
