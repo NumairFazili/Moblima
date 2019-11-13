@@ -2,15 +2,22 @@ package View;
 
 import Entity.Cinema;
 import Entity.Movie;
-//import sun.tools.tree.IntegerExpression;
 
 import java.util.*;
 
 public class Boundary {
+
+
+    private static final String[] staffOptions={"Create movie listing","Update movie listing","Create cinema showtimes and the movies to be shown","Update cinema showtimes and the movies to be shown","Configure system settings"};
+    private static final String[] startoptions={"MOBLIMA Movie Booking System START", "Admin user","Movie-Goer"};
+    private static final String[] userMovieOptions={"Search movie", "View booking history","List the Top 5 ranking by ticket sales","List the Top 5 ranking by overall reviewers’ ratings","List all movies"};
+    private static final String[] userOptions={"Existing User","New User","Guest User"};
+
+
     public static int ModuleSelection(int choice, Scanner input){
 
         while(choice != 1 && choice !=2 && choice !=0){
-            Boundary.DisplayBegin();
+            Boundary.DisplayOptions("startMenu");
 
             try{
                 choice = input.nextInt();
@@ -36,61 +43,41 @@ public class Boundary {
         return 0;
     }
 
-    public static int Display_User_Choice(){
-        System.out.println("MOVIE-GOER USER");
-        int choice = 0;
-        while (choice <= 0 || choice >= 4){
-            try{
-                Scanner in = new Scanner(System.in);
-                System.out.println("1. Existing User");
-                System.out.println("2. New User");
-                System.out.println("3. Proceed as Guest User");
-                choice = in.nextInt();
-                if (choice <= 0 || choice >= 4){
-                    System.out.println("Error! Please enter either 1, 2 or 3:");
-                }
-            }
-            catch(InputMismatchException e){
-                System.out.println("That is not an integer, please try again." );
-            }
+    public static void DisplayOptions(String input) {
+
+        String str[]={};
+
+        switch (input){
+            case "staffMenu":
+                str=staffOptions;
+                break;
+            case "startMenu":
+                str=startoptions;
+                break;
+
+            case "userMovieMenu":
+                str=userMovieOptions;
+                break;
+
+            case "userMenu":
+                str=userOptions;
+                break;
         }
-        return choice;
-    }
-
-    public static void Display_User_main(){
-        System.out.println("1. Search movie");
-        System.out.println("2. View booking history");
-        System.out.println("3. List the Top 5 ranking by ticket sales");
-        System.out.println("4. List the Top 5 ranking by overall reviewers’ ratings");
-        System.out.println("5. List all movies");
-        System.out.println("0. Exit the Program");
-    }
-
-    public static void Display_Staff_main(){
-        System.out.println("1. Create movie listing");
-        System.out.println("2. Update movie listing");
-        System.out.println("3. Remove movie listing");
-        System.out.println("4. Create cinema showtimes and the movies to be shown");
-        System.out.println("5. Update cinema showtimes and the movies to be shown");
-        System.out.println("6. Remove cinema showtimes and the movies to be shown");
-        System.out.println("7. Configure system settings");
-        System.out.println("0. Exit the Program");
-    }
-    public static void DisplayBegin(){
-        System.out.println("MOBLIMA Movie Booking System START:");
-        System.out.println("1. Admin user: ");
-        System.out.println("2. Movie-Goer: ");
-        System.out.println("0. to exit:");
-    }
-    public static void DisplayOptions(String[] str) {
-        int count = 0;
+        int count = 1;
         for (int i = 0; i < str.length; i++)
-            System.out.println(" " + String.valueOf(count++) + " : " + str[i]);
-        System.out.println(-1 + " : " + "Exit");
+            System.out.println(" " + count++ + " : " + str[i]);
+        System.out.println(" "+0+" : "+"Exit");
+    }
+
+    public static void main(String[] args) {
+
+        Boundary.DisplayOptions("staffMenu");
+
+
     }
 
 
-    public static void DisplayMovies(List<Movie> movieList){
+    public static void DisplayMovie(List<Movie> movieList){
         System.out.println("ID" + "\t" + "Title" + " \t" + "Rating(Avg)" + "\t" + "Language");
         for(Movie movie:movieList){
             System.out.println(movie.getId() + "\t" + movie.getName() + "\t" + movie.getAvgRating() + "\t" +movie.getLanguage());
@@ -124,12 +111,11 @@ public class Boundary {
         }
     }
 
-    public static void DisplaySeating(List<Integer> i_list) {
+    public static void DisplaySeating(Cinema cinema) {
         int value;
-        int rows=10;
-        int cols=10;
-//        List<Integer> seating_temp = cinema.getSeats();
-        List<Integer> seating_temp = i_list;
+        int rows=8;
+        int cols=8;
+        List<Integer> seating_temp = cinema.getSeats();
 
         System.out.print("   ");
         for(int i=0;i<cols;i++)
@@ -141,31 +127,19 @@ public class Boundary {
             for (int j=0;j<cols;j++){
                 value=i*cols + j;
 
-                int k;
-                for(k=0; k < seating_temp.size(); k++){
-                    if(seating_temp.get(k)==value){
-                        break;
-                    }
-                }
-
-                if(k == seating_temp.size()){
-                    System.out.print(" A ");
-                }else{
+                for(int k=0; k < seating_temp.size(); k++){
+                if(seating_temp.get(k)==value){
                     System.out.print(" X ");
                     seating_temp.remove(k);
+                }else{
+                    System.out.print(" A ");
                 }
-            }
+                }
+             }
             System.out.println();
-        }
+         }
     }
 
-    public static void main(String args[]){
-        List<Integer> i_list = new ArrayList<Integer>();
-        i_list.add(14);
-        i_list.add(3);
-        i_list.add(17);
-        DisplaySeating(i_list);
-    }    
 
 }
 

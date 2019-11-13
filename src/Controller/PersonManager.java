@@ -139,7 +139,7 @@ public class PersonManager{
         StaffManager s = AuthManager.getStaff("username", "123");
         if(s != null){
             List<Movie> c_list = s.getMovieByName("Avenger");
-            Boundary.DisplayMovies(c_list);
+            Boundary.DisplayMovie(c_list);
         }else{
             System.out.println("Not authorized");
         }

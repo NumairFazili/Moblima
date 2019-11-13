@@ -26,7 +26,7 @@ public class UserBoundary{
                 return;
             }
         }
-        Boundary.DisplayMovies(mymovielist);
+        Boundary.DisplayMovie(mymovielist);
         //Select movie by movie ID and print movie details – including reviews and ratings
         System.out.println("Enter ID of the movie to see the details: " );
         int inputsearchint = input.nextInt();
@@ -64,7 +64,7 @@ public class UserBoundary{
                 System.out.println("Choose index of the showtime to view seat availability: ");
                 inputsearchint = input.nextInt();
                 input.nextLine(); //Catch newline from .nextInt()
-                Boundary.DisplaySeating(((DataManager.LoadShowTimes(mymovie.getId()).get(inputsearchint))).getSeats());
+                Boundary.DisplaySeating(((DataManager.LoadShowTimes(mymovie.getId()).get(inputsearchint))));
                 choice = -1;
                 while (choice <= -1 || choice >= 3){
                     try{
