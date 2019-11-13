@@ -4,6 +4,7 @@ import Entity.Cinema;
 import Entity.Movie;
 //import sun.tools.tree.IntegerExpression;
 
+import java.lang.reflect.Array;
 import java.util.*;
 
 public class Boundary {
@@ -90,7 +91,7 @@ public class Boundary {
     }
 
 
-    public static void DisplayMovies(List<Movie> movieList){
+    public static void DisplayMovies(ArrayList<Movie> movieList){
         System.out.println("ID" + "\t" + "Title" + " \t" + "Rating(Avg)" + "\t" + "Language");
         for(Movie movie:movieList){
             System.out.println(movie.getId() + "\t" + movie.getName() + "\t" + movie.getAvgRating() + "\t" +movie.getLanguage());

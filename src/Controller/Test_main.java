@@ -1,8 +1,6 @@
 package Controller;
 
-import Entity.Cinema;
-import Entity.Movie;
-import Entity.Settings;
+import Entity.*;
 import View.Boundary;
 import javafx.beans.binding.ObjectExpression;
 import javafx.util.Pair;
@@ -13,31 +11,13 @@ import java.util.Scanner;
 
 public class Test_main {
     public static void main(String[] args) {
-        //Variables for admin to create movie
-        int movieid, minage;
-        double rating;
-
-
-        String username, password, inputsearch, mobilenumber, email;
         int choice = -1;
-        //variables for admin to create showtime
-        String showtime, status, cinemaclass, movietype, moviereview;
-        List<Integer> seats;
-
-        //Variables for admin to edit settings
-        List<String> holidays;
-        Settings mysettings;
-
-        Cinema mycinema;
-        ArrayList<Movie> mymovielist;
-        Movie mymovie;
-        UserManager myuser = null;
         Scanner input = new Scanner(System.in);
         while(true){
             if (Boundary.ModuleSelection(choice, input ) == 1) {
-                Pair<Integer, StaffManager> temp = (AuthManager.login(input));
+                Pair<Integer, Staff> temp = (AuthManager.Stafflogin(input));
                 int login_status = temp.getKey();
-                StaffManager staff = temp.getValue();
+                Staff staff = temp.getValue();
                 if(login_status==-1){continue;}
                 else{
                     do{
@@ -75,8 +55,9 @@ public class Test_main {
                 }
 
             }
+
             else {
-                UserManager user = null;
+                User user = null;
                 while (user == null){
                     int user_login_choice = Boundary.Display_User_Choice();
                     if(user_login_choice == 1){
@@ -120,6 +101,8 @@ public class Test_main {
 
                 System.out.println("User module");
             }
+
+
             System.out.println("Module Finished. ");
             break;
         }

@@ -512,8 +512,7 @@ public class DataManager {
             reader.readLine();
             while ((line = reader.readLine()) != null) {
                 String[] tokens = line.split(",");
-                List<String> bookings = Arrays.asList(tokens[4].split("\\."));
-                User user = new User(tokens[0], Integer.parseInt(tokens[1]), tokens[2], tokens[3],bookings);
+                User user = new User(tokens[0], Integer.parseInt(tokens[1]), tokens[2], tokens[3]);
                 userArrayList.add(user);
 
             }
@@ -555,8 +554,8 @@ public class DataManager {
             writer.append("Mobile");
             writer.append(",");
             writer.append("Email");
-            writer.append(",");
-            writer.append("Bookings");
+
+
             writer.append("\n");
 
 
@@ -584,7 +583,6 @@ public class DataManager {
                     writer.append(",");
                     writer.append(tokens[3]);
                     writer.append(",");
-                    writer.append(tokens[4]);
                     writer.append("\n");
                 }
                 if(Found || add){
@@ -595,8 +593,6 @@ public class DataManager {
                     writer.append(user.getmobileNumber());
                     writer.append(",");
                     writer.append(user.getEmail());
-                    writer.append(",");
-                    writer.append(Joiner.on('.').join(user.getBookings()));
                     writer.append("\n");
                     add=false;
                     Found=false;
