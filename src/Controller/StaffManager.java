@@ -370,7 +370,7 @@ public class StaffManager extends PersonManager{
         c.setMovieType(s);
     }
     public boolean saveShowTimeChanges(Cinema c){
-        return DataManager.UpdateShowTime(c);
+        return DataManager.UpdateShowTime(c,false);
     }
     public void deleteShowTime(Cinema c){
         c.setStatus("Ended");

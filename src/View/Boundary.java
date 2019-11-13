@@ -1,5 +1,6 @@
 package View;
 
+import Entity.Booking;
 import Entity.Cinema;
 import Entity.Movie;
 
@@ -93,6 +94,31 @@ public class Boundary {
         System.out.println("Cast\t\t: "+movie.getCast());
         System.out.println("Description\t\t: "+movie.getDescription());
     }
+
+
+    public static void DisplayBookings(List<Booking> bookings){
+        int count=0;
+        for(Booking booking:bookings){
+            System.out.println("Booking number: " + count++);
+            System.out.println("Customer Name : "+booking.getCustomerName());
+            System.out.println("Customer Type : "+booking.getCustomerType());
+            System.out.println("Booking ID : "+booking.getBookingID());
+            System.out.println("Cinplex ID : "+booking.getCinplexID());
+            System.out.println("Cinema ID : "+booking.getCinemaID());
+            System.out.println("Movie ID : "+booking.getMovieID());
+            System.out.println("Seat No : "+booking.getSeatNO());
+            System.out.println("Showtime : "+booking.getShowTime());
+            System.out.println("Booking Time : "+booking.getBookingTime());
+            System.out.println("Cinema Class : "+booking.getCinemaClass());
+            System.out.println("Movie Type : "+booking.getMovieType());
+            System.out.println("Email : "+booking.getEmail());
+            System.out.println();
+        }
+
+
+    }
+
+
 
     public static void DisplayMovieReviews(Movie movie){
         int reviewNum = movie.getRating().size() < movie.getReviews().size() ? movie.getRating().size() : movie.getReviews().size();
