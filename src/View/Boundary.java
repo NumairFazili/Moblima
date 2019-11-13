@@ -140,8 +140,8 @@ public class Boundary {
 
     public static void DisplaySeating(Cinema cinema) {
         int value;
-        int rows=8;
-        int cols=8;
+        int rows=10;
+        int cols=10;
         List<Integer> seating_temp = cinema.getSeats();
 
         System.out.print("   ");
@@ -153,14 +153,17 @@ public class Boundary {
             System.out.print(i+" ");
             for (int j=0;j<cols;j++){
                 value=i*cols + j;
+                int k;
+                for(k=0; k < seating_temp.size(); k++){
+                    if(seating_temp.get(k)==value)
+                        break;
+                    else if(k!=seating_temp.size()){
+                        System.out.print(" X ");
+                        seating_temp.remove(k);
+                    }
+                    else
+                        System.out.print(" A ");
 
-                for(int k=0; k < seating_temp.size(); k++){
-                if(seating_temp.get(k)==value){
-                    System.out.print(" X ");
-                    seating_temp.remove(k);
-                }else{
-                    System.out.print(" A ");
-                }
                 }
              }
             System.out.println();
