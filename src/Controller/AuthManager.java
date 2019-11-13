@@ -73,10 +73,10 @@ public class AuthManager{
 
         ArrayList<Staff> staffList = DataManager.Loadstaff();
 
-        for(int i = 0; i < staffList.size(); i++){
-            if(staffList.get(i).getName().equals(username)){
-                if(staffList.get(i).checkPassword(password)){
-                    return new StaffManager(staffList.get(i));
+        for(Staff s: staffList){
+            if(s.getName().equals(username)){
+                if(s.checkPassword(password)){
+                    return new StaffManager(s);
                 }
                 return null;
             }
@@ -87,11 +87,11 @@ public class AuthManager{
     public static UserManager getUser(String name, String mobileNumber){
         ArrayList<User> u_list = DataManager.LoadUser();
 
-        for (int i = 0; i < u_list.size(); i++){
+        for (User u: u_list){
 
-            if (u_list.get(i).getName().equals(name)){
-                if(u_list.get(i).getmobileNumber().equals(mobileNumber)){
-                    return new UserManager(u_list.get(i));
+            if (u.getName().equals(name)){
+                if(u.getmobileNumber().equals(mobileNumber)){
+                    return new UserManager(u);
                 }else{
                     return null;
                 }

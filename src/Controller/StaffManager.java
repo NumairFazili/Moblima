@@ -301,7 +301,6 @@ public class StaffManager extends PersonManager{
     }
 
     public void createNewMovie(int id,String name,String Language,List<Integer> rating,String runTime,List<String> cast,String Description,String Director, List<String> comments, int minAge){
-
         Movie m = new Movie(id, name, Language, rating, runTime, cast, Description, Director, comments, minAge);
         DataManager.SaveMovies(m);
     }
@@ -320,7 +319,9 @@ public class StaffManager extends PersonManager{
     public void updateMovieName(Movie m, String s){
         m.setName(s);
     }
-    public void updateMovieLanguage(Movie m, String s){ m.setLanguage(s); }
+    public void updateMovieLanguage(Movie m, String s){
+        m.setLanguage(s); 
+    }
     public void updateMovieRunTime(Movie m, String s){
         m.setRunTime(s);
     }
@@ -372,7 +373,7 @@ public class StaffManager extends PersonManager{
         return DataManager.UpdateShowTime(c);
     }
     public void deleteShowTime(Cinema c){
-        c.setStatus("ended");
+        c.setStatus("Ended");
     }
 
 

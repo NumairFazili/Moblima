@@ -25,19 +25,21 @@ public class PersonManager{
 
     public ArrayList<Movie> getAllMovies(){
         ArrayList<Movie> m_list = DataManager.LoadMovies("");
+        ArrayList<Movie> result_list = new ArrayList<Movie>();
         if(m_list != null){
             return m_list;
         }else{
-            return new ArrayList<Movie>();
+            return result_list;
         }
     }
 
     public ArrayList<Movie> getMovieByName(String s){
         ArrayList<Movie> m_list =  DataManager.LoadMovies(s);
+        ArrayList<Movie> result_list = new ArrayList<Movie>();
         if(m_list != null){
             return m_list;
         }else{
-            return new ArrayList<Movie>();
+            return result_list;
         }
     }
 
@@ -79,9 +81,9 @@ public class PersonManager{
 
     public ArrayList<Movie> getTopBySales(){
         ArrayList<Booking> b_list = DataManager.LoadBookings();
+        ArrayList<Movie> result_list = new ArrayList<Movie>();
         if (b_list != null){
             ArrayList<Movie> m_list = getAllMovies();
-            ArrayList<Movie> result_list = new ArrayList<Movie>();
             if(m_list.size() != 0){
                 try{
                     result_list = SearchManager.get_topN_bySale(getAllMovies(), DataManager.LoadBookings());
@@ -90,7 +92,7 @@ public class PersonManager{
                 }
             }
         }
-        return new ArrayList<Movie>();
+        return result_list;
     }
  
     public List<Cinema> getAllShowTimes(){
@@ -119,7 +121,7 @@ public class PersonManager{
         return return_list;
     }
 
-    public static List<Cinema> getShowTimesByMovie(int movieID){
+    public List<Cinema> getShowTimesByMovie(int movieID){
         List<Cinema> c_list = DataManager.LoadShowTimes(movieID);
         List<Cinema> result_list = new ArrayList<Cinema>();
         if(c_list != null){

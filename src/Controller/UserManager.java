@@ -36,28 +36,32 @@ public class UserManager extends PersonManager{
         Movie m = super.selectMovieByID(cinema.getMovieID());
         BookingManager.init();
 
-        if(user.getAge() >= m.getMinAge()){
-            Booking b = BookingManager.createBooking(user, cinema, seatNO);
-            user.addBooking(b);
-            user.save();    
-        }else{
-            System.out.println("Minimum age requirement not reached.");
+        try{
+            if(user.getAge() >= m.getMinAge()){
+                Booking b = BookingManager.createBooking(user, cinema, seatNO);
+                user.addBooking(b);
+                user.save();    
+            }else{
+                System.out.println("Minimum age requirement not reached.");
+            }    
+        }catch (Exception e){
+            System.out.println(e.getMessage());
         }
     }
 
     public List<Booking> getBookings(){
-        List<String> b_list = user.getBookings();
+        List<String> bID_list = user.getBookings();     //no need null check 
         ArrayList<Booking> all_b = DataManager.LoadBookings();
         ArrayList<Booking> bookings = new ArrayList<Booking>();
-        for(int i = 0; i < b_list.size(); i++){
-            for(int j = 0; j < all_b.size(); j++){
-                if (all_b.get(j).getBookingID().equals(b_list.get(i))){
-                    bookings.add(all_b.get(j));
+        for(String bID: bID_list){
+            for(Booking b: all_b){
+                if (b.getBookingID().equals(bID)){
+                    bookings.add(b);
                     break;
                 }
             }
         }
-        if(bookings.size() != b_list.size()){
+        if(bookings.size() != bID_list.size()){
             System.out.println("some bookings not found");
         }
         return bookings;
@@ -65,7 +69,7 @@ public class UserManager extends PersonManager{
 
     public void reviewMovie(Movie m, int rating, String review){
         m.addRating(rating);
-        m.addReview(review);
+        m.addReview(review);    
     }
 
     public static void main(String args[]){
