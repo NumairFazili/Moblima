@@ -8,7 +8,7 @@ import java.util.*;
 
 public class Staff extends Person {
     String password;
-    
+
     public Staff(String name, String password){
         this.setName_Staff(name);         //using base class method
         this.password = password;

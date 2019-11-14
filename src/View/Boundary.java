@@ -12,7 +12,7 @@ public class Boundary {
 
 
     private static final String[] staffOptions={"Create movie listing","Update movie listing","Create cinema showtimes and the movies to be shown","Update cinema showtimes and the movies to be shown","Configure system settings"};
-    private static final String[] startOptions ={"MOBLIMA Movie Booking System START", "Admin user","Movie-Goer"};
+    private static final String[] startOptions ={"Admin user","Movie-Goer"};
     private static final String[] userMovieOptions={"Search movie", "View booking history","List the Top 5 ranking by ticket sales","List the Top 5 ranking by overall reviewers’ ratings","List all movies"};
     private static final String[] userOptions={"Existing User","New User","Guest User"};
 
@@ -20,6 +20,7 @@ public class Boundary {
     public static int ModuleSelection(int choice, Scanner input){
 
         while(choice != 1 && choice !=2 && choice !=0){
+            System.out.println("MOBLIMA Movie Booking System ");
             Boundary.DisplayOptions("startMenu");
 
             try{
@@ -144,8 +145,8 @@ public class Boundary {
     }
     public static void DisplaySeating(Cinema cinema) {
         int value;
-        int rows=8;
-        int cols=8;
+        int rows=10;
+        int cols=10;
         List<Integer> seating_temp = cinema.getSeats();
 
         System.out.print("   ");
@@ -157,14 +158,17 @@ public class Boundary {
             System.out.print(i+" ");
             for (int j=0;j<cols;j++){
                 value=i*cols + j;
+                int k;
+                for(k=0; k < seating_temp.size(); k++){
+                    if(seating_temp.get(k)==value)
+                        break;
+                    else if(k!=seating_temp.size()){
+                        System.out.print(" X ");
+                        seating_temp.remove(k);
+                    }
+                    else
+                        System.out.print(" A ");
 
-                for(int k=0; k < seating_temp.size(); k++){
-                if(seating_temp.get(k)==value){
-                    System.out.print(" X ");
-                    seating_temp.remove(k);
-                }else{
-                    System.out.print(" A ");
-                }
                 }
              }
             System.out.println();
