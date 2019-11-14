@@ -22,12 +22,12 @@ public class UserManager {
 
         try{User myuser = AuthManager.getUser(username, mobilenumber);
             if(myuser!=null)
-                System.out.println("User Login Successful!");
+                System.out.println("User Login Successful!\n");
             else{
-                System.out.println("Error! Incorrect login details.");
+                System.out.println("Error! Incorrect login details.\n");
             }
             return myuser;}
-        catch ( Exception e){System.out.println("Error! Incorrect login details."); return null;}
+        catch ( Exception e){System.out.println("Error! Incorrect login details.\n"); return null;}
     }
 
 
@@ -44,6 +44,7 @@ public class UserManager {
         String mobilenumber = input.nextLine();
         System.out.println("Enter Email Address:");
         String email = input.next();
+        System.out.println();
         //Create usermanager object and Save user into database
         User myuser = new User(username, age, mobilenumber, email);
         myuser.save();
@@ -53,8 +54,8 @@ public class UserManager {
 
 
     public String getType(int age){
-        if(age<18){
-            return "student";
+        if(age<15){
+            return "Child";
         }
         else if(age>65){
             return "senior citizen";
@@ -63,12 +64,4 @@ public class UserManager {
             return "regular";
         }
     }
-
-
-    public static User getGuestUser(){
-        User myuser = AuthManager.getUser("guestaccount", "10101010");
-        return myuser;
-    }
-
-
 }

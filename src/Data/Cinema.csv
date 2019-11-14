@@ -1,4 +1,4 @@
-Cineplex_ID,Cinema_ID,Movie ID,ShowTime,Status,Class,Seats,MovieType
+Cineplex_ID,Cinema_ID,Movie ID,ShowTime,Class,Seats,MovieType
 1,1,1001,7/10/2019 16:30,Silver,21.20.44.13.2.0,3D
 1,1,1001,7/10/2019 18:30,Silver,21.20.44.13.2.0.1.0.10.3.11.5.4,2D
 1,1,1001,8/10/2019 16:30,Silver,21.20.44.13.2.1,3D
@@ -16,4 +16,4 @@ Cineplex_ID,Cinema_ID,Movie ID,ShowTime,Status,Class,Seats,MovieType
 3,1,1002,7/10/2019 18:30,Platinum,,2D
 3,2,1002,13/10/2019 22:15,Silver,,4D
 3,2,1001,23/10/2019 17:30,Silver,,3D
-3,1,1009,30/11/2019 12:30,Silver,0,4D
+3,1,1009,30/11/2019 12:30,Silver,0,3D

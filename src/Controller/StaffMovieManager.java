@@ -19,32 +19,6 @@ public class StaffMovieManager extends MovieManager {
         staff=new Staff();
     }
 
-    public void removeMovieListing(Scanner input){
-        //List all movies
-        Boundary.DisplayMovie(movieManager.getAllMovies());
-        //Select movie to remove by movieID
-        System.out.println("Enter ID of the movie to remove: " );
-        System.out.println("Otherwise enter -2 to go back" );
-
-        int inputsearchint = input.nextInt();
-        if (inputsearchint == -2){
-            //Do nothing
-        }
-        else{
-            try {
-                if (this.deleteMovie(SearchManager.find_Movie_byID(this.getAllMovies(), inputsearchint)) == Boolean.TRUE) {
-                    System.out.println("Movie listing successfully removed!");
-                }
-            }
-            catch (NoSuchElementException e){
-                System.out.println("Error movie listing failed to be removed!");
-            }
-        }
-    }
-    public void createNewMovie(int id, String name, String Language, List<Integer> rating, String runTime, List<String> cast, String Synopsis, String Director, List<String> comments, String status){
-        Movie m = new Movie(id, name, Language, rating, runTime, cast, Synopsis, Director, comments, status);
-        DataManager.SaveMovies(m);
-    }
 
     public void UpdateMovie(Scanner input){
         //List all movies
@@ -69,13 +43,7 @@ public class StaffMovieManager extends MovieManager {
             while (choice <= -1 || choice >= 8){
                 try{
                     Scanner in = new Scanner(System.in);
-                    System.out.println("1. movie name");
-                    System.out.println("2. language");
-                    System.out.println("3. runtime");
-                    System.out.println("4. Cast member");
-                    System.out.println("5. Synopsis");
-                    System.out.println("6. director");
-                    System.out.println("7. Status");
+                    Boundary.DisplayOptions("moviesMenu");
                     System.out.println("0. Done");
                     choice = in.nextInt();
                     in.nextLine();//catch newline
@@ -131,10 +99,10 @@ public class StaffMovieManager extends MovieManager {
         }
         //Save edited movie object to database
         if (this.saveMovieChanges(mymovie) == Boolean.TRUE){
-            System.out.println("Movie listing successfully updated!");
+            System.out.println("Movie listing successfully updated!\n");
         }
         else{
-            System.out.println("Error movie listing failed to be updated!");
+            System.out.println("Error movie listing failed to be updated!\n");
         }
 
     }
@@ -156,44 +124,18 @@ public class StaffMovieManager extends MovieManager {
         String Synopsis = input.nextLine();
         System.out.println("Enter director:");
         String director = input.nextLine();
-        System.out.println("Enter Minimum age:");
+        System.out.println("Enter Status:");
         String status = input.next();
         input.nextLine();
-        this.createNewMovie(movieid, moviename, language, Arrays.asList(), runtime, cast, Synopsis, director, Arrays.asList(), status);
+        this.createNewMovie(movieid, moviename, language, Arrays.asList(), runtime, cast, director,Synopsis,Arrays.asList(), status);
 
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    public void createNewMovie(int id, String name, String Language, List<Integer> rating, String runTime, List<String> cast, String Synopsis, String Director, List<String> reviews, String status){
+        Movie m = new Movie(id, name, Language, rating, runTime, cast, Director,Synopsis,reviews, status);
+        DataManager.SaveMovies(m);
+        System.out.println("Movie Created Successfully\n");
+    }
 
     public void updateMovieName(Movie m, String s){
         m.setName(s);
@@ -212,12 +154,7 @@ public class StaffMovieManager extends MovieManager {
         m.setCast(cast);
     }
     public void updateMovieStatus(Movie m, String status){ m.setStatus(status); }
-    public boolean saveMovieChanges(Movie m){
-        return DataManager.manageMovie(m, false);
-    }
-    public boolean deleteMovie(Movie m){
-        return DataManager.manageMovie(m, true);
-    }
+    public boolean saveMovieChanges(Movie m){ return DataManager.manageMovie(m);}
 
 
 

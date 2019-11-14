@@ -38,24 +38,21 @@ public class Main {
                                 staffMovieManager.UpdateMovie(input);
                                 break;
                             case 3:
-                                staffMovieManager.removeMovieListing(input);
-                                break;
-                            case 4:
                                 staffShowTimeManager.createCinemaShowtime(input);
                                 break;
-                            case 5:
+                            case 4:
                                 staffShowTimeManager.updateCinemaShowtime(input);
                                 break;
-                            case 6:
+                            case 5:
                                 staffShowTimeManager.removeCinemaShowtime(input);
                                 break;
-                            case 7:
+                            case 6:
                                 settingsManager.configureSettings(input);
                                 break;
                             case 0:
                                 break;
                             default:
-                                System.out.println("Error! Please enter either 0, 1, 2, 3, 4, 5, 6 or 7:");
+                                System.out.println("Error! Please enter either 0, 1, 2, 3, 4, 5, or 6:");
                         }
                     }while(choice != 0);
 

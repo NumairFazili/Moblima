@@ -58,23 +58,14 @@ public class Movie {
     }
     
     public double getAvgRating(){
-        if(ratings != null){
             if(ratings.size()> 1){
                 avgRating = 0;
-                for(int i = 0; i < ratings.size(); i++){
+                for(int i = 0; i < ratings.size(); i++)
                     avgRating += ratings.get(i);
-                }
-                avgRating /= ratings.size();
-                return avgRating;    
+                return avgRating /= ratings.size();
             }
-        }
         return -1;
     }
-
-    public void setAvgRating(double avgRating){
-        this.avgRating = avgRating;
-    }
-
 
     public String getRunTime() {
         return runTime;

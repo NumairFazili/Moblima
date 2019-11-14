@@ -11,8 +11,6 @@ import java.util.Scanner;
 
 public class SettingsManager {
 
-    Staff staff;
-
     public  SettingsManager(){
     }
 

@@ -58,7 +58,7 @@ public class DataManager {
     }
 
 
-    public static Boolean manageMovie(Movie movie,Boolean delete){
+    public static Boolean manageMovie(Movie movie){
 
         File inputFile = new File(getLocation("Movie"));
         File tempFile = new File(getLocation("Temp"));
@@ -132,7 +132,7 @@ public class DataManager {
                     writer.append("\n");
                 }
 
-                if (Found && !delete) {
+                if (Found) {
                     writer.append(String.valueOf(movie.getId()));
                     writer.append(",");
                     writer.append(movie.getName());
@@ -317,8 +317,6 @@ public class DataManager {
             writer.append(",");
             writer.append("ShowTime");
             writer.append(",");
-            writer.append("Status");
-            writer.append(",");
             writer.append("Class");
             writer.append(",");
             writer.append("Seats");
@@ -398,6 +396,116 @@ public class DataManager {
 
 
     }
+
+
+    public static Boolean UpdateShowTime(Cinema cinema1, Cinema cinema2) {
+
+
+        File inputFile = new File(getLocation("Cinema"));
+        File tempFile = new File(getLocation("Temp"));
+
+        BufferedReader reader = null;
+        BufferedWriter writer = null;
+        try {
+            reader = new BufferedReader(new FileReader(inputFile));
+            writer = new BufferedWriter(new FileWriter(tempFile));
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
+        try {
+            writer.append("Cineplex_ID");
+            writer.append(",");
+            writer.append("Cinema_ID");
+            writer.append(",");
+            writer.append("Movie ID");
+            writer.append(",");
+            writer.append("ShowTime");
+            writer.append(",");
+            writer.append("Class");
+            writer.append(",");
+            writer.append("Seats");
+            writer.append(",");
+            writer.append("MovieType");
+            writer.append("\n");
+
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        Boolean Found = false;
+        String line;
+        try {
+            reader.readLine();
+            while ((line = reader.readLine()) != null) {
+                String[] tokens = line.split(",");
+
+                if ((tokens[0].equals(String.valueOf(cinema1.getCinplexID()))) && (tokens[1].equals(String.valueOf(cinema1.getCinemaID()))) && (tokens[2].equals(String.valueOf(cinema1.getMovieID()))) && (tokens[3].contains(String.valueOf(cinema1.getTime())))) {
+                    Found = true;
+                } else {
+                    writer.append(tokens[0]);
+                    writer.append(",");
+                    writer.append(tokens[1]);
+                    writer.append(",");
+                    writer.append(tokens[2]);
+                    writer.append(",");
+                    writer.append(tokens[3]);
+                    writer.append(",");
+                    writer.append(tokens[4]);
+                    writer.append(",");
+                    writer.append(tokens[5]);
+                    writer.append(",");
+                    writer.append(tokens[6]);
+                    writer.append("\n");
+                }
+
+                if (Found) {
+                    writer.append(String.valueOf(cinema2.getCinplexID()));
+                    writer.append(",");
+                    writer.append(String.valueOf(cinema2.getCinemaID()));
+                    writer.append(",");
+                    writer.append(String.valueOf(cinema2.getMovieID()));
+                    writer.append(",");
+                    writer.append(String.valueOf(cinema2.getTime()));
+                    writer.append(",");
+                    writer.append(cinema2.getCinemaClass());
+                    writer.append(",");
+                    writer.append(Joiner.on('.').join(cinema2.getSeats()));
+                    writer.append(",");
+                    writer.append(cinema2.getMovieType());
+                    writer.append("\n");
+                    Found = false;
+
+                }
+
+            }
+
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        try {
+            //
+            writer.close();
+            reader.close();
+
+
+            Files.delete(Paths.get(getLocation("Cinema")));
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        Boolean success = tempFile.renameTo(new File(getLocation("Cinema")));
+        return success;
+
+
+    }
+
+
 
 
     public static ArrayList<Booking> LoadBookings() {
@@ -760,17 +868,9 @@ public class DataManager {
         return staffArrayList;
     }
 
-
-    public static void main(String[] args) {
-
-//       Cinema cinema=new Cinema(2,2,1004,"11/10/2019 17:30","Coming Soon",Arrays.asList(1,1,0,0)));
-//        UpdateShowTime()
-////
-
-
-    }
 }
-
+//       Cinema cinema1=new Cinema(3,1,1009,"30/11/2019 12:30","Silver",Arrays.asList(1,1,0,0),"3D");
+//        Cinema cinema2=new Cinema(2,1,1009,"30/11/2019 12:30","Silver",Arrays.asList(1,1,0,0),"3D");
 //    ArrayList<Movie> test=LoadMovies("");
 //
 //        for(Movie movie:test)

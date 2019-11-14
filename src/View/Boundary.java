@@ -8,11 +8,13 @@ import java.util.*;
 public class Boundary {
 
 
-    private static final String[] staffOptions={"Create movie listing","Update movie listing","Delete movie listing","Create cinema showtimes and the movies to be shown","Update cinema showtimes and the movies to be shown","Remove cinema showtimes and the movies to be shown","Configure system settings"};
+    private static final String[] staffOptions={"Create movie listing","Update movie listing","Create cinema showtimes and the movies to be shown","Update cinema showtimes and the movies to be shown","Remove cinema showtimes and the movies to be shown","Configure system settings"};
     private static final String[] startOptions ={"Admin user","Movie-Goer"};
     private static final String[] userMovieOptions={"Search movie", "View booking history","List the Top 5 ranking by ticket sales","List the Top 5 ranking by overall reviewers’ ratings","List all movies"};
-    private static final String[] userOptions={"Existing User","New User","Guest User"};
+    private static final String[] userOptions={"Existing User","New User"};
     private static final String[] settingsOptions={"Base price","Child price","Senior price","Holiday price","Silver price","Gold price","Platinum price","Holidays"};
+    private static final String[] movieOptions={"movie name","language","runtime","Cast member","Synopsis","director","Status"};
+    private static final String[] cinemaOptions={"Cineplex_ID","Cinema_ID","Movie_ID","ShowTime","class","MovieType"};
 
 
     public static int ModuleSelection(int choice, Scanner input){
@@ -67,12 +69,18 @@ public class Boundary {
             case "settingsMenu":
                 str=settingsOptions;
                 break;
+            case "moviesMenu":
+                str=movieOptions;
+                break;
+            case "cinemaMenu":
+                str=cinemaOptions;
+                break;
         }
         int count = 1;
         for (int i = 0; i < str.length; i++)
             System.out.println(" " + count++ + " : " + str[i]);
 
-        if(str.equals("settingsMenu"))
+        if(str.equals("settingsMenu") || str.equals("moviesMenu") || str.equals("cinemaMenu"))
             System.out.println(" "+0+" : "+"Done");
         else
             System.out.println(" "+0+" : "+"Exit");
@@ -95,7 +103,7 @@ public class Boundary {
 
     public static void DisplayMovie(Movie movie){
 
-        System.out.format("%-10s   %-20s   %-7s   %-10s  %-15s   %-10s  %-80s  %-30s  %n","Movie ID","Movie Name","Rating",
+        System.out.format("%-10s   %-20s   %-7s   %-10s  %-15s   %-10s         %-80s  %-30s  %n","Movie ID","Movie Name","Rating",
                 "Language","Status","Director","Cast","Synopsis");
 
         String rating;
@@ -145,8 +153,11 @@ public class Boundary {
         int reviewNum = movie.getRating().size() < movie.getReviews().size() ? movie.getRating().size() : movie.getReviews().size();
         List<Integer> rating_list = movie.getRating();
         List<String> review_list = movie.getReviews();
+
+        System.out.format("%-7s %-20s %n","Rating","Review");
+
         for(int i = 0; i < reviewNum; i++)
-            System.out.println("Rating:"+rating_list.get(i) + " | Review: "+review_list.get(i));
+            System.out.format("%-1s/5    %-20s  %n",rating_list.get(i),review_list.get(i));
         System.out.println();
 
     }

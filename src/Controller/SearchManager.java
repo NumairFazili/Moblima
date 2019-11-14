@@ -26,9 +26,6 @@ public class SearchManager {
     public SearchManager(){}
 
     public static HashMap<Integer,Integer> calculateSales(ArrayList<Booking> bookings){
-        //map: m[Movie_ID] = Sales
-        //if Movie_ID not found, m[Movie_ID] = 1;
-        //else m[Movie_ID]++;
 
         HashMap<Integer,Integer> map = new HashMap<Integer, Integer>();
         for(int i = 0;i<bookings.size();i++){
@@ -38,6 +35,8 @@ public class SearchManager {
         }
         return map;
     }
+
+
     public static ArrayList<Movie> get_topN_byRating(ArrayList<Movie> movies){
         ArrayList<Movie> to_return = new ArrayList<Movie>();
             Collections.sort(movies,new SortByRating());
@@ -104,16 +103,4 @@ public class SearchManager {
         return to_return;
 
     }
-    /*
-    public static void main(String args[]){
-        ArrayList<Booking> ar = DataManager.LoadBookings();
-        for(int i = 0 ;i<ar.size();i++){
-            System.out.println(ar.get(i).toString());
-            System.out.println(ar.get(i).getBookingID());
-        }
-        System.out.println(getBookingHistory("Test User","123456789",ar))
-    }
-
-     */
-
 }

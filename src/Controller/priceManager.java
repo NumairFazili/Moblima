@@ -14,7 +14,6 @@ public class priceManager {
 
     private int age;
     private Cinema cinema;
-
     private Settings settings;
 
 
@@ -84,11 +83,4 @@ public class priceManager {
         return settings.getBasePrice() + discount;
 
     }
-
-//    public static void main(String[] args) {
-//        Cinema cinema=new Cinema(1,1,1005,"13/11/2019 16:30","Now Showing","Silver", Arrays.asList(),"3D");
-//        priceManager priceManager=new priceManager(21,cinema);
-//
-//        System.out.println(priceManager.getPrice());
-//    }
 }
