@@ -2,6 +2,7 @@ package View;
 
 import Controller.DataManager;
 import Entity.*;
+import org.junit.jupiter.api.Test;
 //import org.junit.Test;
 
 import java.util.*;
@@ -111,24 +112,13 @@ public class Boundary {
 
     public static void DisplayBookings(List<Booking> bookings){
         int count=0;
-        for(Booking booking:bookings){
-            System.out.println("Booking number: " + count++);
-            System.out.println("Customer Name : "+booking.getCustomerName());
-            System.out.println("Customer Type : "+booking.getCustomerType());
-            System.out.println("Booking ID : "+booking.getBookingID());
-            System.out.println("Cinplex ID : "+booking.getCinplexID());
-            System.out.println("Cinema ID : "+booking.getCinemaID());
-            System.out.println("Movie ID : "+booking.getMovieID());
-            System.out.println("Seat No : "+booking.getSeatNO());
-            System.out.println("Showtime : "+booking.getShowTime());
-            System.out.println("Booking Time : "+booking.getBookingTime());
-            System.out.println("Cinema Class : "+booking.getCinemaClass());
-            System.out.println("Movie Type : "+booking.getMovieType());
-            System.out.println("Email : "+booking.getEmail());
-            System.out.println();
-        }
+        System.out.format("%-20s   %-20s   %-10s   %-15s  %-15s   %-10s %-4s   %-20s   %-20s   %-15s  %-20s  %-20s  %n","Customer Name","Customer Type","Booking ID",
+                            "Cinplex ID","Cinema ID ","Movie ID","Seat","Showtime","Booking Time","Cinema Class","Movie Type","Email");
 
-
+        for(Booking booking:bookings)
+            System.out.format("%-20s   %-20s   %-10s   %-15d   %-15d   %-10d %-4d   %-20s   %-20s   %-15s  %-20s  %-20s  %n",booking.getCustomerName(),
+                    booking.getCustomerType(),booking.getBookingID(),booking.getCinplexID(),booking.getCinemaID(),booking.getMovieID(),booking.getSeatNO(),
+                    booking.getShowTime(),booking.getBookingTime(),booking.getCinemaClass(),booking.getMovieType(),booking.getEmail());
     }
 
 
@@ -144,12 +134,26 @@ public class Boundary {
 
     public static void DisplayCinemas(List<Cinema> cinemas){
         int count=0;
+
+        System.out.println("%-5s %-11s %-9s %-4s,");
+        System.out.println("index"+"\t"+"CinePlex ID" + "\t" + "Cinema ID" + "\t" + "Time" + "\t" + "Status" +"\t"+"Class"+"\t"+"Type");
+
         System.out.format("%-6s %-12s %-10s %-20s %-13s %-9s %-5s %n", "index", "CinePlex ID", "Cinema ID", "Time", "Status", "Class", "Type");
         //System.out.println("index"+"\t"+"CinePlex ID" + "\t" + "Cinema ID" + "\t" + "Time" + "\t" + "Status" +"\t"+"Class"+"\t"+"Type");
+
         for(Cinema cinema:cinemas){
             //System.out.println(count++ +"\t"+cinema.getCinplexID() + "\t" + cinema.getCinemaID() + "\t" + cinema.getTime() + "\t" +cinema.getStatus() + "\t" +cinema.getCinemaClass() + "\t" + cinema.getMovieType());
             System.out.format("%-6d %-12d %-10d %-20s %-13s %-9s %-5s %n", count++, cinema.getCinplexID(), cinema.getCinemaID(), cinema.getTime(), cinema.getStatus(), cinema.getCinemaClass(), cinema.getMovieType());
         }
+    }
+
+    @Test
+    public void t1(){
+
+        Staff staff = new Staff();
+        User user=new User();
+        DisplayBookings(DataManager.LoadBookings());
+
     }
     public static void DisplaySeating(Cinema cinema) {
         int value;
