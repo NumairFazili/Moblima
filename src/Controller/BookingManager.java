@@ -55,8 +55,12 @@ public class BookingManager {
 
 
         Movie m = movieManager.selectMovieByID(cinema.getMovieID());
-        BookingManager.init();
+        if(m.getStatus().equals("End of Show")){
+            System.out.println("The movie has Ended");
+            return;
+        }
 
+        BookingManager.init();
         Booking booking=this.generateBooking(user, cinema, seatNO);
         Boundary.DisplayBookings(Arrays.asList(booking));
         System.out.println("Press 1 to confirm Booking  0 to Cancel");

@@ -44,7 +44,7 @@ public class DataManager {
                     List<String> temp= Arrays.asList(tokens[3].split("\\."));
                     List<Integer> ratings=new ArrayList<>();
                     if(temp.size()>1) for (String s : temp) ratings.add(Integer.valueOf(s));
-                    Movie movie = new Movie(Integer.parseInt(tokens[0]), tokens[1], tokens[2],ratings, tokens[4], cast, tokens[6], tokens[7],reviews,Integer.parseInt(tokens[9]));
+                    Movie movie = new Movie(Integer.parseInt(tokens[0]), tokens[1], tokens[2],ratings, tokens[4], cast, tokens[6], tokens[7],reviews,tokens[9]);
                     movieArrayList.add(movie);
                 }
             }
@@ -89,11 +89,11 @@ public class DataManager {
             writer.append(",");
             writer.append("Director");
             writer.append(",");
-            writer.append("Description");
+            writer.append("Synopsis");
             writer.append(",");
             writer.append("Reviews");
             writer.append(",");
-            writer.append("minAge");
+            writer.append("Status");
             writer.append("\n");
 
 
@@ -147,11 +147,11 @@ public class DataManager {
                     writer.append(",");
                     writer.append(movie.getDirector());
                     writer.append(",");
-                    writer.append(movie.getDescription());
+                    writer.append(movie.getSynopsis());
                     writer.append(",");
                     writer.append(String.join(".", movie.getReviews()));
                     writer.append(",");
-                    writer.append(String.valueOf(movie.getMinAge()));
+                    writer.append(movie.getStatus());
                     writer.append("\n");
                     Found = false;
 
@@ -203,13 +203,13 @@ public class DataManager {
             writer.append(",");
             writer.append(String.join(".", movie.getCast()));
             writer.append(",");
-            writer.append(movie.getDescription());
+            writer.append(movie.getSynopsis());
             writer.append(",");
             writer.append(movie.getDirector());
             writer.append(",");
             writer.append(String.join(".", movie.getReviews()));
             writer.append(",");
-            writer.append(String.valueOf(movie.getMinAge()));
+            writer.append(movie.getStatus());
             writer.append("\n");
             writer.flush();
             writer.close();
@@ -243,10 +243,10 @@ public class DataManager {
                 String[] tokens = line.split(",");
                 if (tokens[2].contains(ID)) {
                     List<Integer> items = new ArrayList<>();
-                    if(!tokens[6].equals("")){
+                    if(!tokens[5].equals("")){
                     List<String> str = Arrays.asList(tokens[6].split("\\."));
                     for (String s : str) items.add(Integer.valueOf(s));}
-                    Cinema cinema = new Cinema(Integer.parseInt(tokens[0]), Integer.parseInt(tokens[1]), Integer.parseInt(tokens[2]), tokens[3], tokens[4],tokens[5],items,tokens[7]);
+                    Cinema cinema = new Cinema(Integer.parseInt(tokens[0]), Integer.parseInt(tokens[1]), Integer.parseInt(tokens[2]), tokens[3], tokens[4],items,tokens[7]);
                     cinemaArrayList.add(cinema);
                 }
             }
@@ -276,8 +276,6 @@ public class DataManager {
             writer.append(String.valueOf(cinema.getMovieID()));
             writer.append(",");
             writer.append(String.valueOf(cinema.getTime()));
-            writer.append(",");
-            writer.append(String.valueOf(cinema.getStatus()));
             writer.append(",");
             writer.append(String.valueOf(cinema.getCinemaClass()));
             writer.append(",");
@@ -355,8 +353,6 @@ public class DataManager {
                     writer.append(tokens[5]);
                     writer.append(",");
                     writer.append(tokens[6]);
-                    writer.append(",");
-                    writer.append(tokens[7]);
                     writer.append("\n");
                 }
 
@@ -368,8 +364,6 @@ public class DataManager {
                     writer.append(String.valueOf(cinema.getMovieID()));
                     writer.append(",");
                     writer.append(String.valueOf(cinema.getTime()));
-                    writer.append(",");
-                    writer.append(String.valueOf(cinema.getStatus()));
                     writer.append(",");
                     writer.append(cinema.getCinemaClass());
                     writer.append(",");

@@ -97,17 +97,17 @@ public class Boundary {
             System.out.println("Rating(Avg)\t\t: "+movie.getAvgRating());
         }
         System.out.println("Language\t\t: "+movie.getLanguage());
-        System.out.println("Age Requirement\t: "+movie.getMinAge());
+        System.out.println("Status\t: "+movie.getStatus());
         System.out.println("Cast\t\t: "+movie.getCast());
         System.out.println("Director\t\t: "+movie.getDirector());
-        System.out.println("Discription\t\t: "+movie.getDescription());
+        System.out.println("Discription\t\t: "+movie.getSynopsis());
         System.out.println();
     }
     public static void Display(List<Object> list){
         int count=1;
         if(list.get(0)!=null){
             if(list.get(0) instanceof Cinema){
-                System.out.println("index"+"\t"+"CinePlex ID" + "\t" + "Cinema ID" + "\t" + "Time" + "\t" + "Status" +"\t"+"Class"+"\t"+"Type");
+                System.out.println("index"+"\t"+"CinePlex ID" + "\t" + "Cinema ID" + "\t" + "Time" + "\t"  +"\t"+"Class"+"\t"+"Type");
             }
 
         }
@@ -146,12 +146,12 @@ public class Boundary {
     public static void DisplayCinemas(List<Cinema> cinemas){
         int count=0;
 
-        System.out.format("%-6s %-12s %-10s %-20s %-13s %-9s %-5s %n", "index", "CinePlex ID", "Cinema ID", "Time", "Status", "Class", "Type");
+        System.out.format("%-6s %-12s %-10s %-20s %-13s %-9s %-5s %n", "index", "CinePlex ID", "Cinema ID", "Time", "Class", "Type");
         //System.out.println("index"+"\t"+"CinePlex ID" + "\t" + "Cinema ID" + "\t" + "Time" + "\t" + "Status" +"\t"+"Class"+"\t"+"Type");
 
         for(Cinema cinema:cinemas){
             //System.out.println(count++ +"\t"+cinema.getCinplexID() + "\t" + cinema.getCinemaID() + "\t" + cinema.getTime() + "\t" +cinema.getStatus() + "\t" +cinema.getCinemaClass() + "\t" + cinema.getMovieType());
-            System.out.format("%-6d %-12d %-10d %-20s %-13s %-9s %-5s %n", count++, cinema.getCinplexID(), cinema.getCinemaID(), cinema.getTime(), cinema.getStatus(), cinema.getCinemaClass(), cinema.getMovieType());
+            System.out.format("%-6d %-12d %-10d %-20s %-9s %-5s %n", count++, cinema.getCinplexID(), cinema.getCinemaID(), cinema.getTime(),cinema.getCinemaClass(), cinema.getMovieType());
         }
     }
 

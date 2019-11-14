@@ -9,23 +9,22 @@ public class Movie {
 
 
     int id;
-    String name,Language,runTime,Description,Director;
+    String name,Language,runTime,Synopsis,Director,status;
     double avgRating;
     List<Integer> ratings;
     List<String> reviews;
     List<String> cast;
-    int minAge;
-    public Movie(int id,String name,String Language,List<Integer>ratings,String runTime,List<String> cast,String Director,String Description,List<String> reviews, int minAge) {
+    public Movie(int id,String name,String Language,List<Integer>ratings,String runTime,List<String> cast,String Director,String Synopsis,List<String> reviews, String status) {
         this.id = id;
         this.ratings = ratings;
         this.name = name;
         this.Language=Language;
         this.runTime = runTime;
-        this.Description = Description;
+        this.Synopsis = Synopsis;
         this.Director = Director;
         this.cast = cast;
         this.reviews = reviews;
-        this.minAge = minAge;
+        this.status = status;
     }
 
     @Override
@@ -85,13 +84,11 @@ public class Movie {
         this.runTime = runTime;
     }
 
-    public String getDescription() {
-        return Description;
+    public String getSynopsis() {
+        return Synopsis;
     }
 
-    public void setDescription(String description) {
-        Description = description;
-    }
+    public void setSynopsis(String Synopsis) {this.Synopsis = Synopsis; }
 
     public String getDirector() {
         return Director;
@@ -141,12 +138,12 @@ public class Movie {
         this.reviews = reviews;
     }
 
-    public int getMinAge(){
-        return minAge;
+    public String getStatus(){
+        return status;
     }
 
-    public void setMinAge(int minAge){
-        this.minAge = minAge;
+    public void setStatus(String minAge){
+        this.status = status;
     }
 
 }

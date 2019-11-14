@@ -42,9 +42,8 @@ public class StaffShowTimeManager extends ShowTimeManager {
             while (choice <= -1 || choice >= 8){
                 try{
                     Scanner in = new Scanner(System.in);
-                    System.out.println("1. Status");
-                    System.out.println("2. class");
-                    System.out.println("3. MovieType");
+                    System.out.println("1. class");
+                    System.out.println("2. MovieType");
                     System.out.println("0. Done");
                     choice = in.nextInt();
                     if (choice <= -1 || choice >= 4){
@@ -60,17 +59,13 @@ public class StaffShowTimeManager extends ShowTimeManager {
                 choice = -1;
                 break;
             }
-            else if (choice == 1){
-                System.out.println("Enter new Status:");
-                this.updateStatus(mycinema, input.next());
-            }
             //6. Prompt input for cinema class and edit cinema object
-            else if (choice == 2){
+            else if (choice == 1){
                 System.out.println("Enter new class:");
                 this.updateClass(mycinema, input.next());
             }
             //7. Prompt input for MovieType and edit cinema object
-            else if (choice == 3){
+            else if (choice == 2){
                 System.out.println("Enter new MovieType:");
                 this.updateMovieType(mycinema, input.next());
             }
@@ -89,10 +84,7 @@ public class StaffShowTimeManager extends ShowTimeManager {
             System.out.println("Error! Showtime failed to be updated!");
         }
     }
-    @Override
-    public List<Cinema> getAllShowTimes(){
-        return  DataManager.LoadShowTimes(-1);
-    }
+
 
 
     public void removeCinemaShowtime(Scanner input){
@@ -138,9 +130,6 @@ public class StaffShowTimeManager extends ShowTimeManager {
 
 
 
-    public void updateStatus(Cinema c, String s){
-        c.setStatus(s);
-    }
     public void updateClass(Cinema c, String s){
         c.setCinemaClass(s);
     }
@@ -150,12 +139,8 @@ public class StaffShowTimeManager extends ShowTimeManager {
     public boolean saveShowTimeChanges(Cinema c){
         return DataManager.UpdateShowTime(c,false);
     }
-    public void deleteShowTime(Cinema c){
-        c.setStatus("ended");
-    }
-
     public void createShowTime(int cinplexID, int cinemaID, int movieID, String time, String status, String cinemaClass, List<Integer> seats, String movieType){
-        Cinema c = new Cinema(cinplexID, cinemaID, movieID, time, status, cinemaClass, seats, movieType);
+        Cinema c = new Cinema(cinplexID, cinemaID, movieID, time,cinemaClass, seats, movieType);
         DataManager.AddShowTimes(c);
     }
 

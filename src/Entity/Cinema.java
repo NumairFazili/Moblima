@@ -5,24 +5,23 @@ import java.util.List;
 public class Cinema {
 
     int cinplexID,cinemaID,movieID;
-    String time,status,cinemaClass;
+    String time,cinemaClass;
     List<Integer> seats;
     String movieType;
 
 
-    public Cinema(int cinplexID, int cinemaID, int movieID, String time, String status, String cinemaClass, List<Integer> seats, String movieType) {
+    public Cinema(int cinplexID, int cinemaID, int movieID, String time,String cinemaClass, List<Integer> seats, String movieType) {
         this.cinplexID = cinplexID;
         this.cinemaID = cinemaID;
         this.movieID = movieID;
         this.time = time;
-        this.status=status;
         this.cinemaClass=cinemaClass;
         this.seats = seats;
         this.movieType = movieType;        
     }
     @Override
     public String toString(){
-        String s = this.getCinplexID() + "\t" + this.getCinemaID() + "\t" + this.getTime() + "\t" +this.getStatus() + "\t" +this.getCinemaClass() + "\t" + this.getMovieType();
+        String s = this.getCinplexID() + "\t" + this.getCinemaID() + "\t" + this.getTime() + "\t" + "\t" +this.getCinemaClass() + "\t" + this.getMovieType();
         return s;
     }
     public int getCinplexID() {
@@ -57,13 +56,6 @@ public class Cinema {
         this.time = time;
     }
 
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
     public String getCinemaClass() {
         return cinemaClass;
     }

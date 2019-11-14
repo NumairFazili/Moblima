@@ -1,11 +1,7 @@
 package Controller;
-
-import Entity.Cinema;
 import Entity.Movie;
-import Entity.Settings;
 import Entity.Staff;
 import View.Boundary;
-
 import java.util.*;
 
 public class StaffMovieManager extends MovieManager {
@@ -13,6 +9,11 @@ public class StaffMovieManager extends MovieManager {
 
     MovieManager movieManager;
     Staff staff;
+
+
+
+
+
     public StaffMovieManager(){
         movieManager=new MovieManager();
         staff=new Staff();
@@ -40,9 +41,9 @@ public class StaffMovieManager extends MovieManager {
             }
         }
     }
-    public void createNewMovie(int id, String name, String Language, List<Integer> rating, String runTime, List<String> cast, String Description, String Director, List<String> comments, int minAge){
+    public void createNewMovie(int id, String name, String Language, List<Integer> rating, String runTime, List<String> cast, String Synopsis, String Director, List<String> comments, String status){
 
-        Movie m = new Movie(id, name, Language, rating, runTime, cast, Description, Director, comments, minAge);
+        Movie m = new Movie(id, name, Language, rating, runTime, cast, Synopsis, Director, comments, status);
         DataManager.SaveMovies(m);
     }
 
@@ -73,9 +74,9 @@ public class StaffMovieManager extends MovieManager {
                     System.out.println("2. language");
                     System.out.println("3. runtime");
                     System.out.println("4. Cast member");
-                    System.out.println("5. description");
+                    System.out.println("5. Synopsis");
                     System.out.println("6. director");
-                    System.out.println("7. Minimum age");
+                    System.out.println("7. Status");
                     System.out.println("0. Done");
                     choice = in.nextInt();
                     if (choice <= -1 || choice >= 8){
@@ -113,8 +114,8 @@ public class StaffMovieManager extends MovieManager {
             }
             //5. Prompt input for description and edit movie object
             else if (choice == 5){
-                System.out.println("Enter new description:");
-                this.updateMovieDescription(mymovie, input.nextLine());
+                System.out.println("Enter new Synopsis:");
+                this.updateMovieSynopsis(mymovie, input.nextLine());
             }
             //6. Prompt input for director and edit movie object
             else if (choice == 6){
@@ -123,8 +124,8 @@ public class StaffMovieManager extends MovieManager {
             }
             //7. Prompt input for Minimum age and edit movie object
             else if (choice == 7){
-                System.out.println("Enter new minimum age:");
-                this.updateMovieMinAge(mymovie, input.nextInt());
+                System.out.println("Enter Status");
+                this.updateMovieStatus(mymovie, input.next());
             }
 
         }
@@ -151,14 +152,14 @@ public class StaffMovieManager extends MovieManager {
         String runtime = input.nextLine();
         System.out.println("Enter cast members, split by ','");
         List<String> cast = Arrays.asList(input.nextLine().split(","));
-        System.out.println("Enter description:");
-        String description = input.nextLine();
+        System.out.println("Enter Synopsis:");
+        String Synopsis = input.nextLine();
         System.out.println("Enter director:");
         String director = input.nextLine();
         System.out.println("Enter Minimum age:");
-        int minage = input.nextInt();
+        String status = input.next();
         input.nextLine();
-        this.createNewMovie(movieid, moviename, language, Arrays.asList(), runtime, cast, description, director, Arrays.asList(), minage);
+        this.createNewMovie(movieid, moviename, language, Arrays.asList(), runtime, cast, Synopsis, director, Arrays.asList(), status);
 
     }
 
@@ -201,8 +202,8 @@ public class StaffMovieManager extends MovieManager {
     public void updateMovieRunTime(Movie m, String s){
         m.setRunTime(s);
     }
-    public void updateMovieDescription(Movie m, String s){
-        m.setDescription(s);
+    public void updateMovieSynopsis(Movie m, String s){
+        m.setSynopsis(s);
     }
     public void updateMovieDirector(Movie m, String s){
         m.setDirector(s);
@@ -210,9 +211,7 @@ public class StaffMovieManager extends MovieManager {
     public void updateMovieCast(Movie m, List<String> cast){
         m.setCast(cast);
     }
-    public void updateMovieMinAge(Movie m, int age){
-        m.setMinAge(age);
-    }
+    public void updateMovieStatus(Movie m, String status){ m.setStatus(status); }
     public boolean saveMovieChanges(Movie m){
         return DataManager.manageMovie(m, false);
     }
