@@ -19,6 +19,7 @@ public class Settings {
         this.holidays=holidays;
     }
 
+
     public double getSilverPrice() {
         return silverPrice;
     }

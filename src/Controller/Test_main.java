@@ -11,7 +11,21 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Test_main {
+
+
+
+
+
+    public Test_main(){
+
+    }
+
     public static void main(String[] args) {
+        MovieManager movieManager=new MovieManager();
+        StaffShowTimeManager staffShowTimeManager=new StaffShowTimeManager();
+        StaffMovieManager staffMovieManager=new StaffMovieManager();
+        SettingsManager settingsManager=new SettingsManager();
+
         int choice = -1;
         Scanner input = new Scanner(System.in);
         while(true){
@@ -26,25 +40,25 @@ public class Test_main {
                         choice = input.nextInt();
                         switch (choice){
                             case 1:
-                                staff.createMovieListing(input);
+                                staffMovieManager.createMovieListing(input);
                                 break;
                             case 2:
-                                staff.UpdateMovie(input);
+                                staffMovieManager.UpdateMovie(input);
                                 break;
                             case 3:
-                                staff.removeMovieListing(input);
+                                staffMovieManager.removeMovieListing(input);
                                 break;
                             case 4:
-                                staff.createCinemaShowtime(input);
+                                staffShowTimeManager.createCinemaShowtime(input);
                                 break;
                             case 5:
-                                staff.updateCinemaShowtime(input);
+                                staffShowTimeManager.updateCinemaShowtime(input);
                                 break;
                             case 6:
-                                staff.removeCinemaShowtime(input);
+                                staffShowTimeManager.removeCinemaShowtime(input);
                                 break;
                             case 7:
-                                staff.configureSettings(input);
+                                settingsManager.configureSettings(input);
                                 break;
                             case 0:
                                 break;
@@ -86,7 +100,7 @@ public class Test_main {
                     switch (choice) {
                         case 1:
                         case 5:
-                            user.SearchListMovie(input, choice);
+                            movieManager.SearchListMovie(user,input, choice);
                             break;
                         case 2:
                             List<Booking> bookings = user.getBookings();

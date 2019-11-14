@@ -3,6 +3,7 @@ package Controller;
 import java.util.*;
 
 import Entity.*;
+import View.Boundary;
 
 /*
     createBookings
@@ -12,6 +13,7 @@ import Entity.*;
 public class UserManager {
 
     User user;
+
 
 
     public static User getUser(String name, String mobileNumber){
@@ -50,11 +52,24 @@ public class UserManager {
 
     }
 
+
+    public String getType(int age){
+        if(age<18){
+            return "student";
+        }
+        else if(age>65){
+            return "senior citizen";
+        }
+        else{
+            return "regular";
+        }
+    }
+
+
     public static User getGuestUser(){
         User myuser = UserManager.getUser("guestaccount", "10101010");
         return myuser;
     }
 
 
-    
 }
