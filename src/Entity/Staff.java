@@ -111,7 +111,11 @@ public class Staff extends Person {
         Boundary.DisplayCinemas(this.getAllShowTimes());
         //Select showtime to update by index
         System.out.println("Enter Index of the showtime to be updated: " );
+        System.out.println("Otherwise enter -2 to go back" );
         int inputsearchint = input.nextInt();
+        if (inputsearchint == -2){
+            return;
+        }
         input.nextLine();//Catch newline from input.nextInt()
         Cinema mycinema = this.getAllShowTimes().get(inputsearchint);
 
@@ -311,7 +315,11 @@ public class Staff extends Person {
         //Boundary.DisplayMovies(DataManager.LoadMovies(""));
         //Select movie to update by movieID
         System.out.println("Enter ID of the movie to be updated: " );
+        System.out.println("Otherwise enter -2 to go back" );
         int inputsearchint = input.nextInt();
+        if (inputsearchint == -2){
+            return;
+        }
         input.nextLine();//Catch newline from input.nextInt()
         Movie mymovie = SearchManager.find_Movie_byID(this.getAllMovies(), inputsearchint);
         Boundary.DisplayMovie(mymovie);
@@ -321,7 +329,7 @@ public class Staff extends Person {
         int choice = -1;
         while (choice != 0){
             choice = -1;
-            while (choice <= -1 || choice >= 7){
+            while (choice <= -1 || choice >= 8){
                 try{
                     Scanner in = new Scanner(System.in);
                     System.out.println("1. movie name");
@@ -330,10 +338,11 @@ public class Staff extends Person {
                     System.out.println("4. Cast member");
                     System.out.println("5. description");
                     System.out.println("6. director");
+                    System.out.println("7. Minimum age");
                     System.out.println("0. Done");
                     choice = in.nextInt();
-                    if (choice <= -1 || choice >= 7){
-                        System.out.println("Error! Please enter either 0, 1, 2, 3, 4, 5 or 6:");
+                    if (choice <= -1 || choice >= 8){
+                        System.out.println("Error! Please enter either 0, 1, 2, 3, 4, 5, 6 or 7:");
                     }
                 }
                 catch(InputMismatchException e){
@@ -355,25 +364,30 @@ public class Staff extends Person {
                 System.out.println("Enter new language:");
                 this.updateMovieLanguage(mymovie, input.nextLine());
             }
-            //4. Prompt input for runtime and edit movie object
+            //3. Prompt input for runtime and edit movie object
             else if (choice == 3){
                 System.out.println("Enter new runtime:");
                 this.updateMovieRunTime(mymovie, input.nextLine());
             }
-            //5. Prompt input for Cast member and edit movie object
+            //4. Prompt input for Cast member and edit movie object
             else if (choice == 4){
                 System.out.println("Enter new cast members:");
                 this.updateMovieCast(mymovie, Arrays.asList((input.nextLine().split(","))));
             }
-            //6. Prompt input for description and edit movie object
+            //5. Prompt input for description and edit movie object
             else if (choice == 5){
                 System.out.println("Enter new description:");
                 this.updateMovieDescription(mymovie, input.nextLine());
             }
-            //7. Prompt input for director and edit movie object
+            //6. Prompt input for director and edit movie object
             else if (choice == 6){
                 System.out.println("Enter new director:");
                 this.updateMovieDirector(mymovie, input.nextLine());
+            }
+            //7. Prompt input for Minimum age and edit movie object
+            else if (choice == 7){
+                System.out.println("Enter new minimum age:");
+                this.updateMovieMinAge(mymovie, input.nextInt());
             }
 
         }

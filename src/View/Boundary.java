@@ -77,7 +77,12 @@ public class Boundary {
         System.out.format("%-5s %-25s %-15s %-15s %n", "ID", "Title", "Rating(Avg)", "Language");
         for(Movie movie:movieList){
             //System.out.println(movie.getId() + "\t" + movie.getName() + "\t" + movie.getAvgRating() + "\t" +movie.getLanguage());
-            System.out.format("%-5d %-25s %-15.2f %-15s %n", movie.getId(), movie.getName(), movie.getAvgRating(), movie.getLanguage());
+            if (movie.getAvgRating() == -1){
+                System.out.format("%-5d %-25s %-15s %-15s %n", movie.getId(), movie.getName(), "NA", movie.getLanguage());
+            }
+            else{
+                System.out.format("%-5d %-25s %-15.2f %-15s %n", movie.getId(), movie.getName(), movie.getAvgRating(), movie.getLanguage());
+            }
         }
         System.out.println();
     }
@@ -86,7 +91,11 @@ public class Boundary {
 
         System.out.println("ID\t\t\t: "+movie.getId());
         System.out.println("Title\t\t: "+movie.getName());
-        System.out.println("Rating(Avg)\t\t: "+movie.getAvgRating());
+        if (movie.getAvgRating() == -1){
+            System.out.println("Rating(Avg)\t\t: " + "NA");
+        }else{
+            System.out.println("Rating(Avg)\t\t: "+movie.getAvgRating());
+        }
         System.out.println("Language\t\t: "+movie.getLanguage());
         System.out.println("Age Requirement\t: "+movie.getMinAge());
         System.out.println("Cast\t\t: "+movie.getCast());

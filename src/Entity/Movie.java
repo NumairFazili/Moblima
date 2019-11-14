@@ -69,7 +69,7 @@ public class Movie {
                 return avgRating;    
             }
         }
-        return 0;
+        return -1;
     }
 
     public void setAvgRating(double avgRating){
