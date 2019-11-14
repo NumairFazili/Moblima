@@ -166,21 +166,24 @@ public class Boundary {
             System.out.print(i+" ");
             for (int j=0;j<cols;j++){
                 value=i*cols + j;
+
                 int k;
                 for(k=0; k < seating_temp.size(); k++){
-                    if(seating_temp.get(k)==value)
+                    if(seating_temp.get(k)==value){
                         break;
-                    else if(k!=seating_temp.size()){
-                        System.out.print(" X ");
-                        seating_temp.remove(k);
                     }
-                    else
-                        System.out.print(" A ");
-
                 }
-             }
+
+                if(k == seating_temp.size()){
+                    System.out.print(" A ");
+                }else{
+                    System.out.print(" X ");
+                    seating_temp.remove(k);
+                }
+            }
             System.out.println();
-         }
+        }
+        System.out.println("=========MOVIE SCREEN==========");
     }
 
 

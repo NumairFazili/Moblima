@@ -89,7 +89,7 @@ public class Test_main {
                             user.SearchListMovie(input, choice);
                             break;
                         case 2:
-                            List<Booking> bookings = SearchManager.getBookingHistory(user.getName(),user.getmobileNumber(), DataManager.LoadBookings());
+                            List<Booking> bookings = user.getBookings();
                             Boundary.DisplayBookings(bookings);
                             break;
                         case 3:

@@ -7,7 +7,6 @@ import Controller.BookingManager;
 import Controller.DataManager;
 import Controller.SearchManager;
 import View.Boundary;
-import org.junit.Test;
 
 public class User extends Person{
     int age;
