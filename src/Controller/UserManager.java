@@ -12,25 +12,24 @@ import View.Boundary;
 
 public class UserManager {
 
-    User user;
+    public static User UserLogin(Scanner input){//1. Existing User
+        System.out.println("Please enter login details:");
+        System.out.println("Enter Username:");
+        String username = input.next();
+        System.out.println("Enter Mobile number:");
+        String mobilenumber = input.next();
+        //Check with database if name and mobile number matches then create corresponding user object
 
-
-
-    public static User getUser(String name, String mobileNumber){
-        ArrayList<User> u_list = DataManager.LoadUser();
-
-        for (int i = 0; i < u_list.size(); i++){
-
-            if (u_list.get(i).getName().equals(name)){
-                if(u_list.get(i).getmobileNumber().equals(mobileNumber)){
-                    return u_list.get(i);
-                }else{
-                    return null;
-                }
+        try{User myuser = AuthManager.getUser(username, mobilenumber);
+            if(myuser!=null)
+                System.out.println("User Login Successful!");
+            else{
+                System.out.println("Error! Incorrect login details.");
             }
-        }
-        return null;
+            return myuser;}
+        catch ( Exception e){System.out.println("Error! Incorrect login details."); return null;}
     }
+
 
     public static User createUser(Scanner input){
         //2. New User
@@ -67,7 +66,7 @@ public class UserManager {
 
 
     public static User getGuestUser(){
-        User myuser = UserManager.getUser("guestaccount", "10101010");
+        User myuser = AuthManager.getUser("guestaccount", "10101010");
         return myuser;
     }
 

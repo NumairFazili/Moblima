@@ -10,15 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class Test_main {
-
-
-
-
-
-    public Test_main(){
-
-    }
+public class Main {
 
     public static void main(String[] args) {
         MovieManager movieManager=new MovieManager();
@@ -30,7 +22,7 @@ public class Test_main {
         Scanner input = new Scanner(System.in);
         while(true){
             if (Boundary.ModuleSelection(choice, input ) == 1) {
-                Pair<Integer, Staff> temp = (AuthManager.Stafflogin(input));
+                Pair<Integer, Staff> temp = (StaffManager.StaffLogin(input));
                 int login_status = temp.getKey();
                 Staff staff = temp.getValue();
                 if(login_status==-1){continue;}
@@ -81,7 +73,7 @@ public class Test_main {
 
 
                     if(user_login_choice == 1){
-                        user = AuthManager.UserLogin(input);
+                        user = UserManager.UserLogin(input);
                     }
                     else if(user_login_choice == 2){
                         user = UserManager.createUser(input);
@@ -124,8 +116,6 @@ public class Test_main {
 
                 System.out.println("User module");
             }
-
-
             System.out.println("Module Finished. ");
             break;
         }

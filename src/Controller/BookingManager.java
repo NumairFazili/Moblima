@@ -89,8 +89,8 @@ public class BookingManager {
 
 
     private static double calc_price(User user,Cinema cinema){
-        priceManager calc_price = new priceManager(user.getAge(),cinema);
-        return  calc_price.getPrice();
+        priceManager priceManager = new priceManager(user.getAge(),cinema);
+        return  priceManager.getPrice();
     }
     private static String genBookingID(){
         Random rand = new Random();

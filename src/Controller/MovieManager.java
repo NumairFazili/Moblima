@@ -147,7 +147,6 @@ public class MovieManager {
                     Cinema mycinema = ((DataManager.LoadShowTimes(mymovie.getId()).get(inputsearchint)));
 
                     BookingManager bookingManager=new BookingManager();
-
                     bookingManager.createBooking(user,mycinema, rowofseat*10 + colofseat);
 
 
