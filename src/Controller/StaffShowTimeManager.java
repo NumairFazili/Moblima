@@ -2,6 +2,7 @@ package Controller;
 
 import Entity.Cinema;
 import View.Boundary;
+import org.junit.Test;
 
 import java.util.Arrays;
 import java.util.InputMismatchException;
@@ -16,6 +17,11 @@ public class StaffShowTimeManager extends ShowTimeManager {
         showTimeManager=new ShowTimeManager();
     }
 
+
+//    public static void main(String[] args) {
+//        StaffShowTimeManager staffShowTimeManager=new StaffShowTimeManager();
+//        staffShowTimeManager.updateCinemaShowtime();
+//    }
     public void updateCinemaShowtime(Scanner input){
         //List all showtimes
         Boundary.DisplayCinemas(this.getAllShowTimes());
@@ -28,7 +34,6 @@ public class StaffShowTimeManager extends ShowTimeManager {
         }
         input.nextLine();//Catch newline from input.nextInt()
         Cinema mycinema = this.getAllShowTimes().get(inputsearchint);
-
         //Choose which attribute of the showtime to be edited
         System.out.println("Choose attribute of showtime to be edited: " );
         int choice = -1;
@@ -37,17 +42,13 @@ public class StaffShowTimeManager extends ShowTimeManager {
             while (choice <= -1 || choice >= 8){
                 try{
                     Scanner in = new Scanner(System.in);
-                    System.out.println("1. Cineplex_ID");
-                    System.out.println("2. Cinema_ID");
-                    System.out.println("3. Movie_ID");
-                    System.out.println("4. ShowTime");
-                    System.out.println("5. Status");
-                    System.out.println("6. class");
-                    System.out.println("7. MovieType");
+                    System.out.println("1. Status");
+                    System.out.println("2. class");
+                    System.out.println("3. MovieType");
                     System.out.println("0. Done");
                     choice = in.nextInt();
-                    if (choice <= -1 || choice >= 8){
-                        System.out.println("Error! Please enter either 0, 1, 2, 3, 4, 5, 6 or 7:");
+                    if (choice <= -1 || choice >= 4){
+                        System.out.println("Error! Please enter either 0, 1, 2, 3:");
                     }
                 }
                 catch(InputMismatchException e){
@@ -59,53 +60,38 @@ public class StaffShowTimeManager extends ShowTimeManager {
                 choice = -1;
                 break;
             }
-            //1. Prompt input for Cineplex_ID name and edit cinema object
             else if (choice == 1){
-                System.out.println("Enter new Cineplex_ID:");
-                this.updateCinemaID(mycinema, input.nextInt());
-                input.nextLine();//Catch newline from input.nextInt
-            }
-            //2. Prompt input for Cinema_ID and edit cinema object
-            else if (choice == 2){
-                System.out.println("Enter new Cinema_ID:");
-                this.updateCinemaID(mycinema, input.nextInt());
-                input.nextLine();//Catch newline from input.nextInt
-            }
-            //3. Prompt input for Movie_ID and edit cinema object
-            else if (choice == 3){
-                System.out.println("Enter new Movie_ID:");
-                this.updateMovieID(mycinema, input.nextInt());
-                input.nextLine();//Catch newline from input.nextInt
-            }
-            //4. Prompt input for ShowTime and edit cinema object
-            else if (choice == 4){
-                System.out.println("Enter new ShowTime:");
-                this.updateTime(mycinema, input.nextLine());
-            }
-            //5. Prompt input for Status and edit cinema object
-            else if (choice == 5){
                 System.out.println("Enter new Status:");
-                this.updateStatus(mycinema, input.nextLine());
+                this.updateStatus(mycinema, input.next());
             }
             //6. Prompt input for cinema class and edit cinema object
-            else if (choice == 6){
+            else if (choice == 2){
                 System.out.println("Enter new class:");
-                this.updateClass(mycinema, input.nextLine());
+                this.updateClass(mycinema, input.next());
             }
             //7. Prompt input for MovieType and edit cinema object
-            else if (choice == 7){
+            else if (choice == 3){
                 System.out.println("Enter new MovieType:");
-                this.updateMovieType(mycinema, input.nextLine());
+                this.updateMovieType(mycinema, input.next());
             }
 
         }
-        //Save edited movie object to database
+
+
+        System.out.println();
+        Boundary.DisplayCinemas(Arrays.asList(mycinema));
+        System.out.println();
+
         if (this.saveShowTimeChanges(mycinema) == Boolean.TRUE){
             System.out.println("Showtime successfully updated!");
         }
         else{
             System.out.println("Error! Showtime failed to be updated!");
         }
+    }
+    @Override
+    public List<Cinema> getAllShowTimes(){
+        return  DataManager.LoadShowTimes(-1);
     }
 
 
@@ -151,15 +137,7 @@ public class StaffShowTimeManager extends ShowTimeManager {
     }
 
 
-    public void updateCinemaID(Cinema c, int i){
-        c.setCinemaID(i);
-    }
-    public void updateMovieID(Cinema c, int i){
-        c.setMovieID(i);
-    }
-    public void updateTime(Cinema c, String s){
-        c.setTime(s);
-    }
+
     public void updateStatus(Cinema c, String s){
         c.setStatus(s);
     }
@@ -181,8 +159,5 @@ public class StaffShowTimeManager extends ShowTimeManager {
         DataManager.AddShowTimes(c);
     }
 
-    public List<Cinema> getAllShowTimes(){
-        return DataManager.LoadShowTimes(-1);
-    }
 
 }

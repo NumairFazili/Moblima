@@ -769,14 +769,18 @@ public class DataManager {
 
     public static void main(String[] args) {
 
-        ArrayList<Movie> test=LoadMovies("");
-
-        for(Movie movie:test)
-            System.out.println(movie.getReviews()+ "   " + movie.getRating());
+//       Cinema cinema=new Cinema(2,2,1004,"11/10/2019 17:30","Coming Soon",Arrays.asList(1,1,0,0)));
+//        UpdateShowTime()
+////
 
 
     }
 }
+
+//    ArrayList<Movie> test=LoadMovies("");
+//
+//        for(Movie movie:test)
+//            System.out.println(movie.getReviews()+ "   " + movie.getRating());
 
 
         //StaffManager mystaff = AuthManager.getStaff("username", "123");
