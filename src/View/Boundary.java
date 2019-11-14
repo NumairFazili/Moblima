@@ -143,6 +143,7 @@ public class Boundary {
         for(int i = 0; i < reviewNum; i++){
             System.out.println("Rating:"+rating_list.get(i) + " | Review: "+review_list.get(i));
         }
+        System.out.println();
     }
 
     public static void DisplayCinemas(List<Cinema> cinemas){
