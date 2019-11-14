@@ -96,6 +96,7 @@ public class Boundary {
         List<Object> l = new ArrayList<Object>((t.getAllShowTimes()));
         Display(l);
     }
+
     public static void Display(List<Object> list){
         int count=1;
         if(list.get(0)!=null){
@@ -146,7 +147,11 @@ public class Boundary {
             System.out.println("Rating:"+rating_list.get(i) + " | Review: "+review_list.get(i));
         }
     }
-
+    @Test
+    public void ttt1(){
+        Staff s = new Staff();
+        DisplayCinemas(s.getAllShowTimes());
+    }
     public static void DisplayCinemas(List<Cinema> cinemas){
         int count=0;
         System.out.println("index"+"\t"+"CinePlex ID" + "\t" + "Cinema ID" + "\t" + "Time" + "\t" + "Status" +"\t"+"Class"+"\t"+"Type");
