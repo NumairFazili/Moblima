@@ -41,7 +41,6 @@ public class SearchManager {
     }
     public static ArrayList<Movie> get_topN_byRating(ArrayList<Movie> movies){
         ArrayList<Movie> to_return = new ArrayList<Movie>();
-
             Collections.sort(movies,new SortByRating());
             for(int i = 0;i<Math.min(SIZE_OF_PQ,movies.size());i++){
                 to_return.add(movies.get(i));
@@ -83,10 +82,7 @@ public class SearchManager {
     public static ArrayList<Movie> get_topN_bySale(ArrayList<Movie> movies, ArrayList<Booking> bookings){
         ArrayList<Movie> to_return = new ArrayList<Movie>();
         HashMap<Integer,Integer> sales_map = SearchManager.calculateSales(bookings);
-        System.out.println(Arrays.asList(sales_map));
         Map<Integer, Integer> sorted_map = sortByValue(sales_map);
-        System.out.println(Arrays.asList(sorted_map));
-
         for(Map.Entry<Integer,Integer> entry: sorted_map.entrySet()){
 
             to_return.add(find_Movie_byID(movies,entry.getKey()));

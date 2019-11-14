@@ -84,6 +84,7 @@ public class Boundary {
     }
 
     public static void DisplayMovie(Movie movie){
+
         System.out.println("ID\t\t\t: "+movie.getId());
         System.out.println("Title\t\t: "+movie.getName());
         System.out.println("Rating(Avg)\t\t: "+movie.getAvgRating());
@@ -134,9 +135,6 @@ public class Boundary {
 
     public static void DisplayCinemas(List<Cinema> cinemas){
         int count=0;
-
-        System.out.println("%-5s %-11s %-9s %-4s,");
-        System.out.println("index"+"\t"+"CinePlex ID" + "\t" + "Cinema ID" + "\t" + "Time" + "\t" + "Status" +"\t"+"Class"+"\t"+"Type");
 
         System.out.format("%-6s %-12s %-10s %-20s %-13s %-9s %-5s %n", "index", "CinePlex ID", "Cinema ID", "Time", "Status", "Class", "Type");
         //System.out.println("index"+"\t"+"CinePlex ID" + "\t" + "Cinema ID" + "\t" + "Time" + "\t" + "Status" +"\t"+"Class"+"\t"+"Type");

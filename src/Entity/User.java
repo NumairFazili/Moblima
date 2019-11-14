@@ -1,5 +1,6 @@
 package Entity;
 
+import java.lang.reflect.Array;
 import java.util.*;
 import java.util.List;
 
@@ -73,11 +74,31 @@ public class User extends Person{
 
 
     public void createBooking(Cinema cinema, int seatNO){
+
+        //Boundary.DisplayBookings(Arrays.asList());
+
+
         Movie m = super.selectMovieByID(cinema.getMovieID());
         BookingManager.init();
 
         if(this.getAge() >= m.getMinAge()){
-            BookingManager.createBooking(this, cinema, seatNO);
+            Booking booking=BookingManager.createBooking(this, cinema, seatNO);
+            Boundary.DisplayBookings(Arrays.asList(booking));
+            System.out.println("Press 1 to confirm Booking  0 to Cancel");
+
+            Scanner input=new Scanner(System.in);
+            int x=input.nextInt();
+
+            if(x==1){
+                BookingManager.saveBooking(booking,cinema);
+                System.out.println("Booking Created");
+            }
+            else{
+                System.out.println("Booking Cancelled");
+
+                return;
+            }
+
         }else{
             System.out.println("Minimum age requirement not reached.");
         }
@@ -189,7 +210,10 @@ public class User extends Person{
                     input.nextLine();//Catch newline from input
                     //4. Book and purchase ticket
                     Cinema mycinema = ((DataManager.LoadShowTimes(mymovie.getId()).get(inputsearchint)));
-                    this.createBooking(mycinema, rowofseat*8 + colofseat);
+                    this.createBooking(mycinema, rowofseat*10 + colofseat);
+
+
+
                 }
                 //2. Select another showtime
                 else if (choice == 2){

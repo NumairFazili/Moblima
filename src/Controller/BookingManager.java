@@ -47,31 +47,29 @@ public class BookingManager {
         genBookingID();
     }*/
 
-    public static void createBooking(User user, Cinema cinema, int seatNO){
+    public static Booking createBooking(User user, Cinema cinema, int seatNO){
         //Cinema class need to be added into Cinema
         //movieType need to be added into Movie
 
         //showtime, movieclass, price removed from parameters
 
 
-        if(cinema.getStatus().equals("Ended")){
-            System.out.println("Cannot Booking as Showtime ended");
-            return;}
 
         String bookingID = genBookingID();
-
-
 
         LocalDateTime dateTime = LocalDateTime.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH::mm");
         String bookingTime = dateTime.format(formatter);
         double final_price = calc_price(user,cinema);
-        Booking newBooking = new Booking(bookingID, cinema.getCinplexID(), cinema.getCinemaID(), cinema.getMovieID(), cinema.getTime(), cinema.getCinemaClass(), cinema.getMovieType(), user.getName(), user.getmobileNumber(), user.getEmail(), user.getCustomerType(), seatNO, bookingTime, final_price);
+        return new Booking(bookingID, cinema.getCinplexID(), cinema.getCinemaID(), cinema.getMovieID(), cinema.getTime(), cinema.getCinemaClass(), cinema.getMovieType(), user.getName(), user.getmobileNumber(), user.getEmail(), user.getCustomerType(), seatNO, bookingTime, final_price);
+    }
 
-        DataManager.AddBooking(newBooking);
-        cinema.addSeats(seatNO);
+    public static void saveBooking(Booking booking,Cinema cinema){
+        DataManager.AddBooking(booking);
+        cinema.addSeats(booking.getSeatNO());
         DataManager.UpdateShowTime(cinema,false);
     }
+
 
     private static double calc_price(User user,Cinema cinema){
         priceManager calc_price = new priceManager(user.getAge(),cinema.getCinemaClass());
