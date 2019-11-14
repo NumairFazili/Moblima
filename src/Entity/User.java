@@ -85,21 +85,15 @@ public class User extends Person{
     }
 
     public List<Booking> getBookings(){
-        List<String> b_list = new ArrayList<String>();
+
         ArrayList<Booking> all_b = DataManager.LoadBookings();
-        ArrayList<Booking> bookings = new ArrayList<Booking>();
-        for(int i = 0; i < b_list.size(); i++){
-            for(int j = 0; j < all_b.size(); j++){
-                if (all_b.get(j).getBookingID().equals(b_list.get(i))){
-                    bookings.add(all_b.get(j));
-                    break;
-                }
+        ArrayList<Booking> to_return = new ArrayList<Booking>();
+        for(Booking b: all_b){
+            if(b.getCustomerName().equals(this.getName())&&b.getMobileNumber().equals(this.getmobileNumber())){
+                to_return.add(b);
             }
         }
-        if(bookings.size() != b_list.size()){
-            System.out.println("some bookings not found");
-        }
-        return bookings;
+        return to_return;
     }
 
     public void reviewMovie(Movie m, int rating, String review){
@@ -108,7 +102,7 @@ public class User extends Person{
     }
     //to verify the attributes
     public void SearchListMovie(Scanner input, int choice){
-        ArrayList<Movie> mymovielist = null;
+        ArrayList<Movie> mymovielist = new ArrayList<Movie>();
         //List all movies
         if (choice == 5){
             mymovielist = DataManager.LoadMovies("");
@@ -126,7 +120,11 @@ public class User extends Person{
         Boundary.DisplayMovie(mymovielist);
         //Select movie by movie ID and print movie details – including reviews and ratings
         System.out.println("Enter ID of the movie to see the details: " );
+        System.out.println("Otherwise enter 0 to go back" );
         int inputsearchint = input.nextInt();
+        if (inputsearchint == 0){
+            return;
+        }
         Movie mymovie = SearchManager.find_Movie_byID(mymovielist, inputsearchint);
         System.out.println("Movie Details: " );
         Boundary.DisplayMovie(mymovie);
