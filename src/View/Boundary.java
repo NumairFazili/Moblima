@@ -2,7 +2,7 @@ package View;
 
 import Controller.DataManager;
 import Entity.*;
-import org.junit.Test;
+//import org.junit.Test;
 
 import java.util.*;
 
@@ -74,9 +74,11 @@ public class Boundary {
 
 
     public static void DisplayMovie(List<Movie> movieList){
-        System.out.println("ID" + "\t" + "Title" + " \t" + "Rating(Avg)" + "\t" + "Language");
+        //System.out.println("ID" + "\t" + "Title" + " \t" + "Rating(Avg)" + "\t" + "Language");
+        System.out.format("%-5s %-25s %-15s %-15s %n", "ID", "Title", "Rating(Avg)", "Language");
         for(Movie movie:movieList){
-            System.out.println(movie.getId() + "\t" + movie.getName() + "\t" + movie.getAvgRating() + "\t" +movie.getLanguage());
+            //System.out.println(movie.getId() + "\t" + movie.getName() + "\t" + movie.getAvgRating() + "\t" +movie.getLanguage());
+            System.out.format("%-5d %-25s %-15.2f %-15s %n", movie.getId(), movie.getName(), movie.getAvgRating(), movie.getLanguage());
         }
     }
 
@@ -89,14 +91,6 @@ public class Boundary {
         System.out.println("Cast\t\t: "+movie.getCast());
         System.out.println("Description\t\t: "+movie.getDescription());
     }
-    @Test
-    public void test_display(){
-        User u = new User();
-        Staff t = new Staff();
-        List<Object> l = new ArrayList<Object>((t.getAllShowTimes()));
-        Display(l);
-    }
-
     public static void Display(List<Object> list){
         int count=1;
         if(list.get(0)!=null){
@@ -147,21 +141,15 @@ public class Boundary {
             System.out.println("Rating:"+rating_list.get(i) + " | Review: "+review_list.get(i));
         }
     }
-    @Test
-    public void ttt1(){
-        Staff s = new Staff();
-        DisplayCinemas(s.getAllShowTimes());
-    }
+
     public static void DisplayCinemas(List<Cinema> cinemas){
         int count=0;
-        System.out.println("index"+"\t"+"CinePlex ID" + "\t" + "Cinema ID" + "\t" + "Time" + "\t" + "Status" +"\t"+"Class"+"\t"+"Type");
+        System.out.format("%-6s %-12s %-10s %-20s %-13s %-9s %-5s %n", "index", "CinePlex ID", "Cinema ID", "Time", "Status", "Class", "Type");
+        //System.out.println("index"+"\t"+"CinePlex ID" + "\t" + "Cinema ID" + "\t" + "Time" + "\t" + "Status" +"\t"+"Class"+"\t"+"Type");
         for(Cinema cinema:cinemas){
-            System.out.println(count++ +"\t"+cinema.getCinplexID() + "\t" + cinema.getCinemaID() + "\t" + cinema.getTime() + "\t" +cinema.getStatus() + "\t" +cinema.getCinemaClass() + "\t" + cinema.getMovieType());
+            //System.out.println(count++ +"\t"+cinema.getCinplexID() + "\t" + cinema.getCinemaID() + "\t" + cinema.getTime() + "\t" +cinema.getStatus() + "\t" +cinema.getCinemaClass() + "\t" + cinema.getMovieType());
+            System.out.format("%-6d %-12d %-10d %-20s %-13s %-9s %-5s %n", count++, cinema.getCinplexID(), cinema.getCinemaID(), cinema.getTime(), cinema.getStatus(), cinema.getCinemaClass(), cinema.getMovieType());
         }
-    }
-    @Test
-    public void t1(){
-        DisplaySeating(DataManager.LoadShowTimes(1002).get(1));
     }
     public static void DisplaySeating(Cinema cinema) {
         int value;

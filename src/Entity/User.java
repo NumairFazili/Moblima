@@ -103,7 +103,7 @@ public class User extends Person{
     }
     //to verify the attributes
     public void SearchListMovie(Scanner input, int choice){
-        ArrayList<Movie> mymovielist = null;
+        ArrayList<Movie> mymovielist = new ArrayList<Movie>();
         //List all movies
         if (choice == 5){
             mymovielist = DataManager.LoadMovies("");
@@ -121,7 +121,11 @@ public class User extends Person{
         Boundary.DisplayMovie(mymovielist);
         //Select movie by movie ID and print movie details – including reviews and ratings
         System.out.println("Enter ID of the movie to see the details: " );
+        System.out.println("Otherwise enter 0 to go back" );
         int inputsearchint = input.nextInt();
+        if (inputsearchint == 0){
+            return;
+        }
         Movie mymovie = SearchManager.find_Movie_byID(mymovielist, inputsearchint);
         System.out.println("Movie Details: " );
         Boundary.DisplayMovie(mymovie);
