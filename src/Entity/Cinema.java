@@ -20,7 +20,11 @@ public class Cinema {
         this.seats = seats;
         this.movieType = movieType;        
     }
-
+    @Override
+    public String toString(){
+        String s = this.getCinplexID() + "\t" + this.getCinemaID() + "\t" + this.getTime() + "\t" +this.getStatus() + "\t" +this.getCinemaClass() + "\t" + this.getMovieType();
+        return s;
+    }
     public int getCinplexID() {
         return cinplexID;
     }

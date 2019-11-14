@@ -89,8 +89,8 @@ public class Test_main {
                             user.SearchListMovie(input, choice);
                             break;
                         case 2:
-                            user.getBookings();
-                            //Display bookings method to be added
+                            List<Booking> bookings = user.getBookings();
+                            Boundary.DisplayBookings(bookings);
                             break;
                         case 3:
                             System.out.println("Listing top 5 movies by ticket sales:");

@@ -205,7 +205,7 @@ public class User extends Person{
             System.out.println("Enter rating for the movie:" );
             int movierating = input.nextInt();
             System.out.println("Enter review for the movie:" );
-            String moviereview = input.nextLine();
+            String moviereview = input.next();
             this.reviewMovie(mymovie, movierating, moviereview);
         }
     }

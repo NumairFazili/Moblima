@@ -69,7 +69,6 @@ public void test_1(){
     @Test
     public void test(){
         User p = new User();
-        System.out.println(Arrays.asList(p.getAllMovies().get(1).getId()));
         get_topN_bySale(p.getAllMovies(), DataManager.LoadBookings());
     }
     public static HashMap<Integer, Integer> sortByValue(HashMap<Integer, Integer> hm)
@@ -97,9 +96,7 @@ public void test_1(){
     public static ArrayList<Movie> get_topN_bySale(ArrayList<Movie> movies, ArrayList<Booking> bookings){
         ArrayList<Movie> to_return = new ArrayList<Movie>();
         HashMap<Integer,Integer> sales_map = SearchManager.calculateSales(bookings);
-        System.out.println(Arrays.asList(sales_map));
         Map<Integer, Integer> sorted_map = sortByValue(sales_map);
-        System.out.println(Arrays.asList(sorted_map));
 
         for(Map.Entry<Integer,Integer> entry: sorted_map.entrySet()){
 

@@ -52,7 +52,11 @@ public class AuthManager{
         //Check with database if name and mobile number matches then create corresponding user object
 
         try{User myuser = UserManager.getUser(username, mobilenumber);
-            System.out.println("User Login Successful!");
+            if(myuser!=null)
+                System.out.println("User Login Successful!");
+            else{
+                System.out.println("Error! Incorrect login details.");
+            }
             return myuser;}
         catch ( Exception e){System.out.println("Error! Incorrect login details."); return null;}
 /*

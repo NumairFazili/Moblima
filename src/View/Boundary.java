@@ -1,9 +1,7 @@
 package View;
 
 import Controller.DataManager;
-import Entity.Booking;
-import Entity.Cinema;
-import Entity.Movie;
+import Entity.*;
 import org.junit.Test;
 
 import java.util.*;
@@ -11,7 +9,7 @@ import java.util.*;
 public class Boundary {
 
 
-    private static final String[] staffOptions={"Create movie listing","Update movie listing","Create cinema showtimes and the movies to be shown","Update cinema showtimes and the movies to be shown","Configure system settings"};
+    private static final String[] staffOptions={"Create movie listing","Update movie listing","Delete movie listing","Create cinema showtimes and the movies to be shown","Update cinema showtimes and the movies to be shown","Remove cinema showtimes and the movies to be shown","Configure system settings"};
     private static final String[] startOptions ={"Admin user","Movie-Goer"};
     private static final String[] userMovieOptions={"Search movie", "View booking history","List the Top 5 ranking by ticket sales","List the Top 5 ranking by overall reviewers’ ratings","List all movies"};
     private static final String[] userOptions={"Existing User","New User","Guest User"};
@@ -73,12 +71,6 @@ public class Boundary {
         System.out.println(" "+0+" : "+"Exit");
     }
 
-    public static void main(String[] args) {
-
-        Boundary.DisplayOptions("staffMenu");
-
-
-    }
 
 
     public static void DisplayMovie(List<Movie> movieList){
@@ -97,7 +89,30 @@ public class Boundary {
         System.out.println("Cast\t\t: "+movie.getCast());
         System.out.println("Description\t\t: "+movie.getDescription());
     }
+    @Test
+    public void test_display(){
+        User u = new User();
+        Staff t = new Staff();
+        List<Object> l = new ArrayList<Object>((t.getAllShowTimes()));
+        Display(l);
+    }
+    public static void Display(List<Object> list){
+        int count=1;
+        if(list.get(0)!=null){
+            if(list.get(0) instanceof Cinema){
+                System.out.println("index"+"\t"+"CinePlex ID" + "\t" + "Cinema ID" + "\t" + "Time" + "\t" + "Status" +"\t"+"Class"+"\t"+"Type");
+            }
 
+        }
+        for(Object o:list){
+            System.out.print(count+" ");
+            count++;
+            System.out.println(o.toString());
+        }
+    }
+    public static void Display(Object o){
+        System.out.println(o.toString());
+    }
 
     public static void DisplayBookings(List<Booking> bookings){
         int count=0;

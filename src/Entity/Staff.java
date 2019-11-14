@@ -15,6 +15,10 @@ public class Staff extends Person {
         //ID should be generated automatically
     }
 
+    public Staff() {
+
+    }
+
     public void setPassword(String password){
         this.password = password;
     }
@@ -300,18 +304,17 @@ public class Staff extends Person {
     }
     public void UpdateMovie(Scanner input){
         //List all movies
-
-        Boundary.DisplayMovies(mystaff.getAllMovies());
+        Boundary.DisplayMovie(this.getAllMovies());
         //Boundary.DisplayMovies(DataManager.LoadMovies(""));
         //Select movie to update by movieID
         System.out.println("Enter ID of the movie to be updated: " );
-        inputsearchint = input.nextInt();
+        int inputsearchint = input.nextInt();
         input.nextLine();//Catch newline from input.nextInt()
-        mymovie = SearchManager.find_Movie_byID(mystaff.getAllMovies(), inputsearchint);
+        Movie mymovie = SearchManager.find_Movie_byID(this.getAllMovies(), inputsearchint);
 
         //Choose which attribute of the movie to be edited
         System.out.println("Choose attribute of movie to be edited: " );
-        choice = -1;
+        int choice = -1;
         while (choice != 0){
             choice = -1;
             while (choice <= -1 || choice >= 8){
@@ -342,12 +345,12 @@ public class Staff extends Person {
             //1. Prompt input for movie name and edit movie object
             else if (choice == 1){
                 System.out.println("Enter new movie name:");
-                mystaff.updateMovieName(mymovie, input.nextLine());
+                this.updateMovieName(mymovie, input.nextLine());
             }
             //2. Prompt input for language and edit movie object
             else if (choice == 2){
                 System.out.println("Enter new language:");
-                mystaff.updateMovieLanguage(mymovie, input.nextLine());
+                this.updateMovieLanguage(mymovie, input.nextLine());
             }
             //3. Prompt input for rating and edit movie object
             else if (choice == 3){// Currently not in use
@@ -358,27 +361,27 @@ public class Staff extends Person {
             //4. Prompt input for runtime and edit movie object
             else if (choice == 4){
                 System.out.println("Enter new runtime:");
-                mystaff.updateMovieRunTime(mymovie, input.nextLine());
+                this.updateMovieRunTime(mymovie, input.nextLine());
             }
             //5. Prompt input for Cast member and edit movie object
             else if (choice == 5){
                 System.out.println("Enter new cast members:");
-                mystaff.updateMovieCast(mymovie, Arrays.asList((input.nextLine().split(","))));
+                this.updateMovieCast(mymovie, Arrays.asList((input.nextLine().split(","))));
             }
             //6. Prompt input for description and edit movie object
             else if (choice == 6){
                 System.out.println("Enter new description:");
-                mystaff.updateMovieDescription(mymovie, input.nextLine());
+                this.updateMovieDescription(mymovie, input.nextLine());
             }
             //7. Prompt input for director and edit movie object
             else if (choice == 7){
                 System.out.println("Enter new director:");
-                mystaff.updateMovieDirector(mymovie, input.nextLine());
+                this.updateMovieDirector(mymovie, input.nextLine());
             }
 
         }
         //Save edited movie object to database
-        if (mystaff.saveMovieChanges(mymovie) == Boolean.TRUE){
+        if (this.saveMovieChanges(mymovie) == Boolean.TRUE){
             System.out.println("Movie listing successfully updated!");
         }
         else{
