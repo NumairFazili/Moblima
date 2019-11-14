@@ -2,8 +2,6 @@ package View;
 
 import Controller.DataManager;
 import Entity.*;
-import org.junit.jupiter.api.Test;
-//import org.junit.Test;
 
 import java.util.*;
 
@@ -145,14 +143,6 @@ public class Boundary {
         }
     }
 
-    @Test
-    public void t1(){
-
-        Staff staff = new Staff();
-        User user=new User();
-        DisplayBookings(DataManager.LoadBookings());
-
-    }
     public static void DisplaySeating(Cinema cinema) {
         int value;
         int rows=10;
@@ -188,6 +178,20 @@ public class Boundary {
         System.out.println("=========MOVIE SCREEN==========");
     }
 
+    public static void DisplaySettings(){
+        Settings mysettings = DataManager.LoadSettings();
+        System.out.println("Current Settings");
+        System.out.println("BasePrice:"+ mysettings.getBasePrice());
+        System.out.println("ChildPrice:"+ mysettings.getChildPrice());
+        System.out.println("Senior:"+ mysettings.getSeniorPrice());
+        System.out.println("HolidayPrice:" +mysettings.getHolidays());
+        System.out.println("SilverPrice:" +mysettings.getSilverPrice());
+        System.out.println("GoldPrice:" +mysettings.getGoldPrice());
+        System.out.println("PlatinumPrice:" +mysettings.getPlatinumPrice());
+        System.out.println("Holidays:" +mysettings.getHolidays());
+        System.out.println();
+
+    }
 
 }
 

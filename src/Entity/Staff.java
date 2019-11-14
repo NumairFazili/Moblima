@@ -217,6 +217,7 @@ public class Staff extends Person {
     }
     public void configureSettings(Scanner input){
         //Choose which setting to configure
+        Boundary.DisplaySettings();
         System.out.println("Choose which setting to configure: " );
         Settings mysettings = this.showSettings();
         int choice = -1;
@@ -311,6 +312,7 @@ public class Staff extends Person {
         int inputsearchint = input.nextInt();
         input.nextLine();//Catch newline from input.nextInt()
         Movie mymovie = SearchManager.find_Movie_byID(this.getAllMovies(), inputsearchint);
+        Boundary.DisplayMovie(mymovie);
 
         //Choose which attribute of the movie to be edited
         System.out.println("Choose attribute of movie to be edited: " );
