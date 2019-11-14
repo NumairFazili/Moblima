@@ -42,7 +42,6 @@ public class StaffMovieManager extends MovieManager {
         }
     }
     public void createNewMovie(int id, String name, String Language, List<Integer> rating, String runTime, List<String> cast, String Synopsis, String Director, List<String> comments, String status){
-
         Movie m = new Movie(id, name, Language, rating, runTime, cast, Synopsis, Director, comments, status);
         DataManager.SaveMovies(m);
     }
@@ -79,6 +78,7 @@ public class StaffMovieManager extends MovieManager {
                     System.out.println("7. Status");
                     System.out.println("0. Done");
                     choice = in.nextInt();
+                    in.nextLine();//catch newline
                     if (choice <= -1 || choice >= 8){
                         System.out.println("Error! Please enter either 0, 1, 2, 3, 4, 5, 6 or 7:");
                     }
@@ -125,7 +125,7 @@ public class StaffMovieManager extends MovieManager {
             //7. Prompt input for Minimum age and edit movie object
             else if (choice == 7){
                 System.out.println("Enter Status");
-                this.updateMovieStatus(mymovie, input.next());
+                this.updateMovieStatus(mymovie, input.nextLine());
             }
 
         }

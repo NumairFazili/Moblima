@@ -110,21 +110,17 @@ public class StaffShowTimeManager extends ShowTimeManager {
         System.out.println("Enter Cinema_ID:");
         int cinemaid = input.nextInt();
         input.nextLine(); //Catch newline from .nextInt()
-        System.out.println("Enter Movie ID:");//might need to error check if movieid is legit
+        System.out.println("Enter Movie ID:");
         int movieid = input.nextInt();
         input.nextLine(); //Catch newline from .nextInt()
         System.out.println("Enter ShowTime:");
         String showtime = input.nextLine();
-        System.out.println("Enter Status");
-        String status = input.nextLine();
         System.out.println("Enter class:");
         String cinemaclass = input.nextLine();
-        //System.out.println("Enter Seats:"); //Staff probably does not need to enter seat details
-        //seats = input.nextLine();
         System.out.println("Enter MovieType:");
         String movietype = input.nextLine();
         //Create new showtime object and save movie listing to database using DataManager
-        this.createShowTime(cineplexid, cinemaid, movieid, showtime, status, cinemaclass, Arrays.asList(), movietype);
+        this.createShowTime(cineplexid, cinemaid, movieid, showtime, cinemaclass, Arrays.asList(), movietype);
     }
 
 
@@ -138,7 +134,7 @@ public class StaffShowTimeManager extends ShowTimeManager {
     public boolean saveShowTimeChanges(Cinema c){
         return DataManager.UpdateShowTime(c,false);
     }
-    public void createShowTime(int cinplexID, int cinemaID, int movieID, String time, String status, String cinemaClass, List<Integer> seats, String movieType){
+    public void createShowTime(int cinplexID, int cinemaID, int movieID, String time, String cinemaClass, List<Integer> seats, String movieType){
         Cinema c = new Cinema(cinplexID, cinemaID, movieID, time,cinemaClass, seats, movieType);
         DataManager.AddShowTimes(c);
     }
