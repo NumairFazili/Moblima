@@ -1,8 +1,10 @@
 package View;
 
+import Controller.DataManager;
 import Entity.Booking;
 import Entity.Cinema;
 import Entity.Movie;
+import org.junit.Test;
 
 import java.util.*;
 
@@ -136,7 +138,10 @@ public class Boundary {
             System.out.println(count++ +"\t"+cinema.getCinplexID() + "\t" + cinema.getCinemaID() + "\t" + cinema.getTime() + "\t" +cinema.getStatus() + "\t" +cinema.getCinemaClass() + "\t" + cinema.getMovieType());
         }
     }
-
+    @Test
+    public void t1(){
+        DisplaySeating(DataManager.LoadShowTimes(1002).get(1));
+    }
     public static void DisplaySeating(Cinema cinema) {
         int value;
         int rows=8;

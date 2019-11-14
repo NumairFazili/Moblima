@@ -299,15 +299,91 @@ public class Staff extends Person {
         DataManager.SaveMovies(m);
     }
     public void UpdateMovie(Scanner input){
+        //List all movies
 
-        ArrayList<Movie> allMovies = this.getAllMovies();
-        Boundary.DisplayMovie(allMovies);
+        Boundary.DisplayMovies(mystaff.getAllMovies());
+        //Boundary.DisplayMovies(DataManager.LoadMovies(""));
+        //Select movie to update by movieID
         System.out.println("Enter ID of the movie to be updated: " );
-        int inputsearchint = input.nextInt();
-        input.nextLine();
-        Movie mymovie = SearchManager.find_Movie_byID(allMovies, inputsearchint);
+        inputsearchint = input.nextInt();
+        input.nextLine();//Catch newline from input.nextInt()
+        mymovie = SearchManager.find_Movie_byID(mystaff.getAllMovies(), inputsearchint);
+
+        //Choose which attribute of the movie to be edited
         System.out.println("Choose attribute of movie to be edited: " );
-        int choice = -1;
+        choice = -1;
+        while (choice != 0){
+            choice = -1;
+            while (choice <= -1 || choice >= 8){
+                try{
+                    Scanner in = new Scanner(System.in);
+                    System.out.println("1. movie name");
+                    System.out.println("2. language");
+                    System.out.println("3. rating");
+                    System.out.println("4. runtime");
+                    System.out.println("5. Cast member");
+                    System.out.println("6. description");
+                    System.out.println("7. director");
+                    System.out.println("0. Done");
+                    choice = in.nextInt();
+                    if (choice <= -1 || choice >= 8){
+                        System.out.println("Error! Please enter either 0, 1, 2, 3, 4, 5, 6 or 7:");
+                    }
+                }
+                catch(InputMismatchException e){
+                    System.out.println("That is not an integer, please try again." );
+                }
+            }
+            //0. Done, save new movie object to database
+            if (choice == 0){
+                choice = -1;
+                break;
+            }
+            //1. Prompt input for movie name and edit movie object
+            else if (choice == 1){
+                System.out.println("Enter new movie name:");
+                mystaff.updateMovieName(mymovie, input.nextLine());
+            }
+            //2. Prompt input for language and edit movie object
+            else if (choice == 2){
+                System.out.println("Enter new language:");
+                mystaff.updateMovieLanguage(mymovie, input.nextLine());
+            }
+            //3. Prompt input for rating and edit movie object
+            else if (choice == 3){// Currently not in use
+                System.out.println("Enter new rating:");
+                //mymovie.setRating(Arrays.asList(input.nextInt()));
+                //input.nextLine();//Catch newline from input.nextDouble()
+            }
+            //4. Prompt input for runtime and edit movie object
+            else if (choice == 4){
+                System.out.println("Enter new runtime:");
+                mystaff.updateMovieRunTime(mymovie, input.nextLine());
+            }
+            //5. Prompt input for Cast member and edit movie object
+            else if (choice == 5){
+                System.out.println("Enter new cast members:");
+                mystaff.updateMovieCast(mymovie, Arrays.asList((input.nextLine().split(","))));
+            }
+            //6. Prompt input for description and edit movie object
+            else if (choice == 6){
+                System.out.println("Enter new description:");
+                mystaff.updateMovieDescription(mymovie, input.nextLine());
+            }
+            //7. Prompt input for director and edit movie object
+            else if (choice == 7){
+                System.out.println("Enter new director:");
+                mystaff.updateMovieDirector(mymovie, input.nextLine());
+            }
+
+        }
+        //Save edited movie object to database
+        if (mystaff.saveMovieChanges(mymovie) == Boolean.TRUE){
+            System.out.println("Movie listing successfully updated!");
+        }
+        else{
+            System.out.println("Error movie listing failed to be updated!");
+        }
 
     }
     public void updateMovieName(Movie m, String s){
