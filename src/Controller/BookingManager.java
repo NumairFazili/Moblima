@@ -19,10 +19,7 @@ import Entity.User;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Random;
-import java.util.Set;
+import java.util.*;
 
 public class BookingManager {
  
@@ -64,15 +61,20 @@ public class BookingManager {
         return new Booking(bookingID, cinema.getCinplexID(), cinema.getCinemaID(), cinema.getMovieID(), cinema.getTime(), cinema.getCinemaClass(), cinema.getMovieType(), user.getName(), user.getmobileNumber(), user.getEmail(), user.getCustomerType(), seatNO, bookingTime, final_price);
     }
 
-    public static void saveBooking(Booking booking,Cinema cinema){
+    public static Boolean saveBooking(Booking booking,Cinema cinema){
+
+        if(!SeatCheck(cinema.getSeats(),booking.getSeatNO()))
+            return false;
+
         DataManager.AddBooking(booking);
         cinema.addSeats(booking.getSeatNO());
         DataManager.UpdateShowTime(cinema,false);
+        return true;
     }
 
 
     private static double calc_price(User user,Cinema cinema){
-        priceManager calc_price = new priceManager(user.getAge(),cinema.getCinemaClass());
+        priceManager calc_price = new priceManager(user.getAge(),cinema);
         return  calc_price.getPrice();
     }
     private static String genBookingID(){
@@ -86,4 +88,17 @@ public class BookingManager {
         }
         return Integer.toString(newID);
     }
+
+    private static boolean SeatCheck(List<Integer> seats,int curSeat){
+
+        if(seats.contains(curSeat))
+            return false;
+        return true;
+
+    }
+
+
+
+
+
 }

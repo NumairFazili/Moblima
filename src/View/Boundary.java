@@ -79,6 +79,7 @@ public class Boundary {
             //System.out.println(movie.getId() + "\t" + movie.getName() + "\t" + movie.getAvgRating() + "\t" +movie.getLanguage());
             System.out.format("%-5d %-25s %-15.2f %-15s %n", movie.getId(), movie.getName(), movie.getAvgRating(), movie.getLanguage());
         }
+        System.out.println();
     }
 
     public static void DisplayMovie(Movie movie){
@@ -89,7 +90,9 @@ public class Boundary {
         System.out.println("Language\t\t: "+movie.getLanguage());
         System.out.println("Age Requirement\t: "+movie.getMinAge());
         System.out.println("Cast\t\t: "+movie.getCast());
-        System.out.println("Description\t\t: "+movie.getDescription());
+        System.out.println("Director\t\t: "+movie.getDirector());
+        System.out.println("Discription\t\t: "+movie.getDescription());
+        System.out.println();
     }
     public static void Display(List<Object> list){
         int count=1;
@@ -111,13 +114,13 @@ public class Boundary {
 
     public static void DisplayBookings(List<Booking> bookings){
         int count=0;
-        System.out.format("%-20s   %-20s   %-10s   %-15s  %-15s   %-10s %-4s   %-20s   %-20s   %-15s  %-20s  %-20s  %n","Customer Name","Customer Type","Booking ID",
-                            "Cinplex ID","Cinema ID ","Movie ID","Seat","Showtime","Booking Time","Cinema Class","Movie Type","Email");
+        System.out.format("%-20s   %-20s   %-10s   %-15s  %-15s   %-10s %-4s   %-20s   %-20s  %-6s  %-15s  %-20s  %-20s  %n","Customer Name","Customer Type","Booking ID",
+                            "Cinplex ID","Cinema ID ","Movie ID","Seat","Showtime","Booking Time","Price","Cinema Class","Movie Type","Email");
 
         for(Booking booking:bookings)
-            System.out.format("%-20s   %-20s   %-10s   %-15d   %-15d   %-10d %-4d   %-20s   %-20s   %-15s  %-20s  %-20s  %n",booking.getCustomerName(),
+            System.out.format("%-20s   %-20s   %-10s   %-15d   %-15d   %-10d %-4d   %-20s   %-20s  %-6.2f  %-15s  %-20s  %-20s  %n",booking.getCustomerName(),
                     booking.getCustomerType(),booking.getBookingID(),booking.getCinplexID(),booking.getCinemaID(),booking.getMovieID(),booking.getSeatNO(),
-                    booking.getShowTime(),booking.getBookingTime(),booking.getCinemaClass(),booking.getMovieType(),booking.getEmail());
+                    booking.getShowTime(),booking.getBookingTime(),booking.getPrice(),booking.getCinemaClass(),booking.getMovieType(),booking.getEmail());
     }
 
 
@@ -184,7 +187,7 @@ public class Boundary {
         System.out.println("BasePrice:"+ mysettings.getBasePrice());
         System.out.println("ChildPrice:"+ mysettings.getChildPrice());
         System.out.println("Senior:"+ mysettings.getSeniorPrice());
-        System.out.println("HolidayPrice:" +mysettings.getHolidays());
+        System.out.println("HolidayPrice:" +mysettings.getHolidayPrice());
         System.out.println("SilverPrice:" +mysettings.getSilverPrice());
         System.out.println("GoldPrice:" +mysettings.getGoldPrice());
         System.out.println("PlatinumPrice:" +mysettings.getPlatinumPrice());

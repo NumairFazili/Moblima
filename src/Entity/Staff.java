@@ -206,7 +206,8 @@ public class Staff extends Person {
         }
         else{
             Cinema mycinema = this.getAllShowTimes().get(inputsearchint);
-            this.deleteShowTime(mycinema); //should remove entry line instead of setting status to "ended" and return boolean instead of void
+            DataManager.UpdateShowTime(mycinema, true);
+
             /*if (mystaff.deleteShowTime(mycinema) == Boolean.TRUE){
                 System.out.println("Showtime successfully removed!");
             }
@@ -236,6 +237,7 @@ public class Staff extends Person {
                     System.out.println("8. Holidays");
                     System.out.println("0. Done");
                     choice = in.nextInt();
+                    in.nextLine();//catch newline
                     if (choice <= -1 || choice >= 9){
                         System.out.println("Error! Please enter either 0, 1, 2, 3, 4, 5, 6, 7 or 8:");
                     }
@@ -287,7 +289,7 @@ public class Staff extends Person {
             //8. Prompt input for holidays
             else if (choice == 8){
                 System.out.println("Enter new holidays:");
-                this.updateHoliday(mysettings, Arrays.asList(input.nextLine().split(",")));
+                this.updateHoliday(mysettings, Arrays.asList(input.next().split(",")));
             }
         }
         //Save edited movie object to database

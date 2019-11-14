@@ -15,7 +15,7 @@ public class Movie {
     List<String> reviews;
     List<String> cast;
     int minAge;
-    public Movie(int id,String name,String Language,List<Integer>ratings,String runTime,List<String> cast,String Description,String Director, List<String> reviews, int minAge) {
+    public Movie(int id,String name,String Language,List<Integer>ratings,String runTime,List<String> cast,String Director,String Description,List<String> reviews, int minAge) {
         this.id = id;
         this.ratings = ratings;
         this.name = name;

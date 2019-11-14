@@ -90,8 +90,12 @@ public class User extends Person{
             int x=input.nextInt();
 
             if(x==1){
-                BookingManager.saveBooking(booking,cinema);
-                System.out.println("Booking Created");
+                if(BookingManager.saveBooking(booking,cinema))
+                    System.out.println("Booking Created");
+                else
+                    System.out.println("Booking Unsuccesfull Seat already taken");
+
+
             }
             else{
                 System.out.println("Booking Cancelled");

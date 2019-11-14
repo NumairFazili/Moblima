@@ -1,5 +1,5 @@
 Movie ID,Movie Name,Language,Rating,RunTime,Cast,Director,Description,Reviews,minAge
-1001,Batman,English,9.6.8.9,3:05,AA.BB.CC,Nolan,sampleText,review1.review2.review3.review4,18
+1001,Batman,English,9.6.8.9,3:05,AA.BB.CC,sampleText,nolan,review1.review2.review3.review4,18
 1002,Avengers,English,9.7.8.9,2:05,a.b.c,sampleText,sampleText,review1.review2.review3.review4,18
 1003,Shawshank,English,10.8.8.9,3:25,a.b.c,sampleText,sampleText,review1.review2.review3.review4,18
 1004,Joker,English,9.1.5.9,3:15,a.b.c,sampleText,sampleText,review1.review2.review3.review4,18

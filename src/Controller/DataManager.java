@@ -145,9 +145,9 @@ public class DataManager {
                     writer.append(",");
                     writer.append(String.join(".", movie.getCast()));
                     writer.append(",");
-                    writer.append(movie.getDescription());
-                    writer.append(",");
                     writer.append(movie.getDirector());
+                    writer.append(",");
+                    writer.append(movie.getDescription());
                     writer.append(",");
                     writer.append(String.join(".", movie.getReviews()));
                     writer.append(",");
