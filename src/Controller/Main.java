@@ -2,7 +2,7 @@ package Controller;
 
 import Entity.*;
 import View.Boundary;
-import View.UserBoundary;
+//import View.UserBoundary;
 import javafx.beans.binding.ObjectExpression;
 import javafx.util.Pair;
 
@@ -70,16 +70,14 @@ public class Main {
                 Boundary.DisplayOptions("userMenu");
                 int user_login_choice = input.nextInt();
                 while (user == null ){
-
-
                     if(user_login_choice == 1){
                         user = UserManager.UserLogin(input);
                     }
                     else if(user_login_choice == 2){
                         user = UserManager.createUser(input);
                     }
-                    else if(user_login_choice == 3){
-                        user = UserManager.getGuestUser();
+                    else if(user_login_choice == 0){
+                        System.exit(-1);
                     }
                     else{
                         System.out.println("Enter Valid Input");

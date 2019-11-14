@@ -2,7 +2,6 @@ package Controller;
 
 import Entity.Cinema;
 import View.Boundary;
-import org.junit.Test;
 
 import java.util.Arrays;
 import java.util.InputMismatchException;

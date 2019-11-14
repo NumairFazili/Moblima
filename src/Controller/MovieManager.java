@@ -138,21 +138,32 @@ public class MovieManager {
                 //1. Select seats
                 else if (choice == 1){
                     looper = Boolean.FALSE; //stop while loop
-                    System.out.println("Enter row index of seat:" );
-                    int rowofseat = input.nextInt();
-                    System.out.println("Enter col index of seat:" );
-                    int colofseat = input.nextInt();
-                    input.nextLine();//Catch newline from input
-                    //4. Book and purchase ticket
-                    Cinema mycinema = ((DataManager.LoadShowTimes(mymovie.getId()).get(inputsearchint)));
+                    while(true){
+                        System.out.println("Enter row index of seat:" );
+                        int rowofseat = input.nextInt();
+                        System.out.println("Enter col index of seat:" );
+                        int colofseat = input.nextInt();
+                        input.nextLine();//Catch newline from input
+                        //4. Book and purchase ticket
+                        Cinema mycinema = ((DataManager.LoadShowTimes(mymovie.getId()).get(inputsearchint)));
 
-                    BookingManager bookingManager=new BookingManager();
-                    if(!bookingManager.createBooking(user,mycinema, rowofseat*10 + colofseat)){
-                        System.out.println("Booking Failed");
-                        continue;
+                        BookingManager bookingManager=new BookingManager();
+                        if(!bookingManager.createBooking(user,mycinema, rowofseat*10 + colofseat)){
+                            System.out.println("Booking Failed");
+                            System.out.println("Enter 1 to choose another seat, 0 to go back");
+                            inputsearchint = input.nextInt();
+                        }
+                        else{
+                            break;
+                        }
+
+                        if (inputsearchint == 0){
+                            break;
+                        }
+                        if (inputsearchint == 1){
+                            Boundary.DisplaySeating(((DataManager.LoadShowTimes(mymovie.getId()).get(inputsearchint))));
+                        }
                     }
-
-
                 }
                 //2. Select another showtime
                 else if (choice == 2){
