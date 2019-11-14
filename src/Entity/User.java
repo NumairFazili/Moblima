@@ -7,7 +7,7 @@ import java.util.List;
 import Controller.*;
 import View.Boundary;
 
-public class User extends Person{
+public class User{
     int age;
     String email; 
     String mobileNumber;
@@ -27,10 +27,6 @@ public class User extends Person{
         userManager=new UserManager();
         movieManager=new MovieManager();
 
-    }
-
-    public void setName_User(String name){
-        this.setName(name);     //using base class function
     }
     public int getAge() {return age; }
     public String getName() {

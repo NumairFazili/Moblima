@@ -1,14 +1,12 @@
 package Entity;
 
-public class Staff extends Person {
+public class Staff{
     String password;
     String name;
 
     public Staff(String name, String password){
-        //this.setName_Staff(name);         //using base class method
         this.password = password;
         this.name=name;
-        //ID should be generated automatically
     }
 
     public Staff() {
@@ -17,9 +15,6 @@ public class Staff extends Person {
 
     public void setPassword(String password){
         this.password = password;
-    }
-    public void setName_Staff(String name){
-        this.setName(name);
     }
     public String getName(){
         return name;

@@ -14,7 +14,6 @@ package Controller;
 
 import Entity.Booking;
 import Entity.Movie;
-import Entity.Person;
 import Entity.User;
 import javafx.css.Size;
 
