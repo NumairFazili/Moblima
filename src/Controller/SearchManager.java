@@ -83,7 +83,11 @@ public class SearchManager {
         Map<Integer, Integer> sorted_map = sortByValue(sales_map);
         for(Map.Entry<Integer,Integer> entry: sorted_map.entrySet()){
 
-            to_return.add(find_Movie_byID(movies,entry.getKey()));
+            Movie m = find_Movie_byID(movies,entry.getKey());
+            if(m == null){
+                continue;
+            }
+            to_return.add(m);
             if(to_return.size()>=SIZE_OF_PQ){
                 break;
             }
