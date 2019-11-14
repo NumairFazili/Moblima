@@ -178,13 +178,15 @@ public class MovieManager {
         return SearchManager.get_topN_bySale(this.getAllMovies(), DataManager.LoadBookings());
     }
 
-
-
-
-
-
-
-
+    public static void main(String args[]){
+        MovieManager mm = new MovieManager();
+        ArrayList<Movie> m_list = mm.getAllMovies();
+        Boundary.DisplayMovie(m_list);
+        for(Movie m: m_list){
+            Boundary.DisplayMovie(m);
+            Boundary.DisplayMovieReviews(m);
+        }
+    }
 
 
 }

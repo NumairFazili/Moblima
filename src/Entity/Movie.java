@@ -142,7 +142,7 @@ public class Movie {
         return status;
     }
 
-    public void setStatus(String minAge){
+    public void setStatus(String status){
         this.status = status;
     }
 
