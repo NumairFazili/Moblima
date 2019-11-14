@@ -29,7 +29,6 @@ public class StaffManager {
 
     public StaffManager(){};
 
-
     public static Pair<Integer,Staff> StaffLogin(Scanner input){
         boolean adminauth = false;
         Staff mystaff =new Staff("NULL","NULL") ;

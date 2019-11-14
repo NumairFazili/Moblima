@@ -100,11 +100,11 @@ public class Main {
                             break;
                         case 3:
                             System.out.println("Listing top 5 movies by ticket sales:");
-                            Boundary.DisplayMovie(user.getTopBySales());
+                            Boundary.DisplayMovie(movieManager.getTopBySales());
                             break;
                         case 4:
                             System.out.println("Listing top 5 movies by overall reviewers’ ratings:");
-                            Boundary.DisplayMovie(user.getTopByRatings());
+                            Boundary.DisplayMovie(movieManager.getTopByRatings());
                             break;
                         case 0:
                             break;

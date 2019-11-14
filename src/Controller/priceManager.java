@@ -5,7 +5,6 @@ import Entity.Settings;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -16,14 +15,14 @@ public class priceManager {
     private int age;
     private Cinema cinema;
 
-    Settings settings;
+    private Settings settings;
 
 
 
     public priceManager(int age, Cinema cinema){
         this.age=age;
         this.cinema=cinema;
-        settings=DataManager.LoadSettings();
+        this.settings=DataManager.LoadSettings();
     }
 
 

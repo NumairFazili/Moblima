@@ -169,6 +169,15 @@ public class MovieManager {
     }
 
 
+    public ArrayList<Movie> getTopByRatings(){
+        return SearchManager.get_topN_byRating(this.getAllMovies());
+    }
+    public ArrayList<Movie> getTopBySales(){
+        SearchManager.calculateSales(DataManager.LoadBookings());
+        return SearchManager.get_topN_bySale(this.getAllMovies(), DataManager.LoadBookings());
+    }
+
+
 
 
 

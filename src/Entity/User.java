@@ -65,12 +65,5 @@ public class User extends Person{
     }
 
 
-        public ArrayList<Movie> getTopByRatings(){
-        return SearchManager.get_topN_byRating(movieManager.getAllMovies());
-    }
-    public ArrayList<Movie> getTopBySales(){
-        SearchManager.calculateSales(DataManager.LoadBookings());
-        return SearchManager.get_topN_bySale(movieManager.getAllMovies(), DataManager.LoadBookings());
-    }
 
 }
