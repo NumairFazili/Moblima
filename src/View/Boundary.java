@@ -106,7 +106,7 @@ public class Boundary {
 
     public static void DisplayMovie(Movie movie){
 
-        System.out.format("%-5s   %-20s   %-7s   %-10s  %-15s   %-30s  %-15s   %-20s   %-50s  %n","Movie ID","Movie Name","Rating",
+        System.out.format("%-5s   %-20s   %-7s   %-10s  %-15s   %-30s   %-20s   %-50s  %n","Movie ID","Movie Name","Rating",
                 "Language","Status","Cast","Director","Synopsis");
 
         String rating;
@@ -115,7 +115,7 @@ public class Boundary {
         else
             rating=String.valueOf(movie.getAvgRating());
 
-        System.out.format("%-5s   %-20s   %-7s   %-10s  %-15s   %-30s  %-15s   %-20s   %-50s  %n",movie.getId(),movie.getName(),rating,movie.getLanguage(),movie.getStatus(),movie.getCast(),movie.getDirector(),movie.getSynopsis());
+        System.out.format("%-5s   %-20s   %-7s   %-10s  %-15s   %-30s   %-20s   %-50s  %n",movie.getId(),movie.getName(),rating,movie.getLanguage(),movie.getStatus(),movie.getCast(),movie.getDirector(),movie.getSynopsis());
 
     }
 
