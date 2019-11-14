@@ -97,13 +97,12 @@ public class Boundary {
             System.out.println("Rating(Avg)\t: "+movie.getAvgRating());
         }
         System.out.println("Language\t: "+movie.getLanguage());
-        System.out.println("Age Requirement\t: "+movie.getMinAge());
         System.out.print("Cast");
         for(String cast: movie.getCast()){
             System.out.println("\t\t: "+cast);
         }
         System.out.println("Director\t: "+movie.getDirector());
-        System.out.println("Discription\t: "+movie.getDescription());
+        System.out.println("Discription\t: "+movie.getSynopsis());
         System.out.println();
     }
     public static void Display(List<Object> list){
