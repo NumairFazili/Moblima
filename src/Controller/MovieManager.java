@@ -147,15 +147,16 @@ public class MovieManager {
                     Cinema mycinema = ((DataManager.LoadShowTimes(mymovie.getId()).get(inputsearchint)));
 
                     BookingManager bookingManager=new BookingManager();
-                    bookingManager.createBooking(user,mycinema, rowofseat*10 + colofseat);
-
+                    if(!bookingManager.createBooking(user,mycinema, rowofseat*10 + colofseat)){
+                        System.out.println("Booking Failed");
+                        continue;
+                    }
 
 
                 }
                 //2. Select another showtime
                 else if (choice == 2){
                     Boundary.DisplayCinemas(showTimeManager.getShowTimesByMovie(mymovie.getId()));
-                    //Boundary.DisplayCinemas(DataManager.LoadShowTimes(mymovie.getId()));
                 }
             }
         }

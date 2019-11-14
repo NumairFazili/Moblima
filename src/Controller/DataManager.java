@@ -244,9 +244,9 @@ public class DataManager {
                 if (tokens[2].contains(ID)) {
                     List<Integer> items = new ArrayList<>();
                     if(!tokens[5].equals("")){
-                    List<String> str = Arrays.asList(tokens[6].split("\\."));
+                    List<String> str = Arrays.asList(tokens[5].split("\\."));
                     for (String s : str) items.add(Integer.valueOf(s));}
-                    Cinema cinema = new Cinema(Integer.parseInt(tokens[0]), Integer.parseInt(tokens[1]), Integer.parseInt(tokens[2]), tokens[3], tokens[4],items,tokens[7]);
+                    Cinema cinema = new Cinema(Integer.parseInt(tokens[0]), Integer.parseInt(tokens[1]), Integer.parseInt(tokens[2]), tokens[3], tokens[4],items,tokens[6]);
                     cinemaArrayList.add(cinema);
                 }
             }

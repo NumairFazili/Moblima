@@ -51,13 +51,14 @@ public class BookingManager {
     }
 
 
-    public void createBooking(User user,Cinema cinema, int seatNO){
+    public Boolean createBooking(User user,Cinema cinema, int seatNO){
 
 
         Movie m = movieManager.selectMovieByID(cinema.getMovieID());
+
         if(m.getStatus().equals("End of Show")){
             System.out.println("The movie has Ended");
-            return;
+            return false;
         }
 
         BookingManager.init();
@@ -69,12 +70,14 @@ public class BookingManager {
         int x=input.nextInt();
 
         if(x==1)
-            if(BookingManager.saveBooking(booking,cinema))
+            if(BookingManager.saveBooking(booking,cinema)){
                 System.out.println("Booking Created");
+                return true;
+            }
             else
-                System.out.println("Booking Unsuccesfull Seat already taken");
-        else
-            System.out.println("Booking Cancelled");
+                System.out.println("Seat Already Taken");
+
+        return false;
     }
 
 

@@ -87,22 +87,39 @@ public class Boundary {
         System.out.println();
     }
 
+//    public static void DisplayMovie(Movie movie){
+//
+//        System.out.println("ID\t\t\t: "+movie.getId());
+//        System.out.println("Title\t\t: "+movie.getName());
+//        if (movie.getAvgRating() == -1){
+//            System.out.println("Rating(Avg)\t\t: " + "NA");
+//        }else{
+//            System.out.println("Rating(Avg)\t\t: "+movie.getAvgRating());
+//        }
+//        System.out.println("Language\t\t: "+movie.getLanguage());
+//        System.out.println("Status\t: "+movie.getStatus());
+//        System.out.println("Cast\t\t: "+movie.getCast());
+//        System.out.println("Director\t\t: "+movie.getDirector());
+//        System.out.println("Synopsis\t\t: "+movie.getSynopsis());
+//        System.out.println();
+//    }
+
     public static void DisplayMovie(Movie movie){
 
-        System.out.println("ID\t\t\t: "+movie.getId());
-        System.out.println("Title\t\t: "+movie.getName());
-        if (movie.getAvgRating() == -1){
-            System.out.println("Rating(Avg)\t\t: " + "NA");
-        }else{
-            System.out.println("Rating(Avg)\t\t: "+movie.getAvgRating());
-        }
-        System.out.println("Language\t\t: "+movie.getLanguage());
-        System.out.println("Status\t: "+movie.getStatus());
-        System.out.println("Cast\t\t: "+movie.getCast());
-        System.out.println("Director\t\t: "+movie.getDirector());
-        System.out.println("Discription\t\t: "+movie.getSynopsis());
-        System.out.println();
+        System.out.format("%-5s   %-20s   %-7s   %-10s  %-15s   %-30s  %-15s   %-20s   %-50s  %n","Movie ID","Movie Name","Rating",
+                "Language","Status","Cast","Director","Synopsis");
+
+        String rating;
+        if(movie.getAvgRating() == -1)
+            rating="NA";
+        else
+            rating=String.valueOf(movie.getAvgRating());
+
+        System.out.format("%-5s   %-20s   %-7s   %-10s  %-15s   %-30s  %-15s   %-20s   %-50s  %n",movie.getId(),movie.getName(),rating,movie.getLanguage(),movie.getStatus(),movie.getCast(),movie.getDirector(),movie.getSynopsis());
+
     }
+
+
     public static void Display(List<Object> list){
         int count=1;
         if(list.get(0)!=null){
@@ -146,7 +163,7 @@ public class Boundary {
     public static void DisplayCinemas(List<Cinema> cinemas){
         int count=0;
 
-        System.out.format("%-6s %-12s %-10s %-20s %-13s %-9s %-5s %n", "index", "CinePlex ID", "Cinema ID", "Time", "Class", "Type");
+        System.out.format("%-6s %-12s %-10s %-20s  %-9s %-5s %n", "index", "CinePlex ID", "Cinema ID", "Time", "Class", "Type");
         //System.out.println("index"+"\t"+"CinePlex ID" + "\t" + "Cinema ID" + "\t" + "Time" + "\t" + "Status" +"\t"+"Class"+"\t"+"Type");
 
         for(Cinema cinema:cinemas){
