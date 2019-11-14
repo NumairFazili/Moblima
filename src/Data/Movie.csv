@@ -1,8 +1,8 @@
-Movie ID,Movie Name,Language,Rating,RunTime,Cast,Director,Description,Reviews,status
-1001,Batman,English,9.6.8.9,4:15,batman.robin.joker,sampleText,nolan,review1.review2.review3.review4,Now Showing
-1002,Avengers,English,9.7.8.9,2:05,a.b.c,sampleText,sampleText,review1.review2.review3.review4,Now Showing
-1003,Shawshank,English,10.8.8.9,3:25,a.b.c,sampleText,sampleText,review1.review2.review3.review4,Now Showing
-1004,Joker,English,9.1.5.9,3:15,a.b.c,sampleText,sampleText,review1.review2.review3.review4,Now Showing
-1005,Mission Impossible 4,English,5.4.8.9,2:15,a.b.c,sampleText,sampleText,review1.review2.review3.review4,Now Showing
-1006,The Incredibles,English,9.3.7.6,2:45,a.b.cd.e,sampletext,Brad Bird,review1.review2.review3.review4,Now Showing
-1007,new avengers,chinese,2.5.8.9,3:10,tony stark. iron man,sampletext,professor hulk,review1.review2.review3.review4,Now Showing
+Movie ID,Movie Name,Language,Rating,RunTime,Cast,Director,Description,Reviews,minAge
+1001,Batman,English,9.6.8.9,4:15,Jack Nicholson as The Joker.Michael Keaton as Bruce Wayne,Tim Burton,Batman is a 1989 American superhero film directed by Tim Burton and produced by Jon Peters and Peter Guber which is based on the DC Comics character of the same name,review1.review2.review3.review4,18
+1002,The Avengers,English,9.7.8.9,2:05,Robert Downey Jr as Iron Man.Chris Evans as Captain America,Joss Whedon,The Avengers is a 2012 American superhero film based on the Marvel Comics superhero team of the same name,review1.review2.review3.review4,18
+1003,The Shawshank Redemption,English,10.8.8.9,3:25,Tim Robbins as Andy.Morgan Freeman as Ellis Boyd.Bob Gunton as Samuel Norton,Frank Darabont,The Shawshank Redemption is a 1994 American drama film which is based on the 1982 Stephen King novella Rita Hayworth and Shawshank Redemption,review1.review2.review3.review4,18
+1004,Joker,English,9.1.5.9,3:15,Joaquin Phoenix as Joker.Robert De Niro as Murray Franklin,Todd Philips,Joker is a 2019 American psychological thriller film directed and produced by Todd Philips,review1.review2.review3.review4,18
+1005,Mission: Impossible 4,English,5.4.8.9,2:15,Tom Cruise as Ethan Hunt.Jeremy Renner as William Brandt,Brad Bird,Mission: Impossible � Ghost Protocol is a 2011 American action spy film directed by Brad Bird and written by Josh Appelbaum and Andre Nemec,review1.review2.review3.review4,18
+1006,The Incredibles,English,9.3.7.6,2:45,Holly Hunter as Elastigirl.Sarah Vowell as Violet Parr.Jason Lee as Incrediboy,Brad Bird,The Incredibles is a 2004 American computer-animated superhero film written and directed by Brad Bird and produced by Pixar Animation Studios,review1.review2.review3.review4,18
+1007,Avengers: Endgame,chinese,2.5.8.9,3:10,Robert Downey Jr as Iron Man.Chris Evans as Captain America,Anthony Russo,Avengers: Endgame is a 2019 American superhero film based on the Marvel Comics superhero team the Avengers and produced by Marvel Studios,review1.review2.review3.review4,18
