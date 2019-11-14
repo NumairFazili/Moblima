@@ -321,20 +321,19 @@ public class Staff extends Person {
         int choice = -1;
         while (choice != 0){
             choice = -1;
-            while (choice <= -1 || choice >= 8){
+            while (choice <= -1 || choice >= 7){
                 try{
                     Scanner in = new Scanner(System.in);
                     System.out.println("1. movie name");
                     System.out.println("2. language");
-                    System.out.println("3. rating");
-                    System.out.println("4. runtime");
-                    System.out.println("5. Cast member");
-                    System.out.println("6. description");
-                    System.out.println("7. director");
+                    System.out.println("3. runtime");
+                    System.out.println("4. Cast member");
+                    System.out.println("5. description");
+                    System.out.println("6. director");
                     System.out.println("0. Done");
                     choice = in.nextInt();
-                    if (choice <= -1 || choice >= 8){
-                        System.out.println("Error! Please enter either 0, 1, 2, 3, 4, 5, 6 or 7:");
+                    if (choice <= -1 || choice >= 7){
+                        System.out.println("Error! Please enter either 0, 1, 2, 3, 4, 5 or 6:");
                     }
                 }
                 catch(InputMismatchException e){
@@ -356,29 +355,23 @@ public class Staff extends Person {
                 System.out.println("Enter new language:");
                 this.updateMovieLanguage(mymovie, input.nextLine());
             }
-            //3. Prompt input for rating and edit movie object
-            else if (choice == 3){// Currently not in use
-                System.out.println("Enter new rating:");
-                //mymovie.setRating(Arrays.asList(input.nextInt()));
-                //input.nextLine();//Catch newline from input.nextDouble()
-            }
             //4. Prompt input for runtime and edit movie object
-            else if (choice == 4){
+            else if (choice == 3){
                 System.out.println("Enter new runtime:");
                 this.updateMovieRunTime(mymovie, input.nextLine());
             }
             //5. Prompt input for Cast member and edit movie object
-            else if (choice == 5){
+            else if (choice == 4){
                 System.out.println("Enter new cast members:");
                 this.updateMovieCast(mymovie, Arrays.asList((input.nextLine().split(","))));
             }
             //6. Prompt input for description and edit movie object
-            else if (choice == 6){
+            else if (choice == 5){
                 System.out.println("Enter new description:");
                 this.updateMovieDescription(mymovie, input.nextLine());
             }
             //7. Prompt input for director and edit movie object
-            else if (choice == 7){
+            else if (choice == 6){
                 System.out.println("Enter new director:");
                 this.updateMovieDirector(mymovie, input.nextLine());
             }
