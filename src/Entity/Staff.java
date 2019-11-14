@@ -473,4 +473,9 @@ public class Staff extends Person {
     public boolean saveSettingsChanges(Settings s){
         return DataManager.manageSettings(s);
     }
+
+    public List<Cinema> getAllShowTimes(){
+        return DataManager.LoadShowTimes(-1);
+    }
+
 }

@@ -47,11 +47,16 @@ public class BookingManager {
         genBookingID();
     }*/
 
-    public static Booking createBooking(User user, Cinema cinema, int seatNO){
+    public static void createBooking(User user, Cinema cinema, int seatNO){
         //Cinema class need to be added into Cinema
         //movieType need to be added into Movie
 
         //showtime, movieclass, price removed from parameters
+
+
+        if(cinema.getStatus().equals("Ended")){
+            System.out.println("Cannot Booking as Showtime ended");
+            return;}
 
         String bookingID = genBookingID();
 
@@ -66,7 +71,6 @@ public class BookingManager {
         DataManager.AddBooking(newBooking);
         cinema.addSeats(seatNO);
         DataManager.UpdateShowTime(cinema,false);
-        return newBooking;
     }
 
     private static double calc_price(User user,Cinema cinema){

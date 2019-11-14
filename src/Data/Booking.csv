@@ -7,3 +7,4 @@ Booking_ID/TID,Cineplex_ID,Cinema_ID,Movie_ID,ShowTime,Cinema Class,Movie Type,C
 78885,1,1,1001,8/10/2019 16:30,Silver,3D,test4,123456789,test4@gmail.com,regular,1,12-11 03::03,15.0
 58653,1,2,1002,7/10/2019 16:30,Gold,2D,test4,123456789,test4@gmail.com,regular,0,12-11 05::02,18.0
 80990,2,1,1002,7/10/2019 18:30,Platinum,3D,bingyan,12345678,bingyan_test@gmail.com,senior citizen,28,12-11 15::44,17.0
+60166,2,1,1003,8/10/2019 16:30,Platinum,3D,test4,123456789,test4@gmail.com,regular,37,14-11 15::12,20.0

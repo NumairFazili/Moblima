@@ -77,8 +77,7 @@ public class User extends Person{
         BookingManager.init();
 
         if(this.getAge() >= m.getMinAge()){
-            Booking b = BookingManager.createBooking(this, cinema, seatNO);
-            this.save();
+            BookingManager.createBooking(this, cinema, seatNO);
         }else{
             System.out.println("Minimum age requirement not reached.");
         }
