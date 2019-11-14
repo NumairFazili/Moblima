@@ -12,6 +12,7 @@ public class Boundary {
     private static final String[] startOptions ={"Admin user","Movie-Goer"};
     private static final String[] userMovieOptions={"Search movie", "View booking history","List the Top 5 ranking by ticket sales","List the Top 5 ranking by overall reviewers’ ratings","List all movies"};
     private static final String[] userOptions={"Existing User","New User","Guest User"};
+    private static final String[] settingsOptions={"Base price","Child price","Senior price","Holiday price","Silver price","Gold price","Platinum price","Holidays"};
 
 
     public static int ModuleSelection(int choice, Scanner input){
@@ -63,20 +64,25 @@ public class Boundary {
             case "userMenu":
                 str=userOptions;
                 break;
+            case "settingsMenu":
+                str=settingsOptions;
+                break;
         }
         int count = 1;
         for (int i = 0; i < str.length; i++)
             System.out.println(" " + count++ + " : " + str[i]);
-        System.out.println(" "+0+" : "+"Exit");
+
+        if(str.equals("settingsMenu"))
+            System.out.println(" "+0+" : "+"Done");
+        else
+            System.out.println(" "+0+" : "+"Exit");
     }
 
 
 
     public static void DisplayMovie(List<Movie> movieList){
-        //System.out.println("ID" + "\t" + "Title" + " \t" + "Rating(Avg)" + "\t" + "Language");
         System.out.format("%-5s %-25s %-15s %-15s %n", "ID", "Title", "Rating(Avg)", "Language");
         for(Movie movie:movieList){
-            //System.out.println(movie.getId() + "\t" + movie.getName() + "\t" + movie.getAvgRating() + "\t" +movie.getLanguage());
             if (movie.getAvgRating() == -1){
                 System.out.format("%-5d %-25s %-15s %-15s %n", movie.getId(), movie.getName(), "NA", movie.getLanguage());
             }
@@ -87,27 +93,10 @@ public class Boundary {
         System.out.println();
     }
 
-//    public static void DisplayMovie(Movie movie){
-//
-//        System.out.println("ID\t\t\t: "+movie.getId());
-//        System.out.println("Title\t\t: "+movie.getName());
-//        if (movie.getAvgRating() == -1){
-//            System.out.println("Rating(Avg)\t\t: " + "NA");
-//        }else{
-//            System.out.println("Rating(Avg)\t\t: "+movie.getAvgRating());
-//        }
-//        System.out.println("Language\t\t: "+movie.getLanguage());
-//        System.out.println("Status\t: "+movie.getStatus());
-//        System.out.println("Cast\t\t: "+movie.getCast());
-//        System.out.println("Director\t\t: "+movie.getDirector());
-//        System.out.println("Synopsis\t\t: "+movie.getSynopsis());
-//        System.out.println();
-//    }
-
     public static void DisplayMovie(Movie movie){
 
-        System.out.format("%-5s   %-20s   %-7s   %-10s  %-15s   %-30s  %-15s   %-20s   %-50s  %n","Movie ID","Movie Name","Rating",
-                "Language","Status","Cast","Director","Synopsis");
+        System.out.format("%-10s   %-20s   %-7s   %-10s  %-15s   %-10s  %-80s  %-30s  %n","Movie ID","Movie Name","Rating",
+                "Language","Status","Director","Cast","Synopsis");
 
         String rating;
         if(movie.getAvgRating() == -1)
@@ -115,8 +104,8 @@ public class Boundary {
         else
             rating=String.valueOf(movie.getAvgRating());
 
-        System.out.format("%-5s   %-20s   %-7s   %-10s  %-15s   %-30s  %-15s   %-20s   %-50s  %n",movie.getId(),movie.getName(),rating,movie.getLanguage(),movie.getStatus(),movie.getCast(),movie.getDirector(),movie.getSynopsis());
-
+        System.out.format("%-10s   %-20s   %-7s   %-10s  %-15s   %-15s  %-80s  %-30s  %n",movie.getId(),movie.getName(),rating,movie.getLanguage(),movie.getStatus(),movie.getDirector(),movie.getCast(),movie.getSynopsis());
+        System.out.println();
     }
 
 
@@ -147,6 +136,7 @@ public class Boundary {
             System.out.format("%-20s   %-20s   %-10s   %-15d   %-15d   %-10d %-4d   %-20s   %-20s  %-6.2f  %-15s  %-20s  %-20s  %n",booking.getCustomerName(),
                     booking.getCustomerType(),booking.getBookingID(),booking.getCinplexID(),booking.getCinemaID(),booking.getMovieID(),booking.getSeatNO(),
                     booking.getShowTime(),booking.getBookingTime(),booking.getPrice(),booking.getCinemaClass(),booking.getMovieType(),booking.getEmail());
+        System.out.println();
     }
 
 
@@ -155,21 +145,21 @@ public class Boundary {
         int reviewNum = movie.getRating().size() < movie.getReviews().size() ? movie.getRating().size() : movie.getReviews().size();
         List<Integer> rating_list = movie.getRating();
         List<String> review_list = movie.getReviews();
-        for(int i = 0; i < reviewNum; i++){
+        for(int i = 0; i < reviewNum; i++)
             System.out.println("Rating:"+rating_list.get(i) + " | Review: "+review_list.get(i));
-        }
+        System.out.println();
+
     }
 
     public static void DisplayCinemas(List<Cinema> cinemas){
         int count=0;
 
         System.out.format("%-6s %-12s %-10s %-20s  %-9s %-5s %n", "index", "CinePlex ID", "Cinema ID", "Time", "Class", "Type");
-        //System.out.println("index"+"\t"+"CinePlex ID" + "\t" + "Cinema ID" + "\t" + "Time" + "\t" + "Status" +"\t"+"Class"+"\t"+"Type");
 
         for(Cinema cinema:cinemas){
-            //System.out.println(count++ +"\t"+cinema.getCinplexID() + "\t" + cinema.getCinemaID() + "\t" + cinema.getTime() + "\t" +cinema.getStatus() + "\t" +cinema.getCinemaClass() + "\t" + cinema.getMovieType());
             System.out.format("%-6d %-12d %-10d %-20s %-9s %-5s %n", count++, cinema.getCinplexID(), cinema.getCinemaID(), cinema.getTime(),cinema.getCinemaClass(), cinema.getMovieType());
         }
+        System.out.println();
     }
 
     public static void DisplaySeating(Cinema cinema) {
@@ -208,19 +198,19 @@ public class Boundary {
     }
 
     public static void DisplaySettings(){
-        Settings mysettings = DataManager.LoadSettings();
-        System.out.println("Current Settings");
-        System.out.println("BasePrice:"+ mysettings.getBasePrice());
-        System.out.println("ChildPrice:"+ mysettings.getChildPrice());
-        System.out.println("Senior:"+ mysettings.getSeniorPrice());
-        System.out.println("HolidayPrice:" +mysettings.getHolidayPrice());
-        System.out.println("SilverPrice:" +mysettings.getSilverPrice());
-        System.out.println("GoldPrice:" +mysettings.getGoldPrice());
-        System.out.println("PlatinumPrice:" +mysettings.getPlatinumPrice());
-        System.out.println("Holidays:" +mysettings.getHolidays());
+
+        System.out.println("\nCurrent Settings");
+        System.out.format("%-13s  %-13s  %-13s  %-13s  %-13s  %-14s  %-14s  %-13s %n", "Base Price", "Child Price", "Senior Price", "Holiday Price","Silver Price","Gold Price", "Platinum Price","Holidays");
+
+        Settings settings = DataManager.LoadSettings();
+
+        System.out.format("%-13s  %-13s  %-13s  %-13s  %-13s  %-14s  %-14s  %-13s %n",settings.getBasePrice(),settings.getChildPrice(),settings.getSeniorPrice(),settings.getHolidayPrice(),settings.getSilverPrice(),settings.getGoldPrice(),settings.getPlatinumPrice(),settings.getHolidays());
+
         System.out.println();
 
     }
+
+
 
 }
 

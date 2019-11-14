@@ -27,15 +27,7 @@ public class SettingsManager {
             while (choice <= -1 || choice >= 9){
                 try{
                     Scanner in = new Scanner(System.in);
-                    System.out.println("1. Base price");
-                    System.out.println("2. Child price");
-                    System.out.println("3. Senior price");
-                    System.out.println("4. Holiday price");
-                    System.out.println("5. Silver price");
-                    System.out.println("6. Gold price");
-                    System.out.println("7. Platinum price");
-                    System.out.println("8. Holidays");
-                    System.out.println("0. Done");
+                    Boundary.DisplayOptions("settingsMenu");
                     choice = in.nextInt();
                     in.nextLine();//catch newline
                     if (choice <= -1 || choice >= 9){
@@ -94,10 +86,10 @@ public class SettingsManager {
         }
         //Save edited movie object to database
         if (this.saveSettingsChanges(mysettings) == Boolean.TRUE){
-            System.out.println("Settings successfully updated!");
+            System.out.println("Settings successfully updated!\n");
         }
         else{
-            System.out.println("Error! Settings failed to be updated!");
+            System.out.println("Error! Settings failed to be updated!\n");
         }
     }
     public void updateBasePrice(Settings s, double base){
