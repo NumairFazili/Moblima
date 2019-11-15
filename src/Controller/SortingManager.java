@@ -22,6 +22,7 @@ import java.util.Map;
 public class SortingManager{
 
 
+    public SortingManager(){}
 
     // private static String sortMoviesBy = "name";
 
@@ -49,8 +50,7 @@ public class SortingManager{
     public static HashMap<Integer, Integer> sortByValue(HashMap<Integer, Integer> hm)
     {
         // Create a list from elements of HashMap
-        List<Map.Entry<Integer, Integer> > list =
-                new LinkedList<Map.Entry<Integer, Integer> >(hm.entrySet());
+        List<Map.Entry<Integer, Integer> > list = new LinkedList<Map.Entry<Integer, Integer> >(hm.entrySet());
 
         // Sort the list
         Collections.sort(list, new Comparator<Map.Entry<Integer, Integer> >() {
@@ -69,17 +69,24 @@ public class SortingManager{
         return temp;
     }
 
-    
-
-}
-
-class SortByName implements Comparator<Movie> {
-    @Override
-    public int compare(Movie o1, Movie o2){
-        return o1.getName().compareTo(o2.getName());
+    public static ArrayList<Movie> sortByRating(ArrayList<Movie> movies, int size){
+        ArrayList<Movie> to_return = new ArrayList<Movie>();
+        Collections.sort(movies,new SortByRating());
+        for(int i = 0;i<Math.min(size,movies.size());i++){
+            to_return.add(movies.get(i));
+        }
+        return to_return;
     }
-
 }
+
+// class SortByName implements Comparator<Movie> {
+//     @Override
+//     public int compare(Movie o1, Movie o2){
+//         return o1.getName().compareTo(o2.getName());
+//     }
+
+// }
+
 class SortByRating implements Comparator<Movie>{
     @Override
     public int compare( Movie o1, Movie o2){

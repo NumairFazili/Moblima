@@ -2,8 +2,7 @@ package Controller;
 
 import java.util.*;
 
-import Entity.*;
-import View.Boundary;
+import Entity.User;
 
 /*
     createBookings
@@ -51,4 +50,5 @@ public class UserManager {
         return myuser;
 
     }
+
 }

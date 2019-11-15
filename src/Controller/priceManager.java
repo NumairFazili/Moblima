@@ -26,7 +26,7 @@ public class priceManager {
 
 
 
-    public  Boolean dateCheck(List<String> dates){
+    private  boolean dateCheck(List<String> dates){
         SimpleDateFormat dfParse = new SimpleDateFormat("dd/MM/yyyy");
         Calendar c = Calendar.getInstance();
 

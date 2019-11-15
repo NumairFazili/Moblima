@@ -1,7 +1,6 @@
 package Controller;
 
 import Entity.Settings;
-import Entity.Staff;
 import View.Boundary;
 
 import java.util.Arrays;
@@ -18,7 +17,7 @@ public class SettingsManager {
         //Choose which setting to configure
         Boundary.DisplaySettings();
         System.out.println("Choose which setting to configure: " );
-        Settings mysettings = DataManager.LoadSettings();
+        Settings mysettings = this.showSettings();
         int choice = -1;
         while (choice != 0){
             choice = -1;
@@ -43,54 +42,81 @@ public class SettingsManager {
             //1. Prompt input for new base price
             else if (choice == 1){
                 System.out.println("Enter new base price:");
-                mysettings.setBasePrice(input.nextDouble());
+                this.updateBasePrice(mysettings, input.nextDouble());
             }
             //2. Prompt input for child price
             else if (choice == 2){
                 System.out.println("Enter new child price:");
-                mysettings.setChildPrice(input.nextDouble());
+                this.updateChildPrice(mysettings, input.nextDouble());
             }
             //3. Prompt input for senior price
             else if (choice == 3){
                 System.out.println("Enter new senior price:");
-                mysettings.setSeniorPrice(input.nextDouble());
+                this.updateSeniorPrice(mysettings, input.nextDouble());
             }
             //4. Prompt input for holiday price
             else if (choice == 4){
                 System.out.println("Enter new holiday price:");
-                mysettings.setHolidayPrice(input.nextDouble());
+                this.updateHolidayPrice(mysettings, input.nextDouble());
             }
             //5. Prompt input for silver price
             else if (choice == 5){
                 System.out.println("Enter new silver price:");
-                mysettings.setSilverPrice(input.nextDouble());
+                this.updateSilverPrice(mysettings, input.nextDouble());
             }
             //6. Prompt input for gold price
             else if (choice == 6){
                 System.out.println("Enter new gold price:");
-                mysettings.setGoldPrice(input.nextDouble());
+                this.updateGoldPrice(mysettings, input.nextDouble());
             }
             //7. Prompt input for platinum price
             else if (choice == 7){
                 System.out.println("Enter new platinum price:");
-                mysettings.setPlatinumPrice(input.nextDouble());
+                this.updatePlatinumPrice(mysettings, input.nextDouble());
                 input.nextLine();//Catch newline from input.nextDouble()
             }
             //8. Prompt input for holidays
             else if (choice == 8){
                 System.out.println("Enter new holidays:");
-                mysettings.setHolidays(Arrays.asList(input.next().split(",")));
+                this.updateHoliday(mysettings, Arrays.asList(input.next().split(",")));
             }
         }
         //Save edited movie object to database
-        if (DataManager.manageSettings(mysettings) == Boolean.TRUE){
+        if (this.saveSettingsChanges(mysettings) == Boolean.TRUE){
             System.out.println("Settings successfully updated!\n");
         }
         else{
             System.out.println("Error! Settings failed to be updated!\n");
         }
     }
-
+    private void updateBasePrice(Settings s, double base){
+        s.setBasePrice(base);
+    }
+    private void updateChildPrice(Settings s, double child){
+        s.setChildPrice(child);
+    }
+    private void updateSeniorPrice(Settings s, double senior){
+        s.setSeniorPrice(senior);
+    }
+    private void updateHolidayPrice(Settings s, double holiday){
+        s.setHolidayPrice(holiday);
+    }
+    private void updateSilverPrice(Settings s, double silver){
+        s.setSilverPrice(silver);
+    }
+    private void updateGoldPrice(Settings s, double gold){
+        s.setGoldPrice(gold);
+    }
+    private void updatePlatinumPrice(Settings s, double platinum){
+        s.setPlatinumPrice(platinum);
+    }
+    private void updateHoliday(Settings s, List<String> holiday){
+        s.setHolidays(holiday);
+    }
+    private boolean saveSettingsChanges(Settings s){
+        return DataManager.manageSettings(s);
+    }
+    private Settings showSettings(){ return DataManager.LoadSettings(); }
 
 
 

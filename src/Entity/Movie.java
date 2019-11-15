@@ -1,30 +1,26 @@
 package Entity;
 
 
-
-import org.junit.Test;
-
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class Movie {
 
 
     int id;
-    String name,Language,runTime,Synopsis,Director,status;
+    String name,language,runTime,synopsis,director,status;
     double avgRating;
     List<Integer> ratings;
-    ArrayList<String> reviews;
+    List<String> reviews;
     List<String> cast;
-    public Movie(int id,String name,String Language,List<Integer>ratings,String runTime,List<String> cast,String Director,String Synopsis,ArrayList<String> reviews, String status) {
+    public Movie(int id,String name,String language,List<Integer>ratings,String runTime,List<String> cast,String director,String synopsis,List<String> reviews, String status) {
         this.id = id;
         this.ratings = ratings;
         this.name = name;
-        this.Language=Language;
+        this.language=language;
         this.runTime = runTime;
-        this.Synopsis = Synopsis;
-        this.Director = Director;
+        this.synopsis = synopsis;
+        this.director = director;
         this.cast = cast;
         this.reviews = reviews;
         this.status = status;
@@ -79,13 +75,13 @@ public class Movie {
     }
 
     public String getSynopsis() {
-        return Synopsis;
+        return synopsis;
     }
 
-    public void setSynopsis(String Synopsis) {this.Synopsis = Synopsis; }
+    public void setSynopsis(String synopsis) {this.synopsis = synopsis; }
 
     public String getDirector() {
-        return Director;
+        return director;
     }
 
     public String getName() {
@@ -97,15 +93,15 @@ public class Movie {
     }
 
     public String getLanguage() {
-        return Language;
+        return language;
     }
 
     public void setLanguage(String language) {
-        Language = language;
+        this.language = language;
     }
 
     public void setDirector(String director) {
-        Director = director;
+        this.director = director;
     }
 
     public List<String> getCast() {
@@ -116,7 +112,7 @@ public class Movie {
         this.cast = cast;
     }
 
-    public ArrayList<String> getReviews(){
+    public List<String> getReviews(){
         if(reviews != null){
             return reviews;
         }else{
@@ -128,7 +124,7 @@ public class Movie {
         this.reviews.add(review);
     }
 
-    public void setReviews(ArrayList<String> reviews){
+    public void setReviews(List<String> reviews){
         this.reviews = reviews;
     }
 
@@ -139,7 +135,5 @@ public class Movie {
     public void setStatus(String status){
         this.status = status;
     }
-
-
 
 }

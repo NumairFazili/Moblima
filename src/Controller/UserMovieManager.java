@@ -1,15 +1,16 @@
 package Controller;
 
+import java.util.ArrayList;
+import java.util.InputMismatchException;
+import java.util.Scanner;
+
 import Entity.Cinema;
 import Entity.Movie;
 import Entity.User;
 import View.Boundary;
 
-import java.util.ArrayList;
-import java.util.InputMismatchException;
-import java.util.Scanner;
 
-public class UserMovieManager extends MovieManager {
+public class UserMovieManager extends MovieManager{
 
     public void SearchListMovie(User user, Scanner input, int choice){
         ArrayList<Movie> mymovielist = new ArrayList<Movie>();
@@ -35,7 +36,7 @@ public class UserMovieManager extends MovieManager {
         if (inputsearchint == 0){
             return;
         }
-        Movie mymovie = this.selectMovieByID(mymovielist, inputsearchint);
+        Movie mymovie = selectMovieByID(mymovielist, inputsearchint);
         System.out.println("Movie Details: " );
         Boundary.DisplayMovie(mymovie);
         System.out.println("All ratings and reviews: " );
@@ -62,7 +63,7 @@ public class UserMovieManager extends MovieManager {
         }
         //Select the showtime by index
         else if (choice == 1){
-            Boundary.DisplayCinemas(showTimeManager.getShowTimesByMovie(mymovie.getId()));
+            Boundary.DisplayCinemas(ShowTimeManager.getShowTimesByMovie(mymovie.getId()));
             //3. Check seat availability and selection of seat/s.
             boolean looper = Boolean.TRUE;
             while (looper){
@@ -103,7 +104,7 @@ public class UserMovieManager extends MovieManager {
                         Cinema mycinema = ((DataManager.LoadShowTimes(mymovie.getId()).get(inputsearchint)));
 
                         BookingManager bookingManager=new BookingManager();
-                        if(!bookingManager.createBooking(user,mycinema, rowofseat*10 + colofseat)){
+                        if(!bookingManager.createBooking(user,mycinema, selectMovieByID(mycinema.getMovieID()), rowofseat*10 + colofseat)){
                             System.out.println("Booking Failed");
                             System.out.println("Enter 1 to choose another seat, 0 to go back");
                             inputsearchint = input.nextInt();
@@ -122,7 +123,7 @@ public class UserMovieManager extends MovieManager {
                 }
                 //2. Select another showtime
                 else if (choice == 2){
-                    Boundary.DisplayCinemas(showTimeManager.getShowTimesByMovie(mymovie.getId()));
+                    Boundary.DisplayCinemas(ShowTimeManager.getShowTimesByMovie(mymovie.getId()));
                 }
             }
         }
@@ -130,19 +131,14 @@ public class UserMovieManager extends MovieManager {
             System.out.println("Enter rating for the movie:" );
             int movieRating = input.nextInt();
             System.out.println("Enter review for the movie:" );
-            input.nextLine();
             String movieReview = input.next();
-            if(this.reviewMovie(mymovie, movieRating, movieReview))
-                System.out.println("Review added successfully");
-            else
-                System.out.println("Failed adding review");
+            this.reviewMovie(mymovie, movieRating, movieReview);
         }
     }
 
-    private Boolean reviewMovie(Movie movie, int rating, String review){
+    public void reviewMovie(Movie movie, int rating, String review){
         movie.addRating(rating);
         movie.addReview(review);
-        return DataManager.manageMovie(movie);
     }
 
 }
