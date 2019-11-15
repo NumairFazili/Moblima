@@ -127,11 +127,11 @@ public class StaffMovieManager extends MovieManager {
         System.out.println("Enter Status:");
         String status = input.next();
         input.nextLine();
-        this.createNewMovie(movieid, moviename, language, Arrays.asList(), runtime, cast, director,Synopsis,Arrays.asList(), status);
+        this.createNewMovie(movieid, moviename, language, Arrays.asList(), runtime, cast, director,Synopsis,new ArrayList<>(), status);
 
     }
 
-    public void createNewMovie(int id, String name, String Language, List<Integer> rating, String runTime, List<String> cast, String Synopsis, String Director, List<String> reviews, String status){
+    public void createNewMovie(int id, String name, String Language, List<Integer> rating, String runTime, List<String> cast, String Synopsis, String Director,ArrayList<String> reviews, String status){
         Movie m = new Movie(id, name, Language, rating, runTime, cast, Director,Synopsis,reviews, status);
         DataManager.SaveMovies(m);
         System.out.println("Movie Created Successfully\n");

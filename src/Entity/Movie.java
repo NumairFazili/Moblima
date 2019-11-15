@@ -3,6 +3,7 @@ package Entity;
 
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class Movie {
@@ -12,9 +13,9 @@ public class Movie {
     String name,Language,runTime,Synopsis,Director,status;
     double avgRating;
     List<Integer> ratings;
-    List<String> reviews;
+    ArrayList<String> reviews;
     List<String> cast;
-    public Movie(int id,String name,String Language,List<Integer>ratings,String runTime,List<String> cast,String Director,String Synopsis,List<String> reviews, String status) {
+    public Movie(int id,String name,String Language,List<Integer>ratings,String runTime,List<String> cast,String Director,String Synopsis,ArrayList<String> reviews, String status) {
         this.id = id;
         this.ratings = ratings;
         this.name = name;
@@ -113,7 +114,7 @@ public class Movie {
         this.cast = cast;
     }
 
-    public List<String> getReviews(){
+    public ArrayList<String> getReviews(){
         if(reviews != null){
             return reviews;
         }else{
@@ -125,7 +126,7 @@ public class Movie {
         this.reviews.add(review);
     }
 
-    public void setReviews(List<String> reviews){
+    public void setReviews(ArrayList<String> reviews){
         this.reviews = reviews;
     }
 
@@ -136,5 +137,7 @@ public class Movie {
     public void setStatus(String status){
         this.status = status;
     }
+
+
 
 }

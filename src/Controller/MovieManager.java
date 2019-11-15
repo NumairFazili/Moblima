@@ -7,7 +7,6 @@ import View.Boundary;
 
 import java.util.ArrayList;
 import java.util.InputMismatchException;
-import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 public class MovieManager {
@@ -51,9 +50,10 @@ public class MovieManager {
     }
 
 
-    public void reviewMovie(Movie movie, int rating, String review){
+    public Boolean reviewMovie(Movie movie, int rating, String review){
         movie.addRating(rating);
         movie.addReview(review);
+        return DataManager.manageMovie(movie);
     }
 
     public void SearchListMovie(User user, Scanner input, int choice){
@@ -175,8 +175,12 @@ public class MovieManager {
             System.out.println("Enter rating for the movie:" );
             int movieRating = input.nextInt();
             System.out.println("Enter review for the movie:" );
+            input.nextLine();
             String movieReview = input.next();
-            this.reviewMovie(mymovie, movieRating, movieReview);
+            if(this.reviewMovie(mymovie, movieRating, movieReview))
+                System.out.println("Review added successfully");
+            else
+                System.out.println("Failed adding review");
         }
     }
 

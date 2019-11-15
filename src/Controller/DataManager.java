@@ -40,7 +40,7 @@ public class DataManager {
                 String[] tokens = line.split(",");
                 if (tokens[1].toLowerCase().contains(search.toLowerCase())) {
                     List<String> cast = Arrays.asList(tokens[5].split("\\."));
-                    List<String> reviews= Arrays.asList(tokens[8].split("\\."));
+                    ArrayList<String> reviews=new ArrayList<String>(Arrays.asList(tokens[8].split("\\.")));
                     List<String> temp= Arrays.asList(tokens[3].split("\\."));
                     List<Integer> ratings=new ArrayList<>();
                     if(temp.size()>1) for (String s : temp) ratings.add(Integer.valueOf(s));
