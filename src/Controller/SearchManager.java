@@ -82,8 +82,8 @@ public class SearchManager {
         ArrayList<Movie> to_return = new ArrayList<Movie>();
         HashMap<Integer,Integer> sales_map = SearchManager.calculateSales(bookings);
         Map<Integer, Integer> sorted_map = sortByValue(sales_map);
-        for(Map.Entry<Integer,Integer> entry: sorted_map.entrySet()){
 
+        for(Map.Entry<Integer,Integer> entry: sorted_map.entrySet()){
             Movie m = find_Movie_byID(movies,entry.getKey());
             if(m == null){
                 continue;
