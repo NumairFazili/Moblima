@@ -13,36 +13,63 @@ import Entity.Movie;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
 
 public class SortingManager{
 
 
 
-    private static String sortMoviesBy = "name";
+    // private static String sortMoviesBy = "name";
 
 
-    private static ArrayList<Movie> sortMovies(String by, ArrayList<Movie> movies) throws IllegalArgumentException{
-        String str1 = new String("name");
-        if(by.equalsIgnoreCase(new String("name"))){
-            Collections.sort(movies, new SortByName());
+    // private static ArrayList<Movie> sortMovies(String by, ArrayList<Movie> movies) throws IllegalArgumentException{
+    //     String str1 = new String("name");
+    //     if(by.equalsIgnoreCase(new String("name"))){
+    //         Collections.sort(movies, new SortByName());
 
+    //     }
+    //     else if(by.equalsIgnoreCase(new String("rating"))){
+    //         Collections.sort(movies, new SortByRating());
+    //     }
+    //     else{
+    //         throw new IllegalArgumentException("no such argument, argument must be 'name' or 'rating'.\n");
+    //     }
+    //     return movies;
+    // }
+
+    // //default is sort by name
+    // private static ArrayList<Movie> sortMovies(ArrayList<Movie> movies) throws IllegalArgumentException{
+    //     return SortingManager.sortMovies(sortMoviesBy,movies);
+    // }
+
+    public static HashMap<Integer, Integer> sortByValue(HashMap<Integer, Integer> hm)
+    {
+        // Create a list from elements of HashMap
+        List<Map.Entry<Integer, Integer> > list =
+                new LinkedList<Map.Entry<Integer, Integer> >(hm.entrySet());
+
+        // Sort the list
+        Collections.sort(list, new Comparator<Map.Entry<Integer, Integer> >() {
+            public int compare(Map.Entry<Integer, Integer> o1,
+                               Map.Entry<Integer, Integer> o2)
+            {
+                return (o1.getValue()).compareTo(o2.getValue());
+            }
+        });
+
+        // put data from sorted list to hashmap
+        HashMap<Integer, Integer> temp = new LinkedHashMap<Integer, Integer>();
+        for (Map.Entry<Integer, Integer> aa : list) {
+            temp.put(aa.getKey(), aa.getValue());
         }
-        else if(by.equalsIgnoreCase(new String("rating"))){
-            Collections.sort(movies, new SortByRating());
-        }
-        else{
-            throw new IllegalArgumentException("no such argument, argument must be 'name' or 'rating'.\n");
-        }
-        return movies;
+        return temp;
     }
 
-    //default is sort by name
-    private static ArrayList<Movie> sortMovies(ArrayList<Movie> movies) throws IllegalArgumentException{
-        return SortingManager.sortMovies(sortMoviesBy,movies);
-    }
-
-
-
+    
 
 }
 
