@@ -38,9 +38,21 @@ public class User{
     public String getmobileNumber(){
         return mobileNumber;
     }
-    public String getCustomerType (){return userManager.getType(this.getAge());}
 
-    
+    public String getCustomerType (){
+        if(age<15){
+            return "Child";
+        }
+        else if(age>65){
+            return "Senior";
+        }
+        else{
+            return "regular";
+        }
+    }
+
+
+
     public String toString() {
         return name + "\nemail\t:" + email + "\nage\t:" + String.valueOf(age) + "\nmobile\t:" + mobileNumber + "\n";
     }

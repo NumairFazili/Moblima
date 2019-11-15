@@ -12,14 +12,14 @@ import java.util.List;
 public class priceManager {
 
 
-    private int age;
+    private String userType;
     private Cinema cinema;
     private Settings settings;
 
 
 
-    public priceManager(int age, Cinema cinema){
-        this.age=age;
+    public priceManager(String userType, Cinema cinema){
+        this.userType=userType;
         this.cinema=cinema;
         this.settings=DataManager.LoadSettings();
     }
@@ -60,10 +60,14 @@ public class priceManager {
 
         double discount=0;
 
-        if(age < 15)
-            discount+=settings.getChildPrice();
-        if(age >65)
-            discount+=settings.getSeniorPrice();
+        switch (userType){
+            case "Child":
+                discount+=settings.getChildPrice();
+                break;
+            case "Senior":
+                discount+=settings.getSeniorPrice();
+                break;
+        }
 
         if(this.dateCheck(settings.getHolidays()))
             discount+=settings.getHolidayPrice();

@@ -51,17 +51,4 @@ public class UserManager {
         return myuser;
 
     }
-
-
-    public String getType(int age){
-        if(age<15){
-            return "Child";
-        }
-        else if(age>65){
-            return "senior citizen";
-        }
-        else{
-            return "regular";
-        }
-    }
 }

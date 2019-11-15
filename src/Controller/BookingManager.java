@@ -84,7 +84,7 @@ public class BookingManager {
 
 
     private static double calculatePrice(User user, Cinema cinema){
-        priceManager priceManager = new priceManager(user.getAge(),cinema);
+        priceManager priceManager = new priceManager(user.getCustomerType(),cinema);
         return  priceManager.getPrice();
     }
     private static String genBookingID(){
