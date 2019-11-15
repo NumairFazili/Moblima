@@ -260,7 +260,7 @@ public class DataManager {
     }
 
 
-    public static void AddShowTimes(Cinema cinema) {
+    public static Boolean AddShowTimes(Cinema cinema) {
         FileWriter writer = null;
         try {
             writer = new FileWriter(getLocation("Cinema"), true);
@@ -285,9 +285,11 @@ public class DataManager {
             writer.append("\n");
             writer.flush();
             writer.close();
+            return true;
         } catch (IOException e) {
             e.printStackTrace();
         }
+        return false;
     }
 
     public static Boolean UpdateShowTime(Cinema cinema, Boolean delete) {

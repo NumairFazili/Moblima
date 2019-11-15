@@ -3,6 +3,7 @@ package Controller;
 import Entity.Cinema;
 import View.Boundary;
 
+import javax.xml.crypto.Data;
 import java.util.Arrays;
 import java.util.InputMismatchException;
 import java.util.List;
@@ -60,7 +61,7 @@ public class StaffShowTimeManager extends ShowTimeManager {
 
             else if (choice == 1){
                 System.out.println("Enter new Cineplex_ID:");
-                this.updateCineplexID(updatedCinema, input.nextInt());
+                updatedCinema.setCinplexID(input.nextInt());
                 input.nextLine();//Catch newline from input.nextInt
             }
 
@@ -68,31 +69,31 @@ public class StaffShowTimeManager extends ShowTimeManager {
 
             else if (choice == 2){
                 System.out.println("Enter new Cinema_ID:");
-                this.updateCinemaID(updatedCinema, input.nextInt());
+                updatedCinema.setCinemaID(input.nextInt());
                 input.nextLine();//Catch newline from input.nextInt
             }
 
             //3. Prompt input for Movie_ID and edit cinema object
             else if (choice == 3){
                 System.out.println("Enter new Movie_ID:");
-                this.updateMovieID(updatedCinema, input.nextInt());
+                updatedCinema.setMovieID(input.nextInt());
                 input.nextLine();//Catch newline from input.nextInt
             }
             //4. Prompt input for ShowTime and edit cinema object
             else if (choice == 4){
                 System.out.println("Enter new ShowTime:");
-                this.updateTime(updatedCinema, input.nextLine());
+                updatedCinema.setTime(input.nextLine());
             }
 
             //6. Prompt input for cinema class and edit cinema object
             else if (choice == 5){
                 System.out.println("Enter new class:");
-                this.updateClass(updatedCinema, input.next());
+                updatedCinema.setCinemaClass(input.next());
             }
             //7. Prompt input for MovieType and edit cinema object
             else if (choice == 6){
                 System.out.println("Enter new MovieType:");
-                this.updateMovieType(updatedCinema, input.next());
+                updatedCinema.setMovieType(input.next());
             }
 
         }
@@ -102,7 +103,7 @@ public class StaffShowTimeManager extends ShowTimeManager {
         Boundary.DisplayCinemas(Arrays.asList(updatedCinema));
         System.out.println();
 
-        if (this.saveShowTimeChanges(cinema,updatedCinema) == Boolean.TRUE){
+        if (DataManager.UpdateShowTime(cinema,updatedCinema) == Boolean.TRUE){
             System.out.println("Showtime successfully updated!\n");
         }
         else{
@@ -150,21 +151,9 @@ public class StaffShowTimeManager extends ShowTimeManager {
         this.createShowTime(cineplexid, cinemaid, movieid, showtime, cinemaclass, Arrays.asList(), movietype);
     }
 
-
-    public void updateCineplexID(Cinema c, int i){ c.setCinplexID(i); }
-    public void updateCinemaID(Cinema c, int i){ c.setCinemaID(i); }
-    public void updateMovieID(Cinema c, int i){ c.setMovieID(i); }
-    public void updateTime(Cinema c, String s){ c.setTime(s);}
-    public void updateClass(Cinema c, String s){
-        c.setCinemaClass(s);
-    }
-    public void updateMovieType(Cinema c, String s){
-        c.setMovieType(s);
-    }
-    public boolean saveShowTimeChanges(Cinema cinema,Cinema updatedCinema){ return DataManager.UpdateShowTime(cinema,updatedCinema);}
-    public void createShowTime(int cinplexID, int cinemaID, int movieID, String time, String cinemaClass, List<Integer> seats, String movieType){
+    public Boolean createShowTime(int cinplexID, int cinemaID, int movieID, String time, String cinemaClass, List<Integer> seats, String movieType){
         Cinema c = new Cinema(cinplexID, cinemaID, movieID, time,cinemaClass, seats, movieType);
-        DataManager.AddShowTimes(c);
+        return DataManager.AddShowTimes(c);
     }
 
 
