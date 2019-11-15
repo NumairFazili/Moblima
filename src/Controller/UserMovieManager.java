@@ -8,9 +8,20 @@ import View.Boundary;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
-
+/**
+ Represents the user movie manager to manage movie objects for the user
+ @author CZ2002 Group 1
+ @version 1.0
+ @since 15-11-2019
+ */
 public class UserMovieManager extends MovieManager {
 
+    /**
+     * Method to Search or List movie depending on user input, display movie details of chosen movie, display all showtimes for chosen movie, display seats for chosen showtime, allow user to choose seat for showtime and confirmation to book chosen movie.
+     * @param user Input user object
+     * @param input Scanner object
+     * @param choice choice parameter to determine whether to search or list movie
+     */
     public void SearchListMovie(User user, Scanner input, int choice){
         ArrayList<Movie> mymovielist = new ArrayList<Movie>();
         //List all movies
@@ -139,6 +150,13 @@ public class UserMovieManager extends MovieManager {
         }
     }
 
+    /**
+     * Method to add rating and review for movie object
+     * @param movie Movie object
+     * @param rating rating to be added to movie object
+     * @param review review to be added to movie object
+     * @return True if review rating and review is successfully added to movie, and False otherwise
+     */
     private Boolean reviewMovie(Movie movie, int rating, String review){
         movie.addRating(rating);
         movie.addReview(review);
