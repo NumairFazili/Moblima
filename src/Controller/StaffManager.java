@@ -52,8 +52,4 @@ public class StaffManager {
         }
 
     }
-    public static void main(String args[]){
-        
-    }
-
 }

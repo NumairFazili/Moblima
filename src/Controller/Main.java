@@ -17,11 +17,11 @@ public class Main {
         StaffShowTimeManager staffShowTimeManager = new StaffShowTimeManager();
         StaffMovieManager staffMovieManager = new StaffMovieManager();
         SettingsManager settingsManager = new SettingsManager();
+        UserMovieManager userMovieManager=new UserMovieManager();
 
         int choice = -1;
         Scanner input = new Scanner(System.in);
         while (true) {
-            if (Boundary.ModuleSelection(choice, input) == 1) {
                 if (Boundary.ModuleSelection(choice, input) == 1) {
                     Staff staff = (StaffManager.StaffLogin(input));
                     if (staff == null) {
@@ -49,10 +49,19 @@ public class Main {
                                 case 6:
                                     settingsManager.configureSettings(input);
                                     break;
+                                case 7:
+                                    System.out.println("Listing top 5 movies by ticket sales:");
+                                    Boundary.DisplayMovie(movieManager.getTopBySales());
+                                    break;
+                                case 8:
+                                    System.out.println("Listing top 5 movies by overall reviewers’ ratings:");
+                                    Boundary.DisplayMovie(movieManager.getTopByRatings());
+                                    break;
+
                                 case 0:
                                     break;
                                 default:
-                                    System.out.println("Error! Please enter either 0, 1, 2, 3, 4, 5, or 6:");
+                                    System.out.println("Error! Please enter either 0, 1, 2, 3, 4, 5,6 or 7:");
                             }
                         } while (choice != 0);
 
@@ -82,7 +91,7 @@ public class Main {
                         switch (choice) {
                             case 1:
                             case 5:
-                                movieManager.SearchListMovie(user, input, choice);
+                                userMovieManager.SearchListMovie(user, input, choice);
                                 break;
                             case 2:
                                 List<Booking> bookings = user.getBookings();
@@ -113,4 +122,3 @@ public class Main {
 
         }
     }
-}

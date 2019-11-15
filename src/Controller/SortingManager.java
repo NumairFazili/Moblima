@@ -17,7 +17,6 @@ import java.util.Comparator;
 public class SortingManager{
 
 
-    public SortingManager(){}
 
     private static String sortMoviesBy = "name";
 

@@ -29,7 +29,7 @@ public class BookingManager {
 
     public BookingManager(){
        movieManager  = new MovieManager();
-        bookingArrayList = DataManager.LoadBookings();
+       bookingArrayList = DataManager.LoadBookings();
     }
 
     public  Booking generateBooking(User user, Cinema cinema, int seatNO){
@@ -106,7 +106,6 @@ public class BookingManager {
     }
 
     private static boolean SeatCheck(List<Integer> seats,int curSeat){
-
         if(seats.contains(curSeat))
             return false;
         return true;

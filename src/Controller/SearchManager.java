@@ -48,6 +48,7 @@ public class SearchManager {
     }
 
     public static Movie find_Movie_byID(ArrayList<Movie> movies, int id) throws NoSuchElementException{
+
         for(int i = 0;i<movies.size();i++){
             if(movies.get(i).getId()==id){
                 return movies.get(i);
