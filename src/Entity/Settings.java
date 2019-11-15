@@ -13,7 +13,7 @@ public class Settings {
     /**
      * Price parameters for different type of movie-goers, movie-type and cinema class.
      */
-    private double basePrice,childPrice,seniorPrice,holidayPrice,silverPrice,goldPrice,platinumPrice;
+    private double basePrice,childPrice,seniorPrice,holidayPrice,silverPrice,goldPrice,platinumPrice,price3D;
 
     /**
      * List of strings denoting the days where holiday price should be charged, format "DD/MM/YYYY"
@@ -32,7 +32,7 @@ public class Settings {
      *@param platinumPrice
      *@param holidays
      */
-    public Settings(double basePrice, double childPrice, double seniorPrice, double holidayPrice,double silverPrice,double goldPrice,double platinumPrice,List<String> holidays){
+    public Settings(double basePrice, double childPrice, double seniorPrice, double holidayPrice,double silverPrice,double goldPrice,double platinumPrice,double price3D,List<String> holidays){
         this.basePrice=basePrice;
         this.childPrice=childPrice;
         this.seniorPrice=seniorPrice;
@@ -40,6 +40,7 @@ public class Settings {
         this.silverPrice=silverPrice;
         this.goldPrice=goldPrice;
         this.platinumPrice=platinumPrice;
+        this.price3D=price3D;
         this.holidays=holidays;
     }
 
@@ -121,6 +122,14 @@ public class Settings {
      */
     public void setChildPrice(double childPrice) {
         this.childPrice = childPrice;
+    }
+
+    public double getPrice3D() {
+        return price3D;
+    }
+
+    public void setPrice3D(double price3D) {
+        this.price3D = price3D;
     }
 
     /**

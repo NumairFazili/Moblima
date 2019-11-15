@@ -12,7 +12,7 @@ public class Boundary {
     private static final String[] startOptions ={"Admin user","Movie-Goer"};
     private static final String[] userMovieOptions={"Search movie", "View booking history","List the Top 5 ranking by ticket sales","List the Top 5 ranking by overall reviewers’ ratings","List all movies"};
     private static final String[] userOptions={"Existing User","New User"};
-    private static final String[] settingsOptions={"Base price","Child price","Senior price","Holiday price","Silver price","Gold price","Platinum price","Holidays"};
+    private static final String[] settingsOptions={"Base price","Child price","Senior price","Holiday price","Silver price","Gold price","Platinum price","3Dprice","Holidays"};
     private static final String[] movieOptions={"movie name","language","runtime","Cast member","Synopsis","director","Status"};
     private static final String[] cinemaOptions={"Cineplex_ID","Cinema_ID","Movie_ID","ShowTime","class","MovieType"};
 
@@ -84,6 +84,8 @@ public class Boundary {
             System.out.println(" "+0+" : "+"Done");
         else
             System.out.println(" "+0+" : "+"Exit");
+
+        System.out.println();
     }
 
 
@@ -91,12 +93,15 @@ public class Boundary {
     public static void DisplayMovie(List<Movie> movieList){
         System.out.format("%-5s %-25s %-15s %-15s %n", "ID", "Title", "Rating(Avg)", "Language");
         for(Movie movie:movieList){
-            if (movie.getAvgRating() == -1){
-                System.out.format("%-5d %-25s %-15s %-15s %n", movie.getId(), movie.getName(), "NA", movie.getLanguage());
-            }
-            else{
-                System.out.format("%-5d %-25s %-15.2f %-15s %n", movie.getId(), movie.getName(), movie.getAvgRating(), movie.getLanguage());
-            }
+
+            String rating;
+            if (movie.getAvgRating() == -1)
+                rating="NA";
+            else
+                rating=String.format("%.3g",movie.getAvgRating());
+
+            System.out.format("%-5d %-25s %-15s %-15s %n", movie.getId(), movie.getName(),rating, movie.getLanguage());
+
         }
         System.out.println();
     }
@@ -110,7 +115,9 @@ public class Boundary {
         if(movie.getAvgRating() == -1)
             rating="NA";
         else
-            rating=String.valueOf(movie.getAvgRating());
+            rating=String.format("%.3g",movie.getAvgRating());
+
+
 
         System.out.format("%-10s   %-20s   %-7s   %-10s  %-15s   %-15s  %-80s  %-30s  %n",movie.getId(),movie.getName(),rating,movie.getLanguage(),movie.getStatus(),movie.getDirector(),movie.getCast(),movie.getSynopsis());
         System.out.println();
@@ -211,11 +218,11 @@ public class Boundary {
     public static void DisplaySettings(){
 
         System.out.println("\nCurrent Settings");
-        System.out.format("%-13s  %-13s  %-13s  %-13s  %-13s  %-14s  %-14s  %-13s %n", "Base Price", "Child Price", "Senior Price", "Holiday Price","Silver Price","Gold Price", "Platinum Price","Holidays");
+        System.out.format("%-13s  %-13s  %-13s  %-13s  %-13s  %-14s  %-14s  %-13s  %-13s %n", "Base Price", "Child Price", "Senior Price", "Holiday Price","Silver Price","Gold Price", "Platinum Price","3D Price","Holidays");
 
         Settings settings = DataManager.LoadSettings();
 
-        System.out.format("%-13s  %-13s  %-13s  %-13s  %-13s  %-14s  %-14s  %-13s %n",settings.getBasePrice(),settings.getChildPrice(),settings.getSeniorPrice(),settings.getHolidayPrice(),settings.getSilverPrice(),settings.getGoldPrice(),settings.getPlatinumPrice(),settings.getHolidays());
+        System.out.format("%-13s  %-13s  %-13s  %-13s  %-13s  %-14s  %-14s  %-13s   %-13s %n",settings.getBasePrice(),settings.getChildPrice(),settings.getSeniorPrice(),settings.getHolidayPrice(),settings.getSilverPrice(),settings.getGoldPrice(),settings.getPlatinumPrice(),settings.getPrice3D(),settings.getHolidays());
 
         System.out.println();
 

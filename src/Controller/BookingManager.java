@@ -17,7 +17,10 @@ import Entity.Cinema;
 import Entity.Movie;
 import Entity.User;
 import View.Boundary;
+import org.junit.Test;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
@@ -45,12 +48,14 @@ public class BookingManager {
     public Boolean createBooking(User user,Cinema cinema, int seatNO){
 
 
-        Movie m = movieManager.selectMovieByID(cinema.getMovieID());
+        //Movie m = movieManager.selectMovieByID(cinema.getMovieID());
 
-        if(m.getStatus().equals("End of Show")){
-            System.out.println("The movie has Ended");
+
+        if(!DateCheck(cinema.getTime())){
+            System.out.println("The Movie has Already Passed");
             return false;
         }
+
 
         Booking booking=this.generateBooking(user, cinema, seatNO);
         Boundary.DisplayBookings(Arrays.asList(booking));
@@ -103,6 +108,28 @@ public class BookingManager {
             if(!booking.getBookingID().equals(String.valueOf(id)))
                 return true;
             return false;
+    }
+
+    private Boolean DateCheck(String date){
+        SimpleDateFormat dfParse = new SimpleDateFormat("dd/MM/yyyy");
+        Date ShowDate;
+        Date currentDate;
+        try {
+           ShowDate=dfParse.parse(date);
+           currentDate=dfParse.parse(dfParse.format(new Date()));
+            int result=currentDate.compareTo(ShowDate);
+
+            if(result==1)
+                return false;
+
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        return true;
+
+
+
     }
 
     private static boolean SeatCheck(List<Integer> seats,int curSeat){

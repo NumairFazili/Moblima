@@ -62,10 +62,24 @@ public class UserMovieManager extends MovieManager {
         }
         //Select the showtime by index
         else if (choice == 1){
-            Boundary.DisplayCinemas(showTimeManager.getShowTimesByMovie(mymovie.getId()));
-            //3. Check seat availability and selection of seat/s.
-            boolean looper = Boolean.TRUE;
+
+            boolean looper=Boolean.TRUE;
+            if(mymovie.getStatus().equals("End of Show")){
+                System.out.println("The movie has Ended\n");
+                looper=Boolean.FALSE;
+            }
+
+
+            if(showTimeManager.getShowTimesByMovie(mymovie.getId()).size()==0){
+                System.out.println("No ShowTimes Available\n");
+                looper=Boolean.FALSE;
+            }
+
+
+
+
             while (looper){
+                Boundary.DisplayCinemas(showTimeManager.getShowTimesByMovie(mymovie.getId()));
                 System.out.println("Choose index of the showtime to view seat availability: ");
                 inputsearchint = input.nextInt();
                 input.nextLine(); //Catch newline from .nextInt()
@@ -105,7 +119,7 @@ public class UserMovieManager extends MovieManager {
                         BookingManager bookingManager=new BookingManager();
                         if(!bookingManager.createBooking(user,mycinema, rowofseat*10 + colofseat)){
                             System.out.println("Booking Failed");
-                            System.out.println("Enter 1 to choose another seat, 0 to go back");
+                            System.out.println("Enter 1 to retry or  0 to go back");
                             inputsearchint = input.nextInt();
                         }
                         else{
@@ -130,8 +144,8 @@ public class UserMovieManager extends MovieManager {
             System.out.println("Enter rating for the movie:" );
             int movieRating = input.nextInt();
             System.out.println("Enter review for the movie:" );
-            input.nextLine();
             String movieReview = input.next();
+            input.nextLine();
             if(this.reviewMovie(mymovie, movieRating, movieReview))
                 System.out.println("Review added successfully");
             else

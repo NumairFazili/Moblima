@@ -125,8 +125,7 @@ public class StaffMovieManager extends MovieManager {
         System.out.println("Enter director:");
         String director = input.nextLine();
         System.out.println("Enter Status:");
-        String status = input.next();
-        input.nextLine();
+        String status = input.nextLine();
         this.createNewMovie(movieid, moviename, language, Arrays.asList(), runtime, cast, director,Synopsis,new ArrayList<>(), status);
 
     }

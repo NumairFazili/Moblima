@@ -23,28 +23,6 @@ public class SortingManager{
 
 
 
-    // private static String sortMoviesBy = "name";
-
-
-    // private static ArrayList<Movie> sortMovies(String by, ArrayList<Movie> movies) throws IllegalArgumentException{
-    //     String str1 = new String("name");
-    //     if(by.equalsIgnoreCase(new String("name"))){
-    //         Collections.sort(movies, new SortByName());
-
-    //     }
-    //     else if(by.equalsIgnoreCase(new String("rating"))){
-    //         Collections.sort(movies, new SortByRating());
-    //     }
-    //     else{
-    //         throw new IllegalArgumentException("no such argument, argument must be 'name' or 'rating'.\n");
-    //     }
-    //     return movies;
-    // }
-
-    // //default is sort by name
-    // private static ArrayList<Movie> sortMovies(ArrayList<Movie> movies) throws IllegalArgumentException{
-    //     return SortingManager.sortMovies(sortMoviesBy,movies);
-    // }
 
     public static HashMap<Integer, Integer> sortByValue(HashMap<Integer, Integer> hm)
     {

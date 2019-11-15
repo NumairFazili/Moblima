@@ -17,11 +17,6 @@ public class StaffShowTimeManager extends ShowTimeManager {
         showTimeManager=new ShowTimeManager();
     }
 
-
-//    public static void main(String[] args) {
-//        StaffShowTimeManager staffShowTimeManager=new StaffShowTimeManager();
-//        staffShowTimeManager.updateCinemaShowtime();
-//    }
     public void updateCinemaShowtime(Scanner input){
         //List all showtimes
         Boundary.DisplayCinemas(this.getAllShowTimes());
@@ -45,7 +40,7 @@ public class StaffShowTimeManager extends ShowTimeManager {
                     Scanner in = new Scanner(System.in);
                     Boundary.DisplayOptions("cinemaMenu");
                     choice = in.nextInt();
-                    if (choice <= -1 || choice >= 4){
+                    if (choice <= -1 || choice >= 7){
                         System.out.println("Error! Please enter either 0, 1, 2, 3:");
                     }
                 }
@@ -125,7 +120,10 @@ public class StaffShowTimeManager extends ShowTimeManager {
         }
         else{
             Cinema mycinema = this.getAllShowTimes().get(inputsearchint);
-            DataManager.UpdateShowTime(mycinema, true);
+            if(DataManager.UpdateShowTime(mycinema, true))
+                System.out.println("Showtime Deleted Successfully");
+            else
+                System.out.println("Delete Failed");
         }
     }
 
