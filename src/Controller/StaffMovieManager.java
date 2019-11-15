@@ -32,7 +32,7 @@ public class StaffMovieManager extends MovieManager {
             return;
         }
         input.nextLine();//Catch newline from input.nextInt()
-        Movie mymovie = SearchManager.find_Movie_byID(this.getAllMovies(), inputsearchint);
+        Movie mymovie = this.selectMovieByID(this.getAllMovies(), inputsearchint);
         Boundary.DisplayMovie(mymovie);
 
         //Choose which attribute of the movie to be edited

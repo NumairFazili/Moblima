@@ -35,7 +35,7 @@ public class UserMovieManager extends MovieManager {
         if (inputsearchint == 0){
             return;
         }
-        Movie mymovie = SearchManager.find_Movie_byID(mymovielist, inputsearchint);
+        Movie mymovie = this.selectMovieByID(mymovielist, inputsearchint);
         System.out.println("Movie Details: " );
         Boundary.DisplayMovie(mymovie);
         System.out.println("All ratings and reviews: " );
