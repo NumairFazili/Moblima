@@ -1,20 +1,16 @@
 package Entity;
 
-import java.lang.reflect.Array;
 import java.util.*;
 import java.util.List;
 
-import Controller.*;
-import View.Boundary;
+import Controller.DataManager;
 
 public class User{
     int age;
     String email; 
     String mobileNumber;
     String name;
-    UserManager userManager;
-    MovieManager movieManager;
-    public User(){userManager=new UserManager(); movieManager=new MovieManager();}
+    public User(){}
 
 
     //for re-creating existing user
@@ -24,9 +20,6 @@ public class User{
         this.name=name;
         this.email = email;
         this.mobileNumber = mobileNumber;
-        userManager=new UserManager();
-        movieManager=new MovieManager();
-
     }
     public int getAge() {return age; }
     public String getName() {
@@ -38,7 +31,17 @@ public class User{
     public String getmobileNumber(){
         return mobileNumber;
     }
-    public String getCustomerType (){return userManager.getType(this.getAge());}
+    public String getCustomerType (){
+        if(age<15){
+            return "Child";
+        }
+        else if(age>65){
+            return "senior citizen";
+        }
+        else{
+            return "regular";
+        }
+    }
 
     
     public String toString() {
@@ -59,7 +62,5 @@ public class User{
         }
         return bookingArrayList;
     }
-
-
 
 }

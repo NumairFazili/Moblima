@@ -10,12 +10,8 @@ import java.util.Scanner;
 
 public class StaffShowTimeManager extends ShowTimeManager {
 
-    ShowTimeManager showTimeManager;
-
     public StaffShowTimeManager(){
-        showTimeManager=new ShowTimeManager();
     }
-
 
 //    public static void main(String[] args) {
 //        StaffShowTimeManager staffShowTimeManager=new StaffShowTimeManager();
@@ -23,7 +19,7 @@ public class StaffShowTimeManager extends ShowTimeManager {
 //    }
     public void updateCinemaShowtime(Scanner input){
         //List all showtimes
-        Boundary.DisplayCinemas(this.getAllShowTimes());
+        Boundary.DisplayCinemas(getAllShowTimes());
         //Select showtime to update by index
         System.out.println("Enter Index of the showtime to be updated: " );
         System.out.println("Otherwise enter -2 to go back" );
@@ -32,8 +28,8 @@ public class StaffShowTimeManager extends ShowTimeManager {
             return;
         }
         input.nextLine();//Catch newline from input.nextInt()
-        Cinema updatedCinema = this.getAllShowTimes().get(inputsearchint);
-        Cinema cinema=this.getAllShowTimes().get(inputsearchint);
+        Cinema updatedCinema = getAllShowTimes().get(inputsearchint);
+        Cinema cinema= getAllShowTimes().get(inputsearchint);
         //Choose which attribute of the showtime to be edited
         System.out.println("Choose attribute of showtime to be edited: " );
         int choice = -1;
@@ -110,11 +106,9 @@ public class StaffShowTimeManager extends ShowTimeManager {
         }
     }
 
-
-
     public void removeCinemaShowtime(Scanner input){
         //List all showtimes
-        Boundary.DisplayCinemas(showTimeManager.getAllShowTimes());
+        Boundary.DisplayCinemas(getAllShowTimes());
         //Select showtime to remove by index
         System.out.println("Enter the index of showtime to be removed: " );
         System.out.println("Otherwise enter -2 to go back" );
@@ -123,7 +117,7 @@ public class StaffShowTimeManager extends ShowTimeManager {
             //Do nothing
         }
         else{
-            Cinema mycinema = this.getAllShowTimes().get(inputsearchint);
+            Cinema mycinema = getAllShowTimes().get(inputsearchint);
             DataManager.UpdateShowTime(mycinema, true);
         }
     }
@@ -151,15 +145,15 @@ public class StaffShowTimeManager extends ShowTimeManager {
     }
 
 
-    public void updateCineplexID(Cinema c, int i){ c.setCinplexID(i); }
-    public void updateCinemaID(Cinema c, int i){ c.setCinemaID(i); }
-    public void updateMovieID(Cinema c, int i){ c.setMovieID(i); }
-    public void updateTime(Cinema c, String s){ c.setTime(s);}
-    public void updateClass(Cinema c, String s){
-        c.setCinemaClass(s);
+    public void updateCineplexID(Cinema cinema, int cineplexID){ cinema.setCinplexID(cineplexID); }
+    public void updateCinemaID(Cinema cinema, int cinemaID){ cinema.setCinemaID(cinemaID); }
+    public void updateMovieID(Cinema cinema, int movieID){ cinema.setMovieID(movieID); }
+    public void updateTime(Cinema cinema, String time){ cinema.setTime(time);}
+    public void updateClass(Cinema cinema, String cinemaClass){
+        cinema.setCinemaClass(cinemaClass);
     }
-    public void updateMovieType(Cinema c, String s){
-        c.setMovieType(s);
+    public void updateMovieType(Cinema cinema, String movieType){
+        cinema.setMovieType(movieType);
     }
     public boolean saveShowTimeChanges(Cinema cinema,Cinema updatedCinema){ return DataManager.UpdateShowTime(cinema,updatedCinema);}
     public void createShowTime(int cinplexID, int cinemaID, int movieID, String time, String cinemaClass, List<Integer> seats, String movieType){

@@ -1,28 +1,17 @@
 package Controller;
 import Entity.Movie;
-import Entity.Staff;
 import View.Boundary;
 import java.util.*;
 
 public class StaffMovieManager extends MovieManager {
 
 
-    MovieManager movieManager;
-    Staff staff;
-
-
-
-
-
     public StaffMovieManager(){
-        movieManager=new MovieManager();
-        staff=new Staff();
     }
-
 
     public void UpdateMovie(Scanner input){
         //List all movies
-        Boundary.DisplayMovie(this.getAllMovies());
+        Boundary.DisplayMovie(getAllMovies());
         //Boundary.DisplayMovies(DataManager.LoadMovies(""));
         //Select movie to update by movieID
         System.out.println("Enter ID of the movie to be updated: " );
@@ -32,7 +21,7 @@ public class StaffMovieManager extends MovieManager {
             return;
         }
         input.nextLine();//Catch newline from input.nextInt()
-        Movie mymovie = SearchManager.find_Movie_byID(this.getAllMovies(), inputsearchint);
+        Movie mymovie = selectMovieByID(getAllMovies(), inputsearchint);
         Boundary.DisplayMovie(mymovie);
 
         //Choose which attribute of the movie to be edited
@@ -131,40 +120,29 @@ public class StaffMovieManager extends MovieManager {
 
     }
 
-    public void createNewMovie(int id, String name, String Language, List<Integer> rating, String runTime, List<String> cast, String Synopsis, String Director, List<String> reviews, String status){
-        Movie m = new Movie(id, name, Language, rating, runTime, cast, Director,Synopsis,reviews, status);
+    private void createNewMovie(int id, String name, String language, List<Integer> rating, String runTime, List<String> cast, String synopsis, String director, List<String> reviews, String status){
+        Movie m = new Movie(id, name, language, rating, runTime, cast, director,synopsis,reviews, status);
         DataManager.SaveMovies(m);
         System.out.println("Movie Created Successfully\n");
     }
 
-    public void updateMovieName(Movie m, String s){
-        m.setName(s);
+    private void updateMovieName(Movie movie, String name){
+        movie.setName(name);
     }
-    public void updateMovieLanguage(Movie m, String s){ m.setLanguage(s); }
-    public void updateMovieRunTime(Movie m, String s){
-        m.setRunTime(s);
+    private void updateMovieLanguage(Movie movie, String language){ movie.setLanguage(language); }
+    private void updateMovieRunTime(Movie movie, String runTime){
+        movie.setRunTime(runTime);
     }
-    public void updateMovieSynopsis(Movie m, String s){
-        m.setSynopsis(s);
+    private void updateMovieSynopsis(Movie movie, String synopsis){
+        movie.setSynopsis(synopsis);
     }
-    public void updateMovieDirector(Movie m, String s){
-        m.setDirector(s);
+    private void updateMovieDirector(Movie movie, String director){
+        movie.setDirector(director);
     }
-    public void updateMovieCast(Movie m, List<String> cast){
-        m.setCast(cast);
+    private void updateMovieCast(Movie movie, List<String> cast){
+        movie.setCast(cast);
     }
-    public void updateMovieStatus(Movie m, String status){ m.setStatus(status); }
-    public boolean saveMovieChanges(Movie m){ return DataManager.manageMovie(m);}
-
-
-
-
-
-
-
-
-
-
-
+    private void updateMovieStatus(Movie movie, String status){ movie.setStatus(status); }
+    private boolean saveMovieChanges(Movie movie){ return DataManager.manageMovie(movie);}
 
 }

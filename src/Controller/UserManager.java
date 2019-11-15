@@ -2,8 +2,7 @@ package Controller;
 
 import java.util.*;
 
-import Entity.*;
-import View.Boundary;
+import Entity.User;
 
 /*
     createBookings
@@ -52,16 +51,4 @@ public class UserManager {
 
     }
 
-
-    public String getType(int age){
-        if(age<15){
-            return "Child";
-        }
-        else if(age>65){
-            return "senior citizen";
-        }
-        else{
-            return "regular";
-        }
-    }
 }

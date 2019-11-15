@@ -1,7 +1,6 @@
 package Controller;
 
 import Entity.Settings;
-import Entity.Staff;
 import View.Boundary;
 
 import java.util.Arrays;
@@ -90,34 +89,34 @@ public class SettingsManager {
             System.out.println("Error! Settings failed to be updated!\n");
         }
     }
-    public void updateBasePrice(Settings s, double base){
+    private void updateBasePrice(Settings s, double base){
         s.setBasePrice(base);
     }
-    public void updateChildPrice(Settings s, double child){
+    private void updateChildPrice(Settings s, double child){
         s.setChildPrice(child);
     }
-    public void updateSeniorPrice(Settings s, double senior){
+    private void updateSeniorPrice(Settings s, double senior){
         s.setSeniorPrice(senior);
     }
-    public void updateHolidayPrice(Settings s, double holiday){
+    private void updateHolidayPrice(Settings s, double holiday){
         s.setHolidayPrice(holiday);
     }
-    public void updateSilverPrice(Settings s, double silver){
+    private void updateSilverPrice(Settings s, double silver){
         s.setSilverPrice(silver);
     }
-    public void updateGoldPrice(Settings s, double gold){
+    private void updateGoldPrice(Settings s, double gold){
         s.setGoldPrice(gold);
     }
-    public void updatePlatinumPrice(Settings s, double platinum){
+    private void updatePlatinumPrice(Settings s, double platinum){
         s.setPlatinumPrice(platinum);
     }
-    public void updateHoliday(Settings s, List<String> holiday){
+    private void updateHoliday(Settings s, List<String> holiday){
         s.setHolidays(holiday);
     }
-    public boolean saveSettingsChanges(Settings s){
+    private boolean saveSettingsChanges(Settings s){
         return DataManager.manageSettings(s);
     }
-    public Settings showSettings(){ return DataManager.LoadSettings(); }
+    private Settings showSettings(){ return DataManager.LoadSettings(); }
 
 
 

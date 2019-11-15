@@ -25,10 +25,8 @@ import java.util.*;
 public class BookingManager {
 
     private static ArrayList<Booking> bookingArrayList;
-    MovieManager movieManager;
 
     public BookingManager(){
-       movieManager  = new MovieManager();
         bookingArrayList = DataManager.LoadBookings();
     }
 
@@ -42,12 +40,9 @@ public class BookingManager {
     }
 
 
-    public Boolean createBooking(User user,Cinema cinema, int seatNO){
+    public Boolean createBooking(User user,Cinema cinema, Movie movie, int seatNO){
 
-
-        Movie m = movieManager.selectMovieByID(cinema.getMovieID());
-
-        if(m.getStatus().equals("End of Show")){
+        if(movie.getStatus().equals("End of Show")){
             System.out.println("The movie has Ended");
             return false;
         }
@@ -83,11 +78,11 @@ public class BookingManager {
     }
 
 
-    private static double calculatePrice(User user, Cinema cinema){
+    private double calculatePrice(User user, Cinema cinema){
         priceManager priceManager = new priceManager(user.getAge(),cinema);
         return  priceManager.getPrice();
     }
-    private static String genBookingID(){
+    private String genBookingID(){
         int id;
         while(true){
             Random rand = new Random( System.currentTimeMillis() );
@@ -98,14 +93,14 @@ public class BookingManager {
         return Integer.toString(id);
     }
 
-    private static Boolean BookingCheck(int id){
+    private boolean BookingCheck(int id){
         for(Booking booking:bookingArrayList)
             if(!booking.getBookingID().equals(String.valueOf(id)))
                 return true;
             return false;
     }
 
-    private static boolean SeatCheck(List<Integer> seats,int curSeat){
+    private boolean SeatCheck(List<Integer> seats,int curSeat){
 
         if(seats.contains(curSeat))
             return false;
