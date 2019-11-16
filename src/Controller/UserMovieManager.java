@@ -12,7 +12,8 @@ import View.Boundary;
 
 public class UserMovieManager extends MovieManager{
 
-    public void SearchListMovie(User user, Scanner input, int choice){
+    public Movie SearchListMovie(int choice){
+        Scanner input = new Scanner(System.in);
         ArrayList<Movie> mymovielist = new ArrayList<Movie>();
         //List all movies
         if (choice == 5){
@@ -25,7 +26,7 @@ public class UserMovieManager extends MovieManager{
             mymovielist = DataManager.LoadMovies(inputsearch);
             if (mymovielist.isEmpty()){
                 System.out.println("No movie found!" );
-                return;
+                return null;
             }
         }
         Boundary.DisplayMovie(mymovielist);
@@ -34,14 +35,17 @@ public class UserMovieManager extends MovieManager{
         System.out.println("Otherwise enter 0 to go back" );
         int inputsearchint = input.nextInt();
         if (inputsearchint == 0){
-            return;
+            return null;
         }
         Movie mymovie = selectMovieByID(mymovielist, inputsearchint);
         System.out.println("Movie Details: " );
         Boundary.DisplayMovie(mymovie);
         System.out.println("All ratings and reviews: " );
         Boundary.DisplayMovieReviews(mymovie);
-        //Select movie, then search for all showtimes.
+        return mymovie;
+    }
+    public void BookMovie(User user,int choice, Movie mymovie){
+        Scanner input = new Scanner(System.in);
         choice = -1;
         while (choice <= -1 || choice >= 3){
             try{
@@ -68,7 +72,7 @@ public class UserMovieManager extends MovieManager{
             boolean looper = Boolean.TRUE;
             while (looper){
                 System.out.println("Choose index of the showtime to view seat availability: ");
-                inputsearchint = input.nextInt();
+                int inputsearchint = input.nextInt();
                 input.nextLine(); //Catch newline from .nextInt()
                 Boundary.DisplaySeating(((DataManager.LoadShowTimes(mymovie.getId()).get(inputsearchint))));
                 choice = -1;
@@ -104,7 +108,7 @@ public class UserMovieManager extends MovieManager{
                         Cinema mycinema = ((DataManager.LoadShowTimes(mymovie.getId()).get(inputsearchint)));
 
                         BookingManager bookingManager=new BookingManager();
-                        if(!bookingManager.createBooking(user,mycinema, selectMovieByID(mycinema.getMovieID()), rowofseat*10 + colofseat)){
+                        if(!bookingManager.createBooking(user,mycinema, /*selectMovieByID(mycinema.getMovieID()),*/ rowofseat*10 + colofseat)){
                             System.out.println("Booking Failed");
                             System.out.println("Enter 1 to choose another seat, 0 to go back");
                             inputsearchint = input.nextInt();
@@ -135,7 +139,6 @@ public class UserMovieManager extends MovieManager{
             this.reviewMovie(mymovie, movieRating, movieReview);
         }
     }
-
     public void reviewMovie(Movie movie, int rating, String review){
         movie.addRating(rating);
         movie.addReview(review);

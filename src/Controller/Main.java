@@ -1,9 +1,10 @@
 package Controller;
 
+import Entity.Movie;
 import Entity.Staff;
 import Entity.User;
 import View.Boundary;
-import javafx.beans.binding.ObjectExpression;
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -85,7 +86,8 @@ public class Main {
                     switch (choice) {
                         case 1:
                         case 5:
-                            userMovieManager.SearchListMovie(user,input, choice);
+                            Movie movie = userMovieManager.SearchListMovie(choice);
+                            userMovieManager.BookMovie(user,choice,movie);
                             break;
                         case 2:
                             Boundary.DisplayBookings(user.getBookings());
