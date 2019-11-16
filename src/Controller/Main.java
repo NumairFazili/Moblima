@@ -86,7 +86,7 @@ public class Main {
                             case 1:
                             case 5:
                                 Movie movie = userMovieManager.SearchListMovie(choice);
-                                userMovieManager.BookMovie(movie,user,choice);
+                                if(movie!=null) userMovieManager.BookMovie(movie,user,choice);
                                 break;
                             case 2:
                                 List<Booking> bookings = user.getBookings();

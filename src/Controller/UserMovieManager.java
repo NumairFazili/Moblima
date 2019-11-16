@@ -49,6 +49,13 @@ public class UserMovieManager extends MovieManager {
             return null;
         }
         Movie mymovie = this.selectMovieByID(mymovielist, inputsearchint);
+
+        if(mymovie==null){
+            System.out.println("Invalid Movie ID");
+            return null;
+        }
+
+
         System.out.println("Movie Details: ");
         Boundary.DisplayMovie(mymovie);
         System.out.println("All ratings and reviews: ");
