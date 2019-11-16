@@ -1,12 +1,12 @@
 package Entity;
 
 import java.util.List;
-    /**
-     Represents the price settings for different types of movie-goers and cinema classes as well as holiday dates
-     @author CZ2002 Group 1
-     @version 1.0
-     @since 15-11-2019
-     */
+        /**
+         Represents the price settings for different types of movie-goers and cinema classes as well as holiday dates
+         @author CZ2002 Group 1
+         @version 1.0
+         @since 15-11-2019
+         */
 public class Settings {
     /**
      * Price parameters for different type of movie-goers, movie-type and cinema class.
