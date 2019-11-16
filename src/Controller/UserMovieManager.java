@@ -52,8 +52,7 @@ public class UserMovieManager extends MovieManager {
         System.out.println("All ratings and reviews: " );
         Boundary.DisplayMovieReviews(mymovie);
         //Select movie, then search for all showtimes.
-        choice = -1;
-        while (choice <= -1 || choice >= 3){
+        do {
             try{
                 Scanner in = new Scanner(System.in);
                 System.out.println("1. View all showtimes for this movie: ");
@@ -67,7 +66,7 @@ public class UserMovieManager extends MovieManager {
             catch(InputMismatchException e){
                 System.out.println("That is not an integer, please try again." );
             }
-        }
+        } while (choice <= -1 || choice >= 3);
         if (choice == 0){
             return;
         }
@@ -96,7 +95,7 @@ public class UserMovieManager extends MovieManager {
                 input.nextLine(); //Catch newline from .nextInt()
                 Boundary.DisplaySeating(((DataManager.LoadShowTimes(mymovie.getId()).get(inputsearchint))));
                 choice = -1;
-                while (choice <= -1 || choice >= 3){
+               {
                     try{
                         Scanner in = new Scanner(System.in);
                         System.out.println("1. Select seats");

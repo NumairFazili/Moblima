@@ -33,9 +33,8 @@ public class StaffShowTimeManager extends ShowTimeManager {
         //Choose which attribute of the showtime to be edited
         System.out.println("Choose attribute of showtime to be edited: " );
         int choice = -1;
-        while (choice != 0){
-            choice = -1;
-            while (choice <= -1 || choice >= 8){
+        do {
+            do{
                 try{
                     Scanner in = new Scanner(System.in);
                     Boundary.DisplayOptions("cinemaMenu");
@@ -47,10 +46,9 @@ public class StaffShowTimeManager extends ShowTimeManager {
                 catch(InputMismatchException e){
                     System.out.println("That is not an integer, please try again." );
                 }
-            }
+            }while (choice <= -1 || choice >= 8);
             //0. Done, save showtime to database
             if (choice == 0){
-                choice = -1;
                 break;
             }
 
@@ -91,7 +89,7 @@ public class StaffShowTimeManager extends ShowTimeManager {
                 updatedCinema.setMovieType(input.next());
             }
 
-        }
+        }while (choice != 0);
 
 
         System.out.println();

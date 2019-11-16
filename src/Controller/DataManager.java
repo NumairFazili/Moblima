@@ -181,7 +181,7 @@ public class DataManager {
 
 
 
-    public static void SaveMovies(Movie movie) {
+    public static Boolean SaveMovies(Movie movie) {
         FileWriter writer = null;
         try {
             writer = new FileWriter(getLocation("Movie"), true);
@@ -212,9 +212,11 @@ public class DataManager {
             writer.append("\n");
             writer.flush();
             writer.close();
+            return true;
         } catch (IOException e) {
             e.printStackTrace();
         }
+        return false;
 
 
     }

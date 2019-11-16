@@ -20,9 +20,8 @@ public class SettingsManager {
         System.out.println("Choose which setting to configure: " );
         Settings mysettings = DataManager.LoadSettings();
         int choice = -1;
-        while (choice != 0){
-            choice = -1;
-            while (choice <= -1 || choice >= 10){
+        do {
+            do {
                 try{
                     Scanner in = new Scanner(System.in);
                     Boundary.DisplayOptions("settingsMenu");
@@ -35,7 +34,7 @@ public class SettingsManager {
                 catch(InputMismatchException e){
                     System.out.println("That is not an integer, please try again." );
                 }
-            }
+            }while (choice <= -1 || choice >= 10);
             //0. Done, save new settings to database
             if (choice == 0){
                 break;
@@ -93,7 +92,7 @@ public class SettingsManager {
                 System.out.println("Enter new holidays in (dd/mm/yyy) format separated by commas :");
                 mysettings.setHolidays(Arrays.asList(input.next().split(",")));
             }
-        }
+        }while (choice != 0);
         //Save edited movie object to database
         if (DataManager.manageSettings(mysettings) == Boolean.TRUE){
             System.out.println("Settings successfully updated!\n");
