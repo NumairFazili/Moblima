@@ -22,8 +22,8 @@ public class UserMovieManager extends MovieManager{
         //Search and display movies
         if (choice == 1){
             System.out.println("Enter name of movie to search: " );
-            String inputsearch = input.next();
-            mymovielist = DataManager.LoadMovies(inputsearch);
+            String searcharg = input.next();
+            mymovielist = DataManager.LoadMovies(searcharg);
             if (mymovielist.isEmpty()){
                 System.out.println("No movie found!" );
                 return null;
@@ -33,17 +33,20 @@ public class UserMovieManager extends MovieManager{
         //Select movie by movie ID and print movie details – including reviews and ratings
         System.out.println("Enter ID of the movie to see the details: " );
         System.out.println("Otherwise enter 0 to go back" );
-        int inputsearchint = input.nextInt();
-        if (inputsearchint == 0){
+        int inputsearchid= input.nextInt();
+        if (inputsearchid == 0){
             return null;
         }
-        Movie mymovie = selectMovieByID(mymovielist, inputsearchint);
+        Movie mymovie = selectMovieByID(mymovielist, inputsearchid);
         System.out.println("Movie Details: " );
         Boundary.DisplayMovie(mymovie);
         System.out.println("All ratings and reviews: " );
         Boundary.DisplayMovieReviews(mymovie);
         return mymovie;
     }
+
+
+
     public void BookMovie(User user,int choice, Movie mymovie){
         Scanner input = new Scanner(System.in);
         choice = -1;
