@@ -1,12 +1,12 @@
 package Entity;
 
 import java.util.List;
-/**
- Represents the price settings for different types of movie-goers and cinema classes as well as holiday dates
- @author CZ2002 Group 1
- @version 1.0
- @since 15-11-2019
- */
+        /**
+         Represents the price settings for different types of movie-goers and cinema classes as well as holiday dates
+         @author CZ2002 Group 1
+         @version 1.0
+         @since 15-11-2019
+         */
 public class Settings {
     /**
      * Price parameters for different type of movie-goers, movie-type and cinema class.
@@ -28,6 +28,7 @@ public class Settings {
      *@param silverPrice silver price for cinema class
      *@param goldPrice gold price for cinema class
      *@param platinumPrice platinum price for cinema class
+     *@param price3D 3D price for a movie booking
      *@param holidays list of dates designated to be charged holiday price
      */
     public Settings(double basePrice, double childPrice, double seniorPrice, double holidayPrice,double silverPrice,double goldPrice,double platinumPrice,double price3D,List<String> holidays){
@@ -122,10 +123,18 @@ public class Settings {
         this.childPrice = childPrice;
     }
 
+    /**
+     * Get the 3D price for a movie booking
+     * @return 3D price for a movie booking
+     */
     public double getPrice3D() {
         return price3D;
     }
 
+    /**
+     * Change the 3D price price for a movie booking
+     * @param price3D child price for a movie booking
+     */
     public void setPrice3D(double price3D) {
         this.price3D = price3D;
     }

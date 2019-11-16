@@ -1,6 +1,7 @@
 package Controller;
 
 import Entity.*;
+import View.Boundary;
 import com.google.common.base.Joiner;
 
 import java.io.*;
@@ -39,9 +40,14 @@ public class DataManager {
                 if (tokens[1].toLowerCase().contains(search.toLowerCase())) {
                     List<String> cast = Arrays.asList(tokens[5].split("\\."));
                     ArrayList<String> reviews=new ArrayList<String>(Arrays.asList(tokens[8].split("\\.")));
+                    if(reviews.get(0).equals(""))
+                        reviews=new ArrayList<>();
                     List<String> temp= Arrays.asList(tokens[3].split("\\."));
-                    List<Integer> ratings=new ArrayList<>();
-                    if(temp.size()>1) for (String s : temp) ratings.add(Integer.valueOf(s));
+
+                    ArrayList<Integer> ratings=new ArrayList<>();
+                    if(!temp.get(0).equals(""))
+                        for (String s : temp) ratings.add(Integer.valueOf(s));
+
                     Movie movie = new Movie(Integer.parseInt(tokens[0]), tokens[1], tokens[2],ratings, tokens[4], cast, tokens[6], tokens[7],reviews,tokens[9]);
                     movieArrayList.add(movie);
                 }
@@ -56,7 +62,7 @@ public class DataManager {
     }
 
 
-    public static boolean manageMovie(Movie movie){
+    public static Boolean manageMovie(Movie movie){
 
         File inputFile = new File(getLocation("Movie"));
         File tempFile = new File(getLocation("Temp"));
@@ -98,7 +104,7 @@ public class DataManager {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        boolean Found = false;
+        Boolean Found = false;
         String line;
         try {
             reader.readLine();
@@ -147,7 +153,7 @@ public class DataManager {
                     writer.append(",");
                     writer.append(movie.getSynopsis());
                     writer.append(",");
-                    writer.append(String.join(".", movie.getReviews()));
+                    writer.append(Joiner.on('.').join(movie.getReviews()));
                     writer.append(",");
                     writer.append(movie.getStatus());
                     writer.append("\n");
@@ -173,14 +179,14 @@ public class DataManager {
             e.printStackTrace();
         }
 
-        boolean success = tempFile.renameTo(new File(getLocation("Movie")));
+        Boolean success = tempFile.renameTo(new File(getLocation("Movie")));
         return success;
 
     }
 
 
 
-    public static void SaveMovies(Movie movie) {
+    public static Boolean SaveMovies(Movie movie) {
         FileWriter writer = null;
         try {
             writer = new FileWriter(getLocation("Movie"), true);
@@ -205,18 +211,49 @@ public class DataManager {
             writer.append(",");
             writer.append(movie.getDirector());
             writer.append(",");
-            writer.append(String.join(".", movie.getReviews()));
+            writer.append(Joiner.on('.').join(movie.getReviews()));
             writer.append(",");
             writer.append(movie.getStatus());
             writer.append("\n");
             writer.flush();
             writer.close();
+            return true;
         } catch (IOException e) {
             e.printStackTrace();
         }
+        return false;
 
 
     }
+
+
+    // This function is for further enhancement
+
+    public static ArrayList<Cineplex> LoadCineplex() {
+        BufferedReader reader = null;
+        ArrayList<Cineplex> cineplexArrayList = new ArrayList<>();
+        try {
+            reader = new BufferedReader(new FileReader(getLocation("Cineplex")));
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        String line = "";
+        try {
+            reader.readLine();
+            while ((line = reader.readLine()) != null) {
+                String[] tokens = line.split(",");
+                Cineplex cineplex = new Cineplex(Integer.parseInt(tokens[0]), tokens[1], tokens[2], Integer.parseInt(tokens[3]));
+                cineplexArrayList.add(cineplex);
+            }
+            reader.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+
+        }
+        return cineplexArrayList;
+    }
+
+
 
 
     public static List<Cinema> LoadShowTimes(int movieID) {
@@ -290,7 +327,7 @@ public class DataManager {
         return false;
     }
 
-    public static boolean UpdateShowTime(Cinema cinema, boolean delete) {
+    public static Boolean UpdateShowTime(Cinema cinema, Boolean delete) {
 
 
         File inputFile = new File(getLocation("Cinema"));
@@ -328,7 +365,7 @@ public class DataManager {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        boolean Found = false;
+        Boolean Found = false;
         String line;
         try {
             reader.readLine();
@@ -391,14 +428,14 @@ public class DataManager {
             e.printStackTrace();
         }
 
-        boolean success = tempFile.renameTo(new File(getLocation("Cinema")));
+        Boolean success = tempFile.renameTo(new File(getLocation("Cinema")));
         return success;
 
 
     }
 
 
-    public static boolean UpdateShowTime(Cinema cinema1, Cinema cinema2) {
+    public static Boolean UpdateShowTime(Cinema cinema1, Cinema cinema2) {
 
 
         File inputFile = new File(getLocation("Cinema"));
@@ -436,7 +473,7 @@ public class DataManager {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        boolean Found = false;
+        Boolean Found = false;
         String line;
         try {
             reader.readLine();
@@ -499,7 +536,7 @@ public class DataManager {
             e.printStackTrace();
         }
 
-        boolean success = tempFile.renameTo(new File(getLocation("Cinema")));
+        Boolean success = tempFile.renameTo(new File(getLocation("Cinema")));
         return success;
 
 
@@ -629,7 +666,7 @@ public class DataManager {
 
     }
 
-    public static boolean ManageUser(User user,boolean add) {
+    public static Boolean ManageUser(User user,Boolean add) {
 
 
         File inputFile = new File(getLocation("User"));
@@ -666,7 +703,7 @@ public class DataManager {
         }
 
 
-        boolean Found = false;
+        Boolean Found = false;
         String line;
 
         try {
@@ -705,7 +742,7 @@ public class DataManager {
             Files.delete(Paths.get(getLocation("User")));
             } catch (IOException e) {
             e.printStackTrace();}
-        boolean success = tempFile.renameTo(new File(getLocation("User")));
+        Boolean success = tempFile.renameTo(new File(getLocation("User")));
         return success;
         }
 
@@ -738,7 +775,7 @@ public class DataManager {
         return null;
     }
 
-    public static boolean manageSettings(Settings settings){
+    public static Boolean manageSettings(Settings settings){
 
         File tempFile = new File(getLocation("Temp"));
 
@@ -810,7 +847,7 @@ public class DataManager {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        boolean success = tempFile.renameTo(new File(getLocation("settings")));
+        Boolean success = tempFile.renameTo(new File(getLocation("settings")));
         return success;
 
     }

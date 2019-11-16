@@ -17,7 +17,6 @@ import Entity.Cinema;
 import Entity.Movie;
 import Entity.User;
 import View.Boundary;
-import org.junit.Test;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -28,14 +27,12 @@ import java.util.*;
 public class BookingManager {
 
     private static ArrayList<Booking> bookingArrayList;
-    MovieManager movieManager;
 
     public BookingManager(){
-       movieManager  = new MovieManager();
        bookingArrayList = DataManager.LoadBookings();
     }
 
-    public  Booking generateBooking(User user, Cinema cinema, int seatNO){
+    private  Booking generateBooking(User user, Cinema cinema, int seatNO){
         String bookingID = genBookingID();
         LocalDateTime dateTime = LocalDateTime.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
@@ -46,9 +43,6 @@ public class BookingManager {
 
 
     public Boolean createBooking(User user,Cinema cinema, int seatNO){
-
-
-        //Movie m = movieManager.selectMovieByID(cinema.getMovieID());
 
 
         if(!DateCheck(cinema.getTime())){
@@ -76,7 +70,7 @@ public class BookingManager {
     }
 
 
-    public Boolean saveBooking(Booking booking,Cinema cinema){
+    private Boolean saveBooking(Booking booking,Cinema cinema){
 
         if(!SeatCheck(cinema.getSeats(),booking.getSeatNO()))
             return false;
@@ -110,7 +104,7 @@ public class BookingManager {
             return false;
     }
 
-    private Boolean DateCheck(String date){
+    protected Boolean DateCheck(String date){
         SimpleDateFormat dfParse = new SimpleDateFormat("dd/MM/yyyy");
         Date ShowDate;
         Date currentDate;

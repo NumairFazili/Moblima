@@ -7,15 +7,16 @@ import java.util.*;
 public class StaffMovieManager extends MovieManager {
 
 
-    MovieManager movieManager;
-    Staff staff;
+    private MovieManager movieManager;
+    private Staff staff;
+
 
 
 
 
 
     public StaffMovieManager(){
-        movieManager=new MovieManager();
+        //movieManager=new MovieManager();
         staff=new Staff();
     }
 
@@ -37,14 +38,12 @@ public class StaffMovieManager extends MovieManager {
 
         //Choose which attribute of the movie to be edited
         System.out.println("Choose attribute of movie to be edited: " );
-        int choice = -1;
-        while (choice != 0){
-            choice = -1;
-            while (choice <= -1 || choice >= 8){
+        int choice=-1;
+        do {
+            do {
                 try{
                     Scanner in = new Scanner(System.in);
                     Boundary.DisplayOptions("moviesMenu");
-                    System.out.println("0. Done");
                     choice = in.nextInt();
                     in.nextLine();//catch newline
                     if (choice <= -1 || choice >= 8){
@@ -54,7 +53,7 @@ public class StaffMovieManager extends MovieManager {
                 catch(InputMismatchException e){
                     System.out.println("That is not an integer, please try again." );
                 }
-            }
+            } while (choice <= -1 || choice >= 8);
             //0. Done, save new movie object to database
             if (choice == 0){
                 choice = -1;
@@ -96,7 +95,7 @@ public class StaffMovieManager extends MovieManager {
                 mymovie.setStatus(input.nextLine());
             }
 
-        }
+        }while (choice != 0);
         //Save edited movie object to database
         if (DataManager.manageMovie(mymovie) == Boolean.TRUE){
             System.out.println("Movie listing successfully updated!\n");
@@ -126,14 +125,18 @@ public class StaffMovieManager extends MovieManager {
         String director = input.nextLine();
         System.out.println("Enter Status:");
         String status = input.nextLine();
-        this.createNewMovie(movieid, moviename, language, Arrays.asList(), runtime, cast, director,Synopsis,new ArrayList<>(), status);
+        if(this.createNewMovie(movieid, moviename, language, new ArrayList<>(), runtime, cast, director,Synopsis,new ArrayList<>(), status))
+            System.out.println("Movie Created Successfully\n");
+        else
+            System.out.println("Failed to Add movie\n");
+
 
     }
 
-    public void createNewMovie(int id, String name, String Language, List<Integer> rating, String runTime, List<String> cast, String Synopsis, String Director,ArrayList<String> reviews, String status){
+    public Boolean createNewMovie(int id, String name, String Language, ArrayList<Integer> rating, String runTime, List<String> cast, String Synopsis, String Director,ArrayList<String> reviews, String status){
         Movie m = new Movie(id, name, Language, rating, runTime, cast, Director,Synopsis,reviews, status);
-        DataManager.SaveMovies(m);
-        System.out.println("Movie Created Successfully\n");
+        return DataManager.SaveMovies(m);
+
     }
 
 

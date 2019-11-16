@@ -1,118 +1,202 @@
 package Entity;
 
 
+
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ Represents a movie in each cinema, a cinema can have many movies
+ @author CZ2002 Group 1
+ @version 1.0
+ @since 15-11-2019
+ */
 public class Movie {
 
-
+    /**
+     * Movie ID
+     */
     int id;
-    String name,language,runTime,synopsis,director,status;
-    double avgRating;
+    /**
+     * Parameters for name, language, runtime, synopsis, director and status of movie
+     */
+    String name,Language,runTime,Synopsis,Director,status;
+    /**
+     * Ratings of movie
+     */
     List<Integer> ratings;
-    List<String> reviews;
+    /**
+     * Reviews of movie
+     */
+    ArrayList<String> reviews;
+    /**
+     * Cast of movie
+     */
     List<String> cast;
-    public Movie(int id,String name,String language,List<Integer>ratings,String runTime,List<String> cast,String director,String synopsis,List<String> reviews, String status) {
+
+    /**
+     * Creates a new movie object with the following parameters
+     * @param id movie id
+     * @param name movie name
+     * @param Language movie language
+     * @param ratings movie rating
+     * @param runTime movie runtime
+     * @param cast movie cast
+     * @param Synopsis movie synopsis
+     * @param Director movie director
+     * @param reviews movie reviews
+     * @param status movie status
+     */
+    public Movie(int id,String name,String Language,List<Integer>ratings,String runTime,List<String> cast,String Director,String Synopsis,ArrayList<String> reviews, String status) {
         this.id = id;
         this.ratings = ratings;
         this.name = name;
-        this.language=language;
+        this.Language=Language;
         this.runTime = runTime;
-        this.synopsis = synopsis;
-        this.director = director;
+        this.Synopsis = Synopsis;
+        this.Director = Director;
         this.cast = cast;
         this.reviews = reviews;
         this.status = status;
     }
 
-    @Override
-    public String toString() {
-        String cast_str ="";
-        for(int i = 0;i<this.getCast().size();i++){
-            cast_str += this.getCast().get(i);
-            cast_str += "|";
-        }
-        return new String("MovieName: "+this.getName()+"| Rating"+this.getRating()+"\nCasts: "+cast_str);
-    }
+    /**
+     * Get the movie ID
+     * @return movie ID
+     */
+    public int getId() { return id; }
 
-    public int getId() {
-        return id;
-    }
-
+    /**
+     * Change the movie ID
+     * @param id movie ID
+     */
     public void setId(int id) {
         this.id = id;
     }
 
+        /**
+     * Get the movie ratings
+     * @return movie ratings
+     */
     public List<Integer> getRating() {
         return ratings;
     }
 
+    /**
+     * Change the movie ratings
+     * @param ratings movie ratings
+     */
     public void setRating(List<Integer> ratings) {
         this.ratings = ratings;
     }
 
+    /**
+     * Add a rating to movie
+     * @param rating movie rating
+     */
     public void addRating(Integer rating){
         this.ratings.add(rating);
     }
-    
-    public double getAvgRating(){
-            if(ratings.size()> 1){
-                avgRating = 0;
-                for(int i = 0; i < ratings.size(); i++)
-                    avgRating += ratings.get(i);
-                return avgRating /= ratings.size();
-            }
-        return -1;
-    }
 
+        /**
+     * Get the movie runtime
+     * @return movie runtime
+     */
     public String getRunTime() {
         return runTime;
     }
 
+    /**
+     * Change the movie runtime
+     * @param runTime movie runtime
+     */
     public void setRunTime(String runTime) {
         this.runTime = runTime;
     }
 
+        /**
+     * Get the movie synopsis
+     * @return movie synopsis
+     */
     public String getSynopsis() {
-        return synopsis;
+        return Synopsis;
     }
 
-    public void setSynopsis(String synopsis) {this.synopsis = synopsis; }
+    /**
+     * Change the movie synopsis
+     * @param Synopsis movie synopsis
+     */
+    public void setSynopsis(String Synopsis) {this.Synopsis = Synopsis; }
 
+    /**
+     * Get the movie director
+     * @return movie director
+     */
     public String getDirector() {
-        return director;
+        return Director;
     }
 
+    /**
+     * Get the movie name
+     * @return movie name
+     */
     public String getName() {
         return name;
     }
 
+    /**
+     * Change the movie name
+     * @param name movie name
+     */
     public void setName(String name) {
         this.name = name;
     }
 
+    /**
+     * Get the movie language
+     * @return movie language
+     */
     public String getLanguage() {
-        return language;
+        return Language;
     }
 
+    /**
+     * Change the movie language
+     * @param language movie language
+     */
     public void setLanguage(String language) {
-        this.language = language;
+        Language = language;
     }
 
+    /**
+     * Change the movie director
+     * @param director movie director
+     */
     public void setDirector(String director) {
-        this.director = director;
+        Director = director;
     }
 
+    /**
+     * Get the movie cast
+     * @return movie cast
+     */
     public List<String> getCast() {
         return cast;
     }
 
+    /**
+     * Change the movie cast
+     * @param cast movie cast
+     */
     public void setCast(List<String> cast) {
         this.cast = cast;
     }
 
-    public List<String> getReviews(){
+    /**
+     * Get the movie reviews
+     * @return movie reviews
+     */
+    public ArrayList<String> getReviews(){
         if(reviews != null){
             return reviews;
         }else{
@@ -120,20 +204,38 @@ public class Movie {
         }
     }
 
+    /**
+     * Add a review to movie
+     * @param review movie review
+     */
     public void addReview(String review){
         this.reviews.add(review);
     }
 
-    public void setReviews(List<String> reviews){
+    /**
+     * Change the movie reviews
+     * @param reviews movie reviews
+     */
+    public void setReviews(ArrayList<String> reviews){
         this.reviews = reviews;
     }
 
+    /**
+     * Get the movie status
+     * @return movie status
+     */
     public String getStatus(){
         return status;
     }
 
+    /**
+     * Change the movie status
+     * @param status movie status
+     */
     public void setStatus(String status){
         this.status = status;
     }
+
+
 
 }

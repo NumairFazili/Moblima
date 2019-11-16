@@ -1,8 +1,8 @@
 package Controller;
 
-import java.util.*;
+import Entity.Staff;
 
-import Entity.*;
+import java.util.Scanner;
 
 /*
 List of Methods
@@ -23,13 +23,26 @@ List of Methods
 */
 
 
-public class StaffManager {
+/**
+ Represents the StaffManager class to manage Staff objects
+ @author CZ2002 Group 1
+ @version 1.0
+ @since 15-11-2019
+ */
+public class StaffManager extends AuthManager{
 
-
+    /**
+     * Creates a new StaffManaer object
+     */
     public StaffManager(){};
 
-    public static Staff StaffLogin(Scanner input){
-        Staff mystaff;
+    /**
+     * Prompts user to enter username and password and uses AuthManager.getStaff method to check with database if username and password is correct
+     * @param input Scanner object
+     * @return Staff object corresponding to login details entered
+     */
+    public static Staff StaffLogin(Scanner input) {
+        Staff staff;
         while(true){
             System.out.println("ADMIN USER:");
             System.out.println("Please enter login details, Input -1 to go back:");
@@ -40,10 +53,10 @@ public class StaffManager {
             }
             System.out.println("Enter Password:");
             String password = input.next();
-            mystaff = AuthManager.getStaff(username,password);
-            if(mystaff != null){
+            staff = AuthManager.getStaff(username,password);
+            if(staff != null){
                 System.out.println("Admin account successfully logged in!");
-                return mystaff;
+                return staff;
             }
             else{
                 System.out.println("The username or password you typed is incorrect. Please try again.");

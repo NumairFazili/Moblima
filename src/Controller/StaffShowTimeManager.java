@@ -3,20 +3,34 @@ package Controller;
 import Entity.Cinema;
 import View.Boundary;
 
-import javax.xml.crypto.Data;
 import java.util.Arrays;
 import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ Represents the Staff show time manager class to manage showtimes for the staff class
+ @author CZ2002 Group 1
+ @version 1.0
+ @since 15-11-2019
+ */
+
 public class StaffShowTimeManager extends ShowTimeManager {
 
-    ShowTimeManager showTimeManager;
+    private ShowTimeManager showTimeManager;
 
+    /**
+     * Creates a ShowTimeManager object
+     */
     public StaffShowTimeManager(){
         showTimeManager=new ShowTimeManager();
     }
 
+
+    /**
+     * Display all showtimes, update showtimes and delete showtimes
+     * @param input Scanner object
+     */
     public void updateCinemaShowtime(Scanner input){
         //List all showtimes
         Boundary.DisplayCinemas(this.getAllShowTimes());
@@ -33,9 +47,8 @@ public class StaffShowTimeManager extends ShowTimeManager {
         //Choose which attribute of the showtime to be edited
         System.out.println("Choose attribute of showtime to be edited: " );
         int choice = -1;
-        while (choice != 0){
-            choice = -1;
-            while (choice <= -1 || choice >= 8){
+        do {
+            do{
                 try{
                     Scanner in = new Scanner(System.in);
                     Boundary.DisplayOptions("cinemaMenu");
@@ -47,13 +60,13 @@ public class StaffShowTimeManager extends ShowTimeManager {
                 catch(InputMismatchException e){
                     System.out.println("That is not an integer, please try again." );
                 }
-            }
+            }while (choice <= -1 || choice >= 8);
             //0. Done, save showtime to database
             if (choice == 0){
-                choice = -1;
                 break;
             }
 
+            //2. Prompt input for Cineplex_ID and edit cinema object
             else if (choice == 1){
                 System.out.println("Enter new Cineplex_ID:");
                 updatedCinema.setCinplexID(input.nextInt());
@@ -91,7 +104,7 @@ public class StaffShowTimeManager extends ShowTimeManager {
                 updatedCinema.setMovieType(input.next());
             }
 
-        }
+        }while (choice != 0);
 
 
         System.out.println();
@@ -107,7 +120,10 @@ public class StaffShowTimeManager extends ShowTimeManager {
     }
 
 
-
+    /**
+     * Display all showtimes, choose index of shown showtimes to be removed, then deletes corresponding showtime from database
+     * @param input Scanner object
+     */
     public void removeCinemaShowtime(Scanner input){
         //List all showtimes
         Boundary.DisplayCinemas(showTimeManager.getAllShowTimes());
@@ -121,12 +137,16 @@ public class StaffShowTimeManager extends ShowTimeManager {
         else{
             Cinema mycinema = this.getAllShowTimes().get(inputsearchint);
             if(DataManager.UpdateShowTime(mycinema, true))
-                System.out.println("Showtime Deleted Successfully");
+                System.out.println("Showtime Deleted Successfully\n");
             else
-                System.out.println("Delete Failed");
+                System.out.println("Delete Failed\n");
         }
     }
 
+    /**
+     * Prompts user for input of cinema attributes and creates a new Cinema object to be saved in database
+     * @param input Scanner object
+     */
     public void createCinemaShowtime(Scanner input){
         //Get user input for new showtime details
         System.out.println("Enter Cineplex_ID:");
@@ -146,9 +166,23 @@ public class StaffShowTimeManager extends ShowTimeManager {
         String movietype = input.nextLine();
         System.out.println();
         //Create new showtime object and save movie listing to database using DataManager
-        this.createShowTime(cineplexid, cinemaid, movieid, showtime, cinemaclass, Arrays.asList(), movietype);
+        if(this.createShowTime(cineplexid, cinemaid, movieid, showtime, cinemaclass, Arrays.asList(), movietype))
+            System.out.println("Showtime added successfully");
+        else
+            System.out.println("Failed to add Showtime");
     }
 
+    /**
+     * Display all showtimes, choose index of shown showtimes to be removed, then deletes corresponding showtime from database
+     * @param cinplexID Cineplex ID of Cinema object
+     * @param cinemaID Cinema ID of Cinema object
+     * @param movieID Movie ID of Cinema object
+     * @param time time of of Cinema object
+     * @param cinemaClass Cinema class of Cinema object
+     * @param seats Seats of of Cinema object
+     * @param movieType Movie type of of Cinema object
+     * @return True if showtime is successfully saved to database, False otherwise
+     */
     public Boolean createShowTime(int cinplexID, int cinemaID, int movieID, String time, String cinemaClass, List<Integer> seats, String movieType){
         Cinema c = new Cinema(cinplexID, cinemaID, movieID, time,cinemaClass, seats, movieType);
         return DataManager.AddShowTimes(c);

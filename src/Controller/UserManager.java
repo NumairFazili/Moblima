@@ -1,8 +1,8 @@
 package Controller;
 
-import java.util.*;
-
 import Entity.User;
+
+import java.util.Scanner;
 
 /**
  Represents UserManager class to manage user's creation and login
@@ -57,8 +57,8 @@ public class UserManager {
         //Create usermanager object and Save user into database
         User myuser = new User(username, age, mobilenumber, email);
         myuser.save();
+        System.out.println("Account Created Successfully\n");
         return myuser;
 
     }
-
 }
