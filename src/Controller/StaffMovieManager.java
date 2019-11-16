@@ -1,17 +1,28 @@
 package Controller;
 import Entity.Movie;
+import Entity.Staff;
 import View.Boundary;
 import java.util.*;
 
 public class StaffMovieManager extends MovieManager {
 
 
+    MovieManager movieManager;
+    Staff staff;
+
+
+
+
+
     public StaffMovieManager(){
+        movieManager=new MovieManager();
+        staff=new Staff();
     }
+
 
     public void UpdateMovie(Scanner input){
         //List all movies
-        Boundary.DisplayMovie(getAllMovies());
+        Boundary.DisplayMovie(this.getAllMovies());
         //Boundary.DisplayMovies(DataManager.LoadMovies(""));
         //Select movie to update by movieID
         System.out.println("Enter ID of the movie to be updated: " );
@@ -21,7 +32,7 @@ public class StaffMovieManager extends MovieManager {
             return;
         }
         input.nextLine();//Catch newline from input.nextInt()
-        Movie mymovie = selectMovieByID(getAllMovies(), inputsearchint);
+        Movie mymovie = this.selectMovieByID(this.getAllMovies(), inputsearchint);
         Boundary.DisplayMovie(mymovie);
 
         //Choose which attribute of the movie to be edited
@@ -52,42 +63,42 @@ public class StaffMovieManager extends MovieManager {
             //1. Prompt input for movie name and edit movie object
             else if (choice == 1){
                 System.out.println("Enter new movie name:");
-                this.updateMovieName(mymovie, input.nextLine());
+                mymovie.setName(input.nextLine());
             }
             //2. Prompt input for language and edit movie object
             else if (choice == 2){
                 System.out.println("Enter new language:");
-                this.updateMovieLanguage(mymovie, input.nextLine());
+                mymovie.setLanguage(input.nextLine());
             }
             //3. Prompt input for runtime and edit movie object
             else if (choice == 3){
                 System.out.println("Enter new runtime:");
-                this.updateMovieRunTime(mymovie, input.nextLine());
+                mymovie.setRunTime(input.nextLine());
             }
             //4. Prompt input for Cast member and edit movie object
             else if (choice == 4){
                 System.out.println("Enter new cast members:");
-                this.updateMovieCast(mymovie, Arrays.asList((input.nextLine().split(","))));
+                mymovie.setCast(Arrays.asList((input.nextLine().split(","))));
             }
             //5. Prompt input for description and edit movie object
             else if (choice == 5){
                 System.out.println("Enter new Synopsis:");
-                this.updateMovieSynopsis(mymovie, input.nextLine());
+                mymovie.setSynopsis(input.nextLine());
             }
             //6. Prompt input for director and edit movie object
             else if (choice == 6){
                 System.out.println("Enter new director:");
-                this.updateMovieDirector(mymovie, input.nextLine());
+                mymovie.setDirector(input.nextLine());
             }
             //7. Prompt input for Minimum age and edit movie object
             else if (choice == 7){
                 System.out.println("Enter Status");
-                this.updateMovieStatus(mymovie, input.nextLine());
+                mymovie.setStatus(input.nextLine());
             }
 
         }
         //Save edited movie object to database
-        if (this.saveMovieChanges(mymovie) == Boolean.TRUE){
+        if (DataManager.manageMovie(mymovie) == Boolean.TRUE){
             System.out.println("Movie listing successfully updated!\n");
         }
         else{
@@ -114,35 +125,27 @@ public class StaffMovieManager extends MovieManager {
         System.out.println("Enter director:");
         String director = input.nextLine();
         System.out.println("Enter Status:");
-        String status = input.next();
-        input.nextLine();
-        this.createNewMovie(movieid, moviename, language, Arrays.asList(), runtime, cast, director,Synopsis,Arrays.asList(), status);
+        String status = input.nextLine();
+        this.createNewMovie(movieid, moviename, language, Arrays.asList(), runtime, cast, director,Synopsis,new ArrayList<>(), status);
 
     }
 
-    private void createNewMovie(int id, String name, String language, List<Integer> rating, String runTime, List<String> cast, String synopsis, String director, List<String> reviews, String status){
-        Movie m = new Movie(id, name, language, rating, runTime, cast, director,synopsis,reviews, status);
+    public void createNewMovie(int id, String name, String Language, List<Integer> rating, String runTime, List<String> cast, String Synopsis, String Director,ArrayList<String> reviews, String status){
+        Movie m = new Movie(id, name, Language, rating, runTime, cast, Director,Synopsis,reviews, status);
         DataManager.SaveMovies(m);
         System.out.println("Movie Created Successfully\n");
     }
 
-    private void updateMovieName(Movie movie, String name){
-        movie.setName(name);
-    }
-    private void updateMovieLanguage(Movie movie, String language){ movie.setLanguage(language); }
-    private void updateMovieRunTime(Movie movie, String runTime){
-        movie.setRunTime(runTime);
-    }
-    private void updateMovieSynopsis(Movie movie, String synopsis){
-        movie.setSynopsis(synopsis);
-    }
-    private void updateMovieDirector(Movie movie, String director){
-        movie.setDirector(director);
-    }
-    private void updateMovieCast(Movie movie, List<String> cast){
-        movie.setCast(cast);
-    }
-    private void updateMovieStatus(Movie movie, String status){ movie.setStatus(status); }
-    private boolean saveMovieChanges(Movie movie){ return DataManager.manageMovie(movie);}
+
+
+
+
+
+
+
+
+
+
+
 
 }

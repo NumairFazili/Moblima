@@ -1,6 +1,7 @@
 package Controller;
 
 import Entity.Settings;
+import Entity.Staff;
 import View.Boundary;
 
 import java.util.Arrays;
@@ -17,18 +18,18 @@ public class SettingsManager {
         //Choose which setting to configure
         Boundary.DisplaySettings();
         System.out.println("Choose which setting to configure: " );
-        Settings mysettings = this.showSettings();
+        Settings mysettings = DataManager.LoadSettings();
         int choice = -1;
         while (choice != 0){
             choice = -1;
-            while (choice <= -1 || choice >= 9){
+            while (choice <= -1 || choice >= 10){
                 try{
                     Scanner in = new Scanner(System.in);
                     Boundary.DisplayOptions("settingsMenu");
                     choice = in.nextInt();
                     in.nextLine();//catch newline
-                    if (choice <= -1 || choice >= 9){
-                        System.out.println("Error! Please enter either 0, 1, 2, 3, 4, 5, 6, 7 or 8:");
+                    if (choice <= -1 || choice >= 10){
+                        System.out.println("Error! Please enter either 0, 1, 2, 3, 4, 5, 6, 7,8 or 9:");
                     }
                 }
                 catch(InputMismatchException e){
@@ -42,81 +43,66 @@ public class SettingsManager {
             //1. Prompt input for new base price
             else if (choice == 1){
                 System.out.println("Enter new base price:");
-                this.updateBasePrice(mysettings, input.nextDouble());
+                mysettings.setBasePrice(input.nextDouble());
+                input.nextLine();//Catch newline from input.nextDouble()
             }
             //2. Prompt input for child price
             else if (choice == 2){
                 System.out.println("Enter new child price:");
-                this.updateChildPrice(mysettings, input.nextDouble());
+                mysettings.setChildPrice(input.nextDouble());
+                input.nextLine();//Catch newline from input.nextDouble()
             }
             //3. Prompt input for senior price
             else if (choice == 3){
                 System.out.println("Enter new senior price:");
-                this.updateSeniorPrice(mysettings, input.nextDouble());
+                mysettings.setSeniorPrice(input.nextDouble());
+                input.nextLine();//Catch newline from input.nextDouble()
             }
             //4. Prompt input for holiday price
             else if (choice == 4){
                 System.out.println("Enter new holiday price:");
-                this.updateHolidayPrice(mysettings, input.nextDouble());
+                mysettings.setHolidayPrice(input.nextDouble());
+                input.nextLine();//Catch newline from input.nextDouble()
             }
             //5. Prompt input for silver price
             else if (choice == 5){
                 System.out.println("Enter new silver price:");
-                this.updateSilverPrice(mysettings, input.nextDouble());
+                mysettings.setSilverPrice(input.nextDouble());
+                input.nextLine();//Catch newline from input.nextDouble()
             }
             //6. Prompt input for gold price
             else if (choice == 6){
                 System.out.println("Enter new gold price:");
-                this.updateGoldPrice(mysettings, input.nextDouble());
+                mysettings.setGoldPrice(input.nextDouble());
+                input.nextLine();//Catch newline from input.nextDouble()
             }
             //7. Prompt input for platinum price
             else if (choice == 7){
                 System.out.println("Enter new platinum price:");
-                this.updatePlatinumPrice(mysettings, input.nextDouble());
+                mysettings.setPlatinumPrice(input.nextDouble());
+                input.nextLine();//Catch newline from input.nextDouble()
+            }
+            // prompt for 3D price
+            else if(choice == 8){
+                System.out.println("Enter new 3D price:");
+                mysettings.setPrice3D(input.nextDouble());
                 input.nextLine();//Catch newline from input.nextDouble()
             }
             //8. Prompt input for holidays
-            else if (choice == 8){
-                System.out.println("Enter new holidays:");
-                this.updateHoliday(mysettings, Arrays.asList(input.next().split(",")));
+            else if (choice == 9){
+                System.out.println("Enter new holidays in (dd/mm/yyy) format separated by commas :");
+                mysettings.setHolidays(Arrays.asList(input.next().split(",")));
             }
         }
         //Save edited movie object to database
-        if (this.saveSettingsChanges(mysettings) == Boolean.TRUE){
+        if (DataManager.manageSettings(mysettings) == Boolean.TRUE){
             System.out.println("Settings successfully updated!\n");
         }
         else{
             System.out.println("Error! Settings failed to be updated!\n");
         }
     }
-    private void updateBasePrice(Settings s, double base){
-        s.setBasePrice(base);
-    }
-    private void updateChildPrice(Settings s, double child){
-        s.setChildPrice(child);
-    }
-    private void updateSeniorPrice(Settings s, double senior){
-        s.setSeniorPrice(senior);
-    }
-    private void updateHolidayPrice(Settings s, double holiday){
-        s.setHolidayPrice(holiday);
-    }
-    private void updateSilverPrice(Settings s, double silver){
-        s.setSilverPrice(silver);
-    }
-    private void updateGoldPrice(Settings s, double gold){
-        s.setGoldPrice(gold);
-    }
-    private void updatePlatinumPrice(Settings s, double platinum){
-        s.setPlatinumPrice(platinum);
-    }
-    private void updateHoliday(Settings s, List<String> holiday){
-        s.setHolidays(holiday);
-    }
-    private boolean saveSettingsChanges(Settings s){
-        return DataManager.manageSettings(s);
-    }
-    private Settings showSettings(){ return DataManager.LoadSettings(); }
+
 
 
 

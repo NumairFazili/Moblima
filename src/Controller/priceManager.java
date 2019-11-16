@@ -31,6 +31,8 @@ public class priceManager {
         Calendar c = Calendar.getInstance();
 
         int weekend=c.get(Calendar.DAY_OF_WEEK);
+
+
         if(weekend==1 || weekend==7)
             return true;
 
@@ -59,7 +61,6 @@ public class priceManager {
     public double getPrice(){
 
         double discount=0;
-
         switch (userType){
             case "Child":
                 discount+=settings.getChildPrice();
@@ -72,6 +73,9 @@ public class priceManager {
         if(this.dateCheck(settings.getHolidays()))
             discount+=settings.getHolidayPrice();
 
+        if(cinema.getMovieType().equals("3D"))
+            discount+=settings.getPrice3D();
+
         switch(cinema.getCinemaClass()){
             case "Silver":
                 discount+=settings.getSilverPrice();
@@ -83,8 +87,9 @@ public class priceManager {
                 discount+=settings.getPlatinumPrice();
                 break;
         }
-
         return settings.getBasePrice() + discount;
 
     }
 }
+
+

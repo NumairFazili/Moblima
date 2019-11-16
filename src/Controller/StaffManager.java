@@ -2,7 +2,7 @@ package Controller;
 
 import java.util.*;
 
-import Entity.Staff;
+import Entity.*;
 
 /*
 List of Methods
@@ -51,9 +51,4 @@ public class StaffManager {
         }
 
     }
-
-    public static void main(String args[]){
-        
-    }
-
 }

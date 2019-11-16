@@ -17,7 +17,10 @@ import Entity.Cinema;
 import Entity.Movie;
 import Entity.User;
 import View.Boundary;
+import org.junit.Test;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
@@ -25,9 +28,11 @@ import java.util.*;
 public class BookingManager {
 
     private static ArrayList<Booking> bookingArrayList;
+    MovieManager movieManager;
 
     public BookingManager(){
-        bookingArrayList = DataManager.LoadBookings();
+       movieManager  = new MovieManager();
+       bookingArrayList = DataManager.LoadBookings();
     }
 
     public  Booking generateBooking(User user, Cinema cinema, int seatNO){
@@ -40,12 +45,17 @@ public class BookingManager {
     }
 
 
-    public Boolean createBooking(User user,Cinema cinema, Movie movie, int seatNO){
+    public Boolean createBooking(User user,Cinema cinema, int seatNO){
 
-        if(movie.getStatus().equals("End of Show")){
-            System.out.println("The movie has Ended");
+
+        //Movie m = movieManager.selectMovieByID(cinema.getMovieID());
+
+
+        if(!DateCheck(cinema.getTime())){
+            System.out.println("The Movie has Already Passed");
             return false;
         }
+
 
         Booking booking=this.generateBooking(user, cinema, seatNO);
         Boundary.DisplayBookings(Arrays.asList(booking));
@@ -78,11 +88,11 @@ public class BookingManager {
     }
 
 
-    private double calculatePrice(User user, Cinema cinema){
-        priceManager priceManager = new priceManager(user.getAge(),cinema);
+    private static double calculatePrice(User user, Cinema cinema){
+        priceManager priceManager = new priceManager(user.getCustomerType(),cinema);
         return  priceManager.getPrice();
     }
-    private String genBookingID(){
+    private static String genBookingID(){
         int id;
         while(true){
             Random rand = new Random( System.currentTimeMillis() );
@@ -93,15 +103,36 @@ public class BookingManager {
         return Integer.toString(id);
     }
 
-    private boolean BookingCheck(int id){
+    private static Boolean BookingCheck(int id){
         for(Booking booking:bookingArrayList)
             if(!booking.getBookingID().equals(String.valueOf(id)))
                 return true;
             return false;
     }
 
-    private boolean SeatCheck(List<Integer> seats,int curSeat){
+    private Boolean DateCheck(String date){
+        SimpleDateFormat dfParse = new SimpleDateFormat("dd/MM/yyyy");
+        Date ShowDate;
+        Date currentDate;
+        try {
+           ShowDate=dfParse.parse(date);
+           currentDate=dfParse.parse(dfParse.format(new Date()));
+            int result=currentDate.compareTo(ShowDate);
 
+            if(result==1)
+                return false;
+
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        return true;
+
+
+
+    }
+
+    private static boolean SeatCheck(List<Integer> seats,int curSeat){
         if(seats.contains(curSeat))
             return false;
         return true;

@@ -10,7 +10,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import java.util.Scanner;
 public class DataManager {
 
 
@@ -710,36 +709,6 @@ public class DataManager {
         return success;
         }
 
-
-    public static ArrayList<Cineplex> LoadCineplex() {
-
-        BufferedReader reader = null;
-        ArrayList<Cineplex> cineplexArrayList = new ArrayList<>();
-        try {
-            reader = new BufferedReader(new FileReader(getLocation("Cineplex")));
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-
-        String line = "";
-        try {
-            reader.readLine();
-            while ((line = reader.readLine()) != null) {
-                String[] tokens = line.split(",");
-                Cineplex cineplex = new Cineplex(Integer.parseInt(tokens[0]), tokens[1], tokens[2], Integer.parseInt(tokens[3]));
-                cineplexArrayList.add(cineplex);
-
-            }
-            reader.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-
-        }
-        return cineplexArrayList;
-
-    }
-
-
     public static Settings LoadSettings(){
 
         BufferedReader reader = null;
@@ -755,8 +724,8 @@ public class DataManager {
             while ((line = reader.readLine()) != null) {
                 String[] tokens = line.split(",");
 
-                List<String> dates = Arrays.asList(tokens[7].split("\\."));
-                Settings settings = new Settings(Double.parseDouble(tokens[0]),Double.parseDouble(tokens[1]),Double.parseDouble(tokens[2]),Double.parseDouble(tokens[3]),Double.parseDouble(tokens[4]),Double.parseDouble(tokens[5]),Double.parseDouble(tokens[6]),dates);
+                List<String> dates = Arrays.asList(tokens[8].split("\\."));
+                Settings settings = new Settings(Double.parseDouble(tokens[0]),Double.parseDouble(tokens[1]),Double.parseDouble(tokens[2]),Double.parseDouble(tokens[3]),Double.parseDouble(tokens[4]),Double.parseDouble(tokens[5]),Double.parseDouble(tokens[6]),Double.parseDouble(tokens[7]),dates);
                 reader.close();
                 return settings;
 
@@ -798,6 +767,8 @@ public class DataManager {
             writer.append(",");
             writer.append("platinumPrice");
             writer.append(",");
+            writer.append("price3D");
+            writer.append(",");
             writer.append("Holiday");
             writer.append("\n");
 
@@ -815,6 +786,8 @@ public class DataManager {
             writer.append(String.valueOf(settings.getGoldPrice()));
             writer.append(",");
             writer.append(String.valueOf(settings.getPlatinumPrice()));
+            writer.append(",");
+            writer.append(String.valueOf(settings.getPrice3D()));
             writer.append(",");
             writer.append(Joiner.on('.').join(settings.getHolidays()));
             writer.flush();

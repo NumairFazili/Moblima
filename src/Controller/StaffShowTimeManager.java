@@ -3,6 +3,7 @@ package Controller;
 import Entity.Cinema;
 import View.Boundary;
 
+import javax.xml.crypto.Data;
 import java.util.Arrays;
 import java.util.InputMismatchException;
 import java.util.List;
@@ -10,16 +11,15 @@ import java.util.Scanner;
 
 public class StaffShowTimeManager extends ShowTimeManager {
 
+    ShowTimeManager showTimeManager;
+
     public StaffShowTimeManager(){
+        showTimeManager=new ShowTimeManager();
     }
 
-//    public static void main(String[] args) {
-//        StaffShowTimeManager staffShowTimeManager=new StaffShowTimeManager();
-//        staffShowTimeManager.updateCinemaShowtime();
-//    }
     public void updateCinemaShowtime(Scanner input){
         //List all showtimes
-        Boundary.DisplayCinemas(getAllShowTimes());
+        Boundary.DisplayCinemas(this.getAllShowTimes());
         //Select showtime to update by index
         System.out.println("Enter Index of the showtime to be updated: " );
         System.out.println("Otherwise enter -2 to go back" );
@@ -28,8 +28,8 @@ public class StaffShowTimeManager extends ShowTimeManager {
             return;
         }
         input.nextLine();//Catch newline from input.nextInt()
-        Cinema updatedCinema = getAllShowTimes().get(inputsearchint);
-        Cinema cinema= getAllShowTimes().get(inputsearchint);
+        Cinema updatedCinema = this.getAllShowTimes().get(inputsearchint);
+        Cinema cinema=this.getAllShowTimes().get(inputsearchint);
         //Choose which attribute of the showtime to be edited
         System.out.println("Choose attribute of showtime to be edited: " );
         int choice = -1;
@@ -40,7 +40,7 @@ public class StaffShowTimeManager extends ShowTimeManager {
                     Scanner in = new Scanner(System.in);
                     Boundary.DisplayOptions("cinemaMenu");
                     choice = in.nextInt();
-                    if (choice <= -1 || choice >= 4){
+                    if (choice <= -1 || choice >= 7){
                         System.out.println("Error! Please enter either 0, 1, 2, 3:");
                     }
                 }
@@ -56,7 +56,7 @@ public class StaffShowTimeManager extends ShowTimeManager {
 
             else if (choice == 1){
                 System.out.println("Enter new Cineplex_ID:");
-                this.updateCineplexID(updatedCinema, input.nextInt());
+                updatedCinema.setCinplexID(input.nextInt());
                 input.nextLine();//Catch newline from input.nextInt
             }
 
@@ -64,31 +64,31 @@ public class StaffShowTimeManager extends ShowTimeManager {
 
             else if (choice == 2){
                 System.out.println("Enter new Cinema_ID:");
-                this.updateCinemaID(updatedCinema, input.nextInt());
+                updatedCinema.setCinemaID(input.nextInt());
                 input.nextLine();//Catch newline from input.nextInt
             }
 
             //3. Prompt input for Movie_ID and edit cinema object
             else if (choice == 3){
                 System.out.println("Enter new Movie_ID:");
-                this.updateMovieID(updatedCinema, input.nextInt());
+                updatedCinema.setMovieID(input.nextInt());
                 input.nextLine();//Catch newline from input.nextInt
             }
             //4. Prompt input for ShowTime and edit cinema object
             else if (choice == 4){
                 System.out.println("Enter new ShowTime:");
-                this.updateTime(updatedCinema, input.nextLine());
+                updatedCinema.setTime(input.nextLine());
             }
 
             //6. Prompt input for cinema class and edit cinema object
             else if (choice == 5){
                 System.out.println("Enter new class:");
-                this.updateClass(updatedCinema, input.next());
+                updatedCinema.setCinemaClass(input.next());
             }
             //7. Prompt input for MovieType and edit cinema object
             else if (choice == 6){
                 System.out.println("Enter new MovieType:");
-                this.updateMovieType(updatedCinema, input.next());
+                updatedCinema.setMovieType(input.next());
             }
 
         }
@@ -98,7 +98,7 @@ public class StaffShowTimeManager extends ShowTimeManager {
         Boundary.DisplayCinemas(Arrays.asList(updatedCinema));
         System.out.println();
 
-        if (this.saveShowTimeChanges(cinema,updatedCinema) == Boolean.TRUE){
+        if (DataManager.UpdateShowTime(cinema,updatedCinema) == Boolean.TRUE){
             System.out.println("Showtime successfully updated!\n");
         }
         else{
@@ -106,9 +106,11 @@ public class StaffShowTimeManager extends ShowTimeManager {
         }
     }
 
+
+
     public void removeCinemaShowtime(Scanner input){
         //List all showtimes
-        Boundary.DisplayCinemas(getAllShowTimes());
+        Boundary.DisplayCinemas(showTimeManager.getAllShowTimes());
         //Select showtime to remove by index
         System.out.println("Enter the index of showtime to be removed: " );
         System.out.println("Otherwise enter -2 to go back" );
@@ -117,8 +119,11 @@ public class StaffShowTimeManager extends ShowTimeManager {
             //Do nothing
         }
         else{
-            Cinema mycinema = getAllShowTimes().get(inputsearchint);
-            DataManager.UpdateShowTime(mycinema, true);
+            Cinema mycinema = this.getAllShowTimes().get(inputsearchint);
+            if(DataManager.UpdateShowTime(mycinema, true))
+                System.out.println("Showtime Deleted Successfully");
+            else
+                System.out.println("Delete Failed");
         }
     }
 
@@ -144,21 +149,9 @@ public class StaffShowTimeManager extends ShowTimeManager {
         this.createShowTime(cineplexid, cinemaid, movieid, showtime, cinemaclass, Arrays.asList(), movietype);
     }
 
-
-    public void updateCineplexID(Cinema cinema, int cineplexID){ cinema.setCinplexID(cineplexID); }
-    public void updateCinemaID(Cinema cinema, int cinemaID){ cinema.setCinemaID(cinemaID); }
-    public void updateMovieID(Cinema cinema, int movieID){ cinema.setMovieID(movieID); }
-    public void updateTime(Cinema cinema, String time){ cinema.setTime(time);}
-    public void updateClass(Cinema cinema, String cinemaClass){
-        cinema.setCinemaClass(cinemaClass);
-    }
-    public void updateMovieType(Cinema cinema, String movieType){
-        cinema.setMovieType(movieType);
-    }
-    public boolean saveShowTimeChanges(Cinema cinema,Cinema updatedCinema){ return DataManager.UpdateShowTime(cinema,updatedCinema);}
-    public void createShowTime(int cinplexID, int cinemaID, int movieID, String time, String cinemaClass, List<Integer> seats, String movieType){
+    public Boolean createShowTime(int cinplexID, int cinemaID, int movieID, String time, String cinemaClass, List<Integer> seats, String movieType){
         Cinema c = new Cinema(cinplexID, cinemaID, movieID, time,cinemaClass, seats, movieType);
-        DataManager.AddShowTimes(c);
+        return DataManager.AddShowTimes(c);
     }
 
 
