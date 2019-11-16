@@ -16,7 +16,7 @@ public class StaffMovieManager extends MovieManager {
 
 
     public StaffMovieManager(){
-        movieManager=new MovieManager();
+        //movieManager=new MovieManager();
         staff=new Staff();
     }
 

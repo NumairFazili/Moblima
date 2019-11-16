@@ -80,7 +80,6 @@ public class UserMovieManager extends MovieManager {
                 looper=Boolean.FALSE;
             }
 
-
             if(showTimeManager.getShowTimesByMovie(mymovie.getId()).size()==0){
                 System.out.println("No ShowTimes Available\n");
                 looper=Boolean.FALSE;

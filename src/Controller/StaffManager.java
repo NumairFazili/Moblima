@@ -29,7 +29,7 @@ List of Methods
  @version 1.0
  @since 15-11-2019
  */
-public class StaffManager {
+public class StaffManager extends AuthManager{
 
     /**
      * Creates a new StaffManaer object
@@ -41,7 +41,7 @@ public class StaffManager {
      * @param input Scanner object
      * @return Staff object corresponding to login details entered
      */
-    public static Staff StaffLogin(Scanner input){
+    public static Staff StaffLogin(Scanner input) {
         Staff staff;
         while(true){
             System.out.println("ADMIN USER:");

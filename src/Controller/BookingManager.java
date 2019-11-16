@@ -32,7 +32,7 @@ public class BookingManager {
        bookingArrayList = DataManager.LoadBookings();
     }
 
-    public  Booking generateBooking(User user, Cinema cinema, int seatNO){
+    private  Booking generateBooking(User user, Cinema cinema, int seatNO){
         String bookingID = genBookingID();
         LocalDateTime dateTime = LocalDateTime.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
@@ -70,7 +70,7 @@ public class BookingManager {
     }
 
 
-    public Boolean saveBooking(Booking booking,Cinema cinema){
+    private Boolean saveBooking(Booking booking,Cinema cinema){
 
         if(!SeatCheck(cinema.getSeats(),booking.getSeatNO()))
             return false;
@@ -104,7 +104,7 @@ public class BookingManager {
             return false;
     }
 
-    public Boolean DateCheck(String date){
+    protected Boolean DateCheck(String date){
         SimpleDateFormat dfParse = new SimpleDateFormat("dd/MM/yyyy");
         Date ShowDate;
         Date currentDate;
