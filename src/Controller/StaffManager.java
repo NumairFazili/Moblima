@@ -1,8 +1,8 @@
 package Controller;
 
-import java.util.*;
+import Entity.Staff;
 
-import Entity.*;
+import java.util.Scanner;
 
 /*
 List of Methods
@@ -23,11 +23,24 @@ List of Methods
 */
 
 
+/**
+ Represents the StaffManager class to manage Staff objects
+ @author CZ2002 Group 1
+ @version 1.0
+ @since 15-11-2019
+ */
 public class StaffManager {
 
-
+    /**
+     * Creates a new StaffManaer object
+     */
     public StaffManager(){};
 
+    /**
+     * Prompts user to enter username and password and uses AuthManager.getStaff method to check with database if username and password is correct
+     * @param input Scanner object
+     * @return Staff object corresponding to login details entered
+     */
     public static Staff StaffLogin(Scanner input){
         Staff staff;
         while(true){

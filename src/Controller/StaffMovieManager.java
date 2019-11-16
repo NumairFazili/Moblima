@@ -4,23 +4,37 @@ import Entity.Staff;
 import View.Boundary;
 import java.util.*;
 
+/**
+ Represents the Staff Movie Manager class to be used by Staff class to manage Movies
+ @author CZ2002 Group 1
+ @version 1.0
+ @since 15-11-2019
+ */
 public class StaffMovieManager extends MovieManager {
 
-
+    /**
+     * Movie Manger Object
+     */
     private MovieManager movieManager;
+
+    /**
+     * Staff Object
+     */
     private Staff staff;
 
-
-
-
-
-
+    /**
+     * Creates a MovieManager and Staff object
+     */
     public StaffMovieManager(){
         movieManager=new MovieManager();
         staff=new Staff();
     }
 
 
+    /**
+     * Displays all movies, choose ID of movie to update, choose attributes of movie to be edited, then saves updated Movie to database
+     * @param input Scanner object
+     */
     public void UpdateMovie(Scanner input){
         //List all movies
         Boundary.DisplayMovie(this.getAllMovies());
@@ -107,8 +121,11 @@ public class StaffMovieManager extends MovieManager {
 
     }
 
+    /**
+     * Prompts user to input movie details, then uses createNewMovie method to create and save new movie into database
+     * @param input Scanner object
+     */
     public void createMovieListing(Scanner input){
-
         System.out.println("Enter movieID:");
         int movieid = input.nextInt();
         input.nextLine(); //Catch newline from .nextInt()
@@ -134,6 +151,20 @@ public class StaffMovieManager extends MovieManager {
 
     }
 
+    /**
+     * Get the price for silver cinema class
+     * @param id movie id
+     * @param name movie name
+     * @param Language movie language
+     * @param rating movie rating
+     * @param runTime movie runtime
+     * @param cast movie cast
+     * @param Synopsis movie synopsis
+     * @param Director movie director
+     * @param reviews movie reviews
+     * @param status movie status
+     * @return True if movie is successfully saved to database, False otherwise
+     */
     public Boolean createNewMovie(int id, String name, String Language, List<Integer> rating, String runTime, List<String> cast, String Synopsis, String Director,ArrayList<String> reviews, String status){
         Movie m = new Movie(id, name, Language, rating, runTime, cast, Director,Synopsis,reviews, status);
         return DataManager.SaveMovies(m);
