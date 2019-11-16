@@ -1,5 +1,6 @@
 package Entity;
 
+
 public class Booking {
 
     private int cinplexID,cinemaID,movieID,seatNO;

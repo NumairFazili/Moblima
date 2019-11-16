@@ -17,7 +17,6 @@ import Entity.Cinema;
 import Entity.Movie;
 import Entity.User;
 import View.Boundary;
-import org.junit.Test;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
