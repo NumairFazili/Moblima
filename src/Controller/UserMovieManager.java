@@ -154,8 +154,8 @@ public class UserMovieManager extends MovieManager {
             System.out.println("Enter rating for the movie:" );
             int movieRating = input.nextInt();
             System.out.println("Enter review for the movie:" );
-            String movieReview = input.next();
             input.nextLine();
+            String movieReview = input.nextLine();
             if(this.reviewMovie(mymovie, movieRating, movieReview))
                 System.out.println("Review added successfully");
             else

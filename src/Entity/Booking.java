@@ -23,18 +23,6 @@ public class Booking {
         this.email = email;
     }
 
-    @Override
-    public String toString() {
-        String s = "Booking ID : "+this.getBookingID()+ "\nCustomer Name : "+this.getCustomerName()
-                + "\nCustomer Type : "+this.getCustomerType() + "\nCinplex ID : "+this.getCinplexID()+
-                "\nCinema ID : "+this.getCinemaID() + "\nMovie ID : "+this.getMovieID()+ "\nSeat No : "+this.getSeatNO()+
-                "\nShowtime : "+this.getShowTime()+"\nBooking Time : "+this.getBookingTime()+
-                "\nCinema Class : "+this.getCinemaClass()+"\nMovie Type : "+this.getMovieType()+
-                "\nEmail : "+this.getEmail();
-        return s;
-
-
-    }
 
     public String getBookingID() {
         return bookingID;

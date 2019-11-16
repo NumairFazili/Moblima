@@ -32,12 +32,7 @@ public class MovieManager {
 
 
     public ArrayList<Movie> getAllMovies(){
-        ArrayList<Movie> m_list = DataManager.LoadMovies("");
-        return m_list;
-    }
-
-    public ArrayList<Movie> getMovieByName(String s){
-        return DataManager.LoadMovies(s);
+        return DataManager.LoadMovies("");
     }
 
 
@@ -79,5 +74,16 @@ public class MovieManager {
             map.put(movie_id, count+1);
         }
         return map;
+    }
+
+    public static double getAvgRating(Movie movie){
+        double averageRating;
+        if(movie.getRating().size()> 1){
+            averageRating = 0;
+            for(int i = 0; i < movie.getRating().size(); i++)
+                averageRating += movie.getRating().get(i);
+            return averageRating /= movie.getRating().size();
+        }
+        return -1;
     }
 }

@@ -2,6 +2,8 @@ package Entity;
 
 
 
+import Controller.MovieManager;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -11,7 +13,6 @@ public class Movie {
 
     int id;
     String name,Language,runTime,Synopsis,Director,status;
-    double avgRating;
     List<Integer> ratings;
     ArrayList<String> reviews;
     List<String> cast;
@@ -28,15 +29,6 @@ public class Movie {
         this.status = status;
     }
 
-    @Override
-    public String toString() {
-        String cast_str ="";
-        for(int i = 0;i<this.getCast().size();i++){
-            cast_str += this.getCast().get(i);
-            cast_str += "|";
-        }
-        return new String("MovieName: "+this.getName()+"| Rating"+this.getRating()+"\nCasts: "+cast_str);
-    }
 
     public int getId() {
         return id;
@@ -56,16 +48,6 @@ public class Movie {
 
     public void addRating(Integer rating){
         this.ratings.add(rating);
-    }
-    
-    public double getAvgRating(){
-            if(ratings.size()> 1){
-                avgRating = 0;
-                for(int i = 0; i < ratings.size(); i++)
-                    avgRating += ratings.get(i);
-                return avgRating /= ratings.size();
-            }
-        return -1;
     }
 
     public String getRunTime() {

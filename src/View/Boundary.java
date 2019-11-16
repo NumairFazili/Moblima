@@ -1,6 +1,7 @@
 package View;
 
 import Controller.DataManager;
+import Controller.MovieManager;
 import Entity.*;
 
 import java.util.*;
@@ -140,12 +141,11 @@ public class Boundary {
     public static void DisplayMovie(List<Movie> movieList){
         System.out.format("%-5s %-25s %-15s %-15s %n", "ID", "Title", "Rating(Avg)", "Language");
         for(Movie movie:movieList){
-
             String rating;
-            if (movie.getAvgRating() == -1)
+            if (MovieManager.getAvgRating(movie) == -1)
                 rating="NA";
             else
-                rating=String.format("%.3g",movie.getAvgRating());
+                rating=String.format("%.3g",MovieManager.getAvgRating(movie));
 
             System.out.format("%-5d %-25s %-15s %-15s %n", movie.getId(), movie.getName(),rating, movie.getLanguage());
 
@@ -162,10 +162,10 @@ public class Boundary {
                 "Language","Status","Director","Cast","Synopsis");
 
         String rating;
-        if(movie.getAvgRating() == -1)
+        if(MovieManager.getAvgRating(movie) == -1)
             rating="NA";
         else
-            rating=String.format("%.3g",movie.getAvgRating());
+            rating=String.format("%.3g",MovieManager.getAvgRating(movie));
 
 
 

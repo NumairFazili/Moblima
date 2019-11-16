@@ -62,10 +62,10 @@ class SortByRating implements Comparator<Movie>{
     @Override
     public int compare( Movie o1, Movie o2){
 
-        if(o1.getAvgRating()<o2.getAvgRating()){
+        if(MovieManager.getAvgRating(o1)<MovieManager.getAvgRating(o2)){
             return 1;
         }
-        else if(o1.getAvgRating()==o2.getAvgRating()){
+        else if(MovieManager.getAvgRating(o1) == MovieManager.getAvgRating(o2)){
             return 0;
         }
         else{
