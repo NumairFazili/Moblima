@@ -84,22 +84,4 @@ public class MovieManager {
         }
         return -1;
     }
-
-
-//    public static void main(String[] args) {
-//        //Movie movie= new Movie(1000,"helllo","eng",new ArrayList<>(),"3:15",Arrays.asList("a","b"),"dir","syn",new ArrayList<>(),"Showing");
-//        MovieManager movieManager=new MovieManager();
-//        UserMovieManager userMovieManager=new UserMovieManager();
-//        Movie movie=movieManager.selectMovieByID(movieManager.getAllMovies(),1009);
-//
-//        System.out.println(getAvgRating(movie));
-//        userMovieManager.reviewMovie(movie,4,"txt1");
-//        userMovieManager.reviewMovie(movie,4,"txt2");
-//        //DataManager.manageMovie(movie);
-//        Boundary.DisplayMovieReviews(movie);
-//
-//        System.out.println(getAvgRating(movie));
-//
-//
-//    }
 }

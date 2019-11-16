@@ -28,7 +28,7 @@ public class StaffShowTimeManager extends ShowTimeManager {
 
 
     /**
-     * Display all showtimes, choose index of shown showtimes to be updated, choose attribute of showtime to be edited, then save updated showtime to database
+     * Display all showtimes, update showtimes and delete showtimes 
      * @param input Scanner object
      */
     public void updateCinemaShowtime(Scanner input){
