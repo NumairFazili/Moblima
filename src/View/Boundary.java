@@ -125,7 +125,7 @@ public class Boundary {
         for (int i = 0; i < str.length; i++)
             System.out.println(" " + count++ + " : " + str[i]);
 
-        if(str.equals("settingsMenu") || str.equals("moviesMenu") || str.equals("cinemaMenu"))
+        if(input.equals("settingsMenu") || input.equals("moviesMenu") || input.equals("cinemaMenu"))
             System.out.println(" "+0+" : "+"Done");
         else
             System.out.println(" "+0+" : "+"Exit");

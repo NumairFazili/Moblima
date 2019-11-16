@@ -2,11 +2,9 @@ package Controller;
 
 import Entity.Booking;
 import Entity.Movie;
+import View.Boundary;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 public class MovieManager {
 
@@ -78,7 +76,7 @@ public class MovieManager {
 
     public static double getAvgRating(Movie movie){
         double averageRating;
-        if(movie.getRating().size()> 1){
+        if(movie.getRating().size()>=1){
             averageRating = 0;
             for(int i = 0; i < movie.getRating().size(); i++)
                 averageRating += movie.getRating().get(i);
@@ -86,4 +84,22 @@ public class MovieManager {
         }
         return -1;
     }
+
+
+//    public static void main(String[] args) {
+//        //Movie movie= new Movie(1000,"helllo","eng",new ArrayList<>(),"3:15",Arrays.asList("a","b"),"dir","syn",new ArrayList<>(),"Showing");
+//        MovieManager movieManager=new MovieManager();
+//        UserMovieManager userMovieManager=new UserMovieManager();
+//        Movie movie=movieManager.selectMovieByID(movieManager.getAllMovies(),1009);
+//
+//        System.out.println(getAvgRating(movie));
+//        userMovieManager.reviewMovie(movie,4,"txt1");
+//        userMovieManager.reviewMovie(movie,4,"txt2");
+//        //DataManager.manageMovie(movie);
+//        Boundary.DisplayMovieReviews(movie);
+//
+//        System.out.println(getAvgRating(movie));
+//
+//
+//    }
 }

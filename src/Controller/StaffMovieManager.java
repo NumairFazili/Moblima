@@ -4,37 +4,23 @@ import Entity.Staff;
 import View.Boundary;
 import java.util.*;
 
-/**
- Represents the Staff Movie Manager class to be used by Staff class to manage Movies
- @author CZ2002 Group 1
- @version 1.0
- @since 15-11-2019
- */
 public class StaffMovieManager extends MovieManager {
 
-    /**
-     * Movie Manger Object
-     */
-    private MovieManager movieManager;
 
-    /**
-     * Staff Object
-     */
+    private MovieManager movieManager;
     private Staff staff;
 
-    /**
-     * Creates a MovieManager and Staff object
-     */
+
+
+
+
+
     public StaffMovieManager(){
         movieManager=new MovieManager();
         staff=new Staff();
     }
 
 
-    /**
-     * Displays all movies, choose ID of movie to update, choose attributes of movie to be edited, then saves updated Movie to database
-     * @param input Scanner object
-     */
     public void UpdateMovie(Scanner input){
         //List all movies
         Boundary.DisplayMovie(this.getAllMovies());
@@ -58,7 +44,6 @@ public class StaffMovieManager extends MovieManager {
                 try{
                     Scanner in = new Scanner(System.in);
                     Boundary.DisplayOptions("moviesMenu");
-                    System.out.println("0. Done");
                     choice = in.nextInt();
                     in.nextLine();//catch newline
                     if (choice <= -1 || choice >= 8){
@@ -121,11 +106,8 @@ public class StaffMovieManager extends MovieManager {
 
     }
 
-    /**
-     * Prompts user to input movie details, then uses createNewMovie method to create and save new movie into database
-     * @param input Scanner object
-     */
     public void createMovieListing(Scanner input){
+
         System.out.println("Enter movieID:");
         int movieid = input.nextInt();
         input.nextLine(); //Catch newline from .nextInt()
@@ -143,7 +125,7 @@ public class StaffMovieManager extends MovieManager {
         String director = input.nextLine();
         System.out.println("Enter Status:");
         String status = input.nextLine();
-        if(this.createNewMovie(movieid, moviename, language, Arrays.asList(), runtime, cast, director,Synopsis,new ArrayList<>(), status))
+        if(this.createNewMovie(movieid, moviename, language, new ArrayList<>(), runtime, cast, director,Synopsis,new ArrayList<>(), status))
             System.out.println("Movie Created Successfully\n");
         else
             System.out.println("Failed to Add movie\n");
@@ -151,21 +133,7 @@ public class StaffMovieManager extends MovieManager {
 
     }
 
-    /**
-     * Get the price for silver cinema class
-     * @param id movie id
-     * @param name movie name
-     * @param Language movie language
-     * @param rating movie rating
-     * @param runTime movie runtime
-     * @param cast movie cast
-     * @param Synopsis movie synopsis
-     * @param Director movie director
-     * @param reviews movie reviews
-     * @param status movie status
-     * @return True if movie is successfully saved to database, False otherwise
-     */
-    public Boolean createNewMovie(int id, String name, String Language, List<Integer> rating, String runTime, List<String> cast, String Synopsis, String Director,ArrayList<String> reviews, String status){
+    public Boolean createNewMovie(int id, String name, String Language, ArrayList<Integer> rating, String runTime, List<String> cast, String Synopsis, String Director,ArrayList<String> reviews, String status){
         Movie m = new Movie(id, name, Language, rating, runTime, cast, Director,Synopsis,reviews, status);
         return DataManager.SaveMovies(m);
 
