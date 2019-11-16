@@ -174,10 +174,10 @@ public class StaffShowTimeManager extends ShowTimeManager {
      * @param cinplexID Cineplex ID of Cinema object
      * @param cinemaID Cinema ID of Cinema object
      * @param movieID Movie ID of Cinema object
-     * @param time time of of Cinema object
+     * @param time time of Cinema object
      * @param cinemaClass Cinema class of Cinema object
-     * @param seats Seats of of Cinema object
-     * @param movieType Movie type of of Cinema object
+     * @param seats Seats taken of Cinema object
+     * @param movieType Movie type of Cinema object
      * @return True if showtime is successfully saved to database, False otherwise
      */
     private static Boolean createShowTime(int cinplexID, int cinemaID, int movieID, String time, String cinemaClass, List<Integer> seats, String movieType){

@@ -21,7 +21,7 @@ public class Settings {
     /**
      * Creates a new Settings object with the following parameters.
      *
-     *@param basePrice base price for a movie booking
+     *@param basePrice base price for a movie  booking
      *@param childPrice child price for a movie booking
      *@param seniorPrice senior price for a movie booking
      *@param holidayPrice holiday price for a movie booking
