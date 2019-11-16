@@ -227,6 +227,35 @@ public class DataManager {
     }
 
 
+    // This function is for further enhancement
+
+    public static ArrayList<Cineplex> LoadCineplex() {
+        BufferedReader reader = null;
+        ArrayList<Cineplex> cineplexArrayList = new ArrayList<>();
+        try {
+            reader = new BufferedReader(new FileReader(getLocation("Cineplex")));
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        String line = "";
+        try {
+            reader.readLine();
+            while ((line = reader.readLine()) != null) {
+                String[] tokens = line.split(",");
+                Cineplex cineplex = new Cineplex(Integer.parseInt(tokens[0]), tokens[1], tokens[2], Integer.parseInt(tokens[3]));
+                cineplexArrayList.add(cineplex);
+            }
+            reader.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+
+        }
+        return cineplexArrayList;
+    }
+
+
+
+
     public static List<Cinema> LoadShowTimes(int movieID) {
 
         String ID=String.valueOf(movieID);

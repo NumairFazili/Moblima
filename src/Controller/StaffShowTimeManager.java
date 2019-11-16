@@ -28,7 +28,7 @@ public class StaffShowTimeManager extends ShowTimeManager {
 
 
     /**
-     * Display all showtimes, update showtimes and delete showtimes 
+     * Display all showtimes, update showtimes and delete showtimes
      * @param input Scanner object
      */
     public void updateCinemaShowtime(Scanner input){
