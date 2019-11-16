@@ -85,7 +85,8 @@ public class Main {
                         switch (choice) {
                             case 1:
                             case 5:
-                                userMovieManager.SearchListMovie(user, input, choice);
+                                Movie movie = userMovieManager.SearchListMovie(choice);
+                                userMovieManager.BookMovie(movie,user,choice);
                                 break;
                             case 2:
                                 List<Booking> bookings = user.getBookings();

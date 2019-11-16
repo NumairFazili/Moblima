@@ -18,41 +18,49 @@ public class UserMovieManager extends MovieManager {
 
     /**
      * Method to Search or List movie depending on user input, display movie details of chosen movie, display all showtimes for chosen movie, display seats for chosen showtime, allow user to choose seat for showtime and confirmation to book chosen movie.
-     * @param user Input user object
-     * @param input Scanner object
+
      * @param choice choice parameter to determine whether to search or list movie
      */
-    public void SearchListMovie(User user, Scanner input, int choice){
-        BookingManager bookingManager=new BookingManager();
+    public Movie SearchListMovie(int choice) {
+        Scanner input = new Scanner(System.in);
+
+
         ArrayList<Movie> mymovielist = new ArrayList<Movie>();
         //List all movies
-        if (choice == 5){
+        if (choice == 5) {
             mymovielist = DataManager.LoadMovies("");
         }
         //Search and display movies
-        if (choice == 1){
-            System.out.println("Enter name of movie to search: " );
+        if (choice == 1) {
+            System.out.println("Enter name of movie to search: ");
             String inputsearch = input.next();
             mymovielist = DataManager.LoadMovies(inputsearch);
-            if (mymovielist.isEmpty()){
-                System.out.println("No movie found!" );
-                return;
+            if (mymovielist.isEmpty()) {
+                System.out.println("No movie found!");
+                return null;
             }
         }
         Boundary.DisplayMovie(mymovielist);
         //Select movie by movie ID and print movie details – including reviews and ratings
-        System.out.println("Enter ID of the movie to see the details: " );
-        System.out.println("Otherwise enter 0 to go back" );
+        System.out.println("Enter ID of the movie to see the details: ");
+        System.out.println("Otherwise enter 0 to go back");
         int inputsearchint = input.nextInt();
-        if (inputsearchint == 0){
-            return;
+        if (inputsearchint == 0) {
+            return null;
         }
         Movie mymovie = this.selectMovieByID(mymovielist, inputsearchint);
-        System.out.println("Movie Details: " );
+        System.out.println("Movie Details: ");
         Boundary.DisplayMovie(mymovie);
-        System.out.println("All ratings and reviews: " );
+        System.out.println("All ratings and reviews: ");
         Boundary.DisplayMovieReviews(mymovie);
+        return mymovie;
+    }
+
+
+    public void BookMovie(Movie mymovie, User user, int choice){
         //Select movie, then search for all showtimes.
+        Scanner input = new Scanner(System.in);
+        BookingManager bookingManager = new BookingManager();
         do {
             try{
                 Scanner in = new Scanner(System.in);
@@ -93,7 +101,7 @@ public class UserMovieManager extends MovieManager {
             while (looper){
                 Boundary.DisplayCinemas(showTimeManager.getShowTimesByMovie(mymovie.getId()));
                 System.out.println("Choose index of the showtime to view seat availability: ");
-                inputsearchint = input.nextInt();
+                int inputsearchint = input.nextInt();
                 input.nextLine(); //Catch newline from .nextInt()
 
                 String time=((DataManager.LoadShowTimes(mymovie.getId()).get(inputsearchint))).getTime();
