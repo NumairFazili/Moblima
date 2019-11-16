@@ -8,7 +8,6 @@ import java.util.Scanner;
 public class Main {
 
     public static void main(String[] args) {
-        MovieManager movieManager = new MovieManager();
         StaffShowTimeManager staffShowTimeManager = new StaffShowTimeManager();
         StaffMovieManager staffMovieManager = new StaffMovieManager();
         SettingsManager settingsManager = new SettingsManager();
@@ -46,11 +45,11 @@ public class Main {
                                     break;
                                 case 7:
                                     System.out.println("Listing top 5 movies by ticket sales:");
-                                    Boundary.DisplayMovie(movieManager.getTopBySales());
+                                    Boundary.DisplayMovie(staffMovieManager.getTopBySales());
                                     break;
                                 case 8:
                                     System.out.println("Listing top 5 movies by overall reviewers’ ratings:");
-                                    Boundary.DisplayMovie(movieManager.getTopByRatings());
+                                    Boundary.DisplayMovie(staffMovieManager.getTopByRatings());
                                     break;
 
                                 case 0:
@@ -94,11 +93,11 @@ public class Main {
                                 break;
                             case 3:
                                 System.out.println("Listing top 5 movies by ticket sales:");
-                                Boundary.DisplayMovie(movieManager.getTopBySales());
+                                Boundary.DisplayMovie(userMovieManager.getTopBySales());
                                 break;
                             case 4:
                                 System.out.println("Listing top 5 movies by overall reviewers’ ratings:");
-                                Boundary.DisplayMovie(movieManager.getTopByRatings());
+                                Boundary.DisplayMovie(userMovieManager.getTopByRatings());
                                 break;
                             case 0:
                                 break;
