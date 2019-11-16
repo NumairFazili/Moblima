@@ -29,7 +29,7 @@ public class StaffManager {
     public StaffManager(){};
 
     public static Staff StaffLogin(Scanner input){
-        Staff mystaff;
+        Staff staff;
         while(true){
             System.out.println("ADMIN USER:");
             System.out.println("Please enter login details, Input -1 to go back:");
@@ -40,10 +40,10 @@ public class StaffManager {
             }
             System.out.println("Enter Password:");
             String password = input.next();
-            mystaff = AuthManager.getStaff(username,password);
-            if(mystaff != null){
+            staff = AuthManager.getStaff(username,password);
+            if(staff != null){
                 System.out.println("Admin account successfully logged in!");
-                return mystaff;
+                return staff;
             }
             else{
                 System.out.println("The username or password you typed is incorrect. Please try again.");

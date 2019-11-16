@@ -7,8 +7,9 @@ import java.util.*;
 public class StaffMovieManager extends MovieManager {
 
 
-    MovieManager movieManager;
-    Staff staff;
+    private MovieManager movieManager;
+    private Staff staff;
+
 
 
 

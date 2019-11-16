@@ -11,7 +11,7 @@ import java.util.Scanner;
 
 public class StaffShowTimeManager extends ShowTimeManager {
 
-    ShowTimeManager showTimeManager;
+    private ShowTimeManager showTimeManager;
 
     public StaffShowTimeManager(){
         showTimeManager=new ShowTimeManager();
@@ -121,9 +121,9 @@ public class StaffShowTimeManager extends ShowTimeManager {
         else{
             Cinema mycinema = this.getAllShowTimes().get(inputsearchint);
             if(DataManager.UpdateShowTime(mycinema, true))
-                System.out.println("Showtime Deleted Successfully");
+                System.out.println("Showtime Deleted Successfully\n");
             else
-                System.out.println("Delete Failed");
+                System.out.println("Delete Failed\n");
         }
     }
 
@@ -146,7 +146,10 @@ public class StaffShowTimeManager extends ShowTimeManager {
         String movietype = input.nextLine();
         System.out.println();
         //Create new showtime object and save movie listing to database using DataManager
-        this.createShowTime(cineplexid, cinemaid, movieid, showtime, cinemaclass, Arrays.asList(), movietype);
+        if(this.createShowTime(cineplexid, cinemaid, movieid, showtime, cinemaclass, Arrays.asList(), movietype))
+            System.out.println("Showtime added successfully");
+        else
+            System.out.println("Failed to add Showtime");
     }
 
     public Boolean createShowTime(int cinplexID, int cinemaID, int movieID, String time, String cinemaClass, List<Integer> seats, String movieType){

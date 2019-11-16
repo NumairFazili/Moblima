@@ -1,8 +1,10 @@
 package Entity;
 
+import java.util.ArrayList;
 import java.util.List;
 /**
- Represents the price settings for different types of movie-goers and cinema classes as well as holiday dates
+ Represents a student enrolled in the school.
+ A student can be enrolled in many courses.
  @author CZ2002 Group 1
  @version 1.0
  @since 15-11-2019
@@ -21,14 +23,14 @@ public class Settings {
     /**
      * Creates a new Settings object with the following parameters.
      *
-     *@param basePrice base price for a movie booking
-     *@param childPrice child price for a movie booking
-     *@param seniorPrice senior price for a movie booking
-     *@param holidayPrice holiday price for a movie booking
-     *@param silverPrice silver price for cinema class
-     *@param goldPrice gold price for cinema class
-     *@param platinumPrice platinum price for cinema class
-     *@param holidays list of dates designated to be charged holiday price
+     *@param basePrice
+     *@param childPrice
+     *@param seniorPrice
+     *@param holidayPrice
+     *@param silverPrice
+     *@param goldPrice
+     *@param platinumPrice
+     *@param holidays
      */
     public Settings(double basePrice, double childPrice, double seniorPrice, double holidayPrice,double silverPrice,double goldPrice,double platinumPrice,double price3D,List<String> holidays){
         this.basePrice=basePrice;

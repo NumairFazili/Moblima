@@ -11,8 +11,8 @@ import java.util.Scanner;
 
 public class SettingsManager {
 
-    public  SettingsManager(){
-    }
+
+    public  SettingsManager(){}
 
     public void configureSettings(Scanner input){
         //Choose which setting to configure

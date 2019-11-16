@@ -1,7 +1,7 @@
 package Controller;
 import java.util.ArrayList;
-import Entity.Staff;
-import Entity.User;
+import Entity.*;
+
 
 public class AuthManager{
 

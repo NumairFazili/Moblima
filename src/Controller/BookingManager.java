@@ -28,10 +28,8 @@ import java.util.*;
 public class BookingManager {
 
     private static ArrayList<Booking> bookingArrayList;
-    MovieManager movieManager;
 
     public BookingManager(){
-       movieManager  = new MovieManager();
        bookingArrayList = DataManager.LoadBookings();
     }
 
@@ -46,9 +44,6 @@ public class BookingManager {
 
 
     public Boolean createBooking(User user,Cinema cinema, int seatNO){
-
-
-        //Movie m = movieManager.selectMovieByID(cinema.getMovieID());
 
 
         if(!DateCheck(cinema.getTime())){

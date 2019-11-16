@@ -5,18 +5,59 @@ import Entity.*;
 
 import java.util.*;
 
+/**
+ Represents the Boundary class with methods to display text
+ @author CZ2002 Group 1
+ @version 1.0
+ @since 15-11-2019
+ */
 public class Boundary {
 
-
+    /**
+     * List of strings to display staff options
+     */
     private static final String[] staffOptions={"Create movie listing","Update movie listing","Create cinema showtimes and the movies to be shown","Update cinema showtimes and the movies to be shown","Remove cinema showtimes and the movies to be shown","Configure system settings","List the Top 5 ranking by ticket sales","List the Top 5 ranking by overall reviewers’ ratings",};
+
+    /**
+     * List of strings to display module selection options
+     */
     private static final String[] startOptions ={"Admin user","Movie-Goer"};
+
+    /**
+     * List of strings to display user movie options
+     */
     private static final String[] userMovieOptions={"Search movie", "View booking history","List the Top 5 ranking by ticket sales","List the Top 5 ranking by overall reviewers’ ratings","List all movies"};
+
+    /**
+     * List of strings to display user type options
+     */
     private static final String[] userOptions={"Existing User","New User"};
+
     private static final String[] settingsOptions={"Base price","Child price","Senior price","Holiday price","Silver price","Gold price","Platinum price","3Dprice","Holidays"};
+
+
+    /**
+     * List of strings to display settings configuration options
+     */
+
+    /**
+     * List of strings to display movie options
+     */
+
     private static final String[] movieOptions={"movie name","language","runtime","Cast member","Synopsis","director","Status"};
+
+    /**
+     * List of strings to display cinema options
+     */
     private static final String[] cinemaOptions={"Cineplex_ID","Cinema_ID","Movie_ID","ShowTime","class","MovieType"};
 
 
+    /**
+     * Display module selection between admin or movie-goer, and returns user's choice
+     * @param choice input user choice to choose between admin module or movie-goer module
+     * @param input input Scanner object
+     * @return user's choice for admin, movie-goer or exitting the program
+     */
     public static int ModuleSelection(int choice, Scanner input){
 
         while(choice != 1 && choice !=2 && choice !=0){
@@ -46,7 +87,10 @@ public class Boundary {
 
         return 0;
     }
-
+    /**
+     * Display text based on input string
+     * @param input input string to determine which text option to print out
+     */
     public static void DisplayOptions(String input) {
 
         String str[]={};
@@ -89,7 +133,10 @@ public class Boundary {
     }
 
 
-
+    /**
+     * Display details of movie, taking in a list of Movie objects as input
+     * @param movieList List of Movie objects
+     */
     public static void DisplayMovie(List<Movie> movieList){
         System.out.format("%-5s %-25s %-15s %-15s %n", "ID", "Title", "Rating(Avg)", "Language");
         for(Movie movie:movieList){
@@ -105,7 +152,10 @@ public class Boundary {
         }
         System.out.println();
     }
-
+    /**
+     * Display details of movie, taking in a Movie object as input
+     * @param movie Movie object
+     */
     public static void DisplayMovie(Movie movie){
 
         System.out.format("%-10s   %-20s   %-7s   %-10s  %-15s   %-10s         %-80s  %-30s  %n","Movie ID","Movie Name","Rating",
@@ -124,24 +174,10 @@ public class Boundary {
     }
 
 
-    public static void Display(List<Object> list){
-        int count=1;
-        if(list.get(0)!=null){
-            if(list.get(0) instanceof Cinema){
-                System.out.println("index"+"\t"+"CinePlex ID" + "\t" + "Cinema ID" + "\t" + "Time" + "\t"  +"\t"+"Class"+"\t"+"Type");
-            }
-
-        }
-        for(Object o:list){
-            System.out.print(count+" ");
-            count++;
-            System.out.println(o.toString());
-        }
-    }
-    public static void Display(Object o){
-        System.out.println(o.toString());
-    }
-
+    /**
+     * Display details of bookings, taking in a List of Booking objects as input
+     * @param bookings List of Booking objects
+     */
     public static void DisplayBookings(List<Booking> bookings){
         int count=0;
         System.out.format("%-20s   %-20s   %-10s   %-15s  %-15s   %-10s %-4s   %-20s   %-20s  %-6s  %-15s  %-20s  %-20s  %n","Customer Name","Customer Type","Booking ID",
@@ -155,7 +191,10 @@ public class Boundary {
     }
 
 
-
+    /**
+     * Display reviews of movie, taking in a Movie object as input
+     * @param movie Movie object
+     */
     public static void DisplayMovieReviews(Movie movie){
         int reviewNum = movie.getRating().size() < movie.getReviews().size() ? movie.getRating().size() : movie.getReviews().size();
         List<Integer> rating_list = movie.getRating();
@@ -169,6 +208,10 @@ public class Boundary {
 
     }
 
+    /**
+     * Display details of cinema, taking in a List of Cinema objects as input
+     * @param cinemas List of Cinema objects
+     */
     public static void DisplayCinemas(List<Cinema> cinemas){
         int count=0;
 
@@ -180,6 +223,10 @@ public class Boundary {
         System.out.println();
     }
 
+    /**
+     * Display all available and taken seats, taking a Cinema object as input
+     * @param cinema Cinema object
+     */
     public static void DisplaySeating(Cinema cinema) {
         int value;
         int rows=10;
@@ -215,6 +262,9 @@ public class Boundary {
         System.out.println("=========MOVIE SCREEN==========");
     }
 
+    /**
+     * Display current price settings
+     */
     public static void DisplaySettings(){
 
         System.out.println("\nCurrent Settings");

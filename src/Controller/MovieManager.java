@@ -4,28 +4,24 @@ import Entity.Booking;
 import Entity.Movie;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
 public class MovieManager {
 
-    static int SIZE_OF_PQ = 5;
+    private static final int SIZE_OF_PQ = 5;
+
+    protected ShowTimeManager showTimeManager;
+
 
     public MovieManager(){
+        showTimeManager=new ShowTimeManager();
     }
 
-    public static Movie selectMovieByID(int id){
-        ArrayList<Movie> m_list = DataManager.LoadMovies("");
-        
-        for(Movie m: m_list){
-            if(m.getId()==id){
-                return m;
-            }
-        }
-        return null;
-    }
 
-    public static Movie selectMovieByID(ArrayList<Movie> m_list, int id){
+
+    public Movie selectMovieByID(ArrayList<Movie> m_list, int id){
         for (int i = 0; i < m_list.size(); i++){
             if (m_list.get(i).getId() == id){
                 return m_list.get(i);
@@ -34,21 +30,28 @@ public class MovieManager {
         return null;
     }
 
-    public static ArrayList<Movie> getAllMovies(){
+
+    public ArrayList<Movie> getAllMovies(){
         ArrayList<Movie> m_list = DataManager.LoadMovies("");
         return m_list;
     }
 
-    public static ArrayList<Movie> getMovieByName(String s){
+    public ArrayList<Movie> getMovieByName(String s){
         return DataManager.LoadMovies(s);
     }
 
-    public static ArrayList<Movie> getTopByRatings(){
-        ArrayList<Movie> to_return = SortingManager.sortByRating(getAllMovies(), SIZE_OF_PQ);
+
+    public ArrayList<Movie> getTopByRatings(){
+        ArrayList<Movie> movies = getAllMovies();
+        ArrayList<Movie> to_return = new ArrayList<Movie>();
+            Collections.sort(movies,new SortByRating());
+            for(int i = 0;i<Math.min(SIZE_OF_PQ,movies.size());i++){
+                to_return.add(movies.get(i));
+            }
         return to_return;
     }
-    
-    public static ArrayList<Movie> getTopBySales(){
+
+    public ArrayList<Movie> getTopBySales(){
         ArrayList<Movie> movies = getAllMovies();
         ArrayList<Movie> to_return = new ArrayList<Movie>();
         HashMap<Integer,Integer> sales_map = calculateSales(DataManager.LoadBookings());
