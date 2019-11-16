@@ -21,7 +21,7 @@ public class UserMovieManager extends MovieManager {
 
      * @param choice choice parameter to determine whether to search or list movie
      */
-    public Movie SearchListMovie(int choice) {
+    public static Movie SearchListMovie(int choice) {
         Scanner input = new Scanner(System.in);
 
 
@@ -48,7 +48,7 @@ public class UserMovieManager extends MovieManager {
         if (inputsearchint == 0) {
             return null;
         }
-        Movie mymovie = this.selectMovieByID(mymovielist, inputsearchint);
+        Movie mymovie = selectMovieByID(mymovielist, inputsearchint);
 
         if(mymovie==null){
             System.out.println("Invalid Movie ID");
@@ -64,7 +64,7 @@ public class UserMovieManager extends MovieManager {
     }
 
 
-    public void BookMovie(Movie mymovie, User user, int choice){
+    public static void BookMovie(Movie mymovie, User user, int choice){
         //Select movie, then search for all showtimes.
         Scanner input = new Scanner(System.in);
         BookingManager bookingManager = new BookingManager();
@@ -95,7 +95,7 @@ public class UserMovieManager extends MovieManager {
                 looper=Boolean.FALSE;
             }
 
-            if(showTimeManager.getShowTimesByMovie(mymovie.getId()).size()==0){
+            if(ShowTimeManager.getShowTimesByMovie(mymovie.getId()).size()==0){
                 System.out.println("No ShowTimes Available\n");
                 looper=Boolean.FALSE;
             }
@@ -106,7 +106,7 @@ public class UserMovieManager extends MovieManager {
 
 
             while (looper){
-                Boundary.DisplayCinemas(showTimeManager.getShowTimesByMovie(mymovie.getId()));
+                Boundary.DisplayCinemas(ShowTimeManager.getShowTimesByMovie(mymovie.getId()));
                 System.out.println("Choose index of the showtime to view seat availability: ");
                 int inputsearchint = input.nextInt();
                 input.nextLine(); //Catch newline from .nextInt()
@@ -170,7 +170,7 @@ public class UserMovieManager extends MovieManager {
                 }
                 //2. Select another showtime
                 else if (choice == 2){
-                    Boundary.DisplayCinemas(showTimeManager.getShowTimesByMovie(mymovie.getId()));
+                    Boundary.DisplayCinemas(ShowTimeManager.getShowTimesByMovie(mymovie.getId()));
                 }
             }
         }
@@ -181,7 +181,7 @@ public class UserMovieManager extends MovieManager {
             input.nextLine();
             String movieReview = input.nextLine();
 
-            if(this.reviewMovie(mymovie, movieRating, movieReview))
+            if(reviewMovie(mymovie, movieRating, movieReview))
                 System.out.println("Review added successfully");
             else
                 System.out.println("Failed adding review");
@@ -195,7 +195,7 @@ public class UserMovieManager extends MovieManager {
      * @param review review to be added to movie object
      * @return True if review rating and review is successfully added to movie, and False otherwise
      */
-    public Boolean reviewMovie(Movie movie, int rating, String review){
+    public static Boolean reviewMovie(Movie movie, int rating, String review){
         movie.addRating(rating);
         movie.addReview(review);
         return DataManager.manageMovie(movie);

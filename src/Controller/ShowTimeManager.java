@@ -5,18 +5,13 @@ import java.util.List;
 
 public class ShowTimeManager {
 
-    public List<Cinema> getAllShowTimes(){
+    public static List<Cinema> getAllShowTimes(){
         return DataManager.LoadShowTimes(-1);
 
     }
-    public  List<Cinema> getShowTimesByMovie(int movieID){
+    public static List<Cinema> getShowTimesByMovie(int movieID){
         return DataManager.LoadShowTimes(movieID);
 
     }
-
-
-
-
-
 
 }

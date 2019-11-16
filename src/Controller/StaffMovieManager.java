@@ -1,29 +1,13 @@
 package Controller;
 import Entity.Movie;
-import Entity.Staff;
 import View.Boundary;
 import java.util.*;
 
 public class StaffMovieManager extends MovieManager {
 
-
-    private MovieManager movieManager;
-    private Staff staff;
-
-
-
-
-
-
-    public StaffMovieManager(){
-        //movieManager=new MovieManager();
-        staff=new Staff();
-    }
-
-
-    public void UpdateMovie(Scanner input){
+    public static void UpdateMovie(Scanner input){
         //List all movies
-        Boundary.DisplayMovie(this.getAllMovies());
+        Boundary.DisplayMovie(getAllMovies());
         //Boundary.DisplayMovies(DataManager.LoadMovies(""));
         //Select movie to update by movieID
         System.out.println("Enter ID of the movie to be updated: " );
@@ -33,7 +17,7 @@ public class StaffMovieManager extends MovieManager {
             return;
         }
         input.nextLine();//Catch newline from input.nextInt()
-        Movie mymovie = this.selectMovieByID(this.getAllMovies(), inputsearchint);
+        Movie mymovie = selectMovieByID(getAllMovies(), inputsearchint);
         Boundary.DisplayMovie(mymovie);
 
         //Choose which attribute of the movie to be edited
@@ -106,7 +90,7 @@ public class StaffMovieManager extends MovieManager {
 
     }
 
-    public void createMovieListing(Scanner input){
+    public static void createMovieListing(Scanner input){
 
         System.out.println("Enter movieID:");
         int movieid = input.nextInt();
@@ -125,7 +109,7 @@ public class StaffMovieManager extends MovieManager {
         String director = input.nextLine();
         System.out.println("Enter Status:");
         String status = input.nextLine();
-        if(this.createNewMovie(movieid, moviename, language, new ArrayList<>(), runtime, cast, director,Synopsis,new ArrayList<>(), status))
+        if(createNewMovie(movieid, moviename, language, new ArrayList<>(), runtime, cast, director,Synopsis,new ArrayList<>(), status))
             System.out.println("Movie Created Successfully\n");
         else
             System.out.println("Failed to Add movie\n");
@@ -133,7 +117,7 @@ public class StaffMovieManager extends MovieManager {
 
     }
 
-    public Boolean createNewMovie(int id, String name, String Language, ArrayList<Integer> rating, String runTime, List<String> cast, String Synopsis, String Director,ArrayList<String> reviews, String status){
+    private static Boolean createNewMovie(int id, String name, String Language, ArrayList<Integer> rating, String runTime, List<String> cast, String Synopsis, String Director,ArrayList<String> reviews, String status){
         Movie m = new Movie(id, name, Language, rating, runTime, cast, Director,Synopsis,reviews, status);
         return DataManager.SaveMovies(m);
 

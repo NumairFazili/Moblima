@@ -2,7 +2,6 @@ package Controller;
 
 import Entity.Booking;
 import Entity.Movie;
-import View.Boundary;
 
 import java.util.*;
 
@@ -19,7 +18,7 @@ public class MovieManager {
 
 
 
-    public Movie selectMovieByID(ArrayList<Movie> m_list, int id){
+    public static Movie selectMovieByID(ArrayList<Movie> m_list, int id){
         for (int i = 0; i < m_list.size(); i++){
             if (m_list.get(i).getId() == id){
                 return m_list.get(i);
@@ -29,12 +28,12 @@ public class MovieManager {
     }
 
 
-    public ArrayList<Movie> getAllMovies(){
+    public static ArrayList<Movie> getAllMovies(){
         return DataManager.LoadMovies("");
     }
 
 
-    public ArrayList<Movie> getTopByRatings(){
+    public static ArrayList<Movie> getTopByRatings(){
         ArrayList<Movie> movies = getAllMovies();
         ArrayList<Movie> to_return = new ArrayList<Movie>();
             Collections.sort(movies,new SortByRating());
@@ -44,7 +43,7 @@ public class MovieManager {
         return to_return;
     }
 
-    public ArrayList<Movie> getTopBySales(){
+    public static ArrayList<Movie> getTopBySales(){
         ArrayList<Movie> movies = getAllMovies();
         ArrayList<Movie> to_return = new ArrayList<Movie>();
         HashMap<Integer,Integer> sales_map = calculateSales(DataManager.LoadBookings());

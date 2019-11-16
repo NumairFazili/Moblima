@@ -1,12 +1,10 @@
 package Controller;
 
 import Entity.Settings;
-import Entity.Staff;
 import View.Boundary;
 
 import java.util.Arrays;
 import java.util.InputMismatchException;
-import java.util.List;
 import java.util.Scanner;
 
 public class SettingsManager {
@@ -14,7 +12,7 @@ public class SettingsManager {
 
     public  SettingsManager(){}
 
-    public void configureSettings(Scanner input){
+    public static void configureSettings(Scanner input){
         //Choose which setting to configure
         Boundary.DisplaySettings();
         System.out.println("Choose which setting to configure: " );
