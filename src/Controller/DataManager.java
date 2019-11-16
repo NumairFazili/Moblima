@@ -40,9 +40,14 @@ public class DataManager {
                 if (tokens[1].toLowerCase().contains(search.toLowerCase())) {
                     List<String> cast = Arrays.asList(tokens[5].split("\\."));
                     ArrayList<String> reviews=new ArrayList<String>(Arrays.asList(tokens[8].split("\\.")));
+                    if(reviews.get(0).equals(""))
+                        reviews=new ArrayList<>();
                     List<String> temp= Arrays.asList(tokens[3].split("\\."));
-                    List<Integer> ratings=new ArrayList<>();
-                    if(temp.size()>1) for (String s : temp) ratings.add(Integer.valueOf(s));
+
+                    ArrayList<Integer> ratings=new ArrayList<>();
+                    if(!temp.get(0).equals(""))
+                        for (String s : temp) ratings.add(Integer.valueOf(s));
+
                     Movie movie = new Movie(Integer.parseInt(tokens[0]), tokens[1], tokens[2],ratings, tokens[4], cast, tokens[6], tokens[7],reviews,tokens[9]);
                     movieArrayList.add(movie);
                 }
@@ -148,7 +153,7 @@ public class DataManager {
                     writer.append(",");
                     writer.append(movie.getSynopsis());
                     writer.append(",");
-                    writer.append(String.join(".", movie.getReviews()));
+                    writer.append(Joiner.on('.').join(movie.getReviews()));
                     writer.append(",");
                     writer.append(movie.getStatus());
                     writer.append("\n");
@@ -206,7 +211,7 @@ public class DataManager {
             writer.append(",");
             writer.append(movie.getDirector());
             writer.append(",");
-            writer.append(String.join(".", movie.getReviews()));
+            writer.append(Joiner.on('.').join(movie.getReviews()));
             writer.append(",");
             writer.append(movie.getStatus());
             writer.append("\n");

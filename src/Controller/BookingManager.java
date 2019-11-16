@@ -104,7 +104,7 @@ public class BookingManager {
             return false;
     }
 
-    private Boolean DateCheck(String date){
+    public Boolean DateCheck(String date){
         SimpleDateFormat dfParse = new SimpleDateFormat("dd/MM/yyyy");
         Date ShowDate;
         Date currentDate;

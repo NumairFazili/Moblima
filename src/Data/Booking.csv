@@ -25,3 +25,15 @@ Booking_ID/TID,Cineplex_ID,Cinema_ID,Movie_ID,ShowTime,Cinema Class,Movie Type,C
 14356,2,1,1001,7/10/2019 16:30,Platinum,3D,Testing1,123456789,testing1@gmail.com,regular,10,16/11/2019 02:11,25.0
 27566,2,2,1005,7/12/2019 16:30,Silver,2D,Testing1,123456789,testing1@gmail.com,regular,0,16/11/2019 02:18,17.0
 22766,3,1,1008,30/11/2019 12:30,Silver,3D,Testing1,123456789,testing1@gmail.com,regular,10,16/11/2019 02:38,21.0
+18858,1,1,1001,7/12/2019 16:30,Silver,3D,TestinguserAcoount,123456789,testing@gmail.com,regular,90,16/11/2019 13:29,22.0
+29761,2,2,1005,8/12/2019 18:30,Silver,2D,Myuser,123456789,myuser@gmail.com,regular,1,16/11/2019 13:43,18.0
+26619,2,2,1005,8/12/2019 18:30,Silver,2D,TestUser,123456789,testUser@gmail.com,regular,2,16/11/2019 15:04,17.0
+20953,3,1,1004,7/12/2019 16:30,Platinum,3D,Testing1,123456789,testing1@gmail.com,regular,0,16/11/2019 15:06,26.0
+16310,3,1,1004,7/12/2019 16:30,Platinum,3D,Testing1,123456789,testing1@gmail.com,regular,1,16/11/2019 15:09,26.0
+14043,2,2,1005,7/12/2019 16:30,Silver,2D,myUser,123456789,myUser@gmail.com,regular,1,16/11/2019 15:12,17.0
+11683,2,2,1005,7/12/2019 16:30,Silver,2D,myUser,123456789,myUser@gmail.com,regular,10,16/11/2019 15:19,18.0
+26749,2,2,1005,7/12/2019 16:30,Silver,2D,newUser,123456789,user@gmail.com,regular,11,16/11/2019 15:25,18.0
+13572,2,2,1005,7/12/2019 16:30,Silver,2D,myUser,123456789,myUser@gmail.com,regular,22,16/11/2019 15:33,26.0
+26676,2,2,1005,7/12/2019 16:30,Silver,2D,myNewUser,123456789,user@gmail.com,regular,2,16/11/2019 15:39,18.0
+23275,2,2,1005,7/12/2019 16:30,Silver,2D,newUser2,123456789,user@gmail.com,regular,20,16/11/2019 15:53,18.0
+19406,3,2,1001,23/12/2019 17:30,Silver,3D,newUser2,123456789,user@gmail.com,regular,0,16/11/2019 16:00,30.0
