@@ -5,12 +5,20 @@ import Entity.Movie;
 
 import java.util.*;
 
+/**
+ Represents the MovieManager class, to manage movie objects
+ @author CZ2002 Group 1
+ @version 1.0
+ @since 15-11-2019
+ */
 public class MovieManager {
 
+    /**
+     * Number of movies to return when getting movies by top sales or ratings
+     */
     private static final int SIZE_OF_PQ = 5;
 
     protected ShowTimeManager showTimeManager;
-
 
     public MovieManager(){
         showTimeManager=new ShowTimeManager();
@@ -18,6 +26,12 @@ public class MovieManager {
 
 
 
+    /**
+     * Select and return a Movie object by movie ID from an ArrayList of Movie objects
+     * @param id movie ID of movie object to be returned
+     * @param m_list ArrayList of movie objects
+     * @return Movie object corresponding to input movie ID
+     */
     public static Movie selectMovieByID(ArrayList<Movie> m_list, int id){
         for (int i = 0; i < m_list.size(); i++){
             if (m_list.get(i).getId() == id){
@@ -27,12 +41,19 @@ public class MovieManager {
         return null;
     }
 
-
+    /**
+     * Get details of all movies from database
+     * @return ArrayList of Movie objects
+     */
     public static ArrayList<Movie> getAllMovies(){
         return DataManager.LoadMovies("");
     }
 
 
+    /**
+     * Gets top movies by ratings from database
+     * @return ArrayList size of "SIZE_OF_PQ" Movie objects
+     */
     public static ArrayList<Movie> getTopByRatings(){
         ArrayList<Movie> movies = getAllMovies();
         ArrayList<Movie> to_return = new ArrayList<Movie>();
@@ -43,6 +64,10 @@ public class MovieManager {
         return to_return;
     }
 
+    /**
+     * Gets top movies by sales from database
+     * @return ArrayList size of "SIZE_OF_PQ" Movie objects
+     */
     public static ArrayList<Movie> getTopBySales(){
         ArrayList<Movie> movies = getAllMovies();
         ArrayList<Movie> to_return = new ArrayList<Movie>();
@@ -62,6 +87,11 @@ public class MovieManager {
         return to_return;
     }
 
+    /**
+     *
+     * @param bookings
+     * @return
+     */
     private static HashMap<Integer,Integer> calculateSales(ArrayList<Booking> bookings){
 
         HashMap<Integer,Integer> map = new HashMap<Integer, Integer>();
@@ -73,6 +103,11 @@ public class MovieManager {
         return map;
     }
 
+    /**
+     * Get average rating of a Movie object
+     * @param movie input Movie object
+     * @return Average rating of Movie object
+     */
     public static double getAvgRating(Movie movie){
         double averageRating;
         if(movie.getRating().size()>=1){

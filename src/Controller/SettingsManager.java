@@ -7,11 +7,20 @@ import java.util.Arrays;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
+/**
+ Represents the SettingsManager class to manage Settings for staff class.
+ @author CZ2002 Group 1
+ @version 1.0
+ @since 15-11-2019
+ */
 public class SettingsManager {
-
 
     public  SettingsManager(){}
 
+    /**
+     * Displays all current setting details from database and prompts user for input to select which setting to be edited, then saves updated settings to database
+     * @param input Scanner object
+     */
     public static void configureSettings(Scanner input){
         //Choose which setting to configure
         Boundary.DisplaySettings();

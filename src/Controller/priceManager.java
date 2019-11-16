@@ -9,15 +9,36 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+/**
+ Represents the PriceManager class, to handle price calculations and booking expiration date checking
+ @author CZ2002 Group 1
+ @version 1.0
+ @since 15-11-2019
+ */
 public class priceManager {
 
 
+    /**
+     * Customer type (regular/senior/child)
+     */
     private String userType;
+
+    /**
+     * Cinema object
+     */
     private Cinema cinema;
+
+    /**
+     * Settings object
+     */
     private Settings settings;
 
 
-
+    /**
+     * Creates a new priceManager object with the following parameters
+     * @param userType customer type
+     * @param cinema Cinema object
+     */
     public priceManager(String userType, Cinema cinema){
         this.userType=userType;
         this.cinema=cinema;
@@ -25,7 +46,10 @@ public class priceManager {
     }
 
 
-
+    /**
+     *
+     * @param dates
+     */
     private Boolean dateCheck(List<String> dates){
         SimpleDateFormat dfParse = new SimpleDateFormat("dd/MM/yyyy");
         Calendar c = Calendar.getInstance();
@@ -58,6 +82,10 @@ public class priceManager {
     }
 
 
+    /**
+     * Calculate and return price of movie booking based on customer type, if showtime is on a holiday, movie type and cinema class.
+     * @return price of movie booking
+     */
     public double getPrice(){
 
         double discount=0;

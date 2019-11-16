@@ -11,18 +11,31 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ Represents the DataManager class, with methods to pull, edit and save information in the database
+ @author CZ2002 Group 1
+ @version 1.0
+ @since 15-11-2019
+ */
 public class DataManager {
 
 
-    public DataManager() {
+    public DataManager() { }
 
-    }
-
+    /**
+     * Get path of csv file in database
+     * @param str input String of csv file name
+     * @return path of csv file
+     */
     private static String getLocation(String str) {
         return "src/Data/" + str + ".csv";
     }
 
-
+    /**
+     * Load movie objects from database, searching by movie name corresponding to input String
+     * @param search String to search for any substrings in all movie names in database
+     * @return ArrayList of Movie objects
+     */
     public static ArrayList<Movie> LoadMovies(String search) {
         BufferedReader reader = null;
         ArrayList<Movie> movieArrayList = new ArrayList<>();
@@ -60,6 +73,7 @@ public class DataManager {
 
         return movieArrayList;
     }
+
 
 
     public static Boolean manageMovie(Movie movie){
@@ -185,7 +199,11 @@ public class DataManager {
     }
 
 
-
+    /**
+     * Save input Movie object details into database
+     * @param movie Movie object
+     * @return True if database is successfully updated, False otherwise
+     */
     public static Boolean SaveMovies(Movie movie) {
         FileWriter writer = null;
         try {
@@ -229,6 +247,10 @@ public class DataManager {
 
     // This function is for further enhancement
 
+    /**
+     * Loads and return details of all Cineplexes from database
+     * @return ArrayList of Cineplex objects
+     */
     public static ArrayList<Cineplex> LoadCineplex() {
         BufferedReader reader = null;
         ArrayList<Cineplex> cineplexArrayList = new ArrayList<>();
@@ -254,8 +276,11 @@ public class DataManager {
     }
 
 
-
-
+    /**
+     * Loads and return details of all showtimes from database corresponding to input movie ID
+     * @param movieID movie ID
+     * @return ArrayList of Cinema objects
+     */
     public static List<Cinema> LoadShowTimes(int movieID) {
 
         String ID=String.valueOf(movieID);
@@ -294,7 +319,11 @@ public class DataManager {
         return cinemaArrayList;
     }
 
-
+    /**
+     * Saves input Cinema object details into database
+     * @param cinema Cinema object
+     * @return True if database is successfully updated, False otherwise
+     */
     public static Boolean AddShowTimes(Cinema cinema) {
         FileWriter writer = null;
         try {
@@ -327,6 +356,12 @@ public class DataManager {
         return false;
     }
 
+    /**
+     *
+     * @param cinema
+     * @param delete
+     * @return
+     */
     public static Boolean UpdateShowTime(Cinema cinema, Boolean delete) {
 
 
@@ -434,9 +469,13 @@ public class DataManager {
 
     }
 
-
+    /**
+     *
+     * @param cinema1
+     * @param cinema2
+     * @return
+     */
     public static Boolean UpdateShowTime(Cinema cinema1, Cinema cinema2) {
-
 
         File inputFile = new File(getLocation("Cinema"));
         File tempFile = new File(getLocation("Temp"));
@@ -542,9 +581,10 @@ public class DataManager {
 
     }
 
-
-
-
+    /**
+     * Loads and return details of all bookings from database
+     * @return ArrayList of Booking objects
+     */
     public static ArrayList<Booking> LoadBookings() {
         BufferedReader reader = null;
         ArrayList<Booking> bookingArrayList = new ArrayList<>();
@@ -590,7 +630,11 @@ public class DataManager {
         return bookingArrayList;
     }
 
-
+    /**
+     * Saves input Booking object details into database
+     * @param booking Booking object
+     * @return True if database is successfully updated, False otherwise
+     */
     public static void AddBooking(Booking booking) {
         FileWriter writer = null;
         try {
@@ -635,7 +679,10 @@ public class DataManager {
         }
     }
 
-
+    /**
+     * Loads and return details of every user from database
+     * @return ArrayList of User objects
+     */
     public static ArrayList<User> LoadUser() {
 
         BufferedReader reader = null;
@@ -665,6 +712,7 @@ public class DataManager {
 
 
     }
+
 
     public static Boolean ManageUser(User user,Boolean add) {
 
@@ -746,6 +794,10 @@ public class DataManager {
         return success;
         }
 
+    /**
+     * Load and return all settings details from database
+     * @return Settings object
+     */
     public static Settings LoadSettings(){
 
         BufferedReader reader = null;
@@ -775,6 +827,11 @@ public class DataManager {
         return null;
     }
 
+    /**
+     * Save new settings from input Settings object into database
+     * @param settings input Settings object's details to be saved in database
+     * @return True if database is successfully updated, False otherwise
+     */
     public static Boolean manageSettings(Settings settings){
 
         File tempFile = new File(getLocation("Temp"));
@@ -852,6 +909,10 @@ public class DataManager {
 
     }
 
+    /**
+     * Load and return all staff details from database
+     * @return ArrayList of Staff objects
+     */
     public static ArrayList<Staff> Loadstaff(){
         BufferedReader reader = null;
         ArrayList<Staff> staffArrayList=new ArrayList<>();

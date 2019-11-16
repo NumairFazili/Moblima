@@ -24,14 +24,34 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
 
+/**
+ Represents the BookingManager class, to manage all booking objects
+ @author CZ2002 Group 1
+ @version 1.0
+ @since 15-11-2019
+ */
 public class BookingManager {
 
+
+    /**
+     * ArrayList of all Booking objects in database
+     */
     private static ArrayList<Booking> bookingArrayList;
 
+    /**
+     * Creates a new BookingManager object with the details of every booking in the database
+     */
     public BookingManager(){
        bookingArrayList = DataManager.LoadBookings();
     }
 
+    /**
+     * Generates a Booking object with details from input User and Cinema object, and seat number
+     * @param user User object
+     * @param cinema Cinema object
+     * @param seatNO seat chosen in Cinema object
+     * @return Booking object
+     */
     private  Booking generateBooking(User user, Cinema cinema, int seatNO){
         String bookingID = genBookingID();
         LocalDateTime dateTime = LocalDateTime.now();
@@ -42,8 +62,14 @@ public class BookingManager {
     }
 
 
+    /**
+     * Creates a Booking object with details from input User and Cinema object, and seat number. Then saves details of booking object in database if booking is confirmed by user. Does not save if movie showtime has passed or seat is taken.
+     * @param user User object
+     * @param cinema Cinema object
+     * @param seatNO seat chosen in Cinema object
+     * @return True if booking is confirmed and details are successfully saved in database, False otherwise
+     */
     public Boolean createBooking(User user,Cinema cinema, int seatNO){
-
 
         if(!DateCheck(cinema.getTime())){
             System.out.println("The Movie has Already Passed");
@@ -70,6 +96,12 @@ public class BookingManager {
     }
 
 
+    /**
+     * Saves details of input Booking object into database and updates seats in input cinema object. Also checks if seat of corresponding Cinema is taken.
+     * @param booking Booking object
+     * @param cinema Cinema object
+     * @return True if details of Booking object are successfully saved in database and Cinema object seats is updated , False if seat chosen from Booking object is unavailable
+     */
     private Boolean saveBooking(Booking booking,Cinema cinema){
 
         if(!SeatCheck(cinema.getSeats(),booking.getSeatNO()))
@@ -82,10 +114,18 @@ public class BookingManager {
     }
 
 
+    /**
+     * Calculates and returns the price of a movie booking from input User and Cinema object
+     * @param user User object
+     * @param cinema Cinema object
+     * @return price of movie booking
+     */
     private static double calculatePrice(User user, Cinema cinema){
         priceManager priceManager = new priceManager(user.getCustomerType(),cinema);
         return  priceManager.getPrice();
     }
+
+
     private static String genBookingID(){
         int id;
         while(true){
@@ -103,6 +143,7 @@ public class BookingManager {
                 return true;
             return false;
     }
+
 
     protected Boolean DateCheck(String date){
         SimpleDateFormat dfParse = new SimpleDateFormat("dd/MM/yyyy");
@@ -126,6 +167,12 @@ public class BookingManager {
 
     }
 
+    /**
+     * Checks if input integer curSeat is in a list of integers denoting seats taken
+     * @param seats List of integer values
+     * @param curSeat integer value denoting seat number
+     * @return True if List does not contain integer value of curSeat, False otherwise
+     */
     private static boolean SeatCheck(List<Integer> seats,int curSeat){
         if(seats.contains(curSeat))
             return false;
