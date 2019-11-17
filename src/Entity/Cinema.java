@@ -1,6 +1,9 @@
 package Entity;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import Controller.DataManager;
 
 /**
  Represents the cinema class, a cinema can hold multiple movies
@@ -8,12 +11,22 @@ import java.util.List;
  @version 1.0
  @since 15-11-2019
  */
-public class Cinema {
+public class Cinema{
 
     /**
-     * ID parameters for Cineplex, Cinema and Movie
+     * Reference to a Cineplex object
      */
-    int cinplexID,cinemaID,movieID;
+    Cineplex cineplex;
+
+    /**
+     * ID parameters for Cinema
+     */
+    int cinemaID;
+
+    /**
+     * Reference to a Movie object
+     */
+    Movie movie;
 
     /**
      * Showtime of movie in cinema and cinema class(Silver, Gold, Platinum)
@@ -41,13 +54,44 @@ public class Cinema {
      * @param movieType Movie type of Cinema object
      */
     public Cinema(int cinplexID, int cinemaID, int movieID, String time,String cinemaClass, List<Integer> seats, String movieType) {
-        this.cinplexID = cinplexID;
+        this.cineplex = getCineplex(cinplexID);
         this.cinemaID = cinemaID;
-        this.movieID = movieID;
+        this.movie = getMovie(movieID);
         this.time = time;
         this.cinemaClass=cinemaClass;
         this.seats = seats;
-        this.movieType = movieType;        
+        this.movieType = movieType;
+        if(cineplex == null || movie == null){
+            throw new IllegalArgumentException("cinplexID or movieID invalid");
+        }
+    }
+
+    /**
+     * Get Cineplex object using cinplexID
+     * @return Cineplex object (null if not found)
+     */
+    private Cineplex getCineplex(int cinplexID){
+        ArrayList<Cineplex> cp_list = DataManager.LoadCineplex();
+        for(Cineplex cp: cp_list){
+            if(cp.getId() == cinplexID){
+                return cp;
+            }
+        }
+        return null;
+    }
+
+    /**
+     * Get Movie object using movieID
+     * @return Movie object (null if not found)
+     */
+    private Movie getMovie(int movieID){
+        ArrayList<Movie> m_list = DataManager.LoadMovies("");
+        for(Movie m: m_list){
+            if(m.getId() == movieID){
+                return m;
+            }
+        }
+        return null;
     }
 
     /**
@@ -65,7 +109,7 @@ public class Cinema {
      * @return Cineplex ID
      */
     public int getCinplexID() {
-        return cinplexID;
+        return cineplex.getId();
     }
 
     /**
@@ -73,7 +117,7 @@ public class Cinema {
      * @param cinplexID Cineplex ID
      */
     public void setCinplexID(int cinplexID) {
-        this.cinplexID = cinplexID;
+        this.cineplex = getCineplex(cinplexID);
     }
 
     /**
@@ -97,7 +141,7 @@ public class Cinema {
      * @return Movie ID
      */
     public int getMovieID() {
-        return movieID;
+        return movie.getId();
     }
 
     /**
@@ -105,7 +149,7 @@ public class Cinema {
      * @param movieID Movie ID
      */
     public void setMovieID(int movieID) {
-        this.movieID = movieID;
+        this.movie = getMovie(movieID);
     }
 
     /**

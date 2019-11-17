@@ -181,8 +181,13 @@ public class StaffShowTimeManager extends ShowTimeManager {
      * @return True if showtime is successfully saved to database, False otherwise
      */
     private static Boolean createShowTime(int cinplexID, int cinemaID, int movieID, String time, String cinemaClass, List<Integer> seats, String movieType){
-        Cinema c = new Cinema(cinplexID, cinemaID, movieID, time,cinemaClass, seats, movieType);
-        return DataManager.AddShowTimes(c);
+        try{
+            Cinema c = new Cinema(cinplexID, cinemaID, movieID, time,cinemaClass, seats, movieType);
+            return DataManager.AddShowTimes(c);
+        }catch(IllegalArgumentException e){
+            System.out.print(e.getMessage());
+            return false;
+        }
     }
 
 
