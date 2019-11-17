@@ -3,21 +3,8 @@ Booking_ID/TID,Cineplex_ID,Cinema_ID,Movie_ID,ShowTime,Cinema Class,Movie Type,C
 14718,2,2,1004,11/11/2019 17:30,Silver,2D,Test User2,123456789,xyz@gmail.com,senior citizen,41,10/10/2019 17:30,10
 15179,1,2,1002,17/11/2019 16:30,Gold,2D,Test User 3,123456789,xyz@gmail.com,student,12,6/10/2019 16:30,11
 15129,1,2,1002,17/11/2019 16:30,Gold,2D,test4,123456789,xyz@gmail.com,student,10,6/10/2019 16:30,12
-6179,1,2,1002,7/12/2019 16:30,Gold,2D,test4,123456789,test4@gmail.com,regular,9,12-11 03::00,18
-78885,1,1,1001,8/12/2019 16:30,Silver,3D,test4,123456789,test4@gmail.com,regular,1,12-11 03::03,15.0
-58653,1,2,1002,7/12/2019 16:30,Gold,2D,test4,123456789,test4@gmail.com,regular,0,12-11 05::02,18.0
-80990,2,1,1002,17/11/2019 18:30,Platinum,3D,bingyan,12345678,bingyan_test@gmail.com,senior citizen,28,12-11 15::44,17.0
-60166,2,1,1003,8/12/2019 16:30,Platinum,3D,test4,123456789,test4@gmail.com,regular,37,14-11 15::12,20.0
-5229,3,2,1001,23/11/2019 18:30,Silver,3D,Testing1,123456789,testing1@gmail.com,regular,11,14/11/2019 15::43,20.0
 17933,3,2,1001,23/11/2019 18:30,Silver,3D,Testing1,123456789,testing1@gmail.com,regular,13,14/11/2019 16::09,20.0
 31376,1,1,1001,7/12/2019 18:30,Silver,2D,Testing1,123456789,testing1@gmail.com,regular,0,14/11/2019 17::07,22.0
-63989,1,1,1001,7/12/2019 18:30,Silver,2D,Testing1,123456789,testing1@gmail.com,regular,1,14/11/2019 17::08,22.0
-8855,1,1,1001,7/12/2019 18:30,Silver,2D,Testing1,123456789,testing1@gmail.com,regular,10,14/11/2019 17::54,20.0
-447,1,1,1001,7/12/2019 18:30,Silver,2D,Testing2,123456789,test@gmail.com,regular,3,14/11/2019 18::21,16.0
-93574,1,1,1001,17/11/2019 18:30,Silver,2D,Testing1,123456789,testing1@gmail.com,regular,11,14/11/2019 21::04,16.0
-72867,1,1,1001,17/11/2019 16:30,Silver,3D,test4,123456789,test4@gmail.com,regular,0,15/11/2019 01::03,16.0
-76263,1,1,1001,17/11/2019 18:30,Silver,2D,test4,123456789,test4@gmail.com,regular,5,15/11/2019 01::12,16.0
-79337,1,1,1001,17/11/2019 18:30,Silver,2D,test4,123456789,test4@gmail.com,regular,4,15/11/2019 01::14,16.0
 18167,2,1,1001,17/11/2019 16:30,Platinum,3D,Testing1,123456789,testing1@gmail.com,regular,11,16/11/2019 01:12,25.0
 13990,2,2,1005,18/11/2019 18:30,Silver,2D,Testing1,123456789,testing1@gmail.com,regular,0,16/11/2019 01:34,17.0
 29231,1,1,1001,17/11/2019 16:30,Silver,3D,Testing1,123456789,testing1@gmail.com,regular,11,16/11/2019 02:08,20.0
