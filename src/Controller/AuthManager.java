@@ -16,7 +16,7 @@ public class AuthManager{
      * @param password input password of staff
      * @return Staff object with corresponding details, if username and password corresponds to a staff account in the database, null otherwise
      */
-    public static Staff getStaff(String username, String password){
+    public static Staff ValidateStaff(String username, String password){
 
         ArrayList<Staff> staffList = DataManager.Loadstaff();
         for(int i = 0; i < staffList.size(); i++)
@@ -33,7 +33,7 @@ public class AuthManager{
      * @param mobileNumber input password of staff
      * @return User object with corresponding details, if username and password corresponds to a user account in the database, null otherwise
      */
-    public static User getUser(String name, String mobileNumber){
+    public static User ValidateUser(String name, String mobileNumber){
         ArrayList<User> userList = DataManager.LoadUser();
 
         for (int i = 0; i < userList.size(); i++)

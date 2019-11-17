@@ -29,7 +29,7 @@ List of Methods
  @version 1.0
  @since 15-11-2019
  */
-public class StaffManager extends AuthManager{
+public class StaffManager{
 
     /**
      * Creates a new StaffManaer object
@@ -53,7 +53,7 @@ public class StaffManager extends AuthManager{
             }
             System.out.println("Enter Password:");
             String password = input.next();
-            staff = AuthManager.getStaff(username,password);
+            staff = AuthManager.ValidateStaff(username,password);
             if(staff != null){
                 System.out.println("Admin account successfully logged in!");
                 return staff;

@@ -14,7 +14,6 @@ package Controller;
 
 import Entity.Booking;
 import Entity.Cinema;
-import Entity.Movie;
 import Entity.User;
 import View.Boundary;
 

@@ -25,7 +25,7 @@ public class UserManager {
         String mobilenumber = input.next();
         //Check with database if name and mobile number matches then create corresponding user object
 
-        try{User myuser = AuthManager.getUser(username, mobilenumber);
+        try{User myuser = AuthManager.ValidateUser(username, mobilenumber);
             if(myuser!=null)
                 System.out.println("User Login Successful!\n");
             else{
