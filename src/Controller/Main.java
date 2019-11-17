@@ -10,20 +10,20 @@ public class Main {
         int choice = -1;
         Scanner input = new Scanner(System.in);
         while (true) {
-                if (Boundary.ModuleSelection(choice, input) == 1) {
-                    Staff staff = (StaffManager.StaffLogin(input));
+                if (Boundary.moduleSelection(choice, input) == 1) {
+                    Staff staff = (StaffManager.staffLogin(input));
                     if (staff == null) {
                         continue;
                     } else {
                         do {
-                            Boundary.DisplayOptions("staffMenu");
+                            Boundary.displayOptions("staffMenu");
                             choice = input.nextInt();
                             switch (choice) {
                                 case 1:
                                     StaffMovieManager.createMovieListing(input);
                                     break;
                                 case 2:
-                                    StaffMovieManager.UpdateMovie(input);
+                                    StaffMovieManager.updateMovie(input);
                                     break;
                                 case 3:
                                     StaffShowTimeManager.createCinemaShowtime(input);
@@ -39,11 +39,11 @@ public class Main {
                                     break;
                                 case 7:
                                     System.out.println("Listing top 5 movies by ticket sales:");
-                                    Boundary.DisplayMovie(StaffMovieManager.getTopBySales());
+                                    Boundary.displayMovie(StaffMovieManager.getTopBySales());
                                     break;
                                 case 8:
                                     System.out.println("Listing top 5 movies by overall reviewers’ ratings:");
-                                    Boundary.DisplayMovie(StaffMovieManager.getTopByRatings());
+                                    Boundary.displayMovie(StaffMovieManager.getTopByRatings());
                                     break;
 
                                 case 0:
@@ -59,11 +59,11 @@ public class Main {
 
                     User user = null;
 
-                    Boundary.DisplayOptions("userMenu");
+                    Boundary.displayOptions("userMenu");
                     int user_login_choice = input.nextInt();
                     while (user == null) {
                         if (user_login_choice == 1) {
-                            user = UserManager.UserLogin(input);
+                            user = UserManager.userLogin(input);
                         } else if (user_login_choice == 2) {
                             user = UserManager.createUser(input);
                         } else if (user_login_choice == 0) {
@@ -74,24 +74,24 @@ public class Main {
                         }
                     }
                     do {
-                        Boundary.DisplayOptions("userMovieMenu");
+                        Boundary.displayOptions("userMovieMenu");
                         choice = input.nextInt();
                         switch (choice) {
                             case 1:
                             case 5:
                                 UserMovieManager userMovieManager = new UserMovieManager(user);
-                                userMovieManager.SearchListMovie(choice);
+                                userMovieManager.searchListMovie(choice);
                                 break;
                             case 2:
-                                Boundary.DisplayBookings(user.getBookings());
+                                Boundary.displayBookings(user.getBookings());
                                 break;
                             case 3:
                                 System.out.println("Listing top 5 movies by ticket sales:");
-                                Boundary.DisplayMovie(UserMovieManager.getTopBySales());
+                                Boundary.displayMovie(UserMovieManager.getTopBySales());
                                 break;
                             case 4:
                                 System.out.println("Listing top 5 movies by overall reviewers’ ratings:");
-                                Boundary.DisplayMovie(UserMovieManager.getTopByRatings());
+                                Boundary.displayMovie(UserMovieManager.getTopByRatings());
                                 break;
                             case 0:
                                 break;

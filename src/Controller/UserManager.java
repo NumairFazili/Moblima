@@ -26,7 +26,7 @@ public class UserManager {
      * @param input Scanner object
      * @return User object if match is found in database, null if no match is found.
      */
-    public static User UserLogin(Scanner input){//1. Existing User
+    public static User userLogin(Scanner input){//1. Existing User
         System.out.println("Please enter login details:");
         System.out.println("Enter Username:");
         String username = input.next();
@@ -34,7 +34,7 @@ public class UserManager {
         String mobilenumber = input.next();
         //Check with database if name and mobile number matches then create corresponding user object
 
-        try{user = AuthManager.ValidateUser(username, mobilenumber);
+        try{user = AuthManager.validateUser(username, mobilenumber);
             if(user!=null)
                 System.out.println("User Login Successful!\n");
             else{

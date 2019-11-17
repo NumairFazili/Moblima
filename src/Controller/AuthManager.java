@@ -16,9 +16,9 @@ public class AuthManager{
      * @param password input password of staff
      * @return Staff object with corresponding details, if username and password corresponds to a staff account in the database, null otherwise
      */
-    public static Staff ValidateStaff(String username, String password){
+    public static Staff validateStaff(String username, String password){
 
-        ArrayList<Staff> staffList = DataManager.Loadstaff();
+        ArrayList<Staff> staffList = DataManager.loadstaff();
         for(int i = 0; i < staffList.size(); i++)
             if(staffList.get(i).getName().equals(username) && staffList.get(i).checkPassword(password))
                     return staffList.get(i);
@@ -33,8 +33,8 @@ public class AuthManager{
      * @param mobileNumber input password of staff
      * @return User object with corresponding details, if username and password corresponds to a user account in the database, null otherwise
      */
-    public static User ValidateUser(String name, String mobileNumber){
-        ArrayList<User> userList = DataManager.LoadUser();
+    public static User validateUser(String name, String mobileNumber){
+        ArrayList<User> userList = DataManager.loadUser();
 
         for (int i = 0; i < userList.size(); i++)
             if (userList.get(i).getName().equals(name)  &&  userList.get(i).getmobileNumber().equals(mobileNumber) )

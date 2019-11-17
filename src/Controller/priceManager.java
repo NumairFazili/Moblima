@@ -15,7 +15,7 @@ import java.util.List;
  @version 1.0
  @since 15-11-2019
  */
-public class priceManager {
+public class PriceManager {
 
 
     /**
@@ -39,10 +39,10 @@ public class priceManager {
      * @param userType customer type
      * @param cinema Cinema object
      */
-    public priceManager(String userType, Cinema cinema){
+    public PriceManager(String userType, Cinema cinema){
         this.userType=userType;
         this.cinema=cinema;
-        this.settings=DataManager.LoadSettings();
+        this.settings=DataManager.loadSettings();
     }
 
 

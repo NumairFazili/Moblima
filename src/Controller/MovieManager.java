@@ -1,6 +1,5 @@
 package Controller;
 
-import Entity.Booking;
 import Entity.Movie;
 
 import java.util.*;
@@ -46,7 +45,7 @@ public class MovieManager {
      * @return ArrayList of Movie objects
      */
     public static ArrayList<Movie> getAllMovies(){
-        return DataManager.LoadMovies("");
+        return DataManager.loadMovies("");
     }
 
 

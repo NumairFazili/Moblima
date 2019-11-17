@@ -4,25 +4,6 @@ import Entity.Staff;
 
 import java.util.Scanner;
 
-/*
-List of Methods
-(1)Movie
-    createMovie,
-    updateMovie[Name, RunTime, Description, Director, Cast],
-    saveMovieChanges, 
-    deleteMovie
-(2)ShowTime(Cinema)
-    createShowTime,
-    update[CinemaID, MovieID, Time, Status],
-    saveShowTimeChanges,
-    deleteShowTime
-(3)Settings
-    showSettings
-    update[BasePrice, ChildPrice, SeniorPrice, HolidayPrice, SilverPrice, GoldPrice, PlatinumPrice, Holiday]
-    saveSettingsChanges
-*/
-
-
 /**
  Represents the StaffManager class to manage Staff objects
  @author CZ2002 Group 1
@@ -43,7 +24,7 @@ public class StaffManager{
      * @param input Scanner object
      * @return Staff object corresponding to login details entered
      */
-    public static Staff StaffLogin(Scanner input) {
+    public static Staff staffLogin(Scanner input) {
 
         while(true){
             System.out.println("ADMIN USER:");
@@ -55,7 +36,7 @@ public class StaffManager{
             }
             System.out.println("Enter Password:");
             String password = input.next();
-            staff = AuthManager.ValidateStaff(username,password);
+            staff = AuthManager.validateStaff(username,password);
             if(staff != null){
                 System.out.println("Admin account successfully logged in!");
                 return staff;

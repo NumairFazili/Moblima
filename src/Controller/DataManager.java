@@ -34,7 +34,7 @@ public class DataManager {
      * @param search String to search for any substrings in all movie names in database
      * @return ArrayList of Movie objects
      */
-    public static ArrayList<Movie> LoadMovies(String search) {
+    public static ArrayList<Movie> loadMovies(String search) {
         BufferedReader reader = null;
         ArrayList<Movie> movieArrayList = new ArrayList<>();
         try {
@@ -205,7 +205,7 @@ public class DataManager {
      * @param movie Movie object
      * @return True if database is successfully updated, False otherwise
      */
-    public static Boolean SaveMovies(Movie movie) {
+    public static Boolean saveMovies(Movie movie) {
         FileWriter writer = null;
         try {
             writer = new FileWriter(getLocation("Movie"), true);
@@ -252,7 +252,7 @@ public class DataManager {
      * Loads and return details of all Cineplexes from database
      * @return ArrayList of Cineplex objects
      */
-    public static ArrayList<Cineplex> LoadCineplex() {
+    public static ArrayList<Cineplex> loadCineplex() {
         BufferedReader reader = null;
         ArrayList<Cineplex> cineplexArrayList = new ArrayList<>();
         try {
@@ -282,7 +282,7 @@ public class DataManager {
      * @param movieID movie ID
      * @return ArrayList of Cinema objects
      */
-    public static List<Cinema> LoadShowTimes(int movieID) {
+    public static List<Cinema> loadShowTimes(int movieID) {
 
         String ID=String.valueOf(movieID);
 
@@ -325,7 +325,7 @@ public class DataManager {
      * @param cinema Cinema object
      * @return True if database is successfully updated, False otherwise
      */
-    public static Boolean AddShowTimes(Cinema cinema) {
+    public static Boolean addShowTimes(Cinema cinema) {
         FileWriter writer = null;
         try {
             writer = new FileWriter(getLocation("Cinema"), true);
@@ -362,7 +362,7 @@ public class DataManager {
      * @param cinema
      * @return Ture if Showtime removed successfully
      */
-    public static Boolean RemoveShowTime(Cinema cinema) {
+    public static Boolean removeShowTime(Cinema cinema) {
 
 
         File inputFile = new File(getLocation("Cinema"));
@@ -461,7 +461,7 @@ public class DataManager {
      * @param cinema2 Cinema object to be updated in the database
      * @return True if showTime updated successfully updated, False otherwise
      */
-    public static Boolean UpdateShowTime(Cinema cinema1, Cinema cinema2) {
+    public static Boolean updateShowTime(Cinema cinema1, Cinema cinema2) {
 
         File inputFile = new File(getLocation("Cinema"));
         File tempFile = new File(getLocation("Temp"));
@@ -571,7 +571,7 @@ public class DataManager {
      * Loads and return details of all bookings from database
      * @return ArrayList of Booking objects
      */
-    public static ArrayList<Booking> LoadBookings() {
+    public static ArrayList<Booking> loadBookings() {
         BufferedReader reader = null;
         ArrayList<Booking> bookingArrayList = new ArrayList<>();
         try {
@@ -621,7 +621,7 @@ public class DataManager {
      * @param booking Booking object
      * @return True if database is successfully updated, False otherwise
      */
-    public static void AddBooking(Booking booking) {
+    public static void addBooking(Booking booking) {
         FileWriter writer = null;
         try {
             writer = new FileWriter(getLocation("Booking"), true);
@@ -669,7 +669,7 @@ public class DataManager {
      * Loads and return details of every user from database
      * @return ArrayList of User objects
      */
-    public static ArrayList<User> LoadUser() {
+    public static ArrayList<User> loadUser() {
 
         BufferedReader reader = null;
         ArrayList<User> userArrayList = new ArrayList<>();
@@ -705,7 +705,7 @@ public class DataManager {
      * @param add True to add or edit user details in database, False to delete user details in database
      * @return True if User details are updated or a new user is added or user details are successfully deleted, False otherwise
      */
-    public static Boolean ManageUser(User user,Boolean add) {
+    public static Boolean manageUser(User user,Boolean add) {
 
 
         File inputFile = new File(getLocation("User"));
@@ -789,7 +789,7 @@ public class DataManager {
      * Load and return all settings details from database
      * @return Settings object
      */
-    public static Settings LoadSettings(){
+    public static Settings loadSettings(){
 
         BufferedReader reader = null;
         try {
@@ -904,7 +904,7 @@ public class DataManager {
      * Load and return all staff details from database
      * @return ArrayList of Staff objects
      */
-    public static ArrayList<Staff> Loadstaff(){
+    public static ArrayList<Staff> loadstaff(){
         BufferedReader reader = null;
         ArrayList<Staff> staffArrayList=new ArrayList<>();
         try {

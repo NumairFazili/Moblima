@@ -1,8 +1,11 @@
 package Entity;
 
+import java.util.Arrays;
 import java.util.List;
 
+import Controller.BookingManager;
 import Controller.DataManager;
+import View.Boundary;
 
 /**
  Represents the booking object when a movie-goer books a seat for a particular showtime in a Cinema.
@@ -61,8 +64,11 @@ public class Booking {
         this.seatNO = seatNO;
         this.price = price;
         this.bookingTime = bookingTime;
-        if(this.cinema == null || this.user == null){
-            throw new IllegalArgumentException("No matching showtime or no matching user");
+        if(this.cinema == null){
+            throw new IllegalArgumentException("No matching showtime");
+        }
+        if(this.user == null){
+            throw new IllegalArgumentException("No matching user");
         }
     }
 
@@ -80,8 +86,11 @@ public class Booking {
         this.bookingID = bookingID;
         this.price = price;
         this.bookingTime = bookingTime;
-        if(this.cinema == null || this.user == null){
-            throw new IllegalArgumentException("No matching showtime or no matching user");
+        if(this.user == null){
+            throw new IllegalArgumentException("No user provided");
+        }
+        if(this.cinema == null){
+            throw new IllegalArgumentException("No showtime provided");
         }
     }
 
@@ -94,7 +103,7 @@ public class Booking {
      * @return Cinema object (or null if not found)
      */
     private Cinema getCinema(int movieID, int cinplexID, int cinemaID, String showTime){
-        List<Cinema> c_list = DataManager.LoadShowTimes(movieID);
+        List<Cinema> c_list = DataManager.loadShowTimes(movieID);
         for(Cinema c: c_list){
             if (c.getCinplexID() == cinplexID && c.getCinemaID() == cinemaID && c.getTime().equals(showTime)){
                 return c;
@@ -111,7 +120,7 @@ public class Booking {
      * @return User object (or null if not found)
      */
     private User getUser(String customerName,String mobileNumber,String email){
-        List<User> u_list = DataManager.LoadUser();
+        List<User> u_list = DataManager.loadUser();
         for(User u: u_list){
             if(u.getName().equals(customerName) && u.getmobileNumber().equals(mobileNumber) && u.getEmail().equals(email)){
                 return u;

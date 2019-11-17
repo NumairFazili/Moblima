@@ -71,7 +71,7 @@ public class Cinema{
      * @return Cineplex object (null if not found)
      */
     private Cineplex getCineplex(int cinplexID){
-        ArrayList<Cineplex> cp_list = DataManager.LoadCineplex();
+        ArrayList<Cineplex> cp_list = DataManager.loadCineplex();
         for(Cineplex cp: cp_list){
             if(cp.getId() == cinplexID){
                 return cp;
@@ -85,7 +85,7 @@ public class Cinema{
      * @return Movie object (null if not found)
      */
     private Movie getMovie(int movieID){
-        ArrayList<Movie> m_list = DataManager.LoadMovies("");
+        ArrayList<Movie> m_list = DataManager.loadMovies("");
         for(Movie m: m_list){
             if(m.getId() == movieID){
                 return m;

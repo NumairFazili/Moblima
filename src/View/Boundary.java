@@ -59,11 +59,11 @@ public class Boundary {
      * @param input input Scanner object
      * @return user's choice for admin, movie-goer or exitting the program
      */
-    public static int ModuleSelection(int choice, Scanner input){
+    public static int moduleSelection(int choice, Scanner input){
 
         while(choice != 1 && choice !=2 && choice !=0){
             System.out.println("MOBLIMA Movie Booking System ");
-            Boundary.DisplayOptions("startMenu");
+            Boundary.displayOptions("startMenu");
 
             try{
                 choice = input.nextInt();
@@ -92,7 +92,7 @@ public class Boundary {
      * Display text based on input string
      * @param input input string to determine which text option to print out
      */
-    public static void DisplayOptions(String input) {
+    public static void displayOptions(String input) {
 
         String str[]={};
 
@@ -138,7 +138,7 @@ public class Boundary {
      * Display details of movie, taking in a list of Movie objects as input
      * @param movieList List of Movie objects
      */
-    public static void DisplayMovie(List<Movie> movieList){
+    public static void displayMovie(List<Movie> movieList){
         System.out.format("%-5s %-25s %-15s %-15s %n", "ID", "Title", "Rating(Avg)", "Language");
         for(Movie movie:movieList){
             String rating;
@@ -156,7 +156,7 @@ public class Boundary {
      * Display details of movie, taking in a Movie object as input
      * @param movie Movie object
      */
-    public static void DisplayMovie(Movie movie){
+    public static void displayMovie(Movie movie){
 
         System.out.format("%-10s   %-20s   %-7s   %-10s  %-15s   %-10s         %-80s  %-30s  %n","Movie ID","Movie Name","Rating",
                 "Language","Status","Director","Cast","Synopsis");
@@ -178,8 +178,7 @@ public class Boundary {
      * Display details of bookings, taking in a List of Booking objects as input
      * @param bookings List of Booking objects
      */
-    public static void DisplayBookings(List<Booking> bookings){
-        int count=0;
+    public static void displayBookings(List<Booking> bookings){
         System.out.format("%-20s   %-20s   %-10s   %-15s  %-15s   %-10s %-4s   %-20s   %-20s  %-6s  %-15s  %-20s  %-20s  %n","Customer Name","Customer Type","Booking ID",
                             "Cinplex ID","Cinema ID ","Movie ID","Seat","Showtime","Booking Time","Price","Cinema Class","Movie Type","Email");
 
@@ -195,7 +194,7 @@ public class Boundary {
      * Display reviews of movie, taking in a Movie object as input
      * @param movie Movie object
      */
-    public static void DisplayMovieReviews(Movie movie){
+    public static void displayMovieReviews(Movie movie){
         int reviewNum = movie.getRating().size() < movie.getReviews().size() ? movie.getRating().size() : movie.getReviews().size();
         List<Integer> rating_list = movie.getRating();
         List<String> review_list = movie.getReviews();
@@ -212,7 +211,7 @@ public class Boundary {
      * Display details of cinema, taking in a List of Cinema objects as input
      * @param cinemas List of Cinema objects
      */
-    public static void DisplayCinemas(List<Cinema> cinemas){
+    public static void displayCinemas(List<Cinema> cinemas){
         int count=0;
 
         System.out.format("%-6s %-12s %-10s %-20s  %-9s %-5s %n", "index", "CinePlex ID", "Cinema ID", "Time", "Class", "Type");
@@ -227,7 +226,7 @@ public class Boundary {
      * Display all available and taken seats, taking a Cinema object as input
      * @param cinema Cinema object
      */
-    public static void DisplaySeating(Cinema cinema) {
+    public static void displaySeating(Cinema cinema) {
         int value;
         int rows=10;
         int cols=10;
@@ -265,12 +264,12 @@ public class Boundary {
     /**
      * Display current price settings
      */
-    public static void DisplaySettings(){
+    public static void displaySettings(){
 
         System.out.println("\nCurrent Settings");
         System.out.format("%-13s  %-13s  %-13s  %-13s  %-13s  %-14s  %-14s  %-13s  %-13s %n", "Base Price", "Child Price", "Senior Price", "Holiday Price","Silver Price","Gold Price", "Platinum Price","3D Price","Holidays");
 
-        Settings settings = DataManager.LoadSettings();
+        Settings settings = DataManager.loadSettings();
 
         System.out.format("%-13s  %-13s  %-13s  %-13s  %-13s  %-14s  %-14s  %-13s   %-13s %n",settings.getBasePrice(),settings.getChildPrice(),settings.getSeniorPrice(),settings.getHolidayPrice(),settings.getSilverPrice(),settings.getGoldPrice(),settings.getPlatinumPrice(),settings.getPrice3D(),settings.getHolidays());
 

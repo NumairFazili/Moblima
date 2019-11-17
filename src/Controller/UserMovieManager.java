@@ -33,26 +33,26 @@ public class UserMovieManager extends MovieManager {
 
      * @param choice choice parameter to determine whether to search or list movie
      */
-    public  void SearchListMovie(int choice) {
+    public  void searchListMovie(int choice) {
         Scanner input = new Scanner(System.in);
 
 
         ArrayList<Movie> mymovielist = new ArrayList<Movie>();
         //List all movies
         if (choice == 5) {
-            mymovielist = DataManager.LoadMovies("");
+            mymovielist = DataManager.loadMovies("");
         }
         //Search and display movies
         if (choice == 1) {
             System.out.println("Enter name of movie to search: ");
             String inputsearch = input.next();
-            mymovielist = DataManager.LoadMovies(inputsearch);
+            mymovielist = DataManager.loadMovies(inputsearch);
             if (mymovielist.isEmpty()) {
                 System.out.println("No movie found!");
                 return;
             }
         }
-        Boundary.DisplayMovie(mymovielist);
+        Boundary.displayMovie(mymovielist);
         //Select movie by movie ID and print movie details – including reviews and ratings
         System.out.println("Enter ID of the movie to see the details: ");
         System.out.println("Otherwise enter 0 to go back");
@@ -68,9 +68,9 @@ public class UserMovieManager extends MovieManager {
 
 
         System.out.println("Movie Details: ");
-        Boundary.DisplayMovie(movie);
+        Boundary.displayMovie(movie);
         System.out.println("All ratings and reviews: ");
-        Boundary.DisplayMovieReviews(movie);
+        Boundary.displayMovieReviews(movie);
 
 
          this.BookMovie(movie,choice);
@@ -113,18 +113,18 @@ public class UserMovieManager extends MovieManager {
             }
             
             while (looper){
-                Boundary.DisplayCinemas(ShowTimeManager.getShowTimesByMovie(movie.getId()));
+                Boundary.displayCinemas(ShowTimeManager.getShowTimesByMovie(movie.getId()));
                 System.out.println("Choose index of the showtime to view seat availability: ");
                 int inputsearchint = input.nextInt();
                 input.nextLine(); //Catch newline from .nextInt()
 
-                String time=((DataManager.LoadShowTimes(movie.getId()).get(inputsearchint))).getTime();
+                String time=((DataManager.loadShowTimes(movie.getId()).get(inputsearchint))).getTime();
 
-                if(!BookingManager.DateCheck(time)){
+                if(!BookingManager.dateCheck(time)){
                     System.out.println("The Movie has Already Passed");
                     break;
                 }
-                Boundary.DisplaySeating(((DataManager.LoadShowTimes(movie.getId()).get(inputsearchint))));
+                Boundary.displaySeating(((DataManager.loadShowTimes(movie.getId()).get(inputsearchint))));
                 choice = -1;
                {
                     try{
@@ -155,7 +155,7 @@ public class UserMovieManager extends MovieManager {
                         int colofseat = input.nextInt();
                         input.nextLine();//Catch newline from input
                         //4. Book and purchase ticket
-                        Cinema mycinema = ((DataManager.LoadShowTimes(movie.getId()).get(inputsearchint)));
+                        Cinema mycinema = ((DataManager.loadShowTimes(movie.getId()).get(inputsearchint)));
                         BookingManager bookingManager=new BookingManager(user,mycinema);
                         if(!bookingManager.createBooking(rowofseat*10 + colofseat)){
                             System.out.println("Booking Failed");
@@ -170,13 +170,13 @@ public class UserMovieManager extends MovieManager {
                             break;
                         }
                         if (choice == 1){
-                            Boundary.DisplaySeating(((DataManager.LoadShowTimes(movie.getId()).get(inputsearchint))));
+                            Boundary.displaySeating(((DataManager.loadShowTimes(movie.getId()).get(inputsearchint))));
                         }
                     }
                 }
                 //2. Select another showtime
                 else if (choice == 2){
-                    Boundary.DisplayCinemas(ShowTimeManager.getShowTimesByMovie(movie.getId()));
+                    Boundary.displayCinemas(ShowTimeManager.getShowTimesByMovie(movie.getId()));
                 }
             }
         }

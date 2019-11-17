@@ -15,9 +15,9 @@ public class StaffMovieManager extends MovieManager {
      * Displays all movies, choose ID of movie to update, choose attributes of movie to be edited, then saves updated Movie to database
      * @param input Scanner object
      */
-    public static void UpdateMovie(Scanner input){
+    public static void updateMovie(Scanner input){
         //List all movies
-        Boundary.DisplayMovie(getAllMovies());
+        Boundary.displayMovie(getAllMovies());
         //Boundary.DisplayMovies(DataManager.LoadMovies(""));
         //Select movie to update by movieID
         System.out.println("Enter ID of the movie to be updated: " );
@@ -28,7 +28,7 @@ public class StaffMovieManager extends MovieManager {
         }
         input.nextLine();//Catch newline from input.nextInt()
         Movie mymovie = selectMovieByID(getAllMovies(), inputsearchint);
-        Boundary.DisplayMovie(mymovie);
+        Boundary.displayMovie(mymovie);
 
         //Choose which attribute of the movie to be edited
         System.out.println("Choose attribute of movie to be edited: " );
@@ -37,7 +37,7 @@ public class StaffMovieManager extends MovieManager {
             do {
                 try{
                     Scanner in = new Scanner(System.in);
-                    Boundary.DisplayOptions("moviesMenu");
+                    Boundary.displayOptions("moviesMenu");
                     choice = in.nextInt();
                     in.nextLine();//catch newline
                     if (choice <= -1 || choice >= 8){
@@ -147,20 +147,9 @@ public class StaffMovieManager extends MovieManager {
      */
     private static Boolean createNewMovie(int id, String name, String Language, ArrayList<Integer> rating, String runTime, List<String> cast, String Synopsis, String Director,ArrayList<String> reviews, String status){
         Movie m = new Movie(id, name, Language, rating, runTime, cast, Director,Synopsis,reviews, status);
-        return DataManager.SaveMovies(m);
+        return DataManager.saveMovies(m);
 
     }
-
-
-
-
-
-
-
-
-
-
-
 
 
 }

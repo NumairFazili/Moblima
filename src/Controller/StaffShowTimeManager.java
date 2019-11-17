@@ -30,7 +30,7 @@ public class StaffShowTimeManager extends ShowTimeManager {
      */
     public static void updateCinemaShowtime(Scanner input){
         //List all showtimes
-        Boundary.DisplayCinemas(getAllShowTimes());
+        Boundary.displayCinemas(getAllShowTimes());
         //Select showtime to update by index
         System.out.println("Enter Index of the showtime to be updated: " );
         System.out.println("Otherwise enter -2 to go back" );
@@ -48,7 +48,7 @@ public class StaffShowTimeManager extends ShowTimeManager {
             do{
                 try{
                     Scanner in = new Scanner(System.in);
-                    Boundary.DisplayOptions("cinemaMenu");
+                    Boundary.displayOptions("cinemaMenu");
                     choice = in.nextInt();
                     if (choice <= -1 || choice >= 7){
                         System.out.println("Error! Please enter either 0, 1, 2, 3:");
@@ -105,10 +105,10 @@ public class StaffShowTimeManager extends ShowTimeManager {
 
 
         System.out.println();
-        Boundary.DisplayCinemas(Arrays.asList(updatedCinema));
+        Boundary.displayCinemas(Arrays.asList(updatedCinema));
         System.out.println();
 
-        if (DataManager.UpdateShowTime(cinema,updatedCinema) == Boolean.TRUE){
+        if (DataManager.updateShowTime(cinema,updatedCinema) == Boolean.TRUE){
             System.out.println("Showtime successfully updated!\n");
         }
         else{
@@ -123,7 +123,7 @@ public class StaffShowTimeManager extends ShowTimeManager {
      */
     public static void removeCinemaShowtime(Scanner input){
         //List all showtimes
-        Boundary.DisplayCinemas(getAllShowTimes());
+        Boundary.displayCinemas(getAllShowTimes());
         //Select showtime to remove by index
         System.out.println("Enter the index of showtime to be removed: " );
         System.out.println("Otherwise enter -2 to go back" );
@@ -133,7 +133,7 @@ public class StaffShowTimeManager extends ShowTimeManager {
         }
         else{
             Cinema mycinema = getAllShowTimes().get(inputsearchint);
-            if(DataManager.RemoveShowTime(mycinema))
+            if(DataManager.removeShowTime(mycinema))
                 System.out.println("Showtime Deleted Successfully\n");
             else
                 System.out.println("Delete Failed\n");
@@ -183,7 +183,7 @@ public class StaffShowTimeManager extends ShowTimeManager {
     private static Boolean createShowTime(int cinplexID, int cinemaID, int movieID, String time, String cinemaClass, List<Integer> seats, String movieType){
         try{
             Cinema c = new Cinema(cinplexID, cinemaID, movieID, time,cinemaClass, seats, movieType);
-            return DataManager.AddShowTimes(c);
+            return DataManager.addShowTimes(c);
         }catch(IllegalArgumentException e){
             System.out.println(e.getMessage());
             return false;

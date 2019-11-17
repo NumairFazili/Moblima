@@ -15,23 +15,21 @@ import java.util.Scanner;
  */
 public class SettingsManager {
 
-    public  SettingsManager(){}
-
     /**
      * Displays all current setting details from database and prompts user for input to select which setting to be edited, then saves updated settings to database
      * @param input Scanner object
      */
     public static void configureSettings(Scanner input){
         //Choose which setting to configure
-        Boundary.DisplaySettings();
+        Boundary.displaySettings();
         System.out.println("Choose which setting to configure: " );
-        Settings mysettings = DataManager.LoadSettings();
+        Settings mysettings = DataManager.loadSettings();
         int choice = -1;
         do {
             do {
                 try{
                     Scanner in = new Scanner(System.in);
-                    Boundary.DisplayOptions("settingsMenu");
+                    Boundary.displayOptions("settingsMenu");
                     choice = in.nextInt();
                     in.nextLine();//catch newline
                     if (choice <= -1 || choice >= 10){

@@ -1,16 +1,7 @@
-/*
-Author: Bingyan
-Methods:
-1.sortMovies
-
-Helpers:
-1.SortByName  2. SortByRating
- */
 package Controller;
 
 import Entity.Movie;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;

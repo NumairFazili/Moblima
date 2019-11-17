@@ -129,7 +129,7 @@ public class User{
      * Save user details to database
      */
     public void save(){
-        DataManager.ManageUser(this,true);
+        DataManager.manageUser(this,true);
     }
 
 
@@ -139,7 +139,7 @@ public class User{
      */
     public List<Booking> getBookings(){
         ArrayList<Booking> bookingArrayList = new ArrayList<Booking>();
-        for(Booking booking: DataManager.LoadBookings()){
+        for(Booking booking: DataManager.loadBookings()){
             if(booking.getCustomerName().equals(this.getName())&& booking.getMobileNumber().equals(this.getmobileNumber())){
                 bookingArrayList.add(booking);
             }

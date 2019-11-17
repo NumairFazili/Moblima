@@ -1,15 +1,3 @@
-/*
-Author: Bingyan
-Constructor:
-1.BookingManager
-
-Methods:
-1.makeBooking
-2.createBooking
-3.genBookingID
-
-Helpers:
- */
 package Controller;
 
 import Entity.Booking;
@@ -49,7 +37,7 @@ public class BookingManager {
 
     public BookingManager(User user,Cinema cinema){
 
-        bookingArrayList = DataManager.LoadBookings();
+        bookingArrayList = DataManager.loadBookings();
         this.user=user;
         this.cinema=cinema;
     }
@@ -65,7 +53,7 @@ public class BookingManager {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
         String bookingTime = dateTime.format(formatter);
         double final_price = calculatePrice();
-        return new Booking(bookingID, cinema.getCinplexID(), cinema.getCinemaID(), cinema.getMovieID(), cinema.getTime(), cinema.getCinemaClass(), cinema.getMovieType(), user.getName(), user.getmobileNumber(), user.getEmail(), user.getCustomerType(), seatNO, bookingTime, final_price);
+        return new Booking(cinema, user, seatNO, bookingID, bookingTime, final_price);
     }
 
 
@@ -76,14 +64,14 @@ public class BookingManager {
      */
     public Boolean createBooking(int seatNO){
 
-        if(!DateCheck(cinema.getTime())){
+        if(!dateCheck(cinema.getTime())){
             System.out.println("The Movie has Already Passed");
             return false;
         }
 
 
         Booking booking=this.generateBooking(seatNO);
-        Boundary.DisplayBookings(Arrays.asList(booking));
+        Boundary.displayBookings(Arrays.asList(booking));
         System.out.println("Press 1 to confirm Booking  0 to Cancel");
 
         Scanner input=new Scanner(System.in);
@@ -108,12 +96,12 @@ public class BookingManager {
      */
     private Boolean saveBooking(Booking booking){
 
-        if(!SeatCheck(cinema.getSeats(),booking.getSeatNO()))
+        if(!seatCheck(cinema.getSeats(),booking.getSeatNO()))
             return false;
 
-        DataManager.AddBooking(booking);
+        DataManager.addBooking(booking);
         cinema.addSeats(booking.getSeatNO());
-        DataManager.UpdateShowTime(cinema,cinema);
+        DataManager.updateShowTime(cinema,cinema);
         return true;
     }
 
@@ -123,7 +111,7 @@ public class BookingManager {
      * @return price of movie booking
      */
     private double calculatePrice(){
-        priceManager priceManager = new priceManager(user.getCustomerType(),cinema);
+        PriceManager priceManager = new PriceManager(user.getCustomerType(),cinema);
         return  priceManager.getPrice();
     }
 
@@ -136,7 +124,7 @@ public class BookingManager {
         while(true){
             Random rand = new Random( System.currentTimeMillis() );
             id=(1 + rand.nextInt(2)) * 10000 + rand.nextInt(10000);
-            if(BookingCheck(id))
+            if(bookingCheck(id))
                 break;
         }
         return Integer.toString(id);
@@ -147,7 +135,7 @@ public class BookingManager {
      * @param id booking id
      * @return True if the id is unique, False otherwise
      */
-    private static Boolean BookingCheck(int id){
+    private static Boolean bookingCheck(int id){
         for(Booking booking:bookingArrayList){
             if(booking.getBookingID().equals(String.valueOf(id)))
                 return false;
@@ -160,7 +148,7 @@ public class BookingManager {
      * @param date date to be checked
      * @return True if the date of booking is after current date, False otherwise
      */
-    protected static Boolean DateCheck(String date){
+    protected static Boolean dateCheck(String date){
         SimpleDateFormat dfParse = new SimpleDateFormat("dd/MM/yyyy");
         Date ShowDate;
         Date currentDate;
@@ -186,7 +174,7 @@ public class BookingManager {
      * @param curSeat integer value denoting seat number
      * @return True if List does not contain integer value of curSeat, False otherwise
      */
-    private static boolean SeatCheck(List<Integer> seats,int curSeat){
+    private static boolean seatCheck(List<Integer> seats,int curSeat){
         if(seats.contains(curSeat))
             return false;
         return true;
@@ -200,7 +188,7 @@ public class BookingManager {
      * @return HashMap of <MovieID, Sales>
      */
     protected static HashMap<Integer,Integer> calculateSales(){
-        ArrayList<Booking> bookingArrayList=DataManager.LoadBookings();
+        ArrayList<Booking> bookingArrayList=DataManager.loadBookings();
         HashMap<Integer,Integer> map = new HashMap<Integer, Integer>();
         for(int i = 0;i<bookingArrayList.size();i++){
             int movie_id = bookingArrayList.get(i).getMovieID();
@@ -209,9 +197,6 @@ public class BookingManager {
         }
         return map;
     }
-
-
-
 
 
 }

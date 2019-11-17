@@ -18,7 +18,7 @@ public  class ShowTimeManager {
      * @return A list of Cinema objects
      */
     public static List<Cinema> getAllShowTimes(){
-        return DataManager.LoadShowTimes(-1);
+        return DataManager.loadShowTimes(-1);
 
         /**
          * Get all showtimes in the database which corresponds to input movie ID
@@ -27,7 +27,7 @@ public  class ShowTimeManager {
          */
     }
     public static List<Cinema> getShowTimesByMovie(int movieID){
-        return DataManager.LoadShowTimes(movieID);
+        return DataManager.loadShowTimes(movieID);
 
     }
 
