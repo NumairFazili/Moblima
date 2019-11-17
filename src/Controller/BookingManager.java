@@ -14,7 +14,6 @@ package Controller;
 
 import Entity.Booking;
 import Entity.Cinema;
-import Entity.Movie;
 import Entity.User;
 import View.Boundary;
 
@@ -23,9 +22,6 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
-
-import static Controller.MovieManager.getAllMovies;
-import static Controller.MovieManager.selectMovieByID;
 
 /**
  Represents the BookingManager class, to manage all booking objects
@@ -161,7 +157,7 @@ public class BookingManager {
 
     /**
      * Checks if the the date of booking is after current date
-     * @param
+     * @param date date to be checked
      * @return True if the date of booking is after current date, False otherwise
      */
     protected static Boolean DateCheck(String date){
@@ -201,7 +197,6 @@ public class BookingManager {
     /**
      * This function calculates Sales for each movie, it takes booking records as input, and returns a HashMap of
      * <MovieID, Sales>
-
      * @return HashMap of <MovieID, Sales>
      */
     protected static HashMap<Integer,Integer> calculateSales(){

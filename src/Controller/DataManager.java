@@ -72,8 +72,11 @@ public class DataManager {
         return movieArrayList;
     }
 
-
-
+    /**
+     *Update details of movie objects in the database by using movie ID from input Movie object as the key
+     * @param movie Movie object to be updated
+     * @return True if Movie is successfully updated, False otherwise
+     */
     public static Boolean manageMovie(Movie movie){
 
         File inputFile = new File(getLocation("Movie"));
@@ -453,10 +456,10 @@ public class DataManager {
     }
 
     /**
-     *
-     * @param cinema1
-     * @param cinema2
-     * @return True if showTime updated successfully
+     *Updates the cinema details in the database, accepts two cinema objects, one as a key and another for details to be updated
+     * @param cinema1 Cinema object to be used as a key to determine which entry line in database to be updated
+     * @param cinema2 Cinema object to be updated in the database
+     * @return True if showTime updated successfully updated, False otherwise
      */
     public static Boolean UpdateShowTime(Cinema cinema1, Cinema cinema2) {
 
@@ -697,12 +700,11 @@ public class DataManager {
     }
 
     /**
-     *
-     * @param user
-     * @param add
-     * @return True if User details are updated or a new user is added
+     *Manage users in the database
+     * @param user User object to be added, updated or deleted
+     * @param add True to add or edit user details in database, False to delete user details in database
+     * @return True if User details are updated or a new user is added or user details are successfully deleted, False otherwise
      */
-
     public static Boolean ManageUser(User user,Boolean add) {
 
 
