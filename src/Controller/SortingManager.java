@@ -22,7 +22,7 @@ public class SortingManager{
 
     /**
      * Sorts a HashMap by its value, in descending order. This function is used in calculate top 5 sales.
-     * @param hm HashMap of <MovieID, Sales>
+     * @param hm HashMap of movieID and sales
      * @return HashMap of sorted hm
      */
     public static HashMap<Integer, Integer> sortByValue(HashMap<Integer, Integer> hm)

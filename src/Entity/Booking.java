@@ -83,6 +83,8 @@ public class Booking {
         this.bookingID = bookingID;
         this.price = price;
         this.bookingTime = bookingTime;
+        this.seatNO=seatNO;
+
         if(this.user == null){
             throw new IllegalArgumentException("No user provided");
         }

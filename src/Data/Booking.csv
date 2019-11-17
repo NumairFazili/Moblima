@@ -13,3 +13,5 @@ Booking_ID/TID,Cineplex_ID,Cinema_ID,Movie_ID,ShowTime,Cinema Class,Movie Type,C
 15531,2,1,1003,8/12/2019 16:30,Platinum,3D,myName,12345,mb@gmail.com,regular,0,16/11/2019 18:46,35.0
 21904,3,2,1002,13/12/2019 22:15,Silver,2D,test4,123456789,test4@gmail.com,regular,0,17/11/2019 20:58,26.0
 12215,2,2,1003,8/12/2019 16:30,Silver,2D,test4,123456789,test4@gmail.com,regular,0,17/11/2019 21:00,26.0
+22293,3,2,1001,23/12/2019 17:30,Silver,3D,Testing1,123456789,testing1@gmail.com,regular,10,17/11/2019 21:39,30.0
+15217,3,1,1004,7/12/2019 16:30,Platinum,3D,Testing1,123456789,testing1@gmail.com,regular,10,17/11/2019 21:48,34.0

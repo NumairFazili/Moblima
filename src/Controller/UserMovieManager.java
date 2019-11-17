@@ -150,10 +150,10 @@ public class UserMovieManager extends MovieManager {
                     looper = Boolean.FALSE; //stop while loop
                     while(true){
                         System.out.println("Enter row index of seat:" );
+
                         int rowofseat = input.nextInt();
                         System.out.println("Enter col index of seat:" );
                         int colofseat = input.nextInt();
-                        input.nextLine();//Catch newline from input
                         //4. Book and purchase ticket
                         Cinema mycinema = ((DataManager.loadShowTimes(movie.getId()).get(inputsearchint)));
                         BookingManager bookingManager=new BookingManager(user,mycinema);

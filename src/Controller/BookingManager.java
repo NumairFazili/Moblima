@@ -99,10 +99,12 @@ public class BookingManager {
         if(!seatCheck(cinema.getSeats(),booking.getSeatNO()))
             return false;
 
-        DataManager.addBooking(booking);
-        cinema.addSeats(booking.getSeatNO());
-        DataManager.updateShowTime(cinema,cinema);
-        return true;
+        if(DataManager.addBooking(booking)){
+            cinema.addSeats(booking.getSeatNO());
+            if(DataManager.updateShowTime(cinema,cinema))
+                return true;
+        }
+        return false;
     }
 
 
@@ -183,9 +185,8 @@ public class BookingManager {
 
 
     /**
-     * This function calculates Sales for each movie, it takes booking records as input, and returns a HashMap of
-     * <MovieID, Sales>
-     * @return HashMap of <MovieID, Sales>
+     * This function calculates Sales for each movie, it takes booking records as input, and returns a HashMap of MovieID, Sales
+     * @return HashMap of MovieID, Sales
      */
     protected static HashMap<Integer,Integer> calculateSales(){
         ArrayList<Booking> bookingArrayList=DataManager.loadBookings();

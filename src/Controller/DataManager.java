@@ -621,7 +621,7 @@ public class DataManager {
      * @param booking Booking object
      * @return True if database is successfully updated, False otherwise
      */
-    public static void addBooking(Booking booking) {
+    public static Boolean addBooking(Booking booking) {
         FileWriter writer = null;
         try {
             writer = new FileWriter(getLocation("Booking"), true);
@@ -660,9 +660,11 @@ public class DataManager {
             writer.append("\n");
             writer.flush();
             writer.close();
+            return true;
         } catch (IOException e) {
             e.printStackTrace();
         }
+        return false;
     }
 
     /**
