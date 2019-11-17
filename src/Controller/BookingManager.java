@@ -109,7 +109,7 @@ public class BookingManager {
 
         DataManager.AddBooking(booking);
         cinema.addSeats(booking.getSeatNO());
-        DataManager.UpdateShowTime(cinema,false);
+        DataManager.UpdateShowTime(cinema,cinema);
         return true;
     }
 
@@ -155,7 +155,7 @@ public class BookingManager {
 
     /**
      * Checks if the the date of booking is after current date
-     * @param id booking id
+     * @param
      * @return True if the date of booking is after current date, False otherwise
      */
     protected Boolean DateCheck(String date){

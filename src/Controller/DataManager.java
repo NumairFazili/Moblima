@@ -1,9 +1,7 @@
 package Controller;
 
 import Entity.*;
-import View.Boundary;
 import com.google.common.base.Joiner;
-
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -359,10 +357,9 @@ public class DataManager {
     /**
      *
      * @param cinema
-     * @param delete
-     * @return
+     * @return Ture if Showtime removed successfully
      */
-    public static Boolean UpdateShowTime(Cinema cinema, Boolean delete) {
+    public static Boolean RemoveShowTime(Cinema cinema) {
 
 
         File inputFile = new File(getLocation("Cinema"));
@@ -426,24 +423,10 @@ public class DataManager {
                     writer.append("\n");
                 }
 
-                if (Found && !delete) {
-                    writer.append(String.valueOf(cinema.getCinplexID()));
-                    writer.append(",");
-                    writer.append(String.valueOf(cinema.getCinemaID()));
-                    writer.append(",");
-                    writer.append(String.valueOf(cinema.getMovieID()));
-                    writer.append(",");
-                    writer.append(String.valueOf(cinema.getTime()));
-                    writer.append(",");
-                    writer.append(cinema.getCinemaClass());
-                    writer.append(",");
-                    writer.append(Joiner.on('.').join(cinema.getSeats()));
-                    writer.append(",");
-                    writer.append(cinema.getMovieType());
-                    writer.append("\n");
+                if (Found)
                     Found = false;
 
-                }
+
 
             }
 
@@ -473,7 +456,7 @@ public class DataManager {
      *
      * @param cinema1
      * @param cinema2
-     * @return
+     * @return True if showTime updated successfully
      */
     public static Boolean UpdateShowTime(Cinema cinema1, Cinema cinema2) {
 
@@ -713,6 +696,12 @@ public class DataManager {
 
     }
 
+    /**
+     *
+     * @param user
+     * @param add
+     * @return True if User details are updated or a new user is added
+     */
 
     public static Boolean ManageUser(User user,Boolean add) {
 
@@ -941,105 +930,3 @@ public class DataManager {
     }
 
 }
-//       Cinema cinema1=new Cinema(3,1,1009,"30/11/2019 12:30","Silver",Arrays.asList(1,1,0,0),"3D");
-//        Cinema cinema2=new Cinema(2,1,1009,"30/11/2019 12:30","Silver",Arrays.asList(1,1,0,0),"3D");
-//    ArrayList<Movie> test=LoadMovies("");
-//
-//        for(Movie movie:test)
-//            System.out.println(movie.getReviews()+ "   " + movie.getRating());
-
-
-        //StaffManager mystaff = AuthManager.getStaff("username", "123");
-//        Settings settings=DataManager.LoadSettings();//mystaff.showSettings();
-//        settings.setBasePrice(21);
-//        DataManager.manageSettings(settings);
-
-//        Settings settings = new Settings(16,-4,-3,-2,1,3,5,Arrays.asList("07/10/2019.07/11/2019"));
-//        manageSettings(settings);
-
-
-////        Integer a= null;
-////
-//        List<Cinema> cinemaArrayList=LoadShowTimes(-1);
-//
-//        for(Cinema cinema:cinemaArrayList)
-//            System.out.println(cinema.getCinplexID());
-
-
-//        Movie movie=new Movie(1008,"Toy Story","English",Arrays.asList(1),"3:15",Arrays.asList("a","b","c"),"sAmpleText","SampleText",Arrays.asList("review1","review2"),18);
-//        SaveMovies(movie);
-//
-//        List<Long> bookings= (List<Long>) Arrays.asList(1234567890,1234888880,1234888880);
-//        User user=new User("test4",22,"123456789","test4@gmail.com",Arrays.asList(12345L,5678L,89765L));
-//        ManageUser(user,false);
-
-
-//        Movie movie=new Movie(1005,"Mission Impossible 4","English",9.1,"2:15",Arrays.asList("a","b","c"),"sampleText","sampleText");
-//        System.out.println((manageMovie(movie,false)));
-//
-//
-//        int count=0;
-//        while(count<10){
-//            for(Movie move:LoadMovies("Mission Impossible"))
-//                System.out.println(move.getName());
-//            count++;
-//        }
-////        System.out.println((LoadShowTimes(1003)));
-
-//        for(Cinema cinema:LoadShowTimes(1001)){
-//            Boundary.DisplaySeating(cinema.getSeats());
-//            break;
-//        }
-
-
-
-        //####################################Brandan####################################
-//        Movie movie=new Movie(1004,"Joker","English",9.8,"3:15",Arrays.asList("a","b","c"),"sampleText","sampleText");
-//
-//        SaveMovies(movie);
-
-//        ArrayList<Movie> test=LoadMovies("BATMAN");
-//
-//        for(Movie movie:test)
-//            System.out.println(movie.getName());
-
-//
-//        List<String> str=Arrays.asList("a","b","c");
-//        System.out.println(String.join(".",str));
-
-//        ArrayList<Cinema> test2= (ArrayList<Cinema>) LoadShowTimes(2);
-//
-//        for(Cinema cinema:test2)
-//            System.out.println(cinema.getCinemaID());
-
-//        AddShowTimes(new Cinema(2,2,1004,"11/10/2019 17:30","Coming Soon",Arrays.asList(1,1,0,0)));
-
-
-//        ArrayList<Booking> test3=LoadBookings();
-//
-//        for(Booking booking:test3)
-//            System.out.println(booking.getBookingID());
-
-//        Booking booking=new Booking(15179,1,2,1002,"7/10/2019 16:30","Silver","2D","Test User 3",123456789,"xyz@gmail.com","student",12,"6/10/2019 16:30",11);
-//        AddBooking(booking);
-
-
-
-//        addUser(new User("test3",123456789,"test3@gmail.com"));
-//
-//        ArrayList<User> test=LoadUser();
-////
-//        for(User user:test)
-//            System.out.println(user.getMobileNumber());
-
-//
-//        ArrayList<Cineplex> test=LoadCineplex();
-////
-//        for(Cineplex cineplex:test)
-//            System.out.println(cineplex.getName());
-
-
-//        System.out.println((UpdateShowTime(new Cinema(2,2,1004,"11/10/2019 17:30" ,"Coming Soon",Arrays.asList(0,0,0,0)))));
-//        2,2,1004,11/10/2019 17:30,Show Ended,1.1.0.0
-
-
