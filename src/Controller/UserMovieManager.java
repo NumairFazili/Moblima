@@ -67,7 +67,6 @@ public class UserMovieManager extends MovieManager {
     public static void BookMovie(Movie mymovie, User user, int choice){
         //Select movie, then search for all showtimes.
         Scanner input = new Scanner(System.in);
-        BookingManager bookingManager = new BookingManager();
         do {
             try{
                 Scanner in = new Scanner(System.in);
@@ -109,7 +108,7 @@ public class UserMovieManager extends MovieManager {
 
                 String time=((DataManager.LoadShowTimes(mymovie.getId()).get(inputsearchint))).getTime();
 
-                if(!bookingManager.DateCheck(time)){
+                if(!BookingManager.DateCheck(time)){
                     System.out.println("The Movie has Already Passed");
                     break;
                 }
@@ -145,9 +144,8 @@ public class UserMovieManager extends MovieManager {
                         input.nextLine();//Catch newline from input
                         //4. Book and purchase ticket
                         Cinema mycinema = ((DataManager.LoadShowTimes(mymovie.getId()).get(inputsearchint)));
-
-
-                        if(!bookingManager.createBooking(user,mycinema, rowofseat*10 + colofseat)){
+                        BookingManager bookingManager=new BookingManager(user,mycinema);
+                        if(!bookingManager.createBooking(rowofseat*10 + colofseat)){
                             System.out.println("Booking Failed");
                             System.out.println("Enter 1 to retry or  0 to go back");
                             choice = input.nextInt();

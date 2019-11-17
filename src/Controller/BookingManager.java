@@ -37,39 +37,49 @@ public class BookingManager {
      * ArrayList of all Booking objects in database
      */
     private static ArrayList<Booking> bookingArrayList;
+    private User user;
+    private Cinema cinema;
+
+
+    public BookingManager(){
+        bookingArrayList = DataManager.LoadBookings();
+    }
 
     /**
      * Creates a new BookingManager object with the details of every booking in the database
+     * @param user
+     * @param cinema
      */
-    public BookingManager(){
-       bookingArrayList = DataManager.LoadBookings();
+
+
+    public BookingManager(User user,Cinema cinema){
+
+
+        this.user=user;
+        this.cinema=cinema;
     }
 
     /**
      * Generates a Booking object with details from input User and Cinema object, and seat number
-     * @param user User object
-     * @param cinema Cinema object
      * @param seatNO seat chosen in Cinema object
      * @return Booking object
      */
-    private  Booking generateBooking(User user, Cinema cinema, int seatNO){
+    private  Booking generateBooking(int seatNO){
         String bookingID = genBookingID();
         LocalDateTime dateTime = LocalDateTime.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
         String bookingTime = dateTime.format(formatter);
-        double final_price = calculatePrice(user,cinema);
+        double final_price = calculatePrice();
         return new Booking(bookingID, cinema.getCinplexID(), cinema.getCinemaID(), cinema.getMovieID(), cinema.getTime(), cinema.getCinemaClass(), cinema.getMovieType(), user.getName(), user.getmobileNumber(), user.getEmail(), user.getCustomerType(), seatNO, bookingTime, final_price);
     }
 
 
     /**
      * Creates a Booking object with details from input User and Cinema object, and seat number. Then saves details of booking object in database if booking is confirmed by user. Does not save if movie showtime has passed or seat is taken.
-     * @param user User object
-     * @param cinema Cinema object
      * @param seatNO seat chosen in Cinema object
      * @return True if booking is confirmed and details are successfully saved in database, False otherwise
      */
-    public Boolean createBooking(User user,Cinema cinema, int seatNO){
+    public Boolean createBooking(int seatNO){
 
         if(!DateCheck(cinema.getTime())){
             System.out.println("The Movie has Already Passed");
@@ -77,7 +87,7 @@ public class BookingManager {
         }
 
 
-        Booking booking=this.generateBooking(user, cinema, seatNO);
+        Booking booking=this.generateBooking(seatNO);
         Boundary.DisplayBookings(Arrays.asList(booking));
         System.out.println("Press 1 to confirm Booking  0 to Cancel");
 
@@ -116,11 +126,9 @@ public class BookingManager {
 
     /**
      * Calculates and returns the price of a movie booking from input User and Cinema object
-     * @param user User object
-     * @param cinema Cinema object
      * @return price of movie booking
      */
-    private static double calculatePrice(User user, Cinema cinema){
+    private double calculatePrice(){
         priceManager priceManager = new priceManager(user.getCustomerType(),cinema);
         return  priceManager.getPrice();
     }
@@ -158,7 +166,7 @@ public class BookingManager {
      * @param
      * @return True if the date of booking is after current date, False otherwise
      */
-    protected Boolean DateCheck(String date){
+    protected static Boolean DateCheck(String date){
         SimpleDateFormat dfParse = new SimpleDateFormat("dd/MM/yyyy");
         Date ShowDate;
         Date currentDate;
