@@ -1,11 +1,8 @@
 package Entity;
 
-import java.util.Arrays;
 import java.util.List;
 
-import Controller.BookingManager;
 import Controller.DataManager;
-import View.Boundary;
 
 /**
  Represents the booking object when a movie-goer books a seat for a particular showtime in a Cinema.
@@ -64,12 +61,12 @@ public class Booking {
         this.seatNO = seatNO;
         this.price = price;
         this.bookingTime = bookingTime;
-        if(this.cinema == null){
-            throw new IllegalArgumentException("No matching showtime");
-        }
-        if(this.user == null){
-            throw new IllegalArgumentException("No matching user");
-        }
+        // if(this.cinema == null){
+        //     throw new IllegalArgumentException("No matching showtime");
+        // }
+        // if(this.user == null){
+        //     throw new IllegalArgumentException("No matching user");
+        // }
     }
 
     /**
