@@ -19,11 +19,21 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
+/**
+ Represents the SortingManager class to handle sorting
+ @author CZ2002 Group 1
+ @version 1.0
+ @since 15-11-2019
+ */
+
 public class SortingManager{
 
 
-
-
+    /**
+     * Sorts a HashMap by its value, in descending order. This function is used in calculate top 5 sales.
+     * @param hm HashMap of <MovieID, Sales>
+     * @return HashMap of sorted hm
+     */
     public static HashMap<Integer, Integer> sortByValue(HashMap<Integer, Integer> hm)
     {
         // Create a list from elements of HashMap
@@ -50,7 +60,12 @@ public class SortingManager{
     
 
 }
-
+/**
+ * Sort helpers
+ @author CZ2002 Group 1
+ @version 1.0
+ @since 15-11-2019
+ */
 class SortByName implements Comparator<Movie> {
     @Override
     public int compare(Movie o1, Movie o2){
@@ -58,6 +73,12 @@ class SortByName implements Comparator<Movie> {
     }
 
 }
+/**
+ * Sort helpers
+ @author CZ2002 Group 1
+ @version 1.0
+ @since 15-11-2019
+ */
 class SortByRating implements Comparator<Movie>{
     @Override
     public int compare( Movie o1, Movie o2){
