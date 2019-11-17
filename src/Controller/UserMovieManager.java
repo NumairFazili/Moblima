@@ -61,8 +61,10 @@ public class UserMovieManager extends MovieManager {
             return;
         }
         Movie movie = selectMovieByID(mymovielist, inputsearchint);
-
-
+        if(movie==null){
+            System.out.println("Invalid Movie ID");
+            return;
+        }
 
 
         System.out.println("Movie Details: ");
@@ -70,10 +72,7 @@ public class UserMovieManager extends MovieManager {
         System.out.println("All ratings and reviews: ");
         Boundary.DisplayMovieReviews(movie);
 
-        if(movie==null){
-            System.out.println("Invalid Movie ID");
-            return;
-        }
+
          this.BookMovie(movie,choice);
     }
 
@@ -112,8 +111,7 @@ public class UserMovieManager extends MovieManager {
                 System.out.println("No ShowTimes Available\n");
                 looper=Boolean.FALSE;
             }
-
-
+            
             while (looper){
                 Boundary.DisplayCinemas(ShowTimeManager.getShowTimesByMovie(movie.getId()));
                 System.out.println("Choose index of the showtime to view seat availability: ");

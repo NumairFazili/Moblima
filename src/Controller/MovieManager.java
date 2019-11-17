@@ -77,7 +77,7 @@ public class MovieManager {
             averageRating = 0;
             for(int i = 0; i < movie.getRating().size(); i++)
                 averageRating += movie.getRating().get(i);
-            return averageRating /= movie.getRating().size();
+            return averageRating / movie.getRating().size();
         }
         return -1;
     }
@@ -104,6 +104,7 @@ public class MovieManager {
         }
         return to_return;
     }
+
 
 
 }

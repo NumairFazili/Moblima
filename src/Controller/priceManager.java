@@ -67,7 +67,6 @@ public class priceManager {
             try {
                 ShowDate=dfParse.parse(cinema.getTime());
                 date=dfParse.parse((holidays.get(i)));
-                //currentDate=dfParse.parse(dfParse.format(currentDate));
                 int result=ShowDate.compareTo(date);
                 if(result==0){
 
