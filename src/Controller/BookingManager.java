@@ -125,7 +125,10 @@ public class BookingManager {
         return  priceManager.getPrice();
     }
 
-
+    /**
+     * Generates a unique random number between 10000(inclusive) to 40000(exclusive) as booking id
+     * @return booking id
+     */
     private static String genBookingID(){
         int id;
         while(true){
@@ -137,14 +140,24 @@ public class BookingManager {
         return Integer.toString(id);
     }
 
+    /**
+     * Checks if the id is unique by comparing it with the past booking ids
+     * @param id booking id
+     * @return True if the id is unique, False otherwise
+     */
     private static Boolean BookingCheck(int id){
-        for(Booking booking:bookingArrayList)
-            if(!booking.getBookingID().equals(String.valueOf(id)))
-                return true;
-            return false;
+        for(Booking booking:bookingArrayList){
+            if(booking.getBookingID().equals(String.valueOf(id)))
+                return false;
+        }
+        return true;
     }
 
-
+    /**
+     * Checks if the the date of booking is after current date
+     * @param id booking id
+     * @return True if the date of booking is after current date, False otherwise
+     */
     protected Boolean DateCheck(String date){
         SimpleDateFormat dfParse = new SimpleDateFormat("dd/MM/yyyy");
         Date ShowDate;
@@ -162,8 +175,6 @@ public class BookingManager {
         }
 
         return true;
-
-
 
     }
 

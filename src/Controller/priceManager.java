@@ -47,10 +47,11 @@ public class priceManager {
 
 
     /**
-     *
-     * @param dates
+     * Checks if current date is a non working day. Non working day includes weekends and also the list of holidays passed in. 
+     * @param holidays List of String objects in the format of "dd/MM/yyyy"
+     * @return True if current date is holiday, False otherwise
      */
-    private Boolean dateCheck(List<String> dates){
+    private Boolean dateCheck(List<String> holidays){
         SimpleDateFormat dfParse = new SimpleDateFormat("dd/MM/yyyy");
         Calendar c = Calendar.getInstance();
 
@@ -62,10 +63,10 @@ public class priceManager {
 
         Date date;
         Date ShowDate;
-        for(int i=0;i<dates.size();i++){
+        for(int i=0;i<holidays.size();i++){
             try {
                 ShowDate=dfParse.parse(cinema.getTime());
-                date=dfParse.parse((dates.get(i)));
+                date=dfParse.parse((holidays.get(i)));
                 //currentDate=dfParse.parse(dfParse.format(currentDate));
                 int result=ShowDate.compareTo(date);
                 if(result==0){
