@@ -41,10 +41,6 @@ public class BookingManager {
     private Cinema cinema;
 
 
-    public BookingManager(){
-        bookingArrayList = DataManager.LoadBookings();
-    }
-
     /**
      * Creates a new BookingManager object with the details of every booking in the database
      * @param user
@@ -54,7 +50,7 @@ public class BookingManager {
 
     public BookingManager(User user,Cinema cinema){
 
-
+        bookingArrayList = DataManager.LoadBookings();
         this.user=user;
         this.cinema=cinema;
     }
