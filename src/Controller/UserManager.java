@@ -12,7 +12,16 @@ import java.util.Scanner;
  */
 public class UserManager {
 
+
+
+
+    private static User user;
+
+
     /**
+     *
+     *
+     *
      * Prompts user to enter login details(username and mobile number) and compares values with database. If a match is found, return corresponding User object, else returns null
      * @param input Scanner object
      * @return User object if match is found in database, null if no match is found.
@@ -25,13 +34,13 @@ public class UserManager {
         String mobilenumber = input.next();
         //Check with database if name and mobile number matches then create corresponding user object
 
-        try{User myuser = AuthManager.ValidateUser(username, mobilenumber);
-            if(myuser!=null)
+        try{user = AuthManager.ValidateUser(username, mobilenumber);
+            if(user!=null)
                 System.out.println("User Login Successful!\n");
             else{
                 System.out.println("Error! Incorrect login details.\n");
             }
-            return myuser;}
+            return user;}
         catch ( Exception e){System.out.println("Error! Incorrect login details.\n"); return null;}
     }
 
@@ -55,10 +64,10 @@ public class UserManager {
         String email = input.next();
         System.out.println();
         //Create usermanager object and Save user into database
-        User myuser = new User(username, age, mobilenumber, email);
-        myuser.save();
+        user = new User(username, age, mobilenumber, email);
+        user.save();
         System.out.println("Account Created Successfully\n");
-        return myuser;
+        return user;
 
     }
 }

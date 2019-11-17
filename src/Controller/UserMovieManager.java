@@ -16,12 +16,24 @@ import java.util.Scanner;
  */
 public class UserMovieManager extends MovieManager {
 
+
+
+
+    private  User user;
+
+
+
+    public UserMovieManager(User user){
+        this.user=user;
+    }
+
+
     /**
      * Method to Search or List movie depending on user input, display movie details of chosen movie, display all showtimes for chosen movie, display seats for chosen showtime, allow user to choose seat for showtime and confirmation to book chosen movie.
 
      * @param choice choice parameter to determine whether to search or list movie
      */
-    public static Movie SearchListMovie(int choice) {
+    public  void SearchListMovie(int choice) {
         Scanner input = new Scanner(System.in);
 
 
@@ -37,7 +49,7 @@ public class UserMovieManager extends MovieManager {
             mymovielist = DataManager.LoadMovies(inputsearch);
             if (mymovielist.isEmpty()) {
                 System.out.println("No movie found!");
-                return null;
+                return;
             }
         }
         Boundary.DisplayMovie(mymovielist);
@@ -46,25 +58,27 @@ public class UserMovieManager extends MovieManager {
         System.out.println("Otherwise enter 0 to go back");
         int inputsearchint = input.nextInt();
         if (inputsearchint == 0) {
-            return null;
+            return;
         }
-        Movie mymovie = selectMovieByID(mymovielist, inputsearchint);
+        Movie movie = selectMovieByID(mymovielist, inputsearchint);
 
-        if(mymovie==null){
-            System.out.println("Invalid Movie ID");
-            return null;
-        }
+
 
 
         System.out.println("Movie Details: ");
-        Boundary.DisplayMovie(mymovie);
+        Boundary.DisplayMovie(movie);
         System.out.println("All ratings and reviews: ");
-        Boundary.DisplayMovieReviews(mymovie);
-        return mymovie;
+        Boundary.DisplayMovieReviews(movie);
+
+        if(movie==null){
+            System.out.println("Invalid Movie ID");
+            return;
+        }
+         this.BookMovie(movie,choice);
     }
 
 
-    public static void BookMovie(Movie mymovie, User user, int choice){
+    public void BookMovie(Movie movie,int choice){
         //Select movie, then search for all showtimes.
         Scanner input = new Scanner(System.in);
         do {
@@ -89,30 +103,30 @@ public class UserMovieManager extends MovieManager {
         else if (choice == 1){
 
             boolean looper=Boolean.TRUE;
-            if(mymovie.getStatus().equals("End of Show")){
+            if(movie.getStatus().equals("End of Show")){
                 System.out.println("The movie has Ended\n");
                 looper=Boolean.FALSE;
             }
 
-            if(ShowTimeManager.getShowTimesByMovie(mymovie.getId()).size()==0){
+            if(ShowTimeManager.getShowTimesByMovie(movie.getId()).size()==0){
                 System.out.println("No ShowTimes Available\n");
                 looper=Boolean.FALSE;
             }
 
 
             while (looper){
-                Boundary.DisplayCinemas(ShowTimeManager.getShowTimesByMovie(mymovie.getId()));
+                Boundary.DisplayCinemas(ShowTimeManager.getShowTimesByMovie(movie.getId()));
                 System.out.println("Choose index of the showtime to view seat availability: ");
                 int inputsearchint = input.nextInt();
                 input.nextLine(); //Catch newline from .nextInt()
 
-                String time=((DataManager.LoadShowTimes(mymovie.getId()).get(inputsearchint))).getTime();
+                String time=((DataManager.LoadShowTimes(movie.getId()).get(inputsearchint))).getTime();
 
                 if(!BookingManager.DateCheck(time)){
                     System.out.println("The Movie has Already Passed");
                     break;
                 }
-                Boundary.DisplaySeating(((DataManager.LoadShowTimes(mymovie.getId()).get(inputsearchint))));
+                Boundary.DisplaySeating(((DataManager.LoadShowTimes(movie.getId()).get(inputsearchint))));
                 choice = -1;
                {
                     try{
@@ -143,7 +157,7 @@ public class UserMovieManager extends MovieManager {
                         int colofseat = input.nextInt();
                         input.nextLine();//Catch newline from input
                         //4. Book and purchase ticket
-                        Cinema mycinema = ((DataManager.LoadShowTimes(mymovie.getId()).get(inputsearchint)));
+                        Cinema mycinema = ((DataManager.LoadShowTimes(movie.getId()).get(inputsearchint)));
                         BookingManager bookingManager=new BookingManager(user,mycinema);
                         if(!bookingManager.createBooking(rowofseat*10 + colofseat)){
                             System.out.println("Booking Failed");
@@ -158,13 +172,13 @@ public class UserMovieManager extends MovieManager {
                             break;
                         }
                         if (choice == 1){
-                            Boundary.DisplaySeating(((DataManager.LoadShowTimes(mymovie.getId()).get(inputsearchint))));
+                            Boundary.DisplaySeating(((DataManager.LoadShowTimes(movie.getId()).get(inputsearchint))));
                         }
                     }
                 }
                 //2. Select another showtime
                 else if (choice == 2){
-                    Boundary.DisplayCinemas(ShowTimeManager.getShowTimesByMovie(mymovie.getId()));
+                    Boundary.DisplayCinemas(ShowTimeManager.getShowTimesByMovie(movie.getId()));
                 }
             }
         }
@@ -175,7 +189,7 @@ public class UserMovieManager extends MovieManager {
             input.nextLine();
             String movieReview = input.nextLine();
 
-            if(reviewMovie(mymovie, movieRating, movieReview))
+            if(reviewMovie(movie, movieRating, movieReview))
                 System.out.println("Review added successfully");
             else
                 System.out.println("Failed adding review");

@@ -7,7 +7,6 @@ import java.util.Scanner;
 public class Main {
 
     public static void main(String[] args) {
-
         int choice = -1;
         Scanner input = new Scanner(System.in);
         while (true) {
@@ -80,8 +79,8 @@ public class Main {
                         switch (choice) {
                             case 1:
                             case 5:
-                                Movie movie = UserMovieManager.SearchListMovie(choice);
-                                if(movie!=null) UserMovieManager.BookMovie(movie,user,choice);
+                                UserMovieManager userMovieManager = new UserMovieManager(user);
+                                userMovieManager.SearchListMovie(choice);
                                 break;
                             case 2:
                                 Boundary.DisplayBookings(user.getBookings());

@@ -64,46 +64,7 @@ public class MovieManager {
         return to_return;
     }
 
-    /**
-     * Gets top movies by sales from database
-     * @return ArrayList size of "SIZE_OF_PQ" Movie objects
-     */
-    public static ArrayList<Movie> getTopBySales(){
-        ArrayList<Movie> movies = getAllMovies();
-        ArrayList<Movie> to_return = new ArrayList<Movie>();
-        HashMap<Integer,Integer> sales_map = calculateSales(DataManager.LoadBookings());
-        Map<Integer, Integer> sorted_map = SortingManager.sortByValue(sales_map);
-        for(Map.Entry<Integer,Integer> entry: sorted_map.entrySet()){
 
-            Movie m = selectMovieByID(movies,entry.getKey());
-            if(m == null){
-                continue;
-            }
-            to_return.add(m);
-            if(to_return.size()>=SIZE_OF_PQ){
-                break;
-            }
-        }
-        return to_return;
-    }
-
-    /**
-     * This function calculates Sales for each movie, it takes booking records as input, and returns a HashMap of
-     * <MovieID, Sales>
-
-     * @param bookings
-     * @return HashMap of <MovieID, Sales>
-     */
-    private static HashMap<Integer,Integer> calculateSales(ArrayList<Booking> bookings){
-
-        HashMap<Integer,Integer> map = new HashMap<Integer, Integer>();
-        for(int i = 0;i<bookings.size();i++){
-            int movie_id = bookings.get(i).getMovieID();
-            int count = map.containsKey(movie_id)? map.get(movie_id):0;
-            map.put(movie_id, count+1);
-        }
-        return map;
-    }
 
     /**
      * Get average rating of a Movie object
@@ -120,4 +81,29 @@ public class MovieManager {
         }
         return -1;
     }
+
+    /**
+     * Gets top movies by sales from database
+     * @return ArrayList size of "SIZE_OF_PQ" Movie objects
+     */
+    public static ArrayList<Movie> getTopBySales(){
+        ArrayList<Movie> movies = getAllMovies();
+        ArrayList<Movie> to_return = new ArrayList<Movie>();
+        HashMap<Integer,Integer> sales_map = BookingManager.calculateSales();
+        Map<Integer, Integer> sorted_map = SortingManager.sortByValue(sales_map);
+        for(Map.Entry<Integer,Integer> entry: sorted_map.entrySet()){
+
+            Movie m = selectMovieByID(movies,entry.getKey());
+            if(m == null){
+                continue;
+            }
+            to_return.add(m);
+            if(to_return.size()>=SIZE_OF_PQ){
+                break;
+            }
+        }
+        return to_return;
+    }
+
+
 }

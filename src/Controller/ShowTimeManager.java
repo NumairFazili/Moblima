@@ -9,7 +9,7 @@ import java.util.List;
  @version 1.0
  @since 15-11-2019
  */
-public class ShowTimeManager {
+public  class ShowTimeManager {
 
     /**
      * Get all showtimes in the database
@@ -28,5 +28,6 @@ public class ShowTimeManager {
         return DataManager.LoadShowTimes(movieID);
 
     }
+
 
 }

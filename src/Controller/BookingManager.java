@@ -14,6 +14,7 @@ package Controller;
 
 import Entity.Booking;
 import Entity.Cinema;
+import Entity.Movie;
 import Entity.User;
 import View.Boundary;
 
@@ -22,6 +23,9 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
+
+import static Controller.MovieManager.getAllMovies;
+import static Controller.MovieManager.selectMovieByID;
 
 /**
  Represents the BookingManager class, to manage all booking objects
@@ -191,6 +195,24 @@ public class BookingManager {
             return false;
         return true;
 
+    }
+
+
+    /**
+     * This function calculates Sales for each movie, it takes booking records as input, and returns a HashMap of
+     * <MovieID, Sales>
+
+     * @return HashMap of <MovieID, Sales>
+     */
+    protected static HashMap<Integer,Integer> calculateSales(){
+        ArrayList<Booking> bookingArrayList=DataManager.LoadBookings();
+        HashMap<Integer,Integer> map = new HashMap<Integer, Integer>();
+        for(int i = 0;i<bookingArrayList.size();i++){
+            int movie_id = bookingArrayList.get(i).getMovieID();
+            int count = map.containsKey(movie_id)? map.get(movie_id):0;
+            map.put(movie_id, count+1);
+        }
+        return map;
     }
 
 

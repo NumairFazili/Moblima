@@ -34,7 +34,9 @@ public class StaffManager{
     /**
      * Creates a new StaffManaer object
      */
-    public StaffManager(){};
+    private static Staff staff;
+
+    public StaffManager(){staff = new Staff();};
 
     /**
      * Prompts user to enter username and password and uses AuthManager.getStaff method to check with database if username and password is correct
@@ -42,7 +44,7 @@ public class StaffManager{
      * @return Staff object corresponding to login details entered
      */
     public static Staff StaffLogin(Scanner input) {
-        Staff staff;
+
         while(true){
             System.out.println("ADMIN USER:");
             System.out.println("Please enter login details, Input -1 to go back:");
