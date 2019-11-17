@@ -91,7 +91,7 @@ public class BookingManager {
         int x=input.nextInt();
 
         if(x==1)
-            if(this.saveBooking(booking,cinema)){
+            if(this.saveBooking(booking)){
                 System.out.println("Booking Created");
                 return true;
             }
@@ -105,10 +105,9 @@ public class BookingManager {
     /**
      * Saves details of input Booking object into database and updates seats in input cinema object. Also checks if seat of corresponding Cinema is taken.
      * @param booking Booking object
-     * @param cinema Cinema object
      * @return True if details of Booking object are successfully saved in database and Cinema object seats is updated , False if seat chosen from Booking object is unavailable
      */
-    private Boolean saveBooking(Booking booking,Cinema cinema){
+    private Boolean saveBooking(Booking booking){
 
         if(!SeatCheck(cinema.getSeats(),booking.getSeatNO()))
             return false;
