@@ -1,11 +1,9 @@
 package Entity;
 
-import java.lang.reflect.Array;
 import java.util.*;
 import java.util.List;
 
 import Controller.*;
-import View.Boundary;
 
 /**
  Represents the Movie-goer using the MOBLIMA movie booking system, a movie-goer can book multiple movies
@@ -24,25 +22,9 @@ public class User{
      */
     String email, mobileNumber, name;
 
-    /**
-     * UserManager object
-     */
-    UserManager userManager;
-
-    /**
-     * movieManager object
-     */
-    MovieManager movieManager;
-
-    /**
-     * Creates a UserManager and MovieManager object
-     */
-    public User(){userManager=new UserManager(); movieManager=new MovieManager();}
-
-
     //for re-creating existing user
     /**
-     * Creates a new User, UserManager and movieManager object
+     * Creates a new User object
      * @param age movie-goer age
      * @param email movie-goer email
      * @param mobileNumber movie-goer mobile number
@@ -54,9 +36,6 @@ public class User{
         this.name=name;
         this.email = email;
         this.mobileNumber = mobileNumber;
-        userManager=new UserManager();
-        movieManager=new MovieManager();
-
     }
 
     /**
@@ -87,6 +66,38 @@ public class User{
      */
     public String getmobileNumber(){
         return mobileNumber;
+    }
+
+    /**
+     * Set user's age
+     * @param age user's age
+     */
+    public void setAge(int age) {
+        this.age = age;
+    }
+
+    /**
+     * Set user's name
+     * @param name user's name
+     */
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    /**
+     * Set user's email
+     * @param email user's email
+     */
+    public void setEmail(String email){
+        this.email = email;
+    }
+
+    /**
+     * Set user's mobile number
+     * @param mobileNumber user's mobile number
+     */
+    public void setmobileNumber(String mobileNumber){
+        this.mobileNumber = mobileNumber;
     }
 
     /**

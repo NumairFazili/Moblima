@@ -1,5 +1,8 @@
 package Entity;
 
+import java.util.List;
+
+import Controller.DataManager;
 
 /**
  Represents the booking object when a movie-goer books a seat for a particular showtime in a Cinema.
@@ -10,22 +13,32 @@ package Entity;
 public class Booking {
 
     /**
-     * ID parameters for Cineplex, Cinema and Movie, and seat number of booking
+     * Reference to a Cinema object
      */
-    private int cinplexID,cinemaID,movieID,seatNO;
+    Cinema cinema;
+
+    /**
+     * Reference to a User object
+     */
+    User user;
+
+    /**
+     * ID parameters for seat number of booking
+     */
+    private int seatNO;
 
     /**
      * Price of booking
      */
-    private double Price;
+    private double price;
 
     /**
-     * Booking ID, cinema showtime, time of booking, customer name, customer type(regular/senior/child), cinema class(silver/gold/platinum), movie type(2D/3D), customer email, customer mobile number.
+     * Booking ID, time of booking
      */
-    private String bookingID, showTime,bookingTime,customerName,customerType,cinemaClass,movieType,email,mobileNumber;
+    private String bookingID, bookingTime;
 
     /**
-     * Creates a new booking object with the following parameters
+     * Creates a new booking object with the following parameters (from database)
      * @param bookingID booking ID
      * @param mobileNumber mobile number of customer
      * @param cinplexID Cineplex ID of booking
@@ -42,22 +55,70 @@ public class Booking {
      * @param email customer email of booking
      */
     public Booking(String bookingID,int cinplexID,int cinemaID,int movieID,String showTime,String cinemaClass,String movieType,String customerName,String mobileNumber,String email,String customerType,int seatNO,String bookingTime,double price) {
+        this.cinema = getCinema(movieID, cinplexID, cinemaID, showTime);
+        this.user = getUser(customerName, mobileNumber, email);
         this.bookingID = bookingID;
-        this.mobileNumber = mobileNumber;
-        this.cinplexID = cinplexID;
-        this.cinemaID = cinemaID;
-        this.movieID = movieID;
         this.seatNO = seatNO;
-        this.Price = price;
-        this.showTime = showTime;
+        this.price = price;
         this.bookingTime = bookingTime;
-        this.customerName = customerName;
-        this.customerType = customerType;
-        this.cinemaClass = cinemaClass;
-        this.movieType = movieType;
-        this.email = email;
+        if(this.cinema == null || this.user == null){
+            throw new IllegalArgumentException("No matching showtime or no matching user");
+        }
     }
 
+    /**
+     * Creates a new booking object with the following parameters
+     * @param cinema Cinema object to be booked
+     * @param user User object that made the booking
+     * @param bookingID booking ID
+     * @param price price of booking
+     * @param bookingTime time that booking was made
+     */
+    public Booking(Cinema cinema, User user, int seatNO, String bookingID, String bookingTime, double price){
+        this.cinema = cinema;
+        this.user = user;
+        this.bookingID = bookingID;
+        this.price = price;
+        this.bookingTime = bookingTime;
+        if(this.cinema == null || this.user == null){
+            throw new IllegalArgumentException("No matching showtime or no matching user");
+        }
+    }
+
+    /**
+     * Get the Cinema object that matches with the parameters
+     * @param movieID Movie ID of booking
+     * @param cinplexID Cineplex ID of booking
+     * @param cinemaID Cinema ID of booking
+     * @param showTime showtime for cinema of booking
+     * @return Cinema object (or null if not found)
+     */
+    private Cinema getCinema(int movieID, int cinplexID, int cinemaID, String showTime){
+        List<Cinema> c_list = DataManager.LoadShowTimes(movieID);
+        for(Cinema c: c_list){
+            if (c.getCinplexID() == cinplexID && c.getCinemaID() == cinemaID && c.getTime().equals(showTime)){
+                return c;
+            }
+        }
+        return null;
+    }
+
+    /**
+     * Get the User object that matches with the parameters
+     * @param customerName customer name
+     * @param mobileNumber mobile number of customer
+     * @param email customer email of booking
+     * @return User object (or null if not found)
+     */
+    private User getUser(String customerName,String mobileNumber,String email){
+        List<User> u_list = DataManager.LoadUser();
+        for(User u: u_list){
+            if(u.getName().equals(customerName) && u.getmobileNumber().equals(mobileNumber) && u.getEmail().equals(email)){
+                return u;
+            }
+        }
+        return null;
+    }
 
     /**
      * Get Booking ID
@@ -76,35 +137,11 @@ public class Booking {
     }
 
     /**
-     * Get mobile number of customer
-     * @return mobile number of customer
-     */
-    public String getMobileNumber() {
-        return mobileNumber;
-    }
-
-    /**
-     * Change customer mobile number
-     * @param mobileNumber customer mobile number
-     */
-    public void setMobileNumber(String mobileNumber) {
-        this.mobileNumber = mobileNumber;
-    }
-
-    /**
      * Get Cineplex ID of booking
      * @return Cineplex ID
      */
     public int getCinplexID() {
-        return cinplexID;
-    }
-
-    /**
-     * Change Cineplex ID
-     * @param cinplexID Cineplex ID
-     */
-    public void setCinplexID(int cinplexID) {
-        this.cinplexID = cinplexID;
+        return cinema.getCinplexID();
     }
 
     /**
@@ -112,15 +149,7 @@ public class Booking {
      * @return Cinema ID
      */
     public int getCinemaID() {
-        return cinemaID;
-    }
-
-    /**
-     * Change Cinema ID
-     * @param cinemaID Cinema ID
-     */
-    public void setCinemaID(int cinemaID) {
-        this.cinemaID = cinemaID;
+        return cinema.getCinemaID();
     }
 
     /**
@@ -128,15 +157,7 @@ public class Booking {
      * @return movie ID
      */
     public int getMovieID() {
-        return movieID;
-    }
-
-    /**
-     * Change movie ID
-     * @param movieID movie ID
-     */
-    public void setMovieID(int movieID) {
-        this.movieID = movieID;
+        return cinema.getMovieID();
     }
 
     /**
@@ -160,15 +181,7 @@ public class Booking {
      * @return price
      */
     public double getPrice() {
-        return Price;
-    }
-
-    /**
-     * Change price of booking
-     * @param price price of booking
-     */
-    public void setPrice(double price) {
-        Price = price;
+        return price;
     }
 
     /**
@@ -176,15 +189,7 @@ public class Booking {
      * @return showtime
      */
     public String getShowTime() {
-        return showTime;
-    }
-
-    /**
-     * Change showtime for cinema of booking
-     * @param showTime showtime for cinema
-     */
-    public void setShowTime(String showTime) {
-        this.showTime = showTime;
+        return cinema.getTime();
     }
 
     /**
@@ -204,51 +209,11 @@ public class Booking {
     }
 
     /**
-     * Get customer name
-     * @return customer name
-     */
-    public String getCustomerName() {
-        return customerName;
-    }
-
-    /**
-     * Change name of customer
-     * @param customerName name of customer
-     */
-    public void setCustomerName(String customerName) {
-        this.customerName = customerName;
-    }
-
-    /**
-     * Get customer type
-     * @return customer type
-     */
-    public String getCustomerType() {
-        return customerType;
-    }
-
-    /**
-     * Change customer type
-     * @param customerType customer type
-     */
-    public void setCustomerType(String customerType) {
-        this.customerType = customerType;
-    }
-
-    /**
      * Get Cinema class
      * @return Cinema class
      */
     public String getCinemaClass() {
-        return cinemaClass;
-    }
-
-    /**
-     * Change Cinema class
-     * @param cinemaClass Cinema class
-     */
-    public void setCinemaClass(String cinemaClass) {
-        this.cinemaClass = cinemaClass;
+        return cinema.getCinemaClass();
     }
 
     /**
@@ -256,15 +221,31 @@ public class Booking {
      * @return movie type
      */
     public String getMovieType() {
-        return movieType;
+        return cinema.getMovieType();
     }
 
     /**
-     * Change movie type
-     * @param movieType movie type
+     * Get customer type
+     * @return customer type
      */
-    public void setMovieType(String movieType) {
-        this.movieType = movieType;
+    public String getCustomerType() {
+        return user.getCustomerType();
+    }
+
+    /**
+     * Get customer name
+     * @return customer name
+     */
+    public String getCustomerName() {
+        return user.getName();
+    }
+
+    /**
+     * Change name of customer
+     * @param customerName name of customer
+     */
+    public void setCustomerName(String customerName) {
+        this.user.setName(customerName);
     }
 
     /**
@@ -272,7 +253,7 @@ public class Booking {
      * @return customer email
      */
     public String getEmail() {
-        return email;
+        return user.getEmail();
     }
 
     /**
@@ -280,8 +261,23 @@ public class Booking {
      * @param email email of customer
      */
     public void setEmail(String email) {
-        this.email = email;
+        this.user.setEmail(email);
     }
 
+    /**
+     * Get mobile number of customer
+     * @return mobile number of customer
+     */
+    public String getMobileNumber() {
+        return user.getmobileNumber();
+    }
+
+    /**
+     * Change customer mobile number
+     * @param mobileNumber customer mobile number
+     */
+    public void setMobileNumber(String mobileNumber) {
+        this.user.setmobileNumber(mobileNumber);
+    }
 
 }
