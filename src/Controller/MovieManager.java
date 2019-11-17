@@ -88,9 +88,11 @@ public class MovieManager {
     }
 
     /**
-     *
+     * This function calculates Sales for each movie, it takes booking records as input, and returns a HashMap of
+     * <MovieID, Sales>
+
      * @param bookings
-     * @return
+     * @return HashMap of <MovieID, Sales>
      */
     private static HashMap<Integer,Integer> calculateSales(ArrayList<Booking> bookings){
 
