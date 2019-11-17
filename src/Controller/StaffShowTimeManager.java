@@ -185,7 +185,7 @@ public class StaffShowTimeManager extends ShowTimeManager {
             Cinema c = new Cinema(cinplexID, cinemaID, movieID, time,cinemaClass, seats, movieType);
             return DataManager.AddShowTimes(c);
         }catch(IllegalArgumentException e){
-            System.out.print(e.getMessage());
+            System.out.println(e.getMessage());
             return false;
         }
     }

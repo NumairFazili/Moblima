@@ -58,7 +58,13 @@ public class BookingManager {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
         String bookingTime = dateTime.format(formatter);
         double final_price = calculatePrice(user,cinema);
-        return new Booking(bookingID, cinema.getCinplexID(), cinema.getCinemaID(), cinema.getMovieID(), cinema.getTime(), cinema.getCinemaClass(), cinema.getMovieType(), user.getName(), user.getmobileNumber(), user.getEmail(), user.getCustomerType(), seatNO, bookingTime, final_price);
+        try{
+            Booking booking = new Booking(cinema, user, seatNO, bookingID, bookingTime, final_price);
+            return booking;
+        }catch(IllegalArgumentException e){
+            System.out.println(e.getMessage());
+            return null;
+        }
     }
 
 
@@ -78,6 +84,7 @@ public class BookingManager {
 
 
         Booking booking=this.generateBooking(user, cinema, seatNO);
+        if(booking == null){return false;}
         Boundary.DisplayBookings(Arrays.asList(booking));
         System.out.println("Press 1 to confirm Booking  0 to Cancel");
 
