@@ -101,10 +101,6 @@ public class UserMovieManager extends MovieManager {
             }
 
 
-
-
-
-
             while (looper){
                 Boundary.DisplayCinemas(ShowTimeManager.getShowTimesByMovie(mymovie.getId()));
                 System.out.println("Choose index of the showtime to view seat availability: ");

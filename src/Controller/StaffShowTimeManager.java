@@ -133,7 +133,7 @@ public class StaffShowTimeManager extends ShowTimeManager {
         }
         else{
             Cinema mycinema = getAllShowTimes().get(inputsearchint);
-            if(DataManager.UpdateShowTime(mycinema, true))
+            if(DataManager.RemoveShowTime(mycinema))
                 System.out.println("Showtime Deleted Successfully\n");
             else
                 System.out.println("Delete Failed\n");
